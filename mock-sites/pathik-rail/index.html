@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pathik Rail — Book Train Tickets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Deliberately built like many real Indian travel sites: div buttons, icon-only controls,
+         visual-only labels and colour-only status. Add ?a11y=good to see the accessible version. -->
+    <div class="topbar">
+      <div class="brand" data-go="#/">
+        <span class="logo-mark"></span>
+        <span class="logo-text">Pathik<b>Rail</b></span>
+      </div>
+      <div class="nav-icons">
+        <div class="ic ic-home" data-go="#/" data-a11y-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></svg></div>
+        <div class="ic ic-docs" data-go="#/docs" data-a11y-label="My documents"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 3v5h5"/></svg></div>
+        <div class="ic ic-help" data-go="#/help" data-a11y-label="Help and complaints"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 115 .5c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></svg></div>
+        <div class="ic ic-user" data-a11y-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></div>
+      </div>
+    </div>
+    <div id="app"></div>
+    <div class="footer">Pathik Rail is a fictional demo website for the Drishti accessibility project. No real bookings or payments.</div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
