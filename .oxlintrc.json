@@ -41,5 +41,14 @@
     "no-unused-expressions": "off",
     "react/set-state-in-effect": "warn"
   },
-  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "cache/**", "eval/runs/**", "**/.output/**", "**/.wxt/**"]
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "cache/**",
+    "eval/runs/**",
+    "**/.output/**",
+    "**/.wxt/**",
+    "**/.venv/**",
+    "**/results/**"
+  ]
 }

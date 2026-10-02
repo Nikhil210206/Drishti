@@ -1,53 +1,53 @@
 # Spike 5: replies to "Should I pay 845 rupees?"-style confirmations. Hand-written, to be
 # checked by native speakers before Phase 1 reuses them. label: yes | no | unclear
 # ("unclear" = not a safe yes: hedges, questions, conditions, new instructions).
-- { lang: hi-IN, text: "हाँ, बुक कर दो", label: yes }
-- { lang: hi-IN, text: "जी हाँ", label: yes }
-- { lang: hi-IN, text: "बिल्कुल, आगे बढ़ो", label: yes }
-- { lang: hi-IN, text: "ठीक है, पेमेंट कर दीजिए", label: yes }
-- { lang: hi-IN, text: "haan bhai kar do", label: yes }
-- { lang: hi-IN, text: "chalo theek hai", label: yes }
-- { lang: hi-IN, text: "अरे हाँ हाँ, करो", label: yes }
-- { lang: hi-IN, text: "हाँ बिलकुल ठीक है", label: yes }
-- { lang: hi-IN, text: "नहीं, अभी मत करो", label: no }
-- { lang: hi-IN, text: "नहीं नहीं, गलत ट्रेन है", label: no }
-- { lang: hi-IN, text: "nahi yaar, cancel karo", label: no }
-- { lang: hi-IN, text: "मत करो", label: no }
-- { lang: hi-IN, text: "रुकिए, पहले दाम बताइए", label: unclear }
-- { lang: hi-IN, text: "मुझे नहीं पता", label: unclear }
-- { lang: hi-IN, text: "हाँ लेकिन पहले सीट बताओ", label: unclear }
-- { lang: hi-IN, text: "kya? phir se bolo", label: unclear }
-- { lang: hi-IN, text: "शायद, सोचने दो", label: unclear }
-- { lang: ta-IN, text: "ஆமா, புக் பண்ணுங்க", label: yes }
-- { lang: ta-IN, text: "சரி, பணம் கட்டுங்க", label: yes }
-- { lang: ta-IN, text: "ஆமாம், தொடருங்கள்", label: yes }
-- { lang: ta-IN, text: "கண்டிப்பா பண்ணுங்க", label: yes }
-- { lang: ta-IN, text: "okay pannunga", label: yes }
-- { lang: ta-IN, text: "seri seri, pannunga", label: yes }
-- { lang: ta-IN, text: "சரி தான்", label: yes }
-- { lang: ta-IN, text: "வேண்டாம்", label: no }
-- { lang: ta-IN, text: "இல்லை, இப்போ வேண்டாம்", label: no }
-- { lang: ta-IN, text: "வேண்டாம், கேன்சல் பண்ணுங்க", label: no }
-- { lang: ta-IN, text: "illa, wrong train", label: no }
-- { lang: ta-IN, text: "நிறுத்துங்க", label: no }
-- { lang: ta-IN, text: "தெரியலை", label: unclear }
-- { lang: ta-IN, text: "என்ன சொன்னீங்க?", label: unclear }
-- { lang: ta-IN, text: "முதல்ல விலை சொல்லுங்க", label: unclear }
-- { lang: ta-IN, text: "ஆமா ஆனா முதல்ல சீட் நம்பர் சொல்லுங்க", label: unclear }
-- { lang: ta-IN, text: "யோசிக்கணும்", label: unclear }
-- { lang: bn-IN, text: "হ্যাঁ, বুক করে দাও", label: yes }
-- { lang: bn-IN, text: "ঠিক আছে, পেমেন্ট করো", label: yes }
-- { lang: bn-IN, text: "হ্যাঁ হ্যাঁ, এগিয়ে যান", label: yes }
-- { lang: bn-IN, text: "অবশ্যই করুন", label: yes }
-- { lang: bn-IN, text: "আচ্ছা, করে দিন", label: yes }
-- { lang: bn-IN, text: "haan, kore dao", label: yes }
-- { lang: bn-IN, text: "একদম ঠিক, করে ফেলুন", label: yes }
-- { lang: bn-IN, text: "না, এখন না", label: no }
-- { lang: bn-IN, text: "না না, ভুল ট্রেন", label: no }
-- { lang: bn-IN, text: "করবেন না", label: no }
-- { lang: bn-IN, text: "থামুন", label: no }
-- { lang: bn-IN, text: "জানি না", label: unclear }
-- { lang: bn-IN, text: "কী বললেন? আবার বলুন", label: unclear }
-- { lang: bn-IN, text: "আগে দামটা বলুন", label: unclear }
-- { lang: bn-IN, text: "হ্যাঁ, কিন্তু আগে সিট নম্বর বলুন", label: unclear }
-- { lang: bn-IN, text: "দাঁড়ান, ভাবতে দিন", label: unclear }
+- { lang: hi-IN, text: "हाँ, बुक कर दो", label: "yes" }
+- { lang: hi-IN, text: "जी हाँ", label: "yes" }
+- { lang: hi-IN, text: "बिल्कुल, आगे बढ़ो", label: "yes" }
+- { lang: hi-IN, text: "ठीक है, पेमेंट कर दीजिए", label: "yes" }
+- { lang: hi-IN, text: "haan bhai kar do", label: "yes" }
+- { lang: hi-IN, text: "chalo theek hai", label: "yes" }
+- { lang: hi-IN, text: "अरे हाँ हाँ, करो", label: "yes" }
+- { lang: hi-IN, text: "हाँ बिलकुल ठीक है", label: "yes" }
+- { lang: hi-IN, text: "नहीं, अभी मत करो", label: "no" }
+- { lang: hi-IN, text: "नहीं नहीं, गलत ट्रेन है", label: "no" }
+- { lang: hi-IN, text: "nahi yaar, cancel karo", label: "no" }
+- { lang: hi-IN, text: "मत करो", label: "no" }
+- { lang: hi-IN, text: "रुकिए, पहले दाम बताइए", label: "unclear" }
+- { lang: hi-IN, text: "मुझे नहीं पता", label: "unclear" }
+- { lang: hi-IN, text: "हाँ लेकिन पहले सीट बताओ", label: "unclear" }
+- { lang: hi-IN, text: "kya? phir se bolo", label: "unclear" }
+- { lang: hi-IN, text: "शायद, सोचने दो", label: "unclear" }
+- { lang: ta-IN, text: "ஆமா, புக் பண்ணுங்க", label: "yes" }
+- { lang: ta-IN, text: "சரி, பணம் கட்டுங்க", label: "yes" }
+- { lang: ta-IN, text: "ஆமாம், தொடருங்கள்", label: "yes" }
+- { lang: ta-IN, text: "கண்டிப்பா பண்ணுங்க", label: "yes" }
+- { lang: ta-IN, text: "okay pannunga", label: "yes" }
+- { lang: ta-IN, text: "seri seri, pannunga", label: "yes" }
+- { lang: ta-IN, text: "சரி தான்", label: "yes" }
+- { lang: ta-IN, text: "வேண்டாம்", label: "no" }
+- { lang: ta-IN, text: "இல்லை, இப்போ வேண்டாம்", label: "no" }
+- { lang: ta-IN, text: "வேண்டாம், கேன்சல் பண்ணுங்க", label: "no" }
+- { lang: ta-IN, text: "illa, wrong train", label: "no" }
+- { lang: ta-IN, text: "நிறுத்துங்க", label: "no" }
+- { lang: ta-IN, text: "தெரியலை", label: "unclear" }
+- { lang: ta-IN, text: "என்ன சொன்னீங்க?", label: "unclear" }
+- { lang: ta-IN, text: "முதல்ல விலை சொல்லுங்க", label: "unclear" }
+- { lang: ta-IN, text: "ஆமா ஆனா முதல்ல சீட் நம்பர் சொல்லுங்க", label: "unclear" }
+- { lang: ta-IN, text: "யோசிக்கணும்", label: "unclear" }
+- { lang: bn-IN, text: "হ্যাঁ, বুক করে দাও", label: "yes" }
+- { lang: bn-IN, text: "ঠিক আছে, পেমেন্ট করো", label: "yes" }
+- { lang: bn-IN, text: "হ্যাঁ হ্যাঁ, এগিয়ে যান", label: "yes" }
+- { lang: bn-IN, text: "অবশ্যই করুন", label: "yes" }
+- { lang: bn-IN, text: "আচ্ছা, করে দিন", label: "yes" }
+- { lang: bn-IN, text: "haan, kore dao", label: "yes" }
+- { lang: bn-IN, text: "একদম ঠিক, করে ফেলুন", label: "yes" }
+- { lang: bn-IN, text: "না, এখন না", label: "no" }
+- { lang: bn-IN, text: "না না, ভুল ট্রেন", label: "no" }
+- { lang: bn-IN, text: "করবেন না", label: "no" }
+- { lang: bn-IN, text: "থামুন", label: "no" }
+- { lang: bn-IN, text: "জানি না", label: "unclear" }
+- { lang: bn-IN, text: "কী বললেন? আবার বলুন", label: "unclear" }
+- { lang: bn-IN, text: "আগে দামটা বলুন", label: "unclear" }
+- { lang: bn-IN, text: "হ্যাঁ, কিন্তু আগে সিট নম্বর বলুন", label: "unclear" }
+- { lang: bn-IN, text: "দাঁড়ান, ভাবতে দিন", label: "unclear" }

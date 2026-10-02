@@ -11,3 +11,5 @@ fixtures/pathik-rail
 *.css
 *.html
 *.md
+**/.venv
+**/results

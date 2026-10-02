@@ -31,11 +31,12 @@ QUESTION = {
     }
 }
 
-router = Router()  # routes non-Latin scripts to laya-multilingual
+# Pinned to laya-multilingual: auto-routing would send romanised replies to the English checkpoint.
+router = Router()
 by_lang, misses, latencies = {}, [], []
 for r in rows:
     t0 = time.perf_counter()
-    out = router.predict({"body": r["text"]}, QUESTION)
+    out = router.predict({"body": r["text"]}, QUESTION, model="multilingual")
     latencies.append((time.perf_counter() - t0) * 1000)
     ans = out["answers"]["confirm"]
     got, probs = ans["choice"], ans.get("probabilities", {})

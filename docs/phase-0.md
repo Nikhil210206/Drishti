@@ -54,13 +54,13 @@ Started 2026-10-02, ahead of W1. The roadmap is in `~/.claude/plans/now-since-th
 | 2 | Worker relay to Saaras WS vs REST + VAD | GO. The relay adds about 70 ms. The CPU limit needs a deployed test on your Cloudflare account (`docs/spikes/02-worker-stt-relay.md`). |
 | 3 | `chrome.scripting` snapshot on real sites | GO. Six page-model bugs fixed (`docs/spikes/03-scripting-snapshot.md`). |
 | 4 | Synthetic vs `chrome.debugger` input | Debugger by default on real sites (`docs/spikes/04-synthetic-vs-debugger-input.md`). |
-| 5 | Base Laya on 50 yes/no replies | Baseline done (0 unsafe after the fix). The Laya run waits for your OK on the download (`docs/spikes/05-laya-baseline.md`). |
+| 5 | Base Laya on 50 yes/no replies | NO-GO for the base model (62%, 9 unsafe yes, versus 94% and 0 unsafe for the keyword gate). The fine-tuning track continues (`docs/spikes/05-laya-baseline.md`). |
 
 ## Exit criteria
 
 - [x] Harness works after the move.
 - [ ] CI green on GitHub. It passes locally (`npm run ci`); it runs on your next push.
-- [ ] All 5 spikes decided. Spikes 1, 2 and 5 each have one step that needs you (above).
+- [ ] All 5 spikes decided. Spikes 1 and 2 each have one step that needs you (above).
 
 ## Noticed, not fixed (Phase 1)
 
