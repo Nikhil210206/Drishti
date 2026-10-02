@@ -19,15 +19,15 @@ Screen readers make blind users step through a website one element at a time, an
 
 ## What makes it work
 
-- **Page model** (`server/browser/snapshot.js`) — turns any page into a numbered outline of about 300–900 tokens. It **infers names for unlabelled controls** from icon classes and nearby visual labels, names **colour-only indicators** such as `(colour: green)`, collapses repeated cards into single rows, and detects unmarked modal overlays.
-- **Deterministic safety gate** (`server/agent/safety.ts`) — the model cannot skip it:
+- **Page model** (`packages/core/src/snapshot.js`) — turns any page into a numbered outline of about 300–900 tokens. It **infers names for unlabelled controls** from icon classes and nearby visual labels, names **colour-only indicators** such as `(colour: green)`, collapses repeated cards into single rows, and detects unmarked modal overlays.
+- **Deterministic safety gate** (`packages/core/src/agent/safety.ts`) — the model cannot skip it:
   - Pay, submit, send and delete always need a spoken yes in any of the 11 languages.
   - Drishti never types passwords, OTPs, card numbers or Aadhaar numbers.
   - It never attempts a CAPTCHA.
   - Page content is treated as untrusted, which defends against prompt injection.
-  - Navigation is restricted to an allowlist of sites.
+  - Navigation is restricted to an allowlist of sites, whether the agent navigates, clicks a link, gets redirected or a new tab opens (`packages/core/src/agent/policy.ts`).
 - **Voice UX** — push-to-talk or hands-free, interrupting Drishti mid-speech, earcons for every state, narration spoken while each action runs, and a latency HUD.
-- **Pathik Rail** (`mock-sites/pathik-rail`) — a fictional train-booking site that is inaccessible on purpose. Add `?a11y=good` for the accessible version.
+- **Pathik Rail** (`fixtures/pathik-rail`) — a fictional train-booking site that is inaccessible on purpose. Add `?a11y=good` for the accessible version.
 
 ## Run it
 
@@ -37,6 +37,8 @@ npx playwright install chromium
 cp .env.example .env   # add SARVAM_API_KEY
 npm run check          # smoke-test every Sarvam API (TTS → STT loopback, 105B tool call, translate)
 npm run dev            # panel http://localhost:5173 · agent browser opens on the right
+npm test               # unit tests (safety, policy, agent, session, page model in headless Chromium)
+npm run ci             # lint + format check + typecheck + tests, same as GitHub Actions
 ```
 
 In the panel:
@@ -47,14 +49,18 @@ In the panel:
 
 ## Layout
 
+npm workspaces. The core has no Node dependencies, so the browser extension can reuse it as-is.
+
 ```
-server/            Node + Fastify + ws
-  sarvam/          stt, tts, llm, vision, translate, cost meter
-  agent/           orchestrator loop, tools, prompts, safety, phrases
-  browser/         Playwright controller + injected page model
-web/               React panel (mic worklet, PCM player, earcons)
-mock-sites/        Pathik Rail mock + in-memory API
-spikes/            API check + page-model dump
+packages/core/       platform-free agent: orchestrator, tools, prompts, safety gate, navigation policy,
+                     phrases, voice-session state machine, page model (snapshot.js), interfaces
+packages/providers/  Sarvam clients (stt, tts, llm, vision, translate, cost meter)
+packages/ui/         React panel (mic worklet, PCM player, earcons)
+apps/dev-harness/    Fastify + Playwright server for development, eval and CI (+ check/snapshot scripts)
+fixtures/            Pathik Rail mock, bills, HTML fixtures for page-model tests
+eval/                end-to-end agent eval on Pathik Rail
+docs/spikes/         Phase 0 go/no-go notes
+spikes/              throwaway spike code (extension, proxy)
 ```
 
 Pathik Rail and all its data are fictional. No real bookings or payments are made.

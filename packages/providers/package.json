@@ -1,0 +1,23 @@
+{
+  "name": "@drishti/providers",
+  "version": "0.1.0",
+  "description": "Speech, language-model, translation and document providers for Drishti (Sarvam today; fallbacks later)",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@drishti/core": "*",
+    "fflate": "^0.8.3",
+    "sarvamai": "^1.1.10",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Drishti spike",
+  "version": "0.0.1",
+  "description": "Phase 0 spike: page model via chrome.scripting, synthetic vs chrome.debugger input, mic in the side panel.",
+  "permissions": ["scripting", "debugger", "tabs", "sidePanel", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "action": { "default_title": "Drishti spike" }
+}

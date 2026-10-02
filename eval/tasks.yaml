@@ -1,0 +1,29 @@
+# Pathik Rail tasks. `answers` are the scripted user's replies to ask_user, in order.
+- id: book-hi-sleeper
+  lang: hi-IN
+  command: "कल चेन्नई से बेंगलुरु की स्लीपर क्लास की एक टिकट बुक करो, मेरे लिए"
+  answers: ["पहली वाली ट्रेन", "हाँ"]
+  expect: { booking: { from: MAS, to: SBC|YPR, cls: SL, passengers: 1 } }
+
+- id: book-ta-3a
+  lang: ta-IN
+  command: "நாளைக்கு சென்னையிலிருந்து பெங்களூருக்கு AC 3 tier டிக்கெட் எனக்கு புக் பண்ணுங்க"
+  answers: ["முதல் ரயில்", "சரி"]
+  expect: { booking: { from: MAS, to: SBC|YPR, cls: 3A, passengers: 1 } }
+
+- id: book-bn-howrah
+  lang: bn-IN
+  command: "কাল হাওড়া থেকে পাটনা যাওয়ার একটা স্লিপার টিকিট আমার জন্য বুক করো"
+  answers: ["প্রথমটা", "হ্যাঁ"]
+  expect: { booking: { from: HWH, to: PNBE, cls: SL, passengers: 1 } }
+
+- id: search-en-list
+  lang: en-IN
+  command: "What trains are there from Mumbai to Pune tomorrow? Just tell me the first three."
+  expect: {}
+
+- id: complaint-hi-kivi
+  lang: hi-IN
+  command: "मुझे खाने की क्वालिटी के बारे में शिकायत दर्ज करनी है"
+  compose: "Train 12639 mein kal diya gaya khana thanda aur basi tha. Kripya karvai karein."
+  expect: { complaint: true }

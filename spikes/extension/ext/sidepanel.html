@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Drishti spike — mic</title>
+    <style>
+      body { font: 15px/1.5 system-ui, sans-serif; margin: 16px; }
+      button { font-size: 16px; padding: 10px 14px; margin: 4px 0; display: block; width: 100%; }
+      #log { white-space: pre-wrap; background: #f4f4f4; padding: 8px; min-height: 6em; }
+    </style>
+  </head>
+  <body>
+    <h1>Mic spike</h1>
+    <p>Spike 1: can the side panel capture the microphone through the same AudioWorklet the Drishti panel uses?</p>
+    <button id="test">1. Test microphone here</button>
+    <button id="grant">2. If that failed: open a tab to grant mic access</button>
+    <div id="log" role="log" aria-live="polite"></div>
+    <script src="mic-test.js"></script>
+  </body>
+</html>

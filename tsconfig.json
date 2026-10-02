@@ -1,13 +1,6 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "allowJs": false,
-    "types": ["node"]
-  },
-  "include": ["server", "spikes", "eval", "mock-sites/bills/*.ts"]
+  // Root-level scripts (eval). Each workspace has its own tsconfig; `npm run typecheck` runs them all.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": { "types": ["node"] },
+  "include": ["eval"]
 }

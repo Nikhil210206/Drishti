@@ -1,0 +1,28 @@
+{
+  "name": "@drishti/dev-harness",
+  "version": "0.1.0",
+  "description": "Local Drishti server: Playwright-driven Chromium, panel WebSocket, Pathik Rail mock. Used for development, eval and CI.",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "server": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "check": "tsx scripts/check.ts",
+    "snapshot": "tsx scripts/snapshot.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@drishti/core": "*",
+    "@drishti/providers": "*",
+    "@fastify/static": "^10.1.4",
+    "@fastify/websocket": "^11.3.1",
+    "@mozilla/readability": "^0.6.0",
+    "dotenv": "^18.0.4",
+    "fastify": "^5.12.5",
+    "playwright": "^1.63.0"
+  }
+}

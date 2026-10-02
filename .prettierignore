@@ -1,0 +1,13 @@
+node_modules
+dist
+cache
+eval/runs
+eval/last-run.log
+package-lock.json
+.output
+.wxt
+fixtures/pathik-rail
+# Hand-formatted on purpose (dense CSS rules, prose); Prettier covers TS/JS/JSON/YAML.
+*.css
+*.html
+*.md

@@ -1,54 +1,48 @@
 {
   "name": "drishti",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Voice-first web agent for blind users in 11 Indian languages",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently -k -n server,panel \"tsx watch server/index.ts\" \"vite --config web/vite.config.ts\"",
-    "start": "npm run build && tsx server/index.ts",
-    "build": "vite build --config web/vite.config.ts",
-    "check": "tsx spikes/check.ts",
-    "snapshot": "tsx spikes/snapshot.ts"
+    "dev": "concurrently -k -n server,panel \"npm run server -w @drishti/dev-harness\" \"npm run dev -w @drishti/ui\"",
+    "start": "npm run build && npm run start -w @drishti/dev-harness",
+    "build": "npm run build -w @drishti/ui",
+    "check": "npm run check -w @drishti/dev-harness --",
+    "snapshot": "npm run snapshot -w @drishti/dev-harness --",
+    "eval": "tsx eval/run.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "npm run typecheck --workspaces --if-present && tsc -p tsconfig.json",
+    "lint": "oxlint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "ci": "npm run lint && npm run format:check && npm run typecheck && npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nikhil210206/Drishti.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Nikhil210206/Drishti/issues"
   },
   "homepage": "https://github.com/Nikhil210206/Drishti#readme",
-  "private": true,
-  "dependencies": {
-    "@fastify/static": "^10.1.4",
-    "@fastify/websocket": "^11.3.1",
-    "@mozilla/readability": "^0.6.0",
-    "dotenv": "^18.0.4",
-    "fastify": "^5.12.5",
-    "fflate": "^0.8.3",
-    "playwright": "^1.63.0",
-    "sarvamai": "^1.1.10",
-    "ws": "^8.21.3",
-    "zod": "^4.6.5"
+  "engines": {
+    "node": ">=22"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "@types/ws": "^8.18.1",
-    "@vitejs/plugin-react": "^6.1.1",
     "concurrently": "^10.0.5",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "oxlint": "^1.86.0",
+    "prettier": "^3.9.9",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
     "vitest": "^5.0.2",
     "yaml": "^2.9.1"
-  },
-  "type": "module"
+  }
 }

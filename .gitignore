@@ -8,3 +8,7 @@ eval/runs/
 *.log
 .DS_Store
 inbox/
+.wxt/
+.output/
+.wrangler/
+.claude/settings.local.json
