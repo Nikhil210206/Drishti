@@ -50,7 +50,7 @@ Started 2026-10-02, ahead of W1. The roadmap is in `~/.claude/plans/now-since-th
 
 | # | Spike | Decision |
 |---|---|---|
-| 1 | Mic in the MV3 side panel | GO with the extension-tab fallback. **You:** a 3-minute manual check in real Chrome (`docs/spikes/01-side-panel-mic.md`). |
+| 1 | Mic in the MV3 side panel | GO. The side panel can't show the prompt, so the grant happens in an extension tab. Works with VoiceOver, keyboard only. Watch for Chrome's one-time "Allow this time" (`docs/spikes/01-side-panel-mic.md`). |
 | 2 | Worker relay to Saaras WS vs REST + VAD | GO. The relay adds about 70 ms. The CPU limit needs a deployed test on your Cloudflare account (`docs/spikes/02-worker-stt-relay.md`). |
 | 3 | `chrome.scripting` snapshot on real sites | GO. Six page-model bugs fixed (`docs/spikes/03-scripting-snapshot.md`). |
 | 4 | Synthetic vs `chrome.debugger` input | Debugger by default on real sites (`docs/spikes/04-synthetic-vs-debugger-input.md`). |
@@ -60,7 +60,7 @@ Started 2026-10-02, ahead of W1. The roadmap is in `~/.claude/plans/now-since-th
 
 - [x] Harness works after the move.
 - [ ] CI green on GitHub. It passes locally (`npm run ci`); it runs on your next push.
-- [ ] All 5 spikes decided. Spikes 1 and 2 each have one step that needs you (above).
+- [ ] All 5 spikes decided. Only spike 2 still needs you: the Cloudflare deploy for the CPU-limit test.
 
 ## Noticed, not fixed (Phase 1)
 
