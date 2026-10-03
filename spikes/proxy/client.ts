@@ -2,6 +2,9 @@
  * Spike 2 client: stream the same 16 kHz clip (a) straight to Saaras, (b) through the local
  * Worker relay, and (c) send it to the REST endpoint in one request; compare latency.
  *   npx tsx spikes/proxy/client.ts   (with `npx wrangler dev` running in spikes/proxy)
+ *   SOAK=300 RELAY=wss://… DEVICE_TOKEN=… npx tsx spikes/proxy/client.ts
+ *     keeps one relay session streaming for 300 s (the clip on a loop, like hands-free mode)
+ *     and reports whether the Worker kept it alive.
  * Also probes whether Saaras accepts the key without a header (needed for BYOK from a browser).
  */
 import fs from "node:fs";
@@ -11,7 +14,13 @@ import { pcmToWav, resample } from "@drishti/providers";
 import { config, CACHE_DIR, requireApiKey } from "../../apps/dev-harness/src/config.js";
 
 requireApiKey();
-const RELAY = process.env.RELAY ?? "ws://127.0.0.1:8788";
+// Accept the URL as wrangler prints it (https://…) as well as wss://…, and tolerate "wss://https://…".
+const RELAY = (process.env.RELAY ?? "ws://127.0.0.1:8788")
+  .trim()
+  .replace(/\/+$/, "")
+  .replace(/^(wss?:\/\/)?https:\/\//, "wss://")
+  .replace(/^(wss?:\/\/)?http:\/\//, "ws://");
+console.log(`relay: ${RELAY}`);
 const TOKEN = process.env.DEVICE_TOKEN ?? "spike-device-token";
 
 const wav = fs.readFileSync(path.join(CACHE_DIR, "spike-ta.wav"));
@@ -116,6 +125,64 @@ async function keyWithoutHeader() {
     queryParam: await tryOpen(`${base}&api-subscription-key=${encodeURIComponent(config.apiKey)}`),
     noKey: await tryOpen(base),
   };
+}
+
+/** One long relay session: clip, 1.5 s silence, repeat. Worst case for the Worker's CPU budget. */
+async function soak(seconds: number) {
+  return new Promise<Record<string, unknown>>((resolve) => {
+    const t0 = Date.now();
+    const ws = new WebSocket(`${RELAY}/stt?${params}&token=${TOKEN}`);
+    const finals: number[] = [];
+    let sent = 0;
+    let stop = false;
+    let lastProgress = 0;
+    const finish = (r: Record<string, unknown>) => {
+      if (stop) return;
+      stop = true;
+      try {
+        ws.close();
+      } catch {}
+      resolve({ seconds, aliveS: Math.round((Date.now() - t0) / 1000), chunksSent: sent, finals: finals.length, ...r });
+    };
+    ws.on("unexpected-response", (_q, res) => finish({ ok: false, error: `HTTP ${res.statusCode}` }));
+    ws.on("error", (e) => finish({ ok: false, error: e.message }));
+    ws.on("close", (code, reason) => finish({ ok: Date.now() - t0 >= seconds * 1000, closeCode: code, closeReason: reason.toString() }));
+    ws.on("message", (raw) => {
+      const msg = JSON.parse(raw.toString());
+      if (msg.event === "transcript.final") finals.push(Date.now() - t0);
+      if (msg.event === "error") console.log("  upstream error:", msg.code, msg.message);
+    });
+    ws.on("open", async () => {
+      const step = 3200; // 100 ms
+      const silence = Buffer.alloc(step);
+      while (!stop && Date.now() - t0 < seconds * 1000) {
+        for (let i = 0; i < pcm16k.length && !stop; i += step) {
+          ws.send(JSON.stringify({ event: "audio_input", audio: pcm16k.subarray(i, i + step).toString("base64") }));
+          sent++;
+          await new Promise((r) => setTimeout(r, 100));
+        }
+        for (let k = 0; k < 15 && !stop; k++) {
+          ws.send(JSON.stringify({ event: "audio_input", audio: silence.toString("base64") }));
+          sent++;
+          await new Promise((r) => setTimeout(r, 100));
+        }
+        const elapsed = Math.round((Date.now() - t0) / 1000);
+        if (elapsed - lastProgress >= 30) {
+          lastProgress = elapsed;
+          console.log(`  ${elapsed}s: still connected, ${finals.length} transcripts so far`);
+        }
+      }
+      finish({ ok: true });
+    });
+  });
+}
+
+if (process.env.SOAK) {
+  const r = await soak(Number(process.env.SOAK));
+  console.log("soak", r);
+  fs.mkdirSync(path.join(import.meta.dirname, "results"), { recursive: true });
+  fs.writeFileSync(path.join(import.meta.dirname, `results/soak-${process.env.SOAK}s.json`), JSON.stringify(r, null, 2));
+  process.exit(0);
 }
 
 const out: Record<string, unknown> = { audioSeconds: Number(audioSeconds.toFixed(2)) };

@@ -1,10 +1,10 @@
-# Phase 0 status (W1–2, 5–18 Oct 2026)
+# Phase 0 status (W1–2, 5–18 Oct 2026): exit criteria met on 2026-10-03
 
 Started 2026-10-02, ahead of W1. The roadmap is in `~/.claude/plans/now-since-the-event-twinkly-pizza.md`.
 
 ## Day 1
 
-- [ ] Apply to the Sarvam Startup Program and ask for higher rate limits. **You:** a draft is in `docs/sarvam-startup-application.md`.
+- [x] Applied to the Sarvam Startup Program and asked for higher rate limits (2026-10-03).
 
 ## Restructure ✅
 
@@ -51,7 +51,7 @@ Started 2026-10-02, ahead of W1. The roadmap is in `~/.claude/plans/now-since-th
 | # | Spike | Decision |
 |---|---|---|
 | 1 | Mic in the MV3 side panel | GO. The side panel can't show the prompt, so the grant happens in an extension tab. Works with VoiceOver, keyboard only. Watch for Chrome's one-time "Allow this time" (`docs/spikes/01-side-panel-mic.md`). |
-| 2 | Worker relay to Saaras WS vs REST + VAD | GO. The relay adds about 70 ms. The CPU limit needs a deployed test on your Cloudflare account (`docs/spikes/02-worker-stt-relay.md`). |
+| 2 | Worker relay to Saaras WS vs REST + VAD | GO, stateless Worker. Deployed: adds about 25 ms; a 5-minute session survived the free-plan CPU limit (`docs/spikes/02-worker-stt-relay.md`). |
 | 3 | `chrome.scripting` snapshot on real sites | GO. Six page-model bugs fixed (`docs/spikes/03-scripting-snapshot.md`). |
 | 4 | Synthetic vs `chrome.debugger` input | Debugger by default on real sites (`docs/spikes/04-synthetic-vs-debugger-input.md`). |
 | 5 | Base Laya on 50 yes/no replies | NO-GO for the base model (62%, 9 unsafe yes, versus 94% and 0 unsafe for the keyword gate). The fine-tuning track continues (`docs/spikes/05-laya-baseline.md`). |
@@ -59,8 +59,8 @@ Started 2026-10-02, ahead of W1. The roadmap is in `~/.claude/plans/now-since-th
 ## Exit criteria
 
 - [x] Harness works after the move.
-- [ ] CI green on GitHub. It passes locally (`npm run ci`); it runs on your next push.
-- [ ] All 5 spikes decided. Only spike 2 still needs you: the Cloudflare deploy for the CPU-limit test.
+- [x] CI green on GitHub: three pushes, all successful, about 46 s each.
+- [x] All 5 spikes decided.
 
 ## Noticed, not fixed (Phase 1)
 
