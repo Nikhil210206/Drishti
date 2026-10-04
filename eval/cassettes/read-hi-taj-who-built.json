@@ -1,0 +1,36 @@
+{
+ "version": 1,
+ "task": "read-hi-taj-who-built",
+ "recordedAt": "2026-10-04T14:42:46.909Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "5233f0d5abb5d725",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_2b080c21896c4586ba208ae7",
+      "name": "done",
+      "args": {
+       "speech": "ताजमहल का निर्माण मुग़ल सम्राट शाहजहाँ ने करवाया था। उन्होंने अपनी पत्नी मुमताज़ महल की याद में इसे बनवाया था।"
+      }
+     }
+    ],
+    "ms": 689,
+    "usage": {
+     "completion_tokens": 64,
+     "prompt_tokens": 7543,
+     "total_tokens": 7607,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

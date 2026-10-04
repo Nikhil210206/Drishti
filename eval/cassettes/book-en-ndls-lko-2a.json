@@ -1,0 +1,745 @@
+{
+ "version": 1,
+ "task": "book-en-ndls-lko-2a",
+ "recordedAt": "2026-10-04T14:38:43.642Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "9b60d3f2fd546608",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_dbc3b031d68e4143b0b79a6b",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "Clicking FROM box"
+      }
+     }
+    ],
+    "ms": 486,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 3777,
+     "total_tokens": 3820,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "403e9663b444338b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_44b0821ccf5640d6a118d091",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "New Delhi",
+       "narration": "Typing New Delhi in FROM"
+      }
+     },
+     {
+      "id": "call_c0601168672e4ebdaa27cf98",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Lucknow",
+       "narration": "Typing Lucknow in TO"
+      }
+     },
+     {
+      "id": "call_36e85d2360d54b4ca41652b3",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Clicking Tomorrow"
+      }
+     }
+    ],
+    "ms": 644,
+    "usage": {
+     "completion_tokens": 79,
+     "prompt_tokens": 3785,
+     "total_tokens": 3864,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "829e0759919bcd60",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d92bec72a2c24f9dbccadc42",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Selecting New Delhi station"
+      }
+     }
+    ],
+    "ms": 360,
+    "usage": {
+     "completion_tokens": 23,
+     "prompt_tokens": 3856,
+     "total_tokens": 3879,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "fbe69146f13b4997",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c174f547b2704140a76b13b7",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO field"
+      }
+     }
+    ],
+    "ms": 365,
+    "usage": {
+     "completion_tokens": 21,
+     "prompt_tokens": 3862,
+     "total_tokens": 3883,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "b482f4ce9d45c876",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4ce215bae48b4a0091221049",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Select tomorrow's date"
+      }
+     }
+    ],
+    "ms": 477,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 3875,
+     "total_tokens": 3919,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "6afa8227752b3016",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e43e438323d54cef856ea3da",
+      "name": "click",
+      "args": {
+       "id": 24,
+       "narration": "Select tomorrow's date"
+      }
+     }
+    ],
+    "ms": 615,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4055,
+     "total_tokens": 4104,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "d99f1c43ecf2ddca",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_090cad31afec470dbc458531",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "AC 2 tier",
+       "narration": "Select AC 2 tier"
+      }
+     }
+    ],
+    "ms": 531,
+    "usage": {
+     "completion_tokens": 56,
+     "prompt_tokens": 3976,
+     "total_tokens": 4032,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "5e75158c9bbdb2fa",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4fe7a0da600940d79e299bf1",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search for trains"
+      }
+     }
+    ],
+    "ms": 462,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4020,
+     "total_tokens": 4061,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "c62225f7dda1d30a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d81ee529d7344dfa89105f88",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO station",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 516,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4091,
+     "total_tokens": 4139,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "7d55cee5886601de",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_74f8b28a9f814863b8f13366",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Clicking TO station"
+      }
+     }
+    ],
+    "ms": 615,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4104,
+     "total_tokens": 4145,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "80fe2feebbd1a01b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_aa92c2ec93984763a9c1a080",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO field",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 486,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4118,
+     "total_tokens": 4166,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "da47e3dcd47bd914",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9d91eb1f7e054c81af9af259",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO station box",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 493,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4157,
+     "total_tokens": 4206,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "2918b1f9a487b275",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b5b66a3a59f047f68d2bcfda",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO box",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 619,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4219,
+     "total_tokens": 4267,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "3ee3b080a8a87896",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ae9c1f130f4145329e172a9d",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search for trains",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 467,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4258,
+     "total_tokens": 4307,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "2d946ac6d4a2a347",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d4d338be782443579775baea",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO station"
+      }
+     }
+    ],
+    "ms": 533,
+    "usage": {
+     "completion_tokens": 40,
+     "prompt_tokens": 4250,
+     "total_tokens": 4290,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "b6e57fc26b6a7479",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0f960778065547a09f6e79d1",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO station box"
+      }
+     }
+    ],
+    "ms": 486,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4289,
+     "total_tokens": 4332,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "4a844ab31ae5f2a7",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_bbfa0cba371040f4a07a2aae",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Lucknow",
+       "narration": "Typing destination"
+      }
+     }
+    ],
+    "ms": 564,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 4328,
+     "total_tokens": 4381,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "317375622e9314c5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f822155df5d74340921df0b2",
+      "name": "click",
+      "args": {
+       "id": 57,
+       "narration": "Choose Lucknow station",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 570,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 4392,
+     "total_tokens": 4443,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "23274c3e864df488",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_736527744f2c4cd09b600d3e",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains now"
+      }
+     }
+    ],
+    "ms": 492,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4402,
+     "total_tokens": 4443,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "2a985567b59a3072",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_93218e9ff76d405bbd07a84b",
+      "name": "click",
+      "args": {
+       "id": 59,
+       "narration": "Book first 2A train",
+       "confirmation_question": "Book Delhi-Lucknow Express 2A for 850 rupees?"
+      }
+     }
+    ],
+    "ms": 693,
+    "usage": {
+     "completion_tokens": 68,
+     "prompt_tokens": 4650,
+     "total_tokens": 4718,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "49148252ed761845",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_77013ea7f6134534bbd0b9f5",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 63,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 64,
+         "value": "34"
+        },
+        {
+         "id": 65,
+         "value": "Female"
+        },
+        {
+         "id": 70,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Filling passenger details"
+      }
+     }
+    ],
+    "ms": 1189,
+    "usage": {
+     "completion_tokens": 147,
+     "prompt_tokens": 4445,
+     "total_tokens": 4592,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "6bd24c4ec85ba8df",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e37e9c8d195f4e18bdc0d434",
+      "name": "click",
+      "args": {
+       "id": 65,
+       "narration": "Select Female gender"
+      }
+     }
+    ],
+    "ms": 448,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4510,
+     "total_tokens": 4551,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "b8a02d2ab86a1205",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0d181cd94bac4f9c9aa09872",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 70,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Filling mobile number"
+      }
+     },
+     {
+      "id": "call_ab5fe529599c4e95876f3ddc",
+      "name": "click",
+      "args": {
+       "id": 71,
+       "narration": "Proceed to passenger details",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 543,
+    "usage": {
+     "completion_tokens": 66,
+     "prompt_tokens": 4551,
+     "total_tokens": 4617,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "0a0af690eb81881c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5d80bf652753475091e9c431",
+      "name": "click",
+      "args": {
+       "id": 72,
+       "narration": "Proceed to pay",
+       "confirmation_question": "Book Delhi to Lucknow AC 2 tier on 6 Oct for Asha Verma, total ₹870?"
+      }
+     }
+    ],
+    "ms": 676,
+    "usage": {
+     "completion_tokens": 71,
+     "prompt_tokens": 4554,
+     "total_tokens": 4625,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "063faf61b506e40c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_04336bcc03464cc8999a142e",
+      "name": "click",
+      "args": {
+       "id": 76,
+       "narration": "Click pay button",
+       "confirmation_question": "Pay 870 rupees for Delhi Lucknow Express 2A? Confirm?"
+      }
+     }
+    ],
+    "ms": 534,
+    "usage": {
+     "completion_tokens": 65,
+     "prompt_tokens": 4538,
+     "total_tokens": 4603,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

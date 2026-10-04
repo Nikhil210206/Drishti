@@ -1,0 +1,323 @@
+{
+ "version": 1,
+ "task": "book-kn-sbc-mys-2s",
+ "recordedAt": "2026-10-04T14:36:29.207Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "3b3ad6b6db71405f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0c1160012cc041bb99b66efe",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Bengaluru",
+       "narration": "From city type Bengaluru"
+      }
+     }
+    ],
+    "ms": 468,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 3764,
+     "total_tokens": 3816,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "201d43bf9dcf17ea",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cffd72cfc1574da0bb9bbd9b",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "ಬೆಂಗಳೂರು ಸಿಟಿ ಸ್ಟೇಷನ್ ಆಯ್ಕೆ"
+      }
+     }
+    ],
+    "ms": 724,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 3844,
+     "total_tokens": 3891,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "a11e1e58bef99a73",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_767dc2cf3d1b4e43a7307545",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Mysuru",
+       "narration": "Mysuru station enter ಮಾಡ್ತಿದ್ದೀನಿ"
+      }
+     }
+    ],
+    "ms": 458,
+    "usage": {
+     "completion_tokens": 35,
+     "prompt_tokens": 3836,
+     "total_tokens": 3871,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "427c37bf0694820e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_eabf4d4dd4de40faa2554a2b",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "Mysuru station select ಮಾಡಿ"
+      }
+     }
+    ],
+    "ms": 422,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 3897,
+     "total_tokens": 3941,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "071e2a87101048cc",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d94a7ee152a34441a10f6186",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 530,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 3904,
+     "total_tokens": 3953,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "c93ddbafeaf45dc1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_25c9abf593694cbcbbc4b723",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Sahyadri Intercity 2S book ಮಾಡಿ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 579,
+    "usage": {
+     "completion_tokens": 62,
+     "prompt_tokens": 4753,
+     "total_tokens": 4815,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "35e643d892f875fe",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_105c2243d83144fea6aa828e",
+      "name": "type_text",
+      "args": {
+       "id": 35,
+       "text": "Asha",
+       "narration": "Passenger ಹೆಸರು ಬರೆಯುತ್ತಿದ್ದೇನೆ"
+      }
+     },
+     {
+      "id": "call_9c4f04f4fd984d01b8fe6d12",
+      "name": "type_text",
+      "args": {
+       "id": 36,
+       "text": "34",
+       "narration": "Passenger ವಯಸ್ಸು ಬರೆಯುತ್ತಿದ್ದೇನೆ"
+      }
+     },
+     {
+      "id": "call_76c1b8400b314e6ab34a84ff",
+      "name": "click",
+      "args": {
+       "id": 38,
+       "narration": "Gender Female ಆಯ್ಕೆ ಮಾಡುತ್ತಿದ್ದೇನೆ"
+      }
+     },
+     {
+      "id": "call_af87815651e848fcb8ad0454",
+      "name": "type_text",
+      "args": {
+       "id": 42,
+       "text": "9000000001",
+       "narration": "Mobile number ಬರೆಯುತ್ತಿದ್ದೇನೆ"
+      }
+     },
+     {
+      "id": "call_d632d65c72c04406ae127612",
+      "name": "click",
+      "args": {
+       "id": 43,
+       "narration": "Continue ಕ್ಲಿಕ್ ಮಾಡುತ್ತಿದ್ದೇನೆ"
+      }
+     }
+    ],
+    "ms": 1459,
+    "usage": {
+     "completion_tokens": 239,
+     "prompt_tokens": 3978,
+     "total_tokens": 4217,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "732d109c9ed726e3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c3c0918c60304e309a34ff1f",
+      "name": "click",
+      "args": {
+       "id": 44,
+       "narration": "Proceed to pay",
+       "confirmation_question": "Confirm booking for Sahyadri Intercity Express 12981 from Bengaluru to Mysuru on 6 Oct, Second Sitting for 1 passenger, total ₹110?"
+      }
+     }
+    ],
+    "ms": 737,
+    "usage": {
+     "completion_tokens": 87,
+     "prompt_tokens": 4042,
+     "total_tokens": 4129,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "df943ba08448e787",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_815452ac507a4bb8bbbf62e8",
+      "name": "click",
+      "args": {
+       "id": 48,
+       "narration": "₹110 ಪೇ ಮಾಡಿ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 438,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 4029,
+     "total_tokens": 4081,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "11ffb5de74f0aeb1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_687b87f4abb1417ba7d62ee8",
+      "name": "done",
+      "args": {
+       "speech": "ನಿಮ್ಮ ticket booking complete ಆಗಿದೆ. PNR number 4123456700. ನಾಳೆ ಬೆಂಗಳೂರಿನಿಂದ ಮೈಸೂರಿಗೆ 2nd sitting ticket, Sahyadri Intercity Express, seat 12, ₹110 pay ಆಗಿದೆ. Safe journey!"
+      }
+     }
+    ],
+    "ms": 721,
+    "usage": {
+     "completion_tokens": 86,
+     "prompt_tokens": 4062,
+     "total_tokens": 4148,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "399da7c786414015": "ನಾನು ಮುಂದುವರಿಯಬೇಕಾ?",
+  "0231b0d67cc87935": "Page ಹೇಳುತ್ತೆ:"
+ },
+ "docs": {}
+}

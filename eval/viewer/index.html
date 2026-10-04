@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Drishti trace viewer</title>
+    <style>
+      :root {
+        --bg: #fbfbfa;
+        --fg: #1d1d1b;
+        --muted: #6b6b66;
+        --line: #e3e2dc;
+        --card: #ffffff;
+        --ok: #1f7a3d;
+        --bad: #b42318;
+        --warn: #9a6700;
+        --accent: #3b5bdb;
+        --code: #f3f2ee;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #161614;
+          --fg: #ecebe6;
+          --muted: #a3a29b;
+          --line: #33322e;
+          --card: #1f1f1c;
+          --ok: #6fcf8f;
+          --bad: #ff8a80;
+          --warn: #e3b341;
+          --accent: #8ea6ff;
+          --code: #262622;
+        }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, "Noto Sans", sans-serif; }
+      header, main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+      h1 { font-size: 20px; margin: 0 0 4px; }
+      .muted { color: var(--muted); }
+      .drop { border: 2px dashed var(--line); border-radius: 10px; padding: 20px; text-align: center; margin: 12px 0; }
+      .drop.over { border-color: var(--accent); }
+      .summary { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 12px 0; }
+      .pill { font-weight: 600; }
+      .ok { color: var(--ok); }
+      .bad { color: var(--bad); }
+      .warn { color: var(--warn); }
+      .step { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin: 10px 0; padding: 10px 14px; }
+      .step h2 { font-size: 15px; margin: 0 0 6px; display: flex; gap: 10px; flex-wrap: wrap; }
+      .calls { margin: 4px 0; padding-left: 18px; }
+      .calls li { margin: 2px 0; }
+      .ev { font-size: 13px; margin: 2px 0; }
+      details { margin: 6px 0; }
+      summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+      pre { background: var(--code); padding: 10px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; font-size: 12.5px; max-height: 480px; overflow-y: auto; }
+      code { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+      @media (max-width: 600px) { header, main { padding: 12px 16px; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Drishti trace viewer</h1>
+      <p class="muted">Open a <code>eval/runs/&lt;time&gt;/&lt;task&gt;.jsonl</code> file. Nothing leaves your machine.</p>
+      <div class="drop" id="drop">
+        <label>Choose a trace file: <input type="file" id="file" accept=".jsonl,.json,application/json" /></label>
+        <div class="muted">or drop it here</div>
+      </div>
+    </header>
+    <main id="out" aria-live="polite"></main>
+    <script>
+      const out = document.getElementById("out");
+      const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+      const el = (html) => {
+        const t = document.createElement("template");
+        t.innerHTML = html.trim();
+        return t.content.firstElementChild;
+      };
+
+      function render(text) {
+        const rows = text.trim().split("\n").filter(Boolean).map((l) => JSON.parse(l));
+        out.innerHTML = "";
+        const task = rows.find((r) => r.type === "task") ?? {};
+        const result = rows.find((r) => r.type === "result");
+        out.append(
+          el(`<section aria-label="Task">
+            <h2>${esc(task.id)} <span class="muted">${esc(task.lang)} · ${esc(task.mode)} · ${esc(task.model)}</span></h2>
+            <p><strong>Command:</strong> ${esc(task.command)}</p>
+            ${result ? `<div class="summary">
+              <span class="pill ${result.ok ? "ok" : "bad"}">${result.ok ? "PASS" : "FAIL"}</span>
+              <span>outcome ${esc(result.outcome)}</span><span>${result.steps} steps</span><span>${result.llmCalls} LLM calls</span>
+              <span>₹${Number(result.inr).toFixed(2)}</span><span>LLM p50 ${result.llmMsP50} ms</span>
+              ${result.drift ? `<span class="warn">drift ${result.drift}</span>` : ""}
+            </div>
+            ${[...(result.safety ?? []).map((s) => `<p class="bad">⚠️ ${esc(s)}</p>`), ...(result.failures ?? []).map((f) => `<p class="bad">✗ ${esc(f)}</p>`)].join("")}
+            <p><strong>Final reply:</strong> ${esc(result.speech)}</p>` : `<p class="warn">No result line: the run was interrupted.</p>`}
+          </section>`),
+        );
+
+        // Group everything after each LLM request into one step card.
+        let card = null;
+        let snap = null;
+        const pageOf = (req) => {
+          const u = req.messages?.find((m) => m.role === "user")?.content ?? "";
+          return u;
+        };
+        for (const r of rows) {
+          if (r.type === "snapshot") snap = r;
+          if (r.type === "llm_request") {
+            card = el(`<article class="step"><h2>Step ${r.i} <span class="muted">${esc(snap?.url ?? "")}${snap?.dialog ? ` · dialog “${esc(snap.dialog)}”` : ""}</span></h2></article>`);
+            card.append(el(`<details><summary>What the agent saw (prompt sent to the model)</summary><pre><code>${esc(pageOf(r))}</code></pre></details>`));
+            out.append(card);
+          } else if (!card) continue;
+          else if (r.type === "llm_response") {
+            const calls = (r.toolCalls ?? []).map((c) => `<li><code>${esc(c.name)}</code> ${esc(JSON.stringify(c.args))}</li>`).join("");
+            card.querySelector("h2").append(el(`<span class="muted">${r.ms} ms</span>`));
+            card.append(el(`<div><strong>Decided:</strong>${calls ? `<ul class="calls">${calls}</ul>` : ` (no tool) ${esc(r.content)}`}</div>`));
+          } else if (r.type === "llm_error") card.append(el(`<p class="bad">LLM error: ${esc(r.error)}</p>`));
+          else if (r.type === "action") card.append(el(`<p class="ev ${r.error ? "bad" : ""}">→ ${esc(r.method)}(${esc(JSON.stringify(r.args))}) ${r.ms} ms${r.error ? ` — ${esc(r.error)}` : ""}</p>`));
+          else if (r.type === "ask") card.append(el(`<p class="ev warn">${r.kind === "confirm" ? "Confirm" : "Asked"}: “${esc(r.question)}” → user: “${esc(r.answer)}”</p>`));
+          else if (r.type === "say") card.append(el(`<p class="ev">🔊 ${esc(r.text)}</p>`));
+          // Agent events keep their own type (step, audit, metric, …).
+          else if (r.type === "step" && r.step.status !== "running")
+            card.append(el(`<p class="ev ${r.step.status === "ok" ? "ok" : "bad"}">${esc(r.step.status)}: ${esc(r.step.tool)} ${esc(r.step.target ?? "")} ${esc(r.step.result ?? "")}</p>`));
+          else if (r.type === "audit")
+            card.append(el(`<p class="ev warn">audit: ${esc(r.action)} “${esc(r.target)}” ${esc(r.reason)} — ${r.confirmed ? "confirmed" : "not done"}</p>`));
+        }
+      }
+
+      const load = (file) => file.text().then(render).catch((e) => (out.innerHTML = `<p class="bad">Could not read: ${esc(e.message)}</p>`));
+      document.getElementById("file").addEventListener("change", (e) => e.target.files[0] && load(e.target.files[0]));
+      const drop = document.getElementById("drop");
+      drop.addEventListener("dragover", (e) => (e.preventDefault(), drop.classList.add("over")));
+      drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+      drop.addEventListener("drop", (e) => {
+        e.preventDefault();
+        drop.classList.remove("over");
+        if (e.dataTransfer.files[0]) load(e.dataTransfer.files[0]);
+      });
+    </script>
+  </body>
+</html>

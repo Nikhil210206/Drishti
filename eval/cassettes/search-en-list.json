@@ -1,0 +1,345 @@
+{
+ "version": 1,
+ "task": "search-en-list",
+ "recordedAt": "2026-10-04T14:44:06.551Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "563bdb1d489e44f8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3d078003b787423cbd162233",
+      "name": "navigate",
+      "args": {
+       "url": "http://localhost:5174/",
+       "narration": "Opening Pathik Rail booking site"
+      }
+     }
+    ],
+    "ms": 491,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 3759,
+     "total_tokens": 3809,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "fc5258200628a67e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d4db98d7f8fd46219787cbf5",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "Click FROM station box"
+      }
+     },
+     {
+      "id": "call_123458dbefdd487a90977da2",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Mumbai",
+       "narration": "Type Mumbai"
+      }
+     },
+     {
+      "id": "call_576cb4f514864d27bd83076c",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO station box"
+      }
+     },
+     {
+      "id": "call_31b9e17084b94e188fe086b0",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "Type Pune"
+      }
+     },
+     {
+      "id": "call_6ff9aba7d80e4ec4bd543f32",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Click date for tomorrow"
+      }
+     },
+     {
+      "id": "call_f536bf0fc8074692a410e3d0",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Click Tomorrow"
+      }
+     },
+     {
+      "id": "call_f326496c9ffb4fec9a949629",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Click SEARCH TRAINS"
+      }
+     }
+    ],
+    "ms": 1375,
+    "usage": {
+     "completion_tokens": 150,
+     "prompt_tokens": 3760,
+     "total_tokens": 3910,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "cccd7a35b987d04c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f6b583a51d74468dad15dfb7",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Selecting Mumbai CSMT"
+      }
+     }
+    ],
+    "ms": 312,
+    "usage": {
+     "completion_tokens": 23,
+     "prompt_tokens": 3878,
+     "total_tokens": 3901,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "3a22fcb37b1b653d",
+   "response": {
+    "content": "",
+    "toolCalls": [],
+    "ms": 3953,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 3868,
+     "total_tokens": 4468,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "7d16382ca26d010e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3ca0d6d9b1004ec8a0ef9adc",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "Typing Pune as destination"
+      }
+     },
+     {
+      "id": "call_6644f4ecd4d9477fad63fd32",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Selecting tomorrow's date"
+      }
+     }
+    ],
+    "ms": 650,
+    "usage": {
+     "completion_tokens": 64,
+     "prompt_tokens": 3889,
+     "total_tokens": 3953,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "52623711252b7808",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9f5a8bff6d7d4c16a396c833",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "Select Pune Junction"
+      }
+     },
+     {
+      "id": "call_a86972a1be1845cd81f0d073",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Select tomorrow"
+      }
+     },
+     {
+      "id": "call_a9658c5402a5431fb378afb4",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
+      }
+     }
+    ],
+    "ms": 549,
+    "usage": {
+     "completion_tokens": 60,
+     "prompt_tokens": 3938,
+     "total_tokens": 3998,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "50f71422ba1eac9e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c9e7b91a4b7d403083e37a06",
+      "name": "press_key",
+      "args": {
+       "key": "Enter",
+       "narration": "Search for trains"
+      }
+     }
+    ],
+    "ms": 443,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 3960,
+     "total_tokens": 3991,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "27ad567ed2bdc0f0",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_77bbeca2737a4872b099b3be",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search for trains"
+      }
+     }
+    ],
+    "ms": 358,
+    "usage": {
+     "completion_tokens": 30,
+     "prompt_tokens": 3968,
+     "total_tokens": 3998,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "859afcdc1fbba640",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "Reading train results"
+      }
+     }
+    ],
+    "ms": 4648,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5700,
+     "total_tokens": 6300,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "e906ba02d01510a6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "Here are the first three trains from Mumbai CSMT to Pune Junction tomorrow, 6th October. First is Rajdhani Superfast Express, 16807, departing at 3:00 AM, arriving 5:10 AM. Second is Konark Express, 20957, departing 4:05 AM, arriving 6:50 AM. Third is Mumbai–Pune Vande Bharat Express, 12496, departing 6:20 AM, arriving 8:25 AM. Would you like to know more about any of these?"
+      }
+     }
+    ],
+    "ms": 4051,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 6483,
+     "total_tokens": 7083,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

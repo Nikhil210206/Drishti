@@ -1,0 +1,700 @@
+{
+ "version": 1,
+ "task": "book-en-fixed-date",
+ "recordedAt": "2026-10-04T14:40:23.262Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "2e8fc266120d05c3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cad8362339214e13b76375c5",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "Clicking FROM station box",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_e1a38cfbd19c4d03a378adbe",
+      "name": "click",
+      "args": {
+       "id": 7,
+       "narration": "Clicking swap button",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_275c44a047474e92a07f04a4",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Clicking TO station box",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_044d282f3b084b6387370f60",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Nagpur",
+       "narration": "Typing Nagpur station"
+      }
+     },
+     {
+      "id": "call_03ed43f901e84fab9296e774",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Bhopal",
+       "narration": "Typing Bhopal station"
+      }
+     },
+     {
+      "id": "call_6d5fab0529a14ada8ca72622",
+      "name": "click",
+      "args": {
+       "id": 13,
+       "narration": "Opening class dropdown",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_c251b30fab954722a78fd43a",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "Chair Car",
+       "narration": "Selecting Chair Car class"
+      }
+     },
+     {
+      "id": "call_0c4f9b14c3184f82bd843f39",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Opening date picker",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_62477e0feac24a57a871d456",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Selecting Tomorrow",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_ffc7dee6f36846e5ab6f1f54",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Searching trains",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 3271,
+    "usage": {
+     "completion_tokens": 508,
+     "prompt_tokens": 3759,
+     "total_tokens": 4267,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "3245c93610aad26f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9d575ab5f68d457dbc9f0a92",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Select Nagpur station",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 488,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 3864,
+     "total_tokens": 3913,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "e7ea48646ad664cc",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a13e110a7a274e2bb8a1e694",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO box"
+      }
+     }
+    ],
+    "ms": 487,
+    "usage": {
+     "completion_tokens": 40,
+     "prompt_tokens": 3871,
+     "total_tokens": 3911,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "8ca10dfbec6b6d6d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1225f38078e74d51ae95f68d",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Bhopal",
+       "narration": "Typing Bhopal in TO"
+      }
+     }
+    ],
+    "ms": 591,
+    "usage": {
+     "completion_tokens": 55,
+     "prompt_tokens": 3884,
+     "total_tokens": 3939,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "7b3e3207360f5da5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_19487fc9dffe461a8dbd9711",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Select Bhopal station"
+      }
+     }
+    ],
+    "ms": 399,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 3946,
+     "total_tokens": 3988,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "9d17c35780333d3d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d792f432eb344c798d0541e7",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "Chair Car",
+       "narration": "Select Chair Car"
+      }
+     }
+    ],
+    "ms": 517,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 3953,
+     "total_tokens": 4007,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "9975431d83ae3176",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a8536111bdf54794a9ac6f61",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "AC Chair Car (CC)",
+       "narration": "Choose AC Chair Car class"
+      }
+     }
+    ],
+    "ms": 357,
+    "usage": {
+     "completion_tokens": 35,
+     "prompt_tokens": 3991,
+     "total_tokens": 4026,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "4a985111c779233b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_966cc208a3604981b954036b",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Open date picker",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_8933245efc214ad4bce2e0f1",
+      "name": "click",
+      "args": {
+       "id": 12,
+       "narration": "Select day after tomorrow",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 497,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 4033,
+     "total_tokens": 4085,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "f60a340329950443",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_26f979eb474a4a3098c82769",
+      "name": "click",
+      "args": {
+       "id": 38,
+       "narration": "Select 12 October"
+      }
+     }
+    ],
+    "ms": 403,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4217,
+     "total_tokens": 4261,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "35188e5b30546e3e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0b8decd7556743b29b4e8283",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search for trains"
+      }
+     }
+    ],
+    "ms": 480,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 4154,
+     "total_tokens": 4196,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "91780e29bdda7aac",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0ba987d1af434cd9a26608e7",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "Read the train results page"
+      }
+     }
+    ],
+    "ms": 337,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4605,
+     "total_tokens": 4630,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "9ff0cc2df6931973",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4a9c10c8a648417890801f49",
+      "name": "click",
+      "args": {
+       "id": 62,
+       "narration": "Book Nilgiri Shatabdi",
+       "confirmation_question": "Book Nilgiri Shatabdi Express from Nagpur to Bhopal on 12 October in AC Chair Car for 3 rupees, is that correct?"
+      }
+     }
+    ],
+    "ms": 824,
+    "usage": {
+     "completion_tokens": 89,
+     "prompt_tokens": 4956,
+     "total_tokens": 5045,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "c56afa42e220ee49",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_94ac425229394cb8b0edf520",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 65,
+         "value": "Asha"
+        },
+        {
+         "id": 66,
+         "value": "34"
+        }
+       ],
+       "narration": "Filling passenger name and age"
+      }
+     }
+    ],
+    "ms": 833,
+    "usage": {
+     "completion_tokens": 93,
+     "prompt_tokens": 4243,
+     "total_tokens": 4336,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "c063f506d747c183",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9291be3e18954f3a865c4164",
+      "name": "select_option",
+      "args": {
+       "id": 67,
+       "option": "Female",
+       "narration": "Select Female gender"
+      }
+     }
+    ],
+    "ms": 454,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 4279,
+     "total_tokens": 4330,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "97e9eb59d9892a9b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8de9c993582443d4961458df",
+      "name": "click",
+      "args": {
+       "id": 69,
+       "narration": "Selecting Female gender"
+      }
+     }
+    ],
+    "ms": 406,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4316,
+     "total_tokens": 4357,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "6c5072ac5c015ba9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a3c9f35a1a05478bb2e4c7c2",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 65,
+         "value": "Asha"
+        },
+        {
+         "id": 66,
+         "value": "34"
+        },
+        {
+         "id": 72,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Filling passenger details"
+      }
+     }
+    ],
+    "ms": 738,
+    "usage": {
+     "completion_tokens": 99,
+     "prompt_tokens": 4331,
+     "total_tokens": 4430,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "fcf2c6e8457145a8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_aafa376534b64333bb16949a",
+      "name": "click",
+      "args": {
+       "id": 68,
+       "narration": "Selecting Female gender",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 475,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4396,
+     "total_tokens": 4445,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "1990ef80f1c96f97",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ec0f31b4ca014513ab82051f",
+      "name": "click",
+      "args": {
+       "id": 73,
+       "narration": "Continue to payment",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 451,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4409,
+     "total_tokens": 4458,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "270d0f54a0b415e5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 74,
+       "narration": "Proceeding to payment",
+       "confirmation_question": "Confirm booking AC Chair Car from Nagpur to Bhopal on 12 October for 1 passenger at ₹455 total?"
+      }
+     }
+    ],
+    "ms": 3326,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 4367,
+     "total_tokens": 4967,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "159d3675ad02eb44",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3c0f48be55ea498c850f4281",
+      "name": "click",
+      "args": {
+       "id": 78,
+       "narration": "Pay 455 rupees",
+       "confirmation_question": "Pay 455 rupees by UPI for Chair Car ticket from Nagpur to Bhopal on 12 October?"
+      }
+     }
+    ],
+    "ms": 619,
+    "usage": {
+     "completion_tokens": 74,
+     "prompt_tokens": 4353,
+     "total_tokens": 4427,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "149e8a68b639d2f5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_27905a699b7941b3afd0d9e1",
+      "name": "done",
+      "args": {
+       "speech": "Your booking is confirmed. PNR 4123456700 for Nilgiri Shatabdi Express from Nagpur to Bhopal on 12 October in Chair Car, seat C3, seat 12, amount paid ₹455."
+      }
+     }
+    ],
+    "ms": 719,
+    "usage": {
+     "completion_tokens": 67,
+     "prompt_tokens": 4386,
+     "total_tokens": 4453,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

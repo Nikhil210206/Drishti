@@ -1,0 +1,63 @@
+{
+ "version": 1,
+ "task": "read-bn-news-summary",
+ "recordedAt": "2026-10-04T14:43:20.995Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "7f476f4c4392e773",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_34c30fdddcd1487faf5bad0f",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "news summary পড়ছি"
+      }
+     }
+    ],
+    "ms": 556,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 3813,
+     "total_tokens": 3862,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "9edbbbe1ae1b4c4b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_81ddafdd138144dbb369d956",
+      "name": "done",
+      "args": {
+       "speech": "Pathik Rail 15 January 2027 থেকে 120টি accessible sleeper coach যোগ করছে। এতে ramp, চওড়া lower berth আর Braille numbering থাকবে। প্রথম route Chennai–Bengaluru, Mumbai–Pune এবং Howrah–Patna। Wheelchair user-রা "
+      }
+     }
+    ],
+    "ms": 959,
+    "usage": {
+     "completion_tokens": 90,
+     "prompt_tokens": 4047,
+     "total_tokens": 4137,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

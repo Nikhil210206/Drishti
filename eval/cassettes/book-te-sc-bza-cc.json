@@ -1,0 +1,544 @@
+{
+ "version": 1,
+ "task": "book-te-sc-bza-cc",
+ "recordedAt": "2026-10-04T14:36:00.343Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "036371e10a705bde",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d979e3dad2bd433281d9a506",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Secunderabad",
+       "narration": "From station enter"
+      }
+     },
+     {
+      "id": "call_5f5ee9b752184c53910cd29a",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Vijayawada",
+       "narration": "To station enter"
+      }
+     }
+    ],
+    "ms": 893,
+    "usage": {
+     "completion_tokens": 105,
+     "prompt_tokens": 3763,
+     "total_tokens": 3868,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "becba8204a334c5d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b4743d3495414c46b438fa8b",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Secunderabad ఎంచుకోవడం",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 471,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 3834,
+     "total_tokens": 3885,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "1b95209ceb582ca5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_bd766a74cddb46cd8f1310c7",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Vijayawada",
+       "narration": "TO field లో Vijayawada type చేస్తున్నాను"
+      }
+     },
+     {
+      "id": "call_678ab32aed264b00bd85a8d1",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "రేపు date select చేస్తున్నాను",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_e89801d481eb4744ad6932d5",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Tomorrow button నొక్కుతున్నాను"
+      }
+     }
+    ],
+    "ms": 778,
+    "usage": {
+     "completion_tokens": 85,
+     "prompt_tokens": 3840,
+     "total_tokens": 3925,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "c33d09a3a82e2aa6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_97fc433c4c8e412196b51676",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Click Vijayawada station",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_4054ff3efb6a44e889ca3bd5",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Select tomorrow date",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_e9b92ccf1a284f44a3e82efe",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 858,
+    "usage": {
+     "completion_tokens": 77,
+     "prompt_tokens": 3922,
+     "total_tokens": 3999,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "071086d65a45ab1f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8a26427425f84a77a5f17e78",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button click",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 361,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 3944,
+     "total_tokens": 3972,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "c56099bd2bc7bcff",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d1a5e0c9a3584b479c7c9c69",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Book chair car ticket"
+      }
+     }
+    ],
+    "ms": 625,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 5019,
+     "total_tokens": 5070,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "7c0a929881002219",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_fa1fbfe9267e4712a5775ffd",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 38,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 39,
+         "value": "34"
+        },
+        {
+         "id": 40,
+         "value": "Female"
+        }
+       ],
+       "narration": "పేరు, వయసు, జెండర్ నింపుతున్నాను"
+      }
+     }
+    ],
+    "ms": 969,
+    "usage": {
+     "completion_tokens": 122,
+     "prompt_tokens": 4016,
+     "total_tokens": 4138,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "8de4abbee28d8b41",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_af8e75f9b8834196b2cc448d",
+      "name": "click",
+      "args": {
+       "id": 41,
+       "narration": "Female ఎంచుకుంటున్నాను"
+      }
+     }
+    ],
+    "ms": 503,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4080,
+     "total_tokens": 4123,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "d67ea983b5d3213e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_459a8f05b3fc43c7b88b26a0",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 45,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "మొబైల్ నంబర్ ఎంటర్ చేస్తున్నాను"
+      }
+     }
+    ],
+    "ms": 757,
+    "usage": {
+     "completion_tokens": 86,
+     "prompt_tokens": 4095,
+     "total_tokens": 4181,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "10275b10c69ac34b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b10ec47a376e4d45830fe5c5",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 40,
+         "value": "Female"
+        },
+        {
+         "id": 45,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill చేయడం"
+      }
+     }
+    ],
+    "ms": 483,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 4139,
+     "total_tokens": 4189,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "67b0a8ef80b1b88d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1c997c0bbde14efeae423a46",
+      "name": "click",
+      "args": {
+       "id": 40,
+       "narration": "మగవాళ్లని ఎంచుకుంటున్నాను"
+      }
+     }
+    ],
+    "ms": 564,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4174,
+     "total_tokens": 4221,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "9ef0f319e788ad78",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b561e0cf89964e948fc9cafe",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 38,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 39,
+         "value": "34"
+        },
+        {
+         "id": 45,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill చేస్తున్నాను"
+      }
+     },
+     {
+      "id": "call_c5ca98eac93f45fbae9c8f2d",
+      "name": "click",
+      "args": {
+       "id": 41,
+       "narration": "Gender Female select చేస్తున్నాను",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1429,
+    "usage": {
+     "completion_tokens": 185,
+     "prompt_tokens": 4187,
+     "total_tokens": 4372,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "8fa5ad881de00bb5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1503eef45c7644319f81fdae",
+      "name": "click",
+      "args": {
+       "id": 46,
+       "narration": "Continue బటన్ క్లిక్ చేస్తున్నాను"
+      }
+     }
+    ],
+    "ms": 971,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4255,
+     "total_tokens": 4299,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "8192e1662079af3e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e1e89a24eb2045fabc8bdb40",
+      "name": "click",
+      "args": {
+       "id": 47,
+       "narration": "పేమెంట్ కి ప్రొసీడ్ అవుతున్నాను",
+       "confirmation_question": "మొత్తం 370 రూపాయలు కట్టాలా? హైదరాబాద్–విజయవాడ డబుల్ డెక్కర్ ఎక్స్ ప్రెస్, 6 అక్టోబర్, AC Chair Car, ఒక ప్రయాణికురాలు, పేరు ఆశా వర్మ. కొనసాగాలా?"
+      }
+     }
+    ],
+    "ms": 960,
+    "usage": {
+     "completion_tokens": 105,
+     "prompt_tokens": 4218,
+     "total_tokens": 4323,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "251b81ffec9f609a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9c972e72e1d84939aa5e27de",
+      "name": "click",
+      "args": {
+       "id": 51,
+       "narration": "₹370 pay చేయండి",
+       "confirmation_question": "మీరు ₹370 pay చేయడానికి సిద్ధంగా ఉన్నారా? ఈ booking SC నుండి BZA వరకు, 6 Oct 2026, chair car, 1 passenger."
+      }
+     }
+    ],
+    "ms": 812,
+    "usage": {
+     "completion_tokens": 87,
+     "prompt_tokens": 4198,
+     "total_tokens": 4285,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "58cb7b1a236c54e0",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "మీ booking confirm అయింది. PNR 4123456700. Double Decker Express (22714) లో Secunderabad నుండి Vijayawada-కి chair car ticket book అయింది. Amount paid ₹370. Seat C3, seat 12. Asha Verma పేరు మీద book అయింది."
+      }
+     }
+    ],
+    "ms": 3556,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 4232,
+     "total_tokens": 4832,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "ccfa5dfde0e89cdc": "నేను continue చేయాలా?",
+  "7b21831babf8d6fd": "ఆ page-లో ఇలా ఉంది:"
+ },
+ "docs": {}
+}

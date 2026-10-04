@@ -14,7 +14,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,5 +32,14 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Unit tests
         run: npm test
+      - name: Agent eval (replayed from cassettes, no API calls)
+        run: npm run eval -- --ci
+      - name: Upload eval traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-traces
+          path: eval/runs/
+          retention-days: 14
       - name: Build panel
         run: npm run build

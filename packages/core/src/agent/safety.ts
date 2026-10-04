@@ -42,21 +42,49 @@ export interface ConfirmContext {
   pageText?: string;
 }
 
-export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmContext = {}): { required: boolean; reason: string } {
-  if (!el) return { required: false, reason: "" };
+// Controls that pick or enter a value rather than act. A model-invented confirmation on these
+// (e.g. "confirm selecting Chennai Central?") only slows a blind user down.
+const VALUE_ROLES = new Set([
+  "option",
+  "radio",
+  "checkbox",
+  "tab",
+  "switch",
+  "textbox",
+  "searchbox",
+  "combobox",
+  "spinbutton",
+  "slider",
+  "menuitemradio",
+  "menuitemcheckbox",
+  "select",
+  "date",
+]);
+
+export interface Gate {
+  /** The deterministic rules demand a spoken yes. The model can never remove this. */
+  required: boolean;
+  /** Clearly harmless (search, filters, picking a value): a confirmation the model asks for is ignored. */
+  safe: boolean;
+  reason: string;
+}
+
+export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmContext = {}): Gate {
+  if (!el) return { required: false, safe: false, reason: "" };
   const label = `${el.name}`.replace(/\s+/g, " ").trim();
   // Irreversible words anywhere in the name win over everything else.
-  if (IRREVERSIBLE.some((re) => re.test(label))) return { required: true, reason: `"${label}" looks irreversible` };
-  if (MONEY.test(label) && /pay|book|confirm|proceed|buy|order/i.test(label)) return { required: true, reason: `"${label}" moves money` };
-  if (SAFE.some((re) => re.test(label))) return { required: false, reason: "" };
+  if (IRREVERSIBLE.some((re) => re.test(label))) return { required: true, safe: false, reason: `"${label}" looks irreversible` };
+  if (MONEY.test(label) && /pay|book|confirm|proceed|buy|order/i.test(label))
+    return { required: true, safe: false, reason: `"${label}" moves money` };
+  if (SAFE.some((re) => re.test(label))) return { required: false, safe: true, reason: "" };
   const page = ctx.pageText ?? "";
   if (GENERIC_ADVANCE.test(label) && MONEY.test(page) && PAYMENT_CONTEXT.test(page)) {
-    return { required: true, reason: `"${label}" on a page asking for money` };
+    return { required: true, safe: false, reason: `"${label}" on a page asking for money` };
   }
   if (!label && (el.type === "submit" || el.inForm) && /button|submit/.test(`${el.role} ${el.type}`)) {
-    return { required: true, reason: "unlabelled form submit" };
+    return { required: true, safe: false, reason: "unlabelled form submit" };
   }
-  return { required: false, reason: "" };
+  return { required: false, safe: VALUE_ROLES.has(el.role), reason: "" };
 }
 
 const SENSITIVE =

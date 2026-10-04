@@ -1,0 +1,208 @@
+{
+ "version": 1,
+ "task": "complaint-en-cleanliness",
+ "recordedAt": "2026-10-04T14:41:59.521Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "73f7e9471e77242a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_775cc873f99a4fa18bb48283",
+      "name": "click",
+      "args": {
+       "id": 4,
+       "narration": "Open help page"
+      }
+     },
+     {
+      "id": "call_350ac3625e0f44ab9dfc5b21",
+      "name": "click",
+      "args": {
+       "id": 5,
+       "narration": "Open account page"
+      }
+     }
+    ],
+    "ms": 367,
+    "usage": {
+     "completion_tokens": 40,
+     "prompt_tokens": 3747,
+     "total_tokens": 3787,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "aa3f07fa6e923c49",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_69f347add64448379036c895",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Select complaint category"
+      }
+     }
+    ],
+    "ms": 415,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 3629,
+     "total_tokens": 3672,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "a4efabff13245e4d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_452c314911694f2a9cf2b287",
+      "name": "click",
+      "args": {
+       "id": 24,
+       "narration": "Selecting Cleanliness category"
+      }
+     }
+    ],
+    "ms": 420,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 3757,
+     "total_tokens": 3799,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "8c423498f0802e44",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c86a24e72ced4051b4b55f2d",
+      "name": "type_text",
+      "args": {
+       "id": 21,
+       "text": "The coach was very dirty. There was garbage on the floor and seats, and the toilets were not clean. This made the journey uncomfortable.",
+       "narration": "Typing the complaint about the dirty coach"
+      }
+     }
+    ],
+    "ms": 691,
+    "usage": {
+     "completion_tokens": 60,
+     "prompt_tokens": 3714,
+     "total_tokens": 3774,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "891016aa3bee6876",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8d435e9b8c184166a2f39b84",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "your complaint about the dirty coach"
+      }
+     }
+    ],
+    "ms": 486,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 3800,
+     "total_tokens": 3848,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "c694fcd922dc2a96",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8599cf42b3d84f49953f6ed7",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submit the complaint form",
+       "confirmation_question": "Submit the complaint about the dirty coach?"
+      }
+     }
+    ],
+    "ms": 415,
+    "usage": {
+     "completion_tokens": 35,
+     "prompt_tokens": 3876,
+     "total_tokens": 3911,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "10111687facc158b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_59a7a48025084fb39fa8114e",
+      "name": "done",
+      "args": {
+       "speech": "Your complaint has been submitted successfully. The reference number is CMP1000, and they will respond within 48 hours."
+      }
+     }
+    ],
+    "ms": 532,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 3978,
+     "total_tokens": 4032,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

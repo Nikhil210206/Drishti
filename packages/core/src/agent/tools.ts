@@ -20,7 +20,8 @@ export const TOOLS: ToolDef[] = [
       narration,
       confirmation_question: {
         type: "string",
-        description: "Only for irreversible clicks: the yes/no question to ask the user, in their language, with amount and key details.",
+        description:
+          "ONLY for clicks that pay, book, submit, send or delete: the yes/no question to ask the user, in their language, with amount and key details. Leave empty for everything else.",
       },
     },
     ["id", "narration"],
@@ -33,7 +34,7 @@ export const TOOLS: ToolDef[] = [
   ),
   fn(
     "fill_form",
-    "Fill several plain text fields at once (faster than many type_text calls). Not for autocomplete boxes.",
+    "Fill several plain text fields at once (names, ages, phone numbers). Not for station/autocomplete boxes, dates or buttons. Stops early if suggestions pop up.",
     {
       fields: {
         type: "array",
@@ -61,7 +62,7 @@ export const TOOLS: ToolDef[] = [
   fn("navigate", "Open a URL (only websites the user asked for).", { url: { type: "string" }, narration }, ["url", "narration"]),
   fn(
     "read_page",
-    "Only to answer a user question about long page content (articles, notices). NOT for looking around — PAGE STATE already shows the page. mode=verbatim reads it aloud word for word — only when the user explicitly asks to hear the exact text.",
+    'Get the full readable text of a long page (article, notice, scheme details) when PAGE STATE is not enough to answer. NOT for looking around: PAGE STATE already shows the page. mode=summary (default) returns the text to you so you can answer. mode=verbatim reads the page aloud word for word and is slow and costly: ONLY when the user explicitly asks to hear the exact words ("read it out", "word for word"), never for a question or "what is on this page".',
     { mode: { type: "string", enum: ["summary", "verbatim"] }, narration },
     ["mode", "narration"],
   ),

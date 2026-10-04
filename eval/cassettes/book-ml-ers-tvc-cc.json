@@ -1,0 +1,469 @@
+{
+ "version": 1,
+ "task": "book-ml-ers-tvc-cc",
+ "recordedAt": "2026-10-04T14:36:45.934Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "e8751eed8e9dde60",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_af7d3a6efd9c475a8c7d2014",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "From box select ചെയ്യുകയാണ്"
+      }
+     }
+    ],
+    "ms": 514,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 3778,
+     "total_tokens": 3821,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "e1bc4943b0c9d432",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9fb17f925a1f426784f6ed2b",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Ernakulam",
+       "narration": "Ernakulam type ചെയ്യുന്നു"
+      }
+     },
+     {
+      "id": "call_fda2e9e2b75b40889cf2cefe",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Thiruvananthapuram",
+       "narration": "Thiruvananthapuram type ചെയ്യുന്നു"
+      }
+     },
+     {
+      "id": "call_ff3f850a8c5044c5b729a322",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "നാളെ select ചെയ്യുന്നു",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_a8792b1ff2584471ab40a34d",
+      "name": "click",
+      "args": {
+       "id": 13,
+       "narration": "Chair car class select ചെയ്യുന്നു",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_a838b67215d14e75a7a40070",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains click ചെയ്യുന്നു",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1221,
+    "usage": {
+     "completion_tokens": 143,
+     "prompt_tokens": 3786,
+     "total_tokens": 3929,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "834b1b9ddbb2fdac",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f3f9e621236b431a85bd18da",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Ernakulam Junction തിരഞ്ഞെടുക്കുന്നു"
+      }
+     }
+    ],
+    "ms": 431,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 3863,
+     "total_tokens": 3909,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "f5ba5c5a4762caed",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a05291bf36dc4997ab1cf879",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Thiruvananthapuram",
+       "narration": "ടൂ ബോക്സിൽ തിരുവനന്തപുരം ടൈപ്പ് ചെയ്യുന്നു"
+      }
+     },
+     {
+      "id": "call_9ac86db3d63846aa975c064e",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "നാളത്തെ തീയതി തിരഞ്ഞെടുക്കുന്നു"
+      }
+     }
+    ],
+    "ms": 998,
+    "usage": {
+     "completion_tokens": 60,
+     "prompt_tokens": 3869,
+     "total_tokens": 3929,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "31ca0a06f9e2c6c8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d31f0696bcf84831ae3c0648",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "തിരുവനന്തപുരത്തേക്ക് തിരഞ്ഞെടുത്തു",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_dda8339dc3ba4905a6735380",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "നാളത്തെ തീയതി തിരഞ്ഞെടുത്തു",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_e9d1cfbb11e8425ba46ea5b5",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "തിരയൽ ബട്ടൺ അമർത്തുന്നു",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 764,
+    "usage": {
+     "completion_tokens": 89,
+     "prompt_tokens": 3963,
+     "total_tokens": 4052,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "b2c0f61ae026c9d0",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_2a46e37612e04ed78964481c",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button click ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 394,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 3985,
+     "total_tokens": 4029,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "fa68461d8cb57121",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Charminar Shatabdi book ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 3701,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5485,
+     "total_tokens": 6085,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "c79d5fb8323c7c91",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c57b6d1310d34f55a5af406c",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 46,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 47,
+         "value": "34"
+        },
+        {
+         "id": 48,
+         "value": "Female"
+        },
+        {
+         "id": 53,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 749,
+    "usage": {
+     "completion_tokens": 71,
+     "prompt_tokens": 4054,
+     "total_tokens": 4125,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "7d68ea4819def117",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d6948df4eae14b0f9dbe5c05",
+      "name": "click",
+      "args": {
+       "id": 48,
+       "narration": "Female gender select ചെയ്യുന്നു",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_36ce6933bc0c4271a73ba463",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 46,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 47,
+         "value": "34"
+        },
+        {
+         "id": 53,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 678,
+    "usage": {
+     "completion_tokens": 88,
+     "prompt_tokens": 4118,
+     "total_tokens": 4206,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2432
+     }
+    }
+   }
+  },
+  {
+   "hash": "f49fa3c1c322a006",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7966a215989a4a798c426971",
+      "name": "click",
+      "args": {
+       "id": 54,
+       "narration": "Continue button click ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 356,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4199,
+     "total_tokens": 4230,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "512527dd3c4d4423",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b449ff73360b49e0bfca9ad2",
+      "name": "click",
+      "args": {
+       "id": 55,
+       "narration": "Payment-ലേക്ക് പോകാൻ",
+       "confirmation_question": "Chair car-ൽ Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക്, 2026 ഒക്ടോബർ 6-ന്, Asha Verma-യ്ക്ക് ₹330 അടച്ച് book ചെയ്യട്ടെ?"
+      }
+     }
+    ],
+    "ms": 1224,
+    "usage": {
+     "completion_tokens": 98,
+     "prompt_tokens": 4161,
+     "total_tokens": 4259,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "d94ce1979f580911",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 59,
+       "narration": "₹330 pay ചെയ്യുന്നു",
+       "confirmation_question": "നാളെ Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക് chair car-ൽ Asha Verma-ക്ക് ₹330 pay ചെയ്യട്ടേ?"
+      }
+     }
+    ],
+    "ms": 5297,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 4142,
+     "total_tokens": 4742,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "91668bad70ed78e8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e22c5ec2871d4f2e82a70662",
+      "name": "done",
+      "args": {
+       "speech": "നിങ്ങളുടെ ticket book ആയിട്ടുണ്ട്. PNR 4123456700. Charminar Shatabdi Express-ൽ Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക്, 6 October, chair car, seat 12, Asha Verma. ₹330 pay ചെയ്തു. വേറെ എന്തെങ്കിലും വേണോ?"
+      }
+     }
+    ],
+    "ms": 1004,
+    "usage": {
+     "completion_tokens": 100,
+     "prompt_tokens": 4176,
+     "total_tokens": 4276,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "16c3f0393e8faf9c": "ഞാൻ continue ചെയ്യട്ടെ?",
+  "6354fb0d6a0739c1": "Page-ൽ ഇങ്ങനെ പറയുന്നു:"
+ },
+ "docs": {}
+}

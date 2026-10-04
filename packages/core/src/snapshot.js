@@ -341,12 +341,24 @@ export function snapshotPage(opts) {
     return s.join(" ");
   }
 
-  function idFor(el) {
+  // Single-page apps re-render whole forms on a click, which would give every control a new
+  // id and leave the agent chasing stale ones. A control that disappears and comes back with the
+  // same tag, role, name and position among its namesakes gets its old id back.
+  const prevIds = W.__drishtiKeyIds || {};
+  const nextIds = {};
+  const keySeen = {};
+  function idFor(el, role, name) {
+    const base = `${el.tagName}|${role}|${name}`;
+    const n = (keySeen[base] = (keySeen[base] || 0) + 1);
+    const key = `${base}#${n}`;
     let id = el.getAttribute("data-drishti-id");
     if (!id) {
-      id = String(W.__drishtiNextId++);
+      const old = prevIds[key];
+      const taken = old && el.ownerDocument.querySelector(`[data-drishti-id="${old}"]`);
+      id = old && !taken ? old : String(W.__drishtiNextId++);
       el.setAttribute("data-drishti-id", id);
     }
+    nextIds[key] = id;
     return id;
   }
 
@@ -367,10 +379,32 @@ export function snapshotPage(opts) {
   const pdfLinks = [];
   let count = 0;
 
+  /**
+   * An unlabelled icon button takes its meaning from the box it sits in: four identical
+   * "book ticket" icons in a train row are told apart by "SL ₹160", "3A ₹410"…
+   * Climb only while the box holds no other control.
+   */
+  function boxContext(el) {
+    let n = el.parentElement;
+    for (let depth = 0; depth < 3 && n && n !== document.body; depth++) {
+      const inside = n.querySelectorAll("*");
+      if (inside.length > 40) return "";
+      if (Array.from(inside).some((c) => c !== el && !el.contains(c) && !c.contains(el) && isInteractive(c))) return "";
+      const t = textOf(n);
+      if (t) return t.length <= 60 ? t : "";
+      n = n.parentElement;
+    }
+    return "";
+  }
+
   function describeControl(el, prefix = "") {
-    const id = idFor(el);
-    const { name, inferred } = accessibleName(el);
+    const named = accessibleName(el);
+    const isField = ["input", "select", "textarea"].includes(el.tagName.toLowerCase());
+    const ctx = named.inferred && !isField && !textOf(el) ? boxContext(el) : "";
+    const name = ctx ? `${named.name} (${ctx})` : named.name;
+    const inferred = named.inferred;
     const role = roleOf(el);
+    const id = idFor(el, role, name);
     const state = stateOf(el);
     const href = el.tagName === "A" ? el.getAttribute("href") || "" : "";
     elements[id] = {
@@ -474,6 +508,8 @@ export function snapshotPage(opts) {
     node.childNodes.forEach((c) => walk(c, depth + 1));
   }
   walk(root, 0);
+  // Remember ids by key, but keep keys of controls hidden behind a dialog for when it closes.
+  W.__drishtiKeyIds = Object.assign({}, prevIds, nextIds);
 
   // Merge consecutive short text fragments into readable lines.
   const merged = [];

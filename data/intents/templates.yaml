@@ -1,0 +1,59 @@
+# English templates for data/intents/build.ts. Keep them short and spoken, the way a user
+# answers Drishti or interrupts it. "unclear" = not a safe yes: questions, conditions, hesitation.
+confirm.yes:
+  - "Yes"
+  - "Yes, go ahead"
+  - "Okay, do it"
+  - "Sure, pay it"
+  - "Yes please, book it"
+  - "That's right, continue"
+  - "Absolutely, go ahead"
+  - "Yes, submit it"
+confirm.no:
+  - "No"
+  - "No, don't do it"
+  - "Cancel it"
+  - "Stop, don't pay"
+  - "Not now"
+  - "Wrong train, don't book it"
+  - "No thanks"
+  - "Don't send it"
+confirm.unclear:
+  - "Yes, but first tell me the total"
+  - "How much is it?"
+  - "Which train is this?"
+  - "I don't know"
+  - "Wait, let me think"
+  - "Maybe"
+  - "Tell me the seat number first"
+  - "Is it the morning train?"
+control.stop:
+  - "Stop"
+  - "Stop talking"
+  - "Be quiet"
+  - "That's enough"
+control.repeat:
+  - "Say that again"
+  - "Repeat that please"
+  - "Once more"
+control.faster:
+  - "Speak faster"
+  - "A bit faster please"
+control.slower:
+  - "Speak slower"
+  - "Slow down please"
+read:
+  - "What is on this page?"
+  - "Read this page to me"
+  - "Read the news"
+  - "What does this letter say?"
+task:
+  - "Book a train ticket to Delhi"
+  - "Check my PNR status"
+  - "Search for trains to Patna tomorrow"
+  - "File a complaint about the food"
+chat:
+  - "Hello"
+  - "Thank you"
+  - "Who are you?"
+  - "What can you do?"

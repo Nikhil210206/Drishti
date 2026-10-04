@@ -1,0 +1,380 @@
+{
+ "version": 1,
+ "task": "book-mr-mumbai-pune-sl",
+ "recordedAt": "2026-10-04T14:37:15.623Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "6fd15ddec1179361",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e87fc2cf82ce4f54b4896418",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Mumbai",
+       "narration": "From station Mumbai"
+      }
+     }
+    ],
+    "ms": 575,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 3757,
+     "total_tokens": 3807,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "c071ec982b734828",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ed502c5aff6c4fbf9105f087",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "मुंबई CSMT निवडतोय",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 882,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 3843,
+     "total_tokens": 3895,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "45a15fb25ce430ef",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b9b19d4ec72f4b088af5a1a9",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "पुणे टाकतोय"
+      }
+     },
+     {
+      "id": "call_6d9a5c4646bc47a6a0db3301",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "उद्याची तारीख निवडतोय",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1417,
+    "usage": {
+     "completion_tokens": 58,
+     "prompt_tokens": 3833,
+     "total_tokens": 3891,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "35b60b7612c56c92",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6c66bd29460c45f68bf984bb",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "Pune station निवडतोय",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 880,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 3903,
+     "total_tokens": 3956,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "4803aec053bde92b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9978512bdfdf45f398790197",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "SEARCH TRAINS वर click करणे",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 514,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 3910,
+     "total_tokens": 3963,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "7dcecbf04994faab",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_afee8bfc3d4249ddb93aeadb",
+      "name": "click",
+      "args": {
+       "id": 23,
+       "narration": "Sleeper ticket book करतोय",
+       "confirmation_question": "उद्या Mumbai CSMT ते Pune Junction, Sleeper class, ₹145, 1 seat book करू का?"
+      }
+     }
+    ],
+    "ms": 737,
+    "usage": {
+     "completion_tokens": 84,
+     "prompt_tokens": 5642,
+     "total_tokens": 5726,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "28dddfacbc52a10a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cb49a721777242cf882597c7",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 53,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 54,
+         "value": "34"
+        },
+        {
+         "id": 55,
+         "value": ""
+        },
+        {
+         "id": 60,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details भरतेय"
+      }
+     }
+    ],
+    "ms": 1183,
+    "usage": {
+     "completion_tokens": 147,
+     "prompt_tokens": 3984,
+     "total_tokens": 4131,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "1c8548d0fd74243f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_96b8a5c1fc4942bdbea98dff",
+      "name": "click",
+      "args": {
+       "id": 56,
+       "narration": "Female निवडते",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 501,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4048,
+     "total_tokens": 4097,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "930a59ce7e32b00f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c99b15efbc7640db93a4e00e",
+      "name": "type_text",
+      "args": {
+       "id": 60,
+       "text": "9000000001",
+       "narration": "Mobile number टाकत आहे"
+      }
+     },
+     {
+      "id": "call_a61e4282fdb54872850bd720",
+      "name": "click",
+      "args": {
+       "id": 61,
+       "narration": "Passenger details पुढे पाठवत आहे",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1028,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 4063,
+     "total_tokens": 4169,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "88bf850357450ac6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_82189c0ed070400da147675f",
+      "name": "click",
+      "args": {
+       "id": 62,
+       "narration": "Pay करण्यासाठी proceed करतोय",
+       "confirmation_question": "उद्याचा Mumbai CSMT ते Pune Sleeper ticket, ₹165, Asha Verma यांच्यासाठी book करू का?"
+      }
+     }
+    ],
+    "ms": 776,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4063,
+     "total_tokens": 4139,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "80cbffa858058591",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0812b7e9633a4f1a9cd25138",
+      "name": "click",
+      "args": {
+       "id": 66,
+       "narration": "₹165 pay करा",
+       "confirmation_question": "₹165 pay करायचे आहेत, sleeper ticket confirm करायचे का?"
+      }
+     }
+    ],
+    "ms": 636,
+    "usage": {
+     "completion_tokens": 68,
+     "prompt_tokens": 4051,
+     "total_tokens": 4119,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "cd5c837776c05bb2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b5e28d286eef4f8db5ef0d78",
+      "name": "done",
+      "args": {
+       "speech": "तुमचं booking झालं आहे. PNR नंबर 4123456700 आहे. उद्या, 6 ऑक्टोबरला सकाळी 10:00 वाजता CSMT वरून Pune साठी Rajdhani Superfast Express (16807) मध्ये sleeper class मध्ये seat 12 मिळाली आहे. Asha Verma या नावाने ticket आहे आणि ₹165 भरले आहेत."
+      }
+     }
+    ],
+    "ms": 802,
+    "usage": {
+     "completion_tokens": 111,
+     "prompt_tokens": 4085,
+     "total_tokens": 4196,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "c913261813aa0862": "Page-वर लिहिले आहे:"
+ },
+ "docs": {}
+}

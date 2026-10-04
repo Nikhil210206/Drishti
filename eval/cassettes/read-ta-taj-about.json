@@ -1,0 +1,36 @@
+{
+ "version": 1,
+ "task": "read-ta-taj-about",
+ "recordedAt": "2026-10-04T14:42:53.367Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "1db932c5a7d0cd1d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "இந்த page தாஜ் மகால் பத்தின தமிழ் விக்கிப்பீடியா article. இதுல தாஜ் மகால் எந்த ஊர்ல இருக்கு, யாருக்காக கட்டினாங்க, அதோட கட்டிடக்கலை, அப்புறம் சுற்றுச்சூழல் பாதிப்புகள் பத்தி நிறைய தகவல்கள் இருக்கு."
+      }
+     }
+    ],
+    "ms": 3563,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 6889,
+     "total_tokens": 7489,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

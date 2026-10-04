@@ -1,0 +1,36 @@
+{
+ "version": 1,
+ "task": "read-hi-taj-summary",
+ "recordedAt": "2026-10-04T14:42:45.409Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "0d29e2a8f61dcbc9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_466fc27749414308bddeb1fe",
+      "name": "done",
+      "args": {
+       "speech": "यह पेज ताजमहल के बारे में है, जो आगरा में स्थित एक विश्व धरोहर और मुग़ल वास्तुकला का उत्कृष्ट नमूना है। इसमें इसकी ऐतिहासिक पृष्ठभूमि, निर्माण, वास्तु कला और मुख्य विशेषताओं का विस्तृत वर्णन किया गया है।"
+      }
+     }
+    ],
+    "ms": 721,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 7552,
+     "total_tokens": 7628,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

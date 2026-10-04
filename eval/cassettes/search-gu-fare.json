@@ -1,0 +1,217 @@
+{
+ "version": 1,
+ "task": "search-gu-fare",
+ "recordedAt": "2026-10-04T14:45:52.551Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "4554e57af5ee53d3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c8f129cebb3844d181c69c7c",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Ahmedabad",
+       "narration": "From station Ahmedabad enter"
+      }
+     },
+     {
+      "id": "call_f85f876bf9a24cd68552448a",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Jaipur",
+       "narration": "To station Jaipur enter"
+      }
+     },
+     {
+      "id": "call_8b3cf9bf62694c2896c5ba8b",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Select tomorrow's date"
+      }
+     }
+    ],
+    "ms": 687,
+    "usage": {
+     "completion_tokens": 78,
+     "prompt_tokens": 3760,
+     "total_tokens": 3838,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "9b17926c074f14fd",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_afc5c19713f94375897923ac",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Ahmedabad select કરો"
+      }
+     }
+    ],
+    "ms": 430,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 3829,
+     "total_tokens": 3871,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "3333d18800b593b1",
+   "response": {
+    "content": "",
+    "toolCalls": [],
+    "ms": 3906,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 3835,
+     "total_tokens": 4435,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "bb3f456dfb9a9631",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9f999ab18fb74dfe809645ed",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Jaipur",
+       "narration": "Jaipur type karo"
+      }
+     },
+     {
+      "id": "call_7bb9a89c7ddf4df79f62ede6",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Tomorrow select karo"
+      }
+     }
+    ],
+    "ms": 674,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 3856,
+     "total_tokens": 3905,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "1a6e9d9334ea2057",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f4bfc05dd4924e1d914b3f52",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Jaipur select karo"
+      }
+     }
+    ],
+    "ms": 413,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 3907,
+     "total_tokens": 3955,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "e355fd37162f4d30",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_28869c6daa544dccba6487ad",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 415,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 3913,
+     "total_tokens": 3961,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "19de8c36a0c387fd",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "કાલે Ahmedabad-થી Jaipur-નું Vande Bharat-નું fare CC class માટે ₹865 છે. બે Vande Bharat trains છે: પહેલી 05:15 વાગ્યે નીકળી 14:50 વાગ્યે પહોંચે છે, અને બીજી 05:30 વાગ્યે નીકળી 14:35 વાગ્યે પહોંચે છે. બંનેમાં 43 અને 119 seats available છે."
+      }
+     }
+    ],
+    "ms": 3726,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5160,
+     "total_tokens": 5760,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

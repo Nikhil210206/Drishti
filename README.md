@@ -39,7 +39,11 @@ npm run check          # smoke-test every Sarvam API (TTS → STT loopback, 105B
 npm run dev            # panel http://localhost:5173 · agent browser opens on the right
 npm test               # unit tests (safety, policy, agent, session, page model in headless Chromium)
 npm run ci             # lint + format check + typecheck + tests, same as GitHub Actions
+npm run eval           # 40 end-to-end agent tasks replayed from eval/cassettes (free, offline)
+npm run eval -- --live # the same against Sarvam for real, re-recording the cassettes (≈ ₹50)
 ```
+
+Eval traces land in `eval/runs/<time>/`; open one with `eval/viewer/index.html`. The latest results are in `eval/report.md`, and status is in `docs/phase-1.md`.
 
 In the panel:
 - **Talk:** hold `Space` or `` ` ``, or type in the command bar (Kivi types there when you hold Fn).

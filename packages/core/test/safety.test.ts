@@ -67,7 +67,26 @@ describe("needsConfirmation", () => {
   });
 
   it("is a no-op for a missing element", () => {
-    expect(needsConfirmation(undefined)).toEqual({ required: false, reason: "" });
+    expect(needsConfirmation(undefined)).toEqual({ required: false, safe: false, reason: "" });
+  });
+});
+
+describe("needsConfirmation: clearly safe controls", () => {
+  it.each([
+    ["SEARCH TRAINS", {}],
+    ["Chennai Central MAS Chennai", { role: "option" }],
+    ["Sleeper", { role: "radio" }],
+    ["FROM", { role: "textbox" }],
+  ])("%s is safe, so a model-invented confirmation is ignored", (name, extra) => {
+    expect(needsConfirmation(el(name, extra as Partial<ElementInfo>))).toMatchObject({ required: false, safe: true });
+  });
+
+  it("is not safe for an ordinary button the rules do not know", () => {
+    expect(needsConfirmation(el("Continue"))).toMatchObject({ required: false, safe: false });
+  });
+
+  it("never marks an irreversible option as safe", () => {
+    expect(needsConfirmation(el("Pay with UPI", { role: "radio" }))).toMatchObject({ required: true, safe: false });
   });
 });
 

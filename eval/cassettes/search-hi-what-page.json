@@ -1,0 +1,63 @@
+{
+ "version": 1,
+ "task": "search-hi-what-page",
+ "recordedAt": "2026-10-04T14:46:06.916Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "889a01426489fee3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d8583b1fe9ca4fa1933a99d0",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "इस पेज का सारांश पढ़ रहा हूँ"
+      }
+     }
+    ],
+    "ms": 571,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 3742,
+     "total_tokens": 3770,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "ff497cb08f7ee0ad",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_bae850f9730f4ec2b2e45b7d",
+      "name": "done",
+      "args": {
+       "speech": "इस पेज पर आप train tickets book कर सकते हैं। ऊपर menu में PathikRail, home, document, help और account के links हैं। नीचे FROM, TO, DATE और CLASS के options हैं। FROM और TO में station डालने की जगह है। DATE में Today, Tomorrow और Day after के quick buttons हैं। CLASS में General, Tatkal, Ladies और Senior Citizen जैसे options हैं। नीचे SEARCH TRAINS button है। यह एक demo website है, इसलिए कोई real booking या payment नहीं होती।"
+      }
+     }
+    ],
+    "ms": 893,
+    "usage": {
+     "completion_tokens": 134,
+     "prompt_tokens": 3915,
+     "total_tokens": 4049,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

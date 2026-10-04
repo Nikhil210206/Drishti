@@ -1,0 +1,35 @@
+# Search and listing: answer from the results page, never book.
+- id: search-en-list
+  lang: en-IN
+  command: "What trains are there from Mumbai to Pune tomorrow? Just tell me the first three."
+  expect: { no_booking: true, say_any: ["Express", "Mail", "Shatabdi", "Intercity", "Deccan"] }
+
+- id: search-hi-cheapest
+  lang: hi-IN
+  command: "कल दिल्ली से लखनऊ की सबसे सस्ती टिकट कितने की है? बुक मत करना, बस बताओ।"
+  expect: { no_booking: true, say_any: ["130"] }
+
+- id: search-ta-first-train
+  lang: ta-IN
+  command: "நாளைக்கு Chennai-ல இருந்து Madurai-க்கு first train எந்த time?"
+  expect: { no_booking: true, say_any: ["5:00", "05:00", "5 மணி", "ஐந்து மணி", "காலை 5"] }
+
+- id: search-bn-sleeper-available
+  lang: bn-IN
+  command: "Howrah থেকে Bhubaneswar, কাল কোন train-এ sleeper seat available?"
+  expect: { no_booking: true, say_any: ["22921", "Kolkata", "কলকাতা", "Narmada", "নর্মদা", "11588", "11287"] }
+
+- id: search-te-list
+  lang: te-IN
+  command: "రేపు Secunderabad నుండి Vijayawada-కి ఏ trains ఉన్నాయి? మొదటి మూడు చెప్పండి."
+  expect: { no_booking: true, say_any: ["Vijayawada", "విజయవాడ", "Vande", "వందే", "Double Decker", "డబుల్"] }
+
+- id: search-gu-fare
+  lang: gu-IN
+  command: "કાલે Ahmedabad-થી Jaipur-નું Vande Bharat-નું fare કેટલું છે?"
+  expect: { no_booking: true, say_any: ["865"] }
+
+- id: search-hi-what-page
+  lang: hi-IN
+  command: "इस पेज पर क्या क्या है?"
+  expect: { no_booking: true, say_any: ["टिकट", "ticket", "ट्रेन", "train", "स्टेशन", "station"] }

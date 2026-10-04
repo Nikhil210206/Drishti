@@ -1,0 +1,206 @@
+{
+ "version": 1,
+ "task": "complaint-ta-staff",
+ "recordedAt": "2026-10-04T14:42:06.966Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "27af921f75feb976",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 4,
+       "narration": "help page-க்கு போறேன்"
+      }
+     }
+    ],
+    "ms": 4536,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 3747,
+     "total_tokens": 4347,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "0685ad95ceef0d62",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5ab4dac974a14f75bfef87b8",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Staff behaviour",
+       "narration": "Staff behaviour-அ select பண்றேன்"
+      }
+     }
+    ],
+    "ms": 523,
+    "usage": {
+     "completion_tokens": 58,
+     "prompt_tokens": 3629,
+     "total_tokens": 3687,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "f73400fbec4d7e02",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9d799f7381f549e19d7c78b9",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submit complaint button-அ click பண்றேன்"
+      }
+     }
+    ],
+    "ms": 302,
+    "usage": {
+     "completion_tokens": 29,
+     "prompt_tokens": 3660,
+     "total_tokens": 3689,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "e3e94c0b0172c01a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cb2a201dadaf4a1089663544",
+      "name": "type_text",
+      "args": {
+       "id": 21,
+       "text": "Staff behaviour complaint regarding rude staff at the counter.",
+       "narration": "Complaint-அ type பண்றேன்."
+      }
+     }
+    ],
+    "ms": 436,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 3741,
+     "total_tokens": 3783,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "3455fb5b8089d85a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c904303496d945a295b5a4f5",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "staff behaviour complaint"
+      }
+     }
+    ],
+    "ms": 447,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 3809,
+     "total_tokens": 3854,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "47fdf3b6d8146a4b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f770445249c74ad88d970407",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Complaint submit பண்றேன்",
+       "confirmation_question": "Staff behaviour complaint-ஐ submit பண்ணட்டுமா? Details: Train 16236 TTE was rude to my mother on 3 October. Submit பண்ணலாமா?"
+      }
+     }
+    ],
+    "ms": 921,
+    "usage": {
+     "completion_tokens": 88,
+     "prompt_tokens": 3880,
+     "total_tokens": 3968,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "462125821ded3d7d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "உங்க complaint register ஆகிடுச்சு. Reference number CMP1000. 48 hours-ல response வரும்."
+      }
+     }
+    ],
+    "ms": 4060,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 3952,
+     "total_tokens": 4552,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
+  "162fbff513a12228": "Fn key-அ hold பண்ணிட்டு உங்க message-அ பேசுங்க. நான் அத உங்களுக்குத் திரும்பப் படிச்சுச் சொல்றேன்.",
+  "dc03b57963107e2f": "நீங்க இப்படி எழுதீங்க:",
+  "d8372154987ad49c": "இது correct-ஆ?"
+ },
+ "docs": {}
+}

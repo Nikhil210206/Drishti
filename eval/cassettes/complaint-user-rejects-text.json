@@ -1,0 +1,476 @@
+{
+ "version": 1,
+ "task": "complaint-user-rejects-text",
+ "recordedAt": "2026-10-04T14:42:25.210Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "a7e6e0d2d1414b6d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_293e189d4a16410e8e0a11a3",
+      "name": "click",
+      "args": {
+       "id": 4,
+       "narration": "help link पर क्लिक कर रहा हूँ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 599,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 3744,
+     "total_tokens": 3796,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "c92d6409aba8bfe4",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1e798a1cc0944b9392a88b57",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Select complaint category"
+      }
+     },
+     {
+      "id": "call_871581cb1a9e4d3882e6b5fe",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Cleaning / Housekeeping",
+       "narration": "Choose Cleaning category"
+      }
+     }
+    ],
+    "ms": 591,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 3626,
+     "total_tokens": 3678,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "8cadc37b51cb33bd",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_91f69e5f002d4033817e2b29",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Cleanliness",
+       "narration": "Cleanliness category select kar raha hoon"
+      }
+     }
+    ],
+    "ms": 483,
+    "usage": {
+     "completion_tokens": 56,
+     "prompt_tokens": 3740,
+     "total_tokens": 3796,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "7e8cb73b434a3b99",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ab22b214f690494b89300663",
+      "name": "type_text",
+      "args": {
+       "id": 21,
+       "text": "The train was very dirty. The toilets were not cleaned and there was garbage on the floor.",
+       "narration": "शिकायत लिख रहा हूँ"
+      }
+     }
+    ],
+    "ms": 786,
+    "usage": {
+     "completion_tokens": 72,
+     "prompt_tokens": 3771,
+     "total_tokens": 3843,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "b85bd0a3ac58a5d8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_00ebeb9d93724f97a4218cc6",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "your complaint about cleanliness"
+      }
+     }
+    ],
+    "ms": 516,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 3848,
+     "total_tokens": 3896,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "1adbbdd6b6e8fc3e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6bb3793ca06c41de9de8f6b3",
+      "name": "ask_user",
+      "args": {
+       "question": "क्या आप फिर से अपनी शिकायत बोलकर बताना चाहेंगे, या मैं यहीं रुक जाऊँ?"
+      }
+     }
+    ],
+    "ms": 448,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 3897,
+     "total_tokens": 3944,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "de0d8a36a7c965a7",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_fb04c7c96d674c25addbb2ec",
+      "name": "ask_user",
+      "args": {
+       "question": "आपकी शिकायत के लिए मुझे आपकी अपनी बात रिकॉर्ड करनी होगी। क्या आप अपनी शिकायत बोलकर बताना चाहेंगे?"
+      }
+     }
+    ],
+    "ms": 673,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 3962,
+     "total_tokens": 4009,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "86b9e189958e92f5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e812e71662f74b9abfc886e9",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "शिकायत सबमिट करना",
+       "confirmation_question": "क्या आप यह शिकायत सबमिट करना चाहते हैं?"
+      }
+     }
+    ],
+    "ms": 711,
+    "usage": {
+     "completion_tokens": 63,
+     "prompt_tokens": 4008,
+     "total_tokens": 4071,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "5d3e5a9a98276f3b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "ask_user",
+      "args": {
+       "question": "मैंने आपकी शिकायत दर्ज करने की कोशिश की, लेकिन आपका संदेश रिकॉर्ड नहीं हो पाया। क्या आप अपनी शिकायत खुद बोलकर बताना चाहेंगे, या फिर मैं इसे यहीं रोक दूँ?"
+      }
+     }
+    ],
+    "ms": 3570,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 4043,
+     "total_tokens": 4643,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "ee61f8662e1ca692",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_469b0d0db5a648d298310157",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "साफ-सफाई चुनना"
+      }
+     }
+    ],
+    "ms": 585,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4104,
+     "total_tokens": 4151,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "0008366bf11fd360",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_660eec9f61174188a3d84add",
+      "name": "click",
+      "args": {
+       "id": 24,
+       "narration": "Cleanliness चुन रहा हूँ"
+      }
+     }
+    ],
+    "ms": 495,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4211,
+     "total_tokens": 4254,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "821b67e4d2ce9dec",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1930c0af662d43b7b923ce7c",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "शिकायत सबमिट करना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 634,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 4169,
+     "total_tokens": 4222,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "a145521d35149a06",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d1a3542df474473a888e28dc",
+      "name": "scroll",
+      "args": {
+       "direction": "down",
+       "narration": "शिकायत फॉर्म को नीचे देखें"
+      }
+     }
+    ],
+    "ms": 467,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4213,
+     "total_tokens": 4254,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "210a83a56f8b06b3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7eb38546991b414c8227f4ac",
+      "name": "ask_user",
+      "args": {
+       "question": "आपकी शिकायत दर्ज करने के लिए मुझे आपकी अपनी बात रिकॉर्ड करनी होगी। क्या आप अपनी शिकायत बोलकर बताना चाहेंगे, या फिर मैं इसे यहीं रोक दूँ?"
+      }
+     }
+    ],
+    "ms": 627,
+    "usage": {
+     "completion_tokens": 62,
+     "prompt_tokens": 4220,
+     "total_tokens": 4282,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "71799fd5517521b1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_98fca06946e94380a1351743",
+      "name": "ask_user",
+      "args": {
+       "question": "मैंने आपकी शिकायत दर्ज करने की कोशिश की, लेकिन आपका संदेश रिकॉर्ड नहीं हो पाया। क्या आप अपनी शिकायत खुद बोलकर बताना चाहेंगे, या फिर मैं इसे यहीं रोक दूँ?"
+      }
+     }
+    ],
+    "ms": 617,
+    "usage": {
+     "completion_tokens": 65,
+     "prompt_tokens": 4301,
+     "total_tokens": 4366,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "84ed2e9d4a2804e7",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_805e8d12328d42359896b205",
+      "name": "ask_user",
+      "args": {
+       "question": "आपकी शिकायत दर्ज करने के लिए मुझे आपकी अपनी बात रिकॉर्ड करनी होगी। क्या आप अपनी शिकायत बोलकर बताना चाहेंगे, या फिर मैं इसे यहीं रोक दूँ?"
+      }
+     }
+    ],
+    "ms": 761,
+    "usage": {
+     "completion_tokens": 62,
+     "prompt_tokens": 4362,
+     "total_tokens": 4424,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "6573ebdb0c0f4f87",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c01e5ec2cc494d0fa1260523",
+      "name": "done",
+      "args": {
+       "speech": "मैंने आपकी शिकायत दर्ज करने की कोशिश की, लेकिन आपका संदेश रिकॉर्ड नहीं हो पाया। क्या आप अपनी शिकायत खुद बोलकर बताना चाहेंगे, या फिर मैं इसे यहीं रोक दूँ?"
+      }
+     }
+    ],
+    "ms": 567,
+    "usage": {
+     "completion_tokens": 58,
+     "prompt_tokens": 4420,
+     "total_tokens": 4478,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

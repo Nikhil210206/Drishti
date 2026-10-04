@@ -24,7 +24,15 @@ export class PlaywrightDriver implements BrowserDriver {
   page?: Page;
   private starting?: Promise<Page>;
 
-  constructor(private opts: { headless?: boolean } = {}) {}
+  constructor(
+    private opts: {
+      headless?: boolean;
+      /** Freeze Date/Date.now in the page (deterministic eval and cassette replay). */
+      fixedTime?: string;
+      /** Abort requests to anything but localhost (offline, deterministic eval). */
+      offline?: boolean;
+    } = {},
+  ) {}
 
   async ensure(startUrl?: string): Promise<Page> {
     if (this.page && !this.page.isClosed()) return this.page;
@@ -36,6 +44,13 @@ export class PlaywrightDriver implements BrowserDriver {
         args: [`--window-position=${w.x},${w.y}`, `--window-size=${w.width},${w.height}`, "--disable-infobars"],
       });
       this.context = await this.browser.newContext({ viewport: null, locale: "en-IN" });
+      if (this.opts.fixedTime) await this.context.clock.setFixedTime(new Date(this.opts.fixedTime));
+      if (this.opts.offline) {
+        await this.context.route("**/*", (route) => {
+          const host = new URL(route.request().url()).hostname;
+          return host === "localhost" || host === "127.0.0.1" ? route.continue() : route.abort();
+        });
+      }
       this.page = await this.context.newPage();
       // Keep following the newest tab if a site opens one.
       this.context.on("page", (p) => (this.page = p));

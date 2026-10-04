@@ -1,0 +1,505 @@
+{
+ "version": 1,
+ "task": "book-od-hwh-bbs-sl",
+ "recordedAt": "2026-10-04T14:38:20.419Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "97bbf2b9a9cb0a0e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f3838acd004245579440eff7",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Howrah",
+       "narration": "From station Howrah"
+      }
+     },
+     {
+      "id": "call_0591297af81647789599cd45",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Bhubaneswar",
+       "narration": "To station Bhubaneswar"
+      }
+     },
+     {
+      "id": "call_6879f6ea9ab8429d804299ed",
+      "name": "click",
+      "args": {
+       "id": 12,
+       "narration": "Select tomorrow's date"
+      }
+     },
+     {
+      "id": "call_d9a269a0bc214fe18085dd30",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
+      }
+     }
+    ],
+    "ms": 1183,
+    "usage": {
+     "completion_tokens": 187,
+     "prompt_tokens": 3758,
+     "total_tokens": 3945,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "592a0b68c3923bf3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d88b084c153a42989b48be6f",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Howrah Junction select",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 450,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 3827,
+     "total_tokens": 3877,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "d766e446ce10bdb1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5ecde54f5c8647bea73a365b",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Bhubaneswar",
+       "narration": "Bhubaneswar ଟାଇପ୍ କରନ୍ତୁ"
+      }
+     },
+     {
+      "id": "call_6324ce3a059547d4944a935d",
+      "name": "press_key",
+      "args": {
+       "key": "Enter",
+       "narration": "Enter ଦବାନ୍ତୁ"
+      }
+     }
+    ],
+    "ms": 929,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 3834,
+     "total_tokens": 3940,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "5f341e7b3ea18e8e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b0df7af67e9f454983042117",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Bhubaneswar select କରୁଛି"
+      }
+     }
+    ],
+    "ms": 459,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 3908,
+     "total_tokens": 3952,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "2f41691beeb78ebf",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_acee58b1d0e44c9f923eadab",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "କାଲି ତାରିଖ select କରୁଛି"
+      }
+     }
+    ],
+    "ms": 299,
+    "usage": {
+     "completion_tokens": 23,
+     "prompt_tokens": 3914,
+     "total_tokens": 3937,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "594de64d9b62ea1f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9255a2fcd864490282c95e9b",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button"
+      }
+     }
+    ],
+    "ms": 428,
+    "usage": {
+     "completion_tokens": 22,
+     "prompt_tokens": 3927,
+     "total_tokens": 3949,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "fcff2558820cbb8d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9edaf3699edf426abf515b48",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Sleeper class book button select କରୁଛି",
+       "confirmation_question": "କାଲି Howrah-ରୁ Bhubaneswar-କୁ Sleeper class-ରେ book କରିବି, price 200 rupees, 66 seats available. Proceed କରିବି କି?"
+      }
+     }
+    ],
+    "ms": 734,
+    "usage": {
+     "completion_tokens": 64,
+     "prompt_tokens": 5781,
+     "total_tokens": 5845,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "6bb1ed6b157fe0b1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_00d5b1cc190d4dad8450f423",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 54,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 55,
+         "value": "34"
+        },
+        {
+         "id": 56,
+         "value": "Female"
+        },
+        {
+         "id": 61,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill କରୁଛି"
+      }
+     }
+    ],
+    "ms": 973,
+    "usage": {
+     "completion_tokens": 148,
+     "prompt_tokens": 3999,
+     "total_tokens": 4147,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "6923fb803ce6b809",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1d421ddf296746f7b6af1083",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 54,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 55,
+         "value": "34"
+        }
+       ],
+       "narration": "Name and age fill ହେଉଛି"
+      }
+     }
+    ],
+    "ms": 796,
+    "usage": {
+     "completion_tokens": 78,
+     "prompt_tokens": 4063,
+     "total_tokens": 4141,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "4782a9d3fbbe4eb9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7cf79bdab34a48baa6830b2a",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 54,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 55,
+         "value": "34"
+        }
+       ],
+       "narration": "Name and age fill ହେଲା"
+      }
+     }
+    ],
+    "ms": 790,
+    "usage": {
+     "completion_tokens": 94,
+     "prompt_tokens": 4092,
+     "total_tokens": 4186,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "b8721c7db200077d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_63ae3fbf33e14826aff69992",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 61,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Mobile number fill କରନ୍ତୁ"
+      }
+     }
+    ],
+    "ms": 1026,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4128,
+     "total_tokens": 4204,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "30d85c1444e3f062",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6c470d34bde94a949ec74154",
+      "name": "click",
+      "args": {
+       "id": 57,
+       "narration": "Female ବାଛନ୍ତୁ",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_8ce1d4abf03e4f598862a5bc",
+      "name": "click",
+      "args": {
+       "id": 62,
+       "narration": "Continue କରନ୍ତୁ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 913,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 4172,
+     "total_tokens": 4278,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "6458bdbeaabb4b9b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_61aecb087a5f463bb297bbf0",
+      "name": "click",
+      "args": {
+       "id": 63,
+       "narration": "Proceed to payment",
+       "confirmation_question": "Confirm booking Kolkata–Bhubaneswar Express 22921 on Tue 6 Oct from Howrah to Bhubaneswar in Sleeper for Asha Verma, total ₹220?"
+      }
+     }
+    ],
+    "ms": 871,
+    "usage": {
+     "completion_tokens": 88,
+     "prompt_tokens": 4143,
+     "total_tokens": 4231,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "b781247b6b7d3ffd",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_eaaea3609bed446f8f72060d",
+      "name": "click",
+      "args": {
+       "id": 67,
+       "narration": "Pay 220 rupees",
+       "confirmation_question": "Confirm payment of ₹220 for sleeper ticket on Kolkata-Bhubaneswar Express 22921 for Asha Verma on 6 Oct 2026?"
+      }
+     }
+    ],
+    "ms": 759,
+    "usage": {
+     "completion_tokens": 88,
+     "prompt_tokens": 4131,
+     "total_tokens": 4219,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "4b00dddf79ca792b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_497515fa9a2943de9a4e500a",
+      "name": "done",
+      "args": {
+       "speech": "ଆପଣଙ୍କ sleeper ticket book ହୋଇଗଲା। PNR 4123456700, Kolkata–Bhubaneswar Express (22921), Tuesday 6 October, S4 seat 12. ₹220 paid."
+      }
+     }
+    ],
+    "ms": 757,
+    "usage": {
+     "completion_tokens": 78,
+     "prompt_tokens": 4165,
+     "total_tokens": 4243,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "9f37aaf5de88fe24": "Page-ଟି କହୁଛି:"
+ },
+ "docs": {}
+}

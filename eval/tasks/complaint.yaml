@@ -1,0 +1,27 @@
+# Help & complaints: long text is dictated (compose box), read back, then submitted after a yes.
+- id: complaint-hi-kivi
+  lang: hi-IN
+  command: "मुझे खाने की क्वालिटी के बारे में शिकायत दर्ज करनी है"
+  compose: "Train 12639 mein kal diya gaya khana thanda aur basi tha. Kripya karvai karein."
+  expect: { complaint: { category: "Food", text_includes: "12639" } }
+
+- id: complaint-en-cleanliness
+  lang: en-IN
+  command: "I want to complain about how dirty the coach was."
+  compose: "Coach S4 of train 12627 had dirty toilets and no water on 4 October."
+  expect: { complaint: { category: "Cleanliness", text_includes: "12627" } }
+
+- id: complaint-ta-staff
+  lang: ta-IN
+  command: "Staff-ஓட behaviour பத்தி complaint பண்ணணும்."
+  compose: "Train 16236 TTE was rude to my mother on 3 October."
+  expect: { complaint: { category: "Staff", text_includes: "16236" } }
+
+- id: complaint-user-rejects-text
+  lang: hi-IN
+  command: "मुझे सफाई के बारे में शिकायत करनी है"
+  compose: "Coach mein bahut gandagi thi."
+  # The user hears the dictated text read back and says it is wrong every time: nothing is filed.
+  confirms: ["नहीं, यह गलत है"]
+  confirm_default: "नहीं"
+  expect: { no_complaint: true }

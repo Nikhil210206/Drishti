@@ -25,7 +25,7 @@ afterAll(async () => browser?.close());
 
 async function snap(html: string, opts: SnapshotOptions = {}): Promise<Snapshot> {
   // Serve from a real origin so relative links resolve like on a website.
-  await pg.route("http://fixture.test/**", (route) => route.fulfill({ contentType: "text/html", body: html }));
+  await pg.route("http://fixture.test/**", (route) => route.fulfill({ contentType: "text/html; charset=utf-8", body: html }));
   await pg.goto("http://fixture.test/page", { waitUntil: "load" });
   await pg.unroute("http://fixture.test/**");
   return pg.evaluate(`(${SNAPSHOT_FN})(${JSON.stringify(opts)})`) as Promise<Snapshot>;
@@ -90,6 +90,47 @@ describe("snapshot robustness", () => {
     await pg.setContent('<a href="bill.pdf">Bill</a><button>Pay</button>');
     const s = (await pg.evaluate(`(${SNAPSHOT_FN})({})`)) as Snapshot;
     expect(byName(s, "Pay")).toBeDefined();
+  });
+});
+
+describe("snapshot icon buttons in cards", () => {
+  it("tells identical icon buttons apart by the box they sit in (Pathik Rail class boxes)", async () => {
+    const box = (code: string, fare: number) =>
+      `<div class="cls-box"><div>${code}</div><div>₹${fare}</div><div class="bk-btn" style="cursor:pointer;width:24px;height:24px"><svg class="i-ticket" viewBox="0 0 24 24"><path d="M3 7h18"/></svg></div></div>`;
+    const s = await snap(`<div class="train"><div>Chennai Mail (12147)</div>${box("SL", 160)}${box("3A", 410)}</div>`);
+    const names = Object.values(s.elements).map((e) => e.name);
+    expect(names).toEqual(["book ticket (SL ₹160)", "book ticket (3A ₹410)"]);
+  });
+
+  it("does not borrow text from a box that holds other controls", async () => {
+    const s =
+      await snap(`<header>PathikRail <span class="icon-home" style="cursor:pointer;display:inline-block;width:20px;height:20px"></span>
+      <span class="icon-help" style="cursor:pointer;display:inline-block;width:20px;height:20px"></span></header>`);
+    expect(Object.values(s.elements).map((e) => e.name)).toEqual(["home", "help"]);
+  });
+});
+
+describe("snapshot stable ids", () => {
+  it("gives re-rendered controls their old ids back", async () => {
+    await snap(`<div id="f"></div><script>
+      window.render = () => (document.getElementById("f").innerHTML = '<input aria-label="FROM"><input aria-label="TO"><button>Search</button>');
+      render();</script>`);
+    const first = (await pg.evaluate(`(${SNAPSHOT_FN})({})`)) as Snapshot;
+    await pg.evaluate("render()");
+    const second = (await pg.evaluate(`(${SNAPSHOT_FN})({})`)) as Snapshot;
+    const ids = (s: Snapshot) => Object.fromEntries(Object.entries(s.elements).map(([id, e]) => [e.name, id]));
+    expect(ids(second)).toEqual(ids(first));
+  });
+
+  it("keeps duplicates apart and gives new controls new ids", async () => {
+    await snap(`<div id="f"></div><script>
+      window.render = (n) => (document.getElementById("f").innerHTML = Array.from({ length: n }, () => "<button>Book</button>").join(""));
+      render(2);</script>`);
+    const first = Object.keys(((await pg.evaluate(`(${SNAPSHOT_FN})({})`)) as Snapshot).elements);
+    await pg.evaluate("render(3)");
+    const second = Object.keys(((await pg.evaluate(`(${SNAPSHOT_FN})({})`)) as Snapshot).elements);
+    expect(second.slice(0, 2)).toEqual(first);
+    expect(new Set(second).size).toBe(3);
   });
 });
 

@@ -21,7 +21,8 @@ export const complaints: { id: string; category: string; text: string; pnr?: str
 export function registerMockApi(app: FastifyInstance) {
   app.post("/api/bookings", async (req) => {
     const b = req.body as Omit<Booking, "pnr" | "createdAt">;
-    const pnr = String(4000000000 + Math.floor(Math.random() * 999999999)).slice(0, 10);
+    // Sequential, so eval runs (and cassette replays) see the same PNR every time.
+    const pnr = String(4123456700 + bookings.length);
     const booking = { ...b, pnr, createdAt: new Date().toISOString() };
     bookings.push(booking);
     return booking;

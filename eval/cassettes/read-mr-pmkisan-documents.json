@@ -1,0 +1,81 @@
+{
+ "version": 1,
+ "task": "read-mr-pmkisan-documents",
+ "recordedAt": "2026-10-04T14:43:07.706Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "9db0a1f3bc0da79f",
+   "response": {
+    "content": "[",
+    "toolCalls": [],
+    "ms": 3576,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5027,
+     "total_tokens": 5627,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  },
+  {
+   "hash": "95dcaf1d6a5b77e0",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "Documents list वाचतोय"
+      }
+     }
+    ],
+    "ms": 4572,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5048,
+     "total_tokens": 5648,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "139aeb64cb5e8b48",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "PM किसान योजनेसाठी मुख्यतः तीन documents लागतात: आधार कार्ड, जमिनीचे कागदपत्र (landholding papers), आणि बचत बँक खाते (savings bank account). याशिवाय CSC सेंटरवर जाताना जमीन मोजमापाची माहिती आणि पासबुकची कॉपी सुद्धा लागते."
+      }
+     }
+    ],
+    "ms": 4226,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5224,
+     "total_tokens": 5824,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2048
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

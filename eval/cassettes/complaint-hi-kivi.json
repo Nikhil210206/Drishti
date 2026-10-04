@@ -1,0 +1,230 @@
+{
+ "version": 1,
+ "task": "complaint-hi-kivi",
+ "recordedAt": "2026-10-04T14:41:49.818Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "ff0422be5f4dc06f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0387e75911834453ad6d9c14",
+      "name": "click",
+      "args": {
+       "id": 1,
+       "narration": "home page पर जाना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 656,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 3750,
+     "total_tokens": 3799,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "4892cbae138b0d6a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_aedfbb44ee3a4c30aead5548",
+      "name": "click",
+      "args": {
+       "id": 1,
+       "narration": "Home page पर जाना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 498,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 3766,
+     "total_tokens": 3817,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "dc526d9bef141158",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_86ee73e8f24b4e1a809c40d3",
+      "name": "click",
+      "args": {
+       "id": 4,
+       "narration": "Help section पर जा रहा हूँ"
+      }
+     }
+    ],
+    "ms": 463,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 3780,
+     "total_tokens": 3825,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "3339ca7cdf833259",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1ebd3a46a1ea41e5a4cd3731",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Food Quality",
+       "narration": "Food Quality चुनें"
+      }
+     }
+    ],
+    "ms": 601,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 3666,
+     "total_tokens": 3718,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "8484d0c0a80c3516",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1027bca7f6a94920bf442269",
+      "name": "type_text",
+      "args": {
+       "id": 21,
+       "text": "खाने की क्वालिटी बहुत खराब थी, खाना ठंडा और बेस्वाद था",
+       "narration": "शिकायत दर्ज कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 529,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 3697,
+     "total_tokens": 3749,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "a264dbbb90c8d2d8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b3be1e325a2948dcafd408a0",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "अपनी शिकायत बताएं"
+      }
+     }
+    ],
+    "ms": 547,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 3770,
+     "total_tokens": 3816,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "13353b3cd39d8e8d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_550417bb8c904ed1bcd576b9",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "शिकायत submit कर रहा हूँ",
+       "confirmation_question": "क्या आप Pathik Rail पर शिकायत submit करना चाहते हैं? विवरण: Train 12639, खाने की क्वालिटी, PNR खाली"
+      }
+     }
+    ],
+    "ms": 887,
+    "usage": {
+     "completion_tokens": 82,
+     "prompt_tokens": 3851,
+     "total_tokens": 3933,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "c6532702f0890c63",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0accefd05b6f4cdfad3b416d",
+      "name": "done",
+      "args": {
+       "speech": "आपकी शिकायत दर्ज हो गई है। Reference number CMP1000 है। वे 48 घंटे के अंदर जवाब देंगे।"
+      }
+     }
+    ],
+    "ms": 434,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 3953,
+     "total_tokens": 4007,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

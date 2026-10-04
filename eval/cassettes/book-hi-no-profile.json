@@ -1,0 +1,641 @@
+{
+ "version": 1,
+ "task": "book-hi-no-profile",
+ "recordedAt": "2026-10-04T15:08:18.464Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "bb4946863cece1a7",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a5d5515737a1420b8c5413aa",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "मुंबई enter कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_29f20d2ac3934269a0334e2b",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Mumbai",
+       "narration": "मुंबई enter कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_47c52fa19e474122be94153d",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "पुणे enter कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_447473a730fa4b79a74e9d2b",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "पुणे enter कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_08669841acac4cacab38c54c",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "कल की date select कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_1eb1f316d3e744fc8444ae8e",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "कल की date select कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_176773e4f7034398968067c7",
+      "name": "click",
+      "args": {
+       "id": 13,
+       "narration": "Chair Car class select कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_b3e85bc4150b4ff7a5f73a17",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button दबा रहा हूँ"
+      }
+     }
+    ],
+    "ms": 3246,
+    "usage": {
+     "completion_tokens": 361,
+     "prompt_tokens": 3731,
+     "total_tokens": 4092,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "d2dfc96a1fe83cf6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b99bf0e2f32146acaed211d3",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "मुंबई CSMT चुनना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 619,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 3844,
+     "total_tokens": 3895,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "0056616bf44d15be",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_be8eba7eb71d4b3fb405e43d",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "पुणे टाइप कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_e75ccf7328194a3faf9aeb15",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "कल की तारीख चुन रहा हूँ"
+      }
+     }
+    ],
+    "ms": 637,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 3834,
+     "total_tokens": 3887,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "b92dd29ac4edeecb",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_bac332cb556d4de5b182d93a",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "पुणे स्टेशन चुनना"
+      }
+     }
+    ],
+    "ms": 548,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 3904,
+     "total_tokens": 3949,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "dc9f48257a6a7c48",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7c829afb080448c4a76d1bfb",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "SEARCH TRAINS पर click कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 591,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 3911,
+     "total_tokens": 3958,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "76dc05ed563fa5bd",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 30,
+       "narration": "Vande Bharat बुक करें",
+       "confirmation_question": "कल मुंबई CSMT से पुणे के लिए Vande Bharat Express (12496) की Chair Car (CC) सीट ₹310 में बुक करूँ? (12 seats available)"
+      }
+     }
+    ],
+    "ms": 5249,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5643,
+     "total_tokens": 6243,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "ea001821e9699332",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6ae7074e8be3450395aa7f93",
+      "name": "click",
+      "args": {
+       "id": 60,
+       "narration": "Mobile number डाल रहा हूँ"
+      }
+     }
+    ],
+    "ms": 461,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 3986,
+     "total_tokens": 4029,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "af9692a334a01f87",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e540a996c2254ce19de6cc4a",
+      "name": "type_text",
+      "args": {
+       "id": 53,
+       "text": "User Name",
+       "narration": "Name fill कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_72750cc64e7847e492e5cb0c",
+      "name": "type_text",
+      "args": {
+       "id": 54,
+       "text": "30",
+       "narration": "Age fill कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 739,
+    "usage": {
+     "completion_tokens": 60,
+     "prompt_tokens": 4005,
+     "total_tokens": 4065,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "6c9b79ed3cfd0604",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cbd8125a55dc4621a105d325",
+      "name": "ask_user",
+      "args": {
+       "question": "कृपया यात्री का नाम, उम्र और मोबाइल नंबर बताएं।"
+      }
+     }
+    ],
+    "ms": 687,
+    "usage": {
+     "completion_tokens": 40,
+     "prompt_tokens": 4130,
+     "total_tokens": 4170,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "5816d44a10b13532",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b14a536672e44f15ae99df7e",
+      "name": "type_text",
+      "args": {
+       "id": 53,
+       "text": "Asha Verma",
+       "narration": "यात्री का नाम भर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 589,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 4184,
+     "total_tokens": 4229,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "fcc8a8b627c7a244",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0b1a521a3de64687b3789f9a",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 54,
+         "value": "34"
+        },
+        {
+         "id": 56,
+         "value": ""
+        }
+       ],
+       "narration": "यात्री की उम्र और लिंग भरना"
+      }
+     }
+    ],
+    "ms": 508,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 4211,
+     "total_tokens": 4256,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "a27789eb39d528ee",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_939a88c4e3c8481e9e6dfd20",
+      "name": "click",
+      "args": {
+       "id": 56,
+       "narration": "महिला चुनें",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_90ebd83fd5e348009a27c107",
+      "name": "type_text",
+      "args": {
+       "id": 60,
+       "text": "9000000001",
+       "narration": "मोबाइल नंबर भरें"
+      }
+     }
+    ],
+    "ms": 527,
+    "usage": {
+     "completion_tokens": 62,
+     "prompt_tokens": 4260,
+     "total_tokens": 4322,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "c39ed92deb39044b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9bb4b1fb660c4a6ea1d1b0fa",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 53,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 54,
+         "value": "34"
+        }
+       ],
+       "narration": "यात्री का नाम और उम्र भरना"
+      }
+     }
+    ],
+    "ms": 702,
+    "usage": {
+     "completion_tokens": 96,
+     "prompt_tokens": 4322,
+     "total_tokens": 4418,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "bc846d9af56dac4f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7bdfe98e0f424413bc41a8ae",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 53,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 54,
+         "value": "34"
+        }
+       ],
+       "narration": "नाम और उम्र भरना"
+      }
+     }
+    ],
+    "ms": 930,
+    "usage": {
+     "completion_tokens": 77,
+     "prompt_tokens": 4352,
+     "total_tokens": 4429,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "a388f0109861dc45",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e6866519404b4275976f90b6",
+      "name": "press_key",
+      "args": {
+       "key": "Tab",
+       "narration": "अगले field पर जाना"
+      }
+     }
+    ],
+    "ms": 450,
+    "usage": {
+     "completion_tokens": 33,
+     "prompt_tokens": 4382,
+     "total_tokens": 4415,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "26f2d0d28e13df84",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1ae58f384252467483b6a300",
+      "name": "click",
+      "args": {
+       "id": 61,
+       "narration": "Passenger details continue करें",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 437,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 4391,
+     "total_tokens": 4441,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "2e96b41821275374",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_45878729e66a4c62b8a73e16",
+      "name": "click",
+      "args": {
+       "id": 62,
+       "narration": "Proceed to pay",
+       "confirmation_question": "क्या आप ₹330 में Mumbai से Pune की Chair Car टिकट बुक करना चाहते हैं? यात्री Asha Verma, 34 साल, 6 Oct 2026, Vande Bharat Express (12496)।"
+      }
+     }
+    ],
+    "ms": 816,
+    "usage": {
+     "completion_tokens": 98,
+     "prompt_tokens": 4348,
+     "total_tokens": 4446,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "5844440f4e7c5988",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c3f405c4faf44ff6841d5255",
+      "name": "click",
+      "args": {
+       "id": 66,
+       "narration": "₹330 का payment कर रहा हूं",
+       "confirmation_question": "क्या आप ₹330 का payment करना चाहते हैं?"
+      }
+     }
+    ],
+    "ms": 801,
+    "usage": {
+     "completion_tokens": 67,
+     "prompt_tokens": 4333,
+     "total_tokens": 4400,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "86698c9e4901be88",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4c39bd25e612448d88c7733f",
+      "name": "done",
+      "args": {
+       "speech": "आपकी बुकिंग पूरी हो गई है। PNR नंबर 4123456700 है। मुंबई CSMT से पुणे की Vande Bharat Express (12496) में चेयर कार की सीट 12 बुक हुई है, यात्री आशा वर्मा। ₹330 का भुगतान हो गया है।"
+      }
+     }
+    ],
+    "ms": 1058,
+    "usage": {
+     "completion_tokens": 97,
+     "prompt_tokens": 4367,
+     "total_tokens": 4464,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

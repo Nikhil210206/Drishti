@@ -1,0 +1,184 @@
+{
+ "version": 1,
+ "task": "search-hi-cheapest",
+ "recordedAt": "2026-10-04T14:44:29.220Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "e7b72d6a038e3886",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_350c3678f57741b69313918d",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Delhi",
+       "narration": "From station Delhi"
+      }
+     }
+    ],
+    "ms": 570,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 3766,
+     "total_tokens": 3816,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "d37c3cc946150683",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_2e637c4b31dc42cd80ec6d77",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "New Delhi station चुनना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 541,
+    "usage": {
+     "completion_tokens": 57,
+     "prompt_tokens": 3816,
+     "total_tokens": 3873,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "94681d81123f14e3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7a847b7e0b4344948153e0a4",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Lucknow",
+       "narration": "Typing Lucknow in TO field"
+      }
+     }
+    ],
+    "ms": 415,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 3823,
+     "total_tokens": 3854,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "5130b5eeb11dfe0e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b1d6a4dfdfb04a438661c21e",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Lucknow select kar raha hoon",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_abb4b5d3f8004904b5a4e34f",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Tomorrow select kar raha hoon",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 681,
+    "usage": {
+     "completion_tokens": 57,
+     "prompt_tokens": 3886,
+     "total_tokens": 3943,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "a92b80fd036b1b8a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a2612414be5b4eea806dbf52",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains for cheapest ticket"
+      }
+     }
+    ],
+    "ms": 370,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 3910,
+     "total_tokens": 3935,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "1241d7b9eca5fed2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "कल दिल्ली से लखनऊ की सबसे सस्ती टिकट 2S class में ₹130 की है, जो Delhi–Lucknow Express (11188) में सुबह 02:30 बजे निकलेगी। इसके बाद 2S में Tapti Shatabdi Express ₹170 और Intercity Express ₹140 में है। अगर आप चाहें तो मैं और details बता सकता हूँ।"
+      }
+     }
+    ],
+    "ms": 4118,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 5331,
+     "total_tokens": 5931,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

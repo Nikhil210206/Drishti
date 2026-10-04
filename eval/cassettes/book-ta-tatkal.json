@@ -1,0 +1,390 @@
+{
+ "version": 1,
+ "task": "book-ta-tatkal",
+ "recordedAt": "2026-10-04T15:07:59.430Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "02ca824a8754abc2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ebf8661c16914024a4f3846c",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Chennai",
+       "narration": "From-ஆ சென்னைய போட்டேன்"
+      }
+     }
+    ],
+    "ms": 985,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 3768,
+     "total_tokens": 3821,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "d6ac086c0c166b5d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c5384ab5b9564969b2224ed4",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "சென்னையை செலக்ட் பண்றேன்"
+      }
+     }
+    ],
+    "ms": 382,
+    "usage": {
+     "completion_tokens": 29,
+     "prompt_tokens": 3840,
+     "total_tokens": 3869,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "6fc43adb8275d24f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9c83b2d8429c4549a885b901",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Madurai",
+       "narration": "Madurai-க்கு type பண்றேன்"
+      }
+     }
+    ],
+    "ms": 496,
+    "usage": {
+     "completion_tokens": 34,
+     "prompt_tokens": 3833,
+     "total_tokens": 3867,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "748b78091ddd5de6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7dcd40030a8c4fcbb019e02a",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "Click Madurai station"
+      }
+     }
+    ],
+    "ms": 410,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 3894,
+     "total_tokens": 3925,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "26f7c8e2a41e2772",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ad19bf17bd0945ee863bfadb",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
+      }
+     }
+    ],
+    "ms": 468,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 3901,
+     "total_tokens": 3943,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "1adb6cedb57a425e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6328f093e5f640b59cced576",
+      "name": "click",
+      "args": {
+       "id": 24,
+       "narration": "ஸ்லீப்பர் கிளாஸ் புக் பண்ணுதல்"
+      }
+     }
+    ],
+    "ms": 537,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 5156,
+     "total_tokens": 5207,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "3b15a280c781fa44",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_42ecf8a86cf74d0190232a34",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 43,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 44,
+         "value": "34"
+        },
+        {
+         "id": 45,
+         "value": "Female"
+        },
+        {
+         "id": 50,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill பண்றேன்"
+      }
+     }
+    ],
+    "ms": 743,
+    "usage": {
+     "completion_tokens": 74,
+     "prompt_tokens": 3972,
+     "total_tokens": 4046,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "7fa34db4281941ca",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_06e9f49fd94644c1a267f788",
+      "name": "click",
+      "args": {
+       "id": 46,
+       "narration": "Female-அ select பண்றேன்"
+      }
+     }
+    ],
+    "ms": 507,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4036,
+     "total_tokens": 4082,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "bb43623c42199c47",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_560c34f0b94f4331bda0d494",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 50,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Mobile number fill பண்றேன்"
+      }
+     }
+    ],
+    "ms": 754,
+    "usage": {
+     "completion_tokens": 79,
+     "prompt_tokens": 4051,
+     "total_tokens": 4130,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  },
+  {
+   "hash": "f2a39cb08207766f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9a1f42bc88464080a915b79e",
+      "name": "click",
+      "args": {
+       "id": 51,
+       "narration": "Continue button",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 593,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4095,
+     "total_tokens": 4143,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "bdb7fb4bb7b2342c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_94971ed8632d49eba35f5b0b",
+      "name": "click",
+      "args": {
+       "id": 52,
+       "narration": "Proceed to pay",
+       "confirmation_question": "நாளை சென்னையிலிருந்து மதுரைக்கு Ganga Superfast Express-ல் ஒரு Sleeper டிக்கெட் ₹285-க்கு book பண்ணட்டுமா?"
+      }
+     }
+    ],
+    "ms": 705,
+    "usage": {
+     "completion_tokens": 79,
+     "prompt_tokens": 4048,
+     "total_tokens": 4127,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "1ba15f53a5a78669",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_bd79cd7f62b6459187e88a56",
+      "name": "click",
+      "args": {
+       "id": 56,
+       "narration": "₹285 செலுத்த",
+       "confirmation_question": "₹285 செலுத்தவா?"
+      }
+     }
+    ],
+    "ms": 496,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4038,
+     "total_tokens": 4084,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  },
+  {
+   "hash": "e1e48fb0e721217f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6a1cc96a589d470591faf015",
+      "name": "done",
+      "args": {
+       "speech": "உங்களுடைய தட்கல் டிக்கெட் புக் ஆகிவிட்டது. PNR எண் 4123456700. கங்கா சூப்பர்ஃபாஸ்ட் எக்ஸ்பிரஸ், சென்னை சென்ட்ரல்ல இருந்து மதுரைக்கு, அக்டோபர் 6, ஸ்லீப்பர் கிளாஸ், சீட் 12. ₹285 கட்டணம் செலுத்தப்பட்டுள்ளது."
+      }
+     }
+    ],
+    "ms": 1086,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 4072,
+     "total_tokens": 4178,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3392
+     }
+    }
+   }
+  }
+ ],
+ "translate": {
+  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
+  "06d5f51c23d1c42f": "அந்த page-ல இப்படி போட்டுருக்கு:"
+ },
+ "docs": {}
+}

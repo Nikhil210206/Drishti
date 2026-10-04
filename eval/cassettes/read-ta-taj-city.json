@@ -1,0 +1,36 @@
+{
+ "version": 1,
+ "task": "read-ta-taj-city",
+ "recordedAt": "2026-10-04T14:42:48.355Z",
+ "model": "sarvam-105b",
+ "llm": [
+  {
+   "hash": "7b337b6b8668d1be",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "தாஜ் மகால் இந்தியாவுல இருக்குற ஆக்ரா சிட்டில இருக்கு. இது உத்தரப் பிரதேசம் மாநிலத்துல, யமுனை ஆற்றங்கரையில அமைஞ்சிருக்கு."
+      }
+     }
+    ],
+    "ms": 4276,
+    "usage": {
+     "completion_tokens": 600,
+     "prompt_tokens": 6881,
+     "total_tokens": 7481,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3328
+     }
+    }
+   }
+  }
+ ],
+ "translate": {},
+ "docs": {}
+}

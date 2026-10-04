@@ -1,0 +1,56 @@
+# Reading saved real pages (offline copies in fixtures/sites) and a fictional news page.
+- id: read-hi-taj-summary
+  lang: hi-IN
+  start: sites/hi-wikipedia-taj-mahal/
+  command: "यह पेज किस बारे में है? दो वाक्य में बताओ"
+  expect: { say_any: ["ताज", "आगरा", "मकबरा", "शाहजहाँ", "शाहजहां", "मुमताज"] }
+
+- id: read-hi-taj-who-built
+  lang: hi-IN
+  start: sites/hi-wikipedia-taj-mahal/
+  command: "ताजमहल किसने बनवाया था?"
+  expect: { say_any: ["शाहजहाँ", "शाहजहां", "शाह जहाँ", "Shah Jahan"] }
+
+- id: read-ta-taj-city
+  lang: ta-IN
+  start: sites/ta-wikipedia-taj-mahal/
+  command: "Taj Mahal எந்த city-ல இருக்கு?"
+  expect: { say_any: ["ஆக்ரா", "Agra", "ஆக்ராவில்"] }
+
+- id: read-ta-taj-about
+  lang: ta-IN
+  start: sites/ta-wikipedia-taj-mahal/
+  command: "இந்த page எதைப் பத்தினதுன்னு சொல்ல முடியுமா?"
+  expect: { say_any: ["தாஜ்", "Taj", "ஆக்ரா", "Agra"] }
+
+- id: read-en-pmkisan-amount
+  lang: en-IN
+  start: sites/myscheme-pm-kisan/
+  command: "How much money does PM-KISAN give a farmer each year?"
+  expect: { say_any: ["6000", "6,000", "six thousand"] }
+
+- id: read-kn-pmkisan-amount
+  lang: kn-IN
+  start: sites/myscheme-pm-kisan/
+  command: "PM Kisan ಒಂದು year-ನಲ್ಲಿ ಎಷ್ಟು ದುಡ್ಡು ಕೊಡ್ತಾರೆ?"
+  expect: { say_any: ["6000", "6,000", "ಆರು ಸಾವಿರ"] }
+
+- id: read-mr-pmkisan-documents
+  lang: mr-IN
+  start: sites/myscheme-pm-kisan/
+  command: "PM Kisan-साठी कोणते documents लागणार आहेत?"
+  expect: { say_any: ["आधार", "Aadhaar", "aadhaar"] }
+
+- id: read-bn-news-summary
+  lang: bn-IN
+  start: sites/news-pathik-samachar/
+  command: "এই news-টা একটু short-এ বলুন।"
+  confirm_default: "না"
+  expect: { no_click: "subscribe", say_any: ["র‍্যাম্প", "ramp", "কোচ", "coach", "জানুয়ারি", "January", "120", "১২০"] }
+
+- id: read-en-news-verbatim
+  lang: en-IN
+  start: sites/news-pathik-samachar/
+  command: "Read me the first paragraph of this article, word for word."
+  confirm_default: "no"
+  expect: { no_click: "subscribe", spoken_any: ["120 accessible sleeper coaches", "accessible sleeper coaches"] }

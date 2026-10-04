@@ -2,5 +2,6 @@
   // Root-level scripts (eval). Each workspace has its own tsconfig; `npm run typecheck` runs them all.
   "extends": "./tsconfig.base.json",
   "compilerOptions": { "types": ["node"] },
-  "include": ["eval"]
+  "include": ["eval"],
+  "exclude": ["eval/viewer", "eval/runs"]
 }

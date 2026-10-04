@@ -1,0 +1,102 @@
+# Pathik Rail bookings. The eval date is Monday 5 Oct 2026, so "+1" = 2026-10-06.
+- id: book-hi-sleeper
+  lang: hi-IN
+  command: "कल चेन्नई से बेंगलुरु की स्लीपर क्लास की एक टिकट बुक करो, मेरे लिए"
+  answers: ["पहली वाली ट्रेन", "हाँ"]
+  expect: { booking: { from: MAS, to: SBC|YPR, cls: SL, passengers: 1, date: "+1" } }
+
+- id: book-ta-3a
+  lang: ta-IN
+  command: "நாளைக்கு சென்னையிலிருந்து பெங்களூருக்கு AC 3 tier டிக்கெட் எனக்கு புக் பண்ணுங்க"
+  answers: ["முதல் ரயில்", "சரி"]
+  expect: { booking: { from: MAS, to: SBC|YPR, cls: 3A, passengers: 1, date: "+1" } }
+
+- id: book-bn-howrah
+  lang: bn-IN
+  command: "কাল হাওড়া থেকে পাটনা যাওয়ার একটা স্লিপার টিকিট আমার জন্য বুক করো"
+  answers: ["প্রথমটা", "হ্যাঁ"]
+  expect: { booking: { from: HWH, to: PNBE, cls: SL, passengers: 1, date: "+1" } }
+
+# ---- more routes, classes, dates and languages (code-mixed commands from Sarvam Mayura, spot-checked) ----
+- id: book-te-sc-bza-cc
+  lang: te-IN
+  command: "రేపు Secunderabad నుండి Vijayawada-కి నా కోసం chair car ticket book చేయండి."
+  answers: ["మొదటి రైలు", "అవును"]
+  expect: { booking: { from: SC, to: BZA, cls: CC, passengers: 1, date: "+1" } }
+
+- id: book-kn-sbc-mys-2s
+  lang: kn-IN
+  command: "ನಾಳೆ ಬೆಂಗಳೂರಿನಿಂದ ಮೈಸೂರಿಗೆ ನನ್ನ second sitting ticket-ನ book ಮಾಡಿ."
+  answers: ["ಮೊದಲ ರೈಲು", "ಹೌದು"]
+  expect: { booking: { from: SBC|YPR, to: MYS, cls: 2S, passengers: 1, date: "+1" } }
+
+- id: book-ml-ers-tvc-cc
+  lang: ml-IN
+  command: "Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക് നാളെ എനിക്കായി ഒരു chair car ticket book ചെയ്യണേ."
+  answers: ["ആദ്യത്തെ ട്രെയിൻ", "ശരി"]
+  expect: { booking: { from: ERS, to: TVC, cls: CC, passengers: 1, date: "+1" } }
+
+- id: book-mr-mumbai-pune-sl
+  lang: mr-IN
+  command: "उद्या Mumbai-वरून Pune-ला माझ्यासाठी sleeper ticket book करा."
+  answers: ["पहिली train", "होय"]
+  expect: { booking: { from: CSMT|LTT, to: PUNE, cls: SL, passengers: 1, date: "+1" } }
+
+- id: book-gu-adi-jp-cc
+  lang: gu-IN
+  command: "કાલે Ahmedabad-થી Jaipur માટે મારી chair car ticket book કરી દેજો."
+  answers: ["પહેલી train", "હા"]
+  expect: { booking: { from: ADI, to: JP, cls: CC, passengers: 1, date: "+1" } }
+
+- id: book-pa-cdg-asr-cc
+  lang: pa-IN
+  command: "ਕੱਲ੍ਹ ਨੂੰ Chandigarh ਤੋਂ Amritsar ਲਈ ਮੇਰੇ ਲਈ chair car ticket book ਕਰ ਦਿਓ।"
+  answers: ["ਪਹਿਲੀ train", "ਹਾਂ"]
+  expect: { booking: { from: CDG, to: ASR, cls: CC, passengers: 1, date: "+1" } }
+
+- id: book-od-hwh-bbs-sl
+  lang: od-IN
+  command: "କାଲି Howrah-ରୁ Bhubaneswar-କୁ ମୋର ପାଇଁ sleeper ticket book କରନ୍ତୁ।"
+  answers: ["ପ୍ରଥମ train", "ହଁ"]
+  expect: { booking: { from: HWH, to: BBS, cls: SL, passengers: 1, date: "+1" } }
+
+- id: book-en-ndls-lko-2a
+  lang: en-IN
+  command: "Book me an AC 2 tier ticket from New Delhi to Lucknow for tomorrow, on the first train that has 2A."
+  answers: ["The first one is fine", "Yes"]
+  expect: { booking: { from: NDLS, to: LKO, cls: 2A, passengers: 1, date: "+1" } }
+
+# ---- harder: two passengers, day after tomorrow, a fixed date, Tatkal, no saved profile ----
+- id: book-hi-two-passengers
+  lang: hi-IN
+  command: "कल दिल्ली से वाराणसी के लिए AC 3 tier में दो टिकट बुक करो, एक मेरे लिए और एक मेरे पति रवि वर्मा के लिए, उनकी उम्र 36 साल है।"
+  answers: ["पहली वाली ट्रेन", "हाँ"]
+  expect: { booking: { from: NDLS, to: BSB, cls: 3A, passengers: 2, date: "+1" } }
+
+- id: book-hi-day-after
+  lang: hi-IN
+  command: "परसों चेन्नई से मदुरै की स्लीपर टिकट बुक करो मेरे लिए"
+  answers: ["पहली वाली ट्रेन", "हाँ"]
+  expect: { booking: { from: MAS|MS, to: MDU, cls: SL, passengers: 1, date: "+2" } }
+
+- id: book-en-fixed-date
+  lang: en-IN
+  command: "Book a chair car ticket for me from Nagpur to Bhopal on 12 October."
+  answers: ["The first train", "Yes"]
+  expect: { booking: { from: NGP, to: BPL, cls: CC, passengers: 1, date: "2026-10-12" } }
+
+- id: book-ta-tatkal
+  lang: ta-IN
+  command: "நாளைக்கு சென்னையிலிருந்து மதுரைக்கு தட்கல்ல ஒரு ஸ்லீப்பர் டிக்கெட் எனக்கு புக் பண்ணுங்க"
+  answers: ["முதல் ரயில்", "சரி"]
+  expect: { booking: { from: MAS|MS, to: MDU, cls: SL, quota: TQ, passengers: 1, date: "+1" } }
+
+- id: book-hi-no-profile
+  lang: hi-IN
+  profile: none
+  command: "कल मुंबई से पुणे की चेयर कार टिकट बुक करो"
+  answers:
+    - "पहली ट्रेन। यात्री का नाम आशा वर्मा, उम्र 34 साल, महिला, मोबाइल 9000000001"
+    - "आशा वर्मा, 34 साल, महिला, मोबाइल 9000000001"
+    - "आशा वर्मा, 34 साल, महिला, मोबाइल 9000000001"
+  expect: { booking: { from: CSMT|LTT, to: PUNE, cls: CC, passengers: 1, date: "+1" } }
