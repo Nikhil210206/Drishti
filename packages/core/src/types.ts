@@ -75,7 +75,9 @@ export interface ChatResult {
   content: string;
   toolCalls: ToolCall[];
   ms: number;
-  usage?: { prompt_tokens: number; completion_tokens: number };
+  usage?: { prompt_tokens: number; completion_tokens: number; prompt_tokens_details?: { cached_tokens?: number | null } | null };
+  /** The raw reply text, kept only when tool calls had to be recovered from it (for traces). */
+  raw?: string;
 }
 
 export type Reasoning = "low" | "medium" | "high" | "none";
@@ -86,6 +88,8 @@ export interface ChatOptions {
   toolChoice?: "auto" | "required" | "none";
   reasoning?: Reasoning;
   maxTokens?: number;
+  /** Stop generating at any of these strings (at most 4). */
+  stop?: string[];
   temperature?: number;
   json?: boolean;
   signal?: AbortSignal;

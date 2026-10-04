@@ -5,6 +5,9 @@ export { Agent, formatPage, type AgentIO, type AgentDeps, type AgentOptions, typ
 export { TOOLS } from "./agent/tools.js";
 export { systemPrompt, stepMessage } from "./agent/prompts.js";
 export { needsConfirmation, isSensitiveField, yesNo, quickCommand } from "./agent/safety.js";
+export { shownClasses, requestedClasses, CLASS_NAMES } from "./agent/classes.js";
+export { pageDates, requestedDate } from "./agent/dates.js";
+export { readbackPassengers } from "./agent/readback.js";
 export { NavigationPolicy, DEFAULT_ALLOWED_DOMAINS, linkTarget } from "./agent/policy.js";
 export { PHRASES, PhraseBook, type PhraseKey } from "./agent/phrases.js";
 export { VoiceSession, type SessionDeps, type SessionOptions } from "./session.js";

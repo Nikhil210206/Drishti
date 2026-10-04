@@ -43,6 +43,7 @@ export function snapshotPage(opts) {
     [/next|arrow-right|chevron-right|forward/, "next"],
     [/edit|pencil/, "edit"],
     [/trash|delete|bin/, "delete"],
+    [/(^|[^a-z])rm([^a-z]|$)/, "remove"],
     [/plus|add/, "add"],
     [/minus|remove/, "remove"],
     [/mic/, "microphone"],
@@ -203,6 +204,11 @@ export function snapshotPage(opts) {
     if (svgTitle && clean(svgTitle.textContent)) return clean(svgTitle.textContent);
     const hay = bits.join(" ").toLowerCase();
     for (const [re, word] of ICON_WORDS) if (re.test(hay)) return word;
+    // An unlabelled "×": two crossing strokes, e.g. <path d="M6 6l12 12M18 6L6 18"/>.
+    const paths = Array.from(el.querySelectorAll("path, line")).map((p) => p.getAttribute("d") || "line");
+    if (paths.length && paths.length <= 2 && paths.join(" ").replace(/[^Mm]/g, "").length + paths.filter((p) => p === "line").length === 2)
+      if (paths.every((d) => d === "line" || /^[Mm][\d.\s,-]+[Ll][\d.\s,-]+([Mm][\d.\s,-]+[Ll][\d.\s,-]+)?$/.test(d.trim())))
+        return "close";
     const tokens = hay.split(/[^a-z]+/).filter((t) => t.length > 2 && !JUNK.has(t));
     return tokens.length ? tokens.slice(0, 3).join(" ") : "";
   }

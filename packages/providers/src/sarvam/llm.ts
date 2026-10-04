@@ -27,6 +27,7 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
     body.tool_choice = opts.toolChoice ?? "auto";
   }
   if (opts.json) body.response_format = { type: "json_object" };
+  if (opts.stop?.length) body.stop = opts.stop;
 
   const t0 = Date.now();
   let lastErr: unknown;
@@ -46,16 +47,23 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
       if (!res.ok) throw new Error(`LLM HTTP ${res.status}: ${await res.text()}`);
       const data: any = await res.json();
       const msg = data.choices?.[0]?.message ?? {};
-      if (data.usage) costMeter.addLlm(data.usage.prompt_tokens ?? 0, data.usage.completion_tokens ?? 0);
+      if (data.usage) costMeter.addLlm(data.usage);
       const toolCalls: ToolCall[] = (msg.tool_calls ?? []).map((tc: any, i: number) => ({
         id: tc.id ?? `call_${i}`,
         name: tc.function?.name,
         args: parseArgs(tc.function?.arguments),
       }));
       const content: string = msg.content ?? "";
-      if (!toolCalls.length && content) toolCalls.push(...recoverToolCalls(content));
+      const recovered = !toolCalls.length && content ? recoverToolCalls(content) : [];
+      toolCalls.push(...recovered);
       const clean = stripThink(content);
-      return { content: /"name"\s*:/.test(clean) ? "" : clean, toolCalls, ms: Date.now() - t0, usage: data.usage };
+      return {
+        content: /"name"\s*:/.test(clean) ? "" : clean,
+        toolCalls,
+        ms: Date.now() - t0,
+        usage: data.usage,
+        ...(recovered.length ? { raw: content.slice(0, 4000) } : {}),
+      };
     } catch (e: any) {
       if (e?.name === "AbortError") throw e;
       lastErr = e;

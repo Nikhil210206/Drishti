@@ -1,400 +1,276 @@
 {
  "version": 1,
  "task": "book-pa-cdg-asr-cc",
- "recordedAt": "2026-10-04T14:38:00.238Z",
+ "recordedAt": "2026-10-04T17:10:23.677Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "d971228e931dd6e4",
+   "hash": "d8808cb90a69e426",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_064f007df2294981b68519c2",
+      "id": "call_0c5022abf2ba4724a2add929",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chandigarh",
-       "narration": "FROM ਵਿੱਚ Chandigarh ਭਰਨਾ"
+       "narration": "FROM ਵਿੱਚ Chandigarh ਪਾ ਰਿਹਾ ਹਾਂ"
       }
-     }
-    ],
-    "ms": 778,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 3761,
-     "total_tokens": 3814,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2432
-     }
-    }
-   }
-  },
-  {
-   "hash": "07e7eaeba8397430",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_a8ab2b35dfc449e8bd74b17a",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Chandigarh select ਕਰਨਾ"
-      }
-     }
-    ],
-    "ms": 592,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 3813,
-     "total_tokens": 3858,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2432
-     }
-    }
-   }
-  },
-  {
-   "hash": "8bfb2da88064b3f8",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c1a7c98c95e048e897ff66f0",
+      "id": "call_f1980cfbe6864bda904bdc76",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Amritsar",
-       "narration": "Amritsar ਭਰ ਰਿਹਾ ਹਾਂ"
+       "narration": "TO ਵਿੱਚ Amritsar ਪਾ ਰਿਹਾ ਹਾਂ"
       }
      },
      {
-      "id": "call_a5a11d19821a41efa15ceb1e",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "3A",
-       "narration": "Chair car ਚੁਣ ਰਿਹਾ ਹਾਂ"
-      }
-     },
-     {
-      "id": "call_5574cd212ebe4bd3ae9ee6b3",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search ਕਰ ਰਿਹਾ ਹਾਂ",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 882,
-    "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 3819,
-     "total_tokens": 3914,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "9e293a447fc00900",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0fb1e77253cc430ab17d470a",
-      "name": "click",
-      "args": {
-       "id": 20,
-       "narration": "Amritsar Junction ਚੁਣਨਾ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_02b94c4bf9834e58ae223553",
+      "id": "call_db124d58cbba47b9ae155bd6",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "ਕੱਲ੍ਹ ਦੀ date ਚੁਣਨੀ",
-       "confirmation_question": ""
+       "narration": "ਕੱਲ੍ਹ ਦੀ date select ਕਰ ਰਿਹਾ ਹਾਂ"
       }
      },
      {
-      "id": "call_0f1d995076f0488d8fab26f1",
-      "name": "click",
+      "id": "call_9f70c609b6fd464ea8f17a7a",
+      "name": "select_option",
       "args": {
-       "id": 14,
-       "narration": "General class ਚੁਣਨੀ",
-       "confirmation_question": ""
+       "id": 13,
+       "option": "AC Chair Car",
+       "narration": "AC Chair Car select ਕਰ ਰਿਹਾ ਹਾਂ"
       }
-     }
-    ],
-    "ms": 703,
-    "usage": {
-     "completion_tokens": 84,
-     "prompt_tokens": 3899,
-     "total_tokens": 3983,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "44123978b40e2d0f",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_8262ea242b40425093f80b1f",
+      "id": "call_ad8422cb92e54b65bb2f684a",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "SEARCH TRAINS"
+       "narration": "SEARCH TRAINS button click ਕਰ ਰਿਹਾ ਹਾਂ"
       }
      }
     ],
-    "ms": 579,
+    "ms": 1922,
     "usage": {
-     "completion_tokens": 43,
-     "prompt_tokens": 3921,
-     "total_tokens": 3964,
+     "completion_tokens": 266,
+     "prompt_tokens": 4081,
+     "total_tokens": 4347,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2432
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "267e50bbe2ab5713",
+   "hash": "b2609f0cc08ccd86",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_aaed541d3275405888643206",
+      "id": "call_072d9dbd268e432fa54999e1",
       "name": "click",
       "args": {
-       "id": 30,
-       "narration": "CC ticket book ਕਰ ਰਹੀ ਹਾਂ"
+       "id": 29,
+       "narration": "CC ticket book ਕਰ ਰਿਹਾ ਹਾਂ",
+       "confirmation_question": "ਕੀ ਮੈਂ Chandigarh ਤੋਂ Amritsar ਲਈ ਕੱਲ੍ਹ AC Chair Car (CC) ਦੀ ticket ₹310 ਵਿੱਚ book ਕਰ ਦੇਵਾਂ?"
       }
      }
     ],
-    "ms": 885,
+    "ms": 771,
     "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 5497,
-     "total_tokens": 5551,
+     "completion_tokens": 81,
+     "prompt_tokens": 4565,
+     "total_tokens": 4646,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2432
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "41d6a1a8b59508e2",
+   "hash": "a2dc78eaa148f039",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_21ef748916c4423b85efea7b",
+      "id": "call_ae42c8c9c9244e188b4e3a95",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 48,
+         "id": 34,
          "value": "Asha Verma"
         },
         {
-         "id": 49,
+         "id": 35,
          "value": "34"
         },
         {
-         "id": 50,
+         "id": 37,
          "value": "Female"
         }
        ],
-       "narration": "ਯਾਤਰੀ ਦੀ ਜਾਣਕਾਰੀ ਭਰ ਰਿਹਾ ਹਾਂ"
+       "narration": "Passenger details ਭਰ ਰਿਹਾ ਹਾਂ"
       }
      }
     ],
-    "ms": 677,
+    "ms": 883,
     "usage": {
-     "completion_tokens": 58,
-     "prompt_tokens": 3994,
-     "total_tokens": 4052,
+     "completion_tokens": 95,
+     "prompt_tokens": 4271,
+     "total_tokens": 4366,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2432
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "856f5c3e4e95e83c",
+   "hash": "b8fb1344c6c32320",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_db10e30fe7b24bb0ae99264a",
-      "name": "click",
+      "id": "call_f6aff62ba7c4437fb5903d61",
+      "name": "fill_form",
       "args": {
-       "id": 51,
-       "narration": "Female ਚੁਣਨਾ",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 621,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 4058,
-     "total_tokens": 4107,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "335afa9a12af0f5b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_a2ca6be026bd4c419ce6f0e0",
-      "name": "type_text",
-      "args": {
-       "id": 55,
-       "text": "9000000001",
-       "narration": "Mobile number ਭਰੋ"
+       "fields": [
+        {
+         "id": 34,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 35,
+         "value": "34"
+        },
+        {
+         "id": 37,
+         "value": "Female"
+        },
+        {
+         "id": 41,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill ਕਰ ਰਿਹਾ ਹਾਂ"
       }
      },
      {
-      "id": "call_ed584bd307264f00bae82e8a",
+      "id": "call_2c35ad5d71404574b944b981",
       "name": "click",
       "args": {
-       "id": 56,
-       "narration": "Continue ਕਰੋ",
+       "id": 42,
+       "narration": "Continue ਕਰ ਰਿਹਾ ਹਾਂ",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 1204,
+    "ms": 938,
     "usage": {
-     "completion_tokens": 103,
-     "prompt_tokens": 4073,
-     "total_tokens": 4176,
+     "completion_tokens": 104,
+     "prompt_tokens": 4330,
+     "total_tokens": 4434,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2048
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "916b9012feb5c6af",
+   "hash": "181a1df8472e9dd1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_3bc549ddfc5c40d68d01aaae",
+      "id": "call_d309561f000847f5aab21582",
       "name": "click",
       "args": {
-       "id": 57,
+       "id": 43,
        "narration": "Proceed to pay",
-       "confirmation_question": "ਕੱਲ੍ਹ 6 ਅਕਤੂਬਰ ਨੂੰ Chandigarh ਤੋਂ Amritsar, AC Chair Car ਵਿੱਚ Asha Verma ਲਈ ₹330 ਦੀ ticket book ਕਰ ਦੇਵਾਂ?"
+       "confirmation_question": "ਕੀ ਮੈਂ ₹330 ਦੀ payment proceed ਕਰਾਂ?"
       }
      }
     ],
-    "ms": 896,
+    "ms": 1079,
     "usage": {
-     "completion_tokens": 80,
-     "prompt_tokens": 4073,
-     "total_tokens": 4153,
+     "completion_tokens": 62,
+     "prompt_tokens": 4354,
+     "total_tokens": 4416,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "2671319c408395a3",
+   "hash": "35fad5698ae4d194",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e37c134b269744b3ae7603d3",
+      "id": "call_7428e26d283b428d8971264b",
       "name": "click",
       "args": {
-       "id": 61,
-       "narration": "₹330 ਦਾ payment ਕਰੋ",
-       "confirmation_question": "ਕੀ ਤੁਸੀਂ ₹330 ਦਾ payment ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ chair car ਲਈ?"
+       "id": 47,
+       "narration": "Pay ₹330",
+       "confirmation_question": "ਕੀ ਮੈਂ ₹330 ਦਾ payment ਕਰ ਦੇਵਾਂ?"
       }
      }
     ],
-    "ms": 901,
+    "ms": 675,
     "usage": {
-     "completion_tokens": 70,
-     "prompt_tokens": 4061,
-     "total_tokens": 4131,
+     "completion_tokens": 63,
+     "prompt_tokens": 4339,
+     "total_tokens": 4402,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "b7f13e7db97762bb",
+   "hash": "9f79c75f636a334b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_cff040a0b6ed49cda83a3ce3",
+      "id": "call_389d0906d4524f8a870c60dd",
       "name": "done",
       "args": {
-       "speech": "ਤੁਹਾਡੀ ticket book ਹੋ ਗਈ ਹੈ, PNR 4123456700। Charminar Double Decker Express (16365) ਵਿੱਚ seat 12, chair car, amount 330 rupees paid। ਤੁਸੀਂ ਚਾਹੋ ਤਾਂ ਇੱਕ ਹੋਰ ticket book ਕਰ ਸਕਦੇ ਹੋ।"
+       "speech": "ਤੁਹਾਡੀ ticket book ਹੋ ਗਈ ਹੈ! PNR 4123456700 ਹੈ। 6 ਅਕਤੂਬਰ ਨੂੰ ਚੰਡੀਗੜ੍ਹ ਤੋਂ ਅੰਮ੍ਰਿਤਸਰ Intercity Express (22441) ਦੀ AC Chair Car ਵਿੱਚ seat 12 ਮਿਲੀ ਹੈ, amount ₹330। ਹੋਰ ਕੁਝ ਚਾਹੀਦਾ ਹੈ?"
       }
      }
     ],
-    "ms": 1000,
+    "ms": 777,
     "usage": {
-     "completion_tokens": 89,
-     "prompt_tokens": 4095,
-     "total_tokens": 4184,
+     "completion_tokens": 91,
+     "prompt_tokens": 4373,
+     "total_tokens": 4464,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2432
+      "cached_tokens": 3584
      }
     }
    }
   }
  ],
  "translate": {
-  "5a534375d96340d7": "ਕੀ ਮੈਂ ਅੱਗੇ ਵਧਾਂ?",
   "ae3f67e8588f2608": "Page 'ਤੇ ਲਿਖਿਆ ਹੈ:"
  },
  "docs": {}

@@ -1,586 +1,126 @@
 {
  "version": 1,
  "task": "book-hi-day-after",
- "recordedAt": "2026-10-04T14:39:39.369Z",
+ "recordedAt": "2026-10-04T17:05:10.040Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "73f2a081d5eaaa3b",
+   "hash": "96e2b0b306ee12df",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e00158bdec194f958c866c88",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "चेन्नई स्टेशन सेलेक्ट कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 482,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 3760,
-     "total_tokens": 3805,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "72dc4439a91dd1c3",
-   "response": {
-    "content": "",
-    "toolCalls": [],
-    "ms": 3352,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 3768,
-     "total_tokens": 4368,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "5770691e642fe30c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_6b46f9ca53d24759a8c335a9",
+      "id": "call_72d0894e43654dfdb3fe75a7",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chennai",
-       "narration": "From station लिख रहा हूँ"
+       "narration": "FROM में चेन्नई डाल रहा हूँ"
       }
      },
      {
-      "id": "call_2ba92d7201f546dda82d841c",
+      "id": "call_468985094e8b4c4baf6805c1",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Madurai",
-       "narration": "To station लिख रहा हूँ"
+       "narration": "TO में मदुरै डाल रहा हूँ"
       }
      },
      {
-      "id": "call_6e5492185fea49cd9ed13e04",
-      "name": "click",
+      "id": "call_040913b810554fcd9e99128e",
+      "name": "type_text",
       "args": {
        "id": 12,
-       "narration": "Day after select कर रहा हूँ"
+       "text": "17",
+       "narration": "परसों की तारीख 17 Oct डाल रहा हूँ"
       }
-     }
-    ],
-    "ms": 821,
-    "usage": {
-     "completion_tokens": 80,
-     "prompt_tokens": 3789,
-     "total_tokens": 3869,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "a8e5cd3bdd6a5948",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_2ee066ba339d4b308b327836",
+      "id": "call_02476ee860b5413bbaa78d88",
       "name": "click",
       "args": {
-       "id": 20,
-       "narration": "Chennai Egmore select कर रहा हूँ",
+       "id": 13,
+       "narration": "All Classes खोल रहा हूँ",
        "confirmation_question": ""
       }
      },
      {
-      "id": "call_557a4862c41e422c9ed38441",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "परसों की date select कर रहा हूँ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_821b917266cf4013b0cf8b63",
-      "name": "click",
+      "id": "call_c51d0953ed414ee28873b78a",
+      "name": "select_option",
       "args": {
        "id": 14,
-       "narration": "Sleeper class select कर रहा हूँ",
-       "confirmation_question": ""
+       "option": "Sleeper",
+       "narration": "Sleeper class चुन रहा हूँ"
       }
      },
      {
-      "id": "call_69a0a746320947e587f17065",
+      "id": "call_4da0a8bb06514ee689b694b5",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains button दबा रहा हूँ",
+       "narration": "Search Trains दबा रहा हूँ",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 769,
+    "ms": 2995,
     "usage": {
-     "completion_tokens": 119,
-     "prompt_tokens": 3859,
-     "total_tokens": 3978,
+     "completion_tokens": 329,
+     "prompt_tokens": 4059,
+     "total_tokens": 4388,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "869a084866b6f52a",
+   "hash": "9ff703288f15ef7d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0e52f290a22849d59691b930",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Madurai",
-       "narration": "Madurai type कर रहा हूँ"
-      }
-     },
-     {
-      "id": "call_ec31da0a847f4567b8aac66d",
+      "id": "call_d042aaf5ea0e4786bb6017c8",
       "name": "click",
       "args": {
        "id": 12,
-       "narration": "Day after select कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 511,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 3869,
-     "total_tokens": 3923,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "103cc08fc0d76797",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_20a036f30d064c66a5ccafb2",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "Day after date select कर रहा हूँ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_4aff029ecf024aebbb8301cd",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains button click",
+       "narration": "Day after चुनना",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 723,
+    "ms": 518,
     "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 3945,
-     "total_tokens": 4002,
+     "completion_tokens": 52,
+     "prompt_tokens": 4244,
+     "total_tokens": 4296,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "e5a36510f41cdf53",
+   "hash": "4ec3b3f51fc19bcb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_b6fc91943b184b16a2dfe249",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 533,
-    "usage": {
-     "completion_tokens": 55,
-     "prompt_tokens": 4029,
-     "total_tokens": 4084,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "61ad575c56965efb",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_911637b7a19b4b7984172c52",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 466,
-    "usage": {
-     "completion_tokens": 39,
-     "prompt_tokens": 4044,
-     "total_tokens": 4083,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "11475d2f97d56d90",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_feb3ff22e7c34deb9a797c5b",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "चेन्नई से स्टेशन चुनना",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_083fe9daa8e546059bbecd4d",
-      "name": "type_text",
-      "args": {
-       "id": 6,
-       "text": "Chennai Central",
-       "narration": "चेन्नई सेंट्रल टाइप करना"
-      }
-     },
-     {
-      "id": "call_b881d4f78d9949c6be2ea6bb",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "चेन्नई सेंट्रल चुनना",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_c4f54d05ff3b4475ad7e781c",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Madurai Junction",
-       "narration": "मदुरै जंक्शन टाइप करना"
-      }
-     },
-     {
-      "id": "call_a1acec41c4ce4f1da0f113e6",
-      "name": "click",
-      "args": {
-       "id": 21,
-       "narration": "मदुरै जंक्शन चुनना",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_f9b7f4ce510c444696b29684",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "परसों की तारीख",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_2a2a0ea749544408b87e4584",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "ट्रेन खोजना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1271,
-    "usage": {
-     "completion_tokens": 196,
-     "prompt_tokens": 4085,
-     "total_tokens": 4281,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "384e30af9b3d9f7f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_90a7b7cd2ad147b6b1dc4b44",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Chennai Central select कर रहा हूँ"
-      }
-     },
-     {
-      "id": "call_97abd3e98fb74dc0b6ad6aaa",
-      "name": "click",
-      "args": {
-       "id": 21,
-       "narration": "Madurai Junction select कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 763,
-    "usage": {
-     "completion_tokens": 103,
-     "prompt_tokens": 4162,
-     "total_tokens": 4265,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "53a059945fbd2849",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d97a869dc9c04cb4986cf066",
-      "name": "go_back",
-      "args": {
-       "narration": "वापस जा रहे हैं"
-      }
-     }
-    ],
-    "ms": 392,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4183,
-     "total_tokens": 4214,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "5d119497f51937ae",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_ef0b4bb3b0cb4281ae9e8adb",
-      "name": "click",
-      "args": {
-       "id": 8,
-       "narration": "मदुरै दर्ज कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 546,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4166,
-     "total_tokens": 4216,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "910e8b5052f31374",
-   "response": {
-    "content": "",
-    "toolCalls": [],
-    "ms": 4058,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 4180,
-     "total_tokens": 4780,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "7623bead91828dfb",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5695102a4310414591816261",
+      "id": "call_726790afb0624cfba97987fc",
       "name": "select_option",
       "args": {
-       "id": 6,
-       "option": "Chennai Central MAS Chennai",
-       "narration": "From में Chennai Central चुनना"
+       "id": 13,
+       "option": "SL",
+       "narration": "Sleeper class select"
       }
      },
      {
-      "id": "call_4254b9ab4e62479b81faee57",
-      "name": "select_option",
-      "args": {
-       "id": 8,
-       "option": "Madurai Junction MDU Madurai",
-       "narration": "To में Madurai Junction चुनना"
-      }
-     },
-     {
-      "id": "call_067705ccf3214ec483365dec",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "परसों की date चुनना"
-      }
-     },
-     {
-      "id": "call_703562c79b17420c9637bb18",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS पर click करना"
-      }
-     }
-    ],
-    "ms": 1959,
-    "usage": {
-     "completion_tokens": 195,
-     "prompt_tokens": 4201,
-     "total_tokens": 4396,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "5cf4cc5f899db732",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d53b28e49e35426f91a468c9",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Madurai",
-       "narration": "Madurai डाल रहा हूँ"
-      }
-     }
-    ],
-    "ms": 549,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4367,
-     "total_tokens": 4421,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "c099d12e1de28993",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_99edaf4284ff4796be8a5527",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Madurai select कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 429,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4429,
-     "total_tokens": 4473,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "fd25422849109e19",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_772c1fa0e21e41aaaf41afe2",
+      "id": "call_ac8cd2ddeaac41e787060a13",
       "name": "click",
       "args": {
        "id": 18,
@@ -589,311 +129,196 @@
       }
      }
     ],
-    "ms": 599,
+    "ms": 875,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4437,
-     "total_tokens": 4485,
+     "completion_tokens": 109,
+     "prompt_tokens": 4258,
+     "total_tokens": 4367,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "62290433ae3e3ddd",
+   "hash": "8f68300403c0520b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_400a3a5d347943a39a06c13d",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "Results page read karo"
-      }
-     }
-    ],
-    "ms": 453,
-    "usage": {
-     "completion_tokens": 24,
-     "prompt_tokens": 5669,
-     "total_tokens": 5693,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "de2bb3e46bab1718",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bf45c75ee5b7441bbff50d1f",
+      "id": "call_48df395a58434375bf475cbd",
       "name": "click",
       "args": {
-       "id": 22,
-       "narration": "Sleeper class book karo"
+       "id": 30,
+       "narration": "Book Ganga Superfast Express ticket",
+       "confirmation_question": "क्या आप 7 अक्टूबर 2026 को चेन्नई सेंट्रल से मदुरै जंक्शन के लिए गंगा सुपरफास्ट एक्सप्रेस (11261) की स्लीपर टिकट ₹265 में बुक करना चाहती हैं?"
       }
      }
     ],
-    "ms": 589,
+    "ms": 885,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 6314,
-     "total_tokens": 6358,
+     "completion_tokens": 106,
+     "prompt_tokens": 4570,
+     "total_tokens": 4676,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3904
      }
     }
    }
   },
   {
-   "hash": "e7d284a6be967aae",
+   "hash": "21f80c9418cc89ac",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_f892d2bb01e84e3bb59acc91",
+      "id": "call_c6aaadcfae9347028e493850",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 41,
+         "id": 34,
          "value": "Asha Verma"
         },
         {
-         "id": 42,
+         "id": 35,
          "value": "34"
         },
         {
-         "id": 48,
+         "id": 36,
+         "value": "Female"
+        },
+        {
+         "id": 41,
          "value": "9000000001"
         }
        ],
-       "narration": "Passenger details भरना"
+       "narration": "Passenger details fill kar raha hoon"
       }
      }
     ],
-    "ms": 1033,
+    "ms": 1429,
     "usage": {
-     "completion_tokens": 124,
-     "prompt_tokens": 4500,
-     "total_tokens": 4624,
+     "completion_tokens": 150,
+     "prompt_tokens": 4362,
+     "total_tokens": 4512,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "5c887665bb425130",
+   "hash": "d7ff0b305fa9a9a7",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_8d3ec122c6a34829bdd81b49",
-      "name": "select_option",
-      "args": {
-       "id": 43,
-       "option": "Female",
-       "narration": "Gender Female चुन रही हूँ"
-      }
-     }
-    ],
-    "ms": 543,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4573,
-     "total_tokens": 4626,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "1899159a573b6429",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_e274af36c00742039d251fa1",
+      "id": "call_bc63342ec83d4cdabfad2368",
       "name": "click",
       "args": {
-       "id": 44,
-       "narration": "Female चुनें",
-       "confirmation_question": ""
+       "id": 42,
+       "narration": "Continue करें"
       }
      }
     ],
-    "ms": 527,
+    "ms": 526,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4610,
-     "total_tokens": 4658,
+     "completion_tokens": 40,
+     "prompt_tokens": 4458,
+     "total_tokens": 4498,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "2b3fa438e6b951e7",
+   "hash": "8268e2c9bcb1fa88",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_55ce51a25d2d4dd49a97ceb5",
-      "name": "select_option",
-      "args": {
-       "id": 43,
-       "option": "Female",
-       "narration": "Gender Female select कर रही हूँ"
-      }
-     }
-    ],
-    "ms": 619,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4624,
-     "total_tokens": 4678,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "96dd96c1a6e5dc2c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_040438b2cb564875a6d99f95",
+      "id": "call_7d5f63039c434aeb8d2aec4a",
       "name": "click",
       "args": {
-       "id": 49,
-       "narration": "Passenger details fill करने के बाद continue करना"
-      }
-     },
-     {
-      "id": "call_4d99184a19fd4651b472dd52",
-      "name": "select_option",
-      "args": {
        "id": 43,
-       "option": "Female",
-       "narration": "Gender Female select करना"
-      }
-     }
-    ],
-    "ms": 576,
-    "usage": {
-     "completion_tokens": 55,
-     "prompt_tokens": 4659,
-     "total_tokens": 4714,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "43e7025bb69275c0",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_edb0e01e34e0409a806636f4",
-      "name": "click",
-      "args": {
-       "id": 50,
        "narration": "Proceed to pay",
-       "confirmation_question": "Confirm booking for Ganga Superfast Express 7 Oct, Chennai Central to Madurai Junction, Sleeper, 1 passenger, total ₹285?"
+       "confirmation_question": "Chennai Central से Madurai Junction, 7 Oct, Sleeper, 1 passenger, total 285 rupees — book करूँ?"
       }
      }
     ],
-    "ms": 665,
+    "ms": 634,
     "usage": {
-     "completion_tokens": 82,
-     "prompt_tokens": 4637,
-     "total_tokens": 4719,
+     "completion_tokens": 80,
+     "prompt_tokens": 4409,
+     "total_tokens": 4489,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3968
      }
     }
    }
   },
   {
-   "hash": "d66fdbeb12b43504",
+   "hash": "7f3ef4a8e88731a7",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_31d9c83a57d44c5d9d072209",
+      "id": "call_4d3cbdc5a2da4503aea3126b",
       "name": "click",
       "args": {
-       "id": 54,
+       "id": 47,
        "narration": "Pay ₹285",
-       "confirmation_question": "क्या आप ₹285 का payment confirm करते हैं?"
+       "confirmation_question": "क्या आप ₹285 का payment करना चाहते हैं?"
       }
      }
     ],
-    "ms": 614,
+    "ms": 713,
     "usage": {
      "completion_tokens": 63,
-     "prompt_tokens": 4627,
-     "total_tokens": 4690,
+     "prompt_tokens": 4399,
+     "total_tokens": 4462,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 4096
      }
     }
    }
   },
   {
-   "hash": "0aa0d9c9b33c26b2",
+   "hash": "88546b37d92cbfac",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_953f717ceb3e4bf1aa5d6092",
+      "id": "call_eec40e745dca4c018aca2088",
       "name": "done",
       "args": {
-       "speech": "आपकी टिकट बुक हो गई है। PNR 4123456700 है, गंगा सुपरफास्ट एक्सप्रेस 11261 में चेन्नई सेंट्रल से मदुरै जंक्शन के लिए, 7 अक्टूबर 2026 को। स्लीपर में सीट 12 है। ₹285 का भुगतान हो चुका है।"
+       "speech": "आपकी बुकिंग कन्फर्म हो गई है। PNR नंबर 4123456700 है, गंगा सुपरफास्ट एक्सप्रेस (11261), चेन्नई सेंट्रल से मदुरै जंक्शन, 7 अक्टूबर 2026, स्लीपर क्लास, सीट 12, नाम आशा वर्मा। ₹285 का पेमेंट हो गया है।"
       }
      }
     ],
-    "ms": 896,
+    "ms": 1075,
     "usage": {
-     "completion_tokens": 103,
-     "prompt_tokens": 4661,
-     "total_tokens": 4764,
+     "completion_tokens": 106,
+     "prompt_tokens": 4433,
+     "total_tokens": 4539,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 4096
      }
     }
    }

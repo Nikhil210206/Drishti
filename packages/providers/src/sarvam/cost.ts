@@ -1,12 +1,20 @@
-// Rough ₹ spend tracker from the published Sarvam price list (Sep 2026).
+// Rough ₹ spend tracker from the published Sarvam price list (Oct 2026).
 const PRICE = {
   llmIn: 29.28 / 1e6,
+  // Prompt tokens served from the provider's prefix cache (the system prompt and tools, mostly).
+  llmCachedIn: 10.98 / 1e6,
   llmOut: 73.2 / 1e6,
   sttPerSec: 30 / 3600,
   ttsPerChar: 30 / 10000,
   translatePerChar: 20 / 10000,
   docPerPage: 0.5,
 };
+
+export interface LlmUsage {
+  prompt_tokens?: number;
+  completion_tokens?: number;
+  prompt_tokens_details?: { cached_tokens?: number | null } | null;
+}
 
 type Listener = (inr: number) => void;
 
@@ -21,8 +29,11 @@ class CostMeter {
     this.listeners.add(l);
     return () => this.listeners.delete(l);
   }
-  addLlm(inTok: number, outTok: number) {
-    this.add(inTok * PRICE.llmIn + outTok * PRICE.llmOut);
+  /** Pass the API's `usage` object: cached prompt tokens are billed at the lower rate. */
+  addLlm(usage: LlmUsage) {
+    const inTok = usage.prompt_tokens ?? 0;
+    const cached = Math.min(usage.prompt_tokens_details?.cached_tokens ?? 0, inTok);
+    this.add((inTok - cached) * PRICE.llmIn + cached * PRICE.llmCachedIn + (usage.completion_tokens ?? 0) * PRICE.llmOut);
   }
   addStt(seconds: number) {
     this.add(seconds * PRICE.sttPerSec);

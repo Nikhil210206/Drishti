@@ -1,11 +1,11 @@
 {
  "version": 1,
  "task": "read-kn-pmkisan-amount",
- "recordedAt": "2026-10-04T14:43:02.897Z",
+ "recordedAt": "2026-10-04T17:07:34.816Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "fa10ca4c976a2ee6",
+   "hash": "569c132f8f623008",
    "response": {
     "content": "",
     "toolCalls": [
@@ -13,21 +13,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "PM Kisan scheme-ನಲ್ಲಿ ಒಂದು ವರ್ಷಕ್ಕೆ 6000 rupees ಕೊಡ್ತಾರೆ. ಇದು 2000 rupees ನ ಮೂರು equal installments ಆಗಿ, ಪ್ರತಿ ನಾಲ್ಕು ತಿಂಗಳಿಗೊಮ್ಮೆ ಕೊಡ್ತಾರೆ."
+       "speech": "PM Kisan scheme-ನಲ್ಲಿ ವರ್ಷಕ್ಕೆ 6000 rupees ಸಿಗುತ್ತೆ. ಇದು ಮೂರು installments-ನಲ್ಲಿ ಬರುತ್ತೆ, ಪ್ರತಿ installment 2000 rupees ಇರುತ್ತೆ. ಇನ್ನು ಬೇರೆ details ಬೇಕಾ?"
       }
      }
     ],
-    "ms": 4142,
+    "ms": 754,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 5037,
-     "total_tokens": 5637,
+     "completion_tokens": 74,
+     "prompt_tokens": 5337,
+     "total_tokens": 5411,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2432
+      "cached_tokens": 2624
      }
-    }
+    },
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"PM Kisan scheme-ನಲ್ಲಿ ವರ್ಷಕ್ಕೆ 6000 rupees ಸಿಗುತ್ತೆ. ಇದು ಮೂರು installments-ನಲ್ಲಿ ಬರುತ್ತೆ, ಪ್ರತಿ installment 2000 rupees ಇರುತ್ತೆ. ಇನ್ನು ಬೇರೆ details ಬೇಕಾ?\"\n  }\n}"
    }
   }
  ],

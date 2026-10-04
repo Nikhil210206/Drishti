@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Agent, NavigationPolicy } from "../src/index.js";
+import { batchStop } from "../src/agent/orchestrator.js";
 import { FakeBrowser, RecordingIO, ScriptedLLM, echoTranslator, element, noDocs, page, phrases } from "./fakes.js";
 
 const HOME = "http://localhost:5174/#/";
@@ -296,6 +297,23 @@ describe("Agent: confirmation readback", () => {
   });
 });
 
+describe("Agent: feedback after a click", () => {
+  it("says when a control now shows something else, e.g. the chosen option", async () => {
+    const HELP = "http://localhost:5174/#/help";
+    const open = page(HELP, {
+      "19": element("Select category ▾", { role: "clickable", tag: "div" }),
+      "26": element("Food quality", { role: "option" }),
+    });
+    const chosen = page(HELP, { "19": element("Food quality ▾", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HELP]: open }, HELP);
+    const snapshots = [open, chosen, chosen];
+    browser.snapshot = async () => snapshots.shift() ?? chosen;
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 26, narration: "" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(String(llm.calls[1].messages[1].content)).toContain('click [26] "Food quality" → ok ⇒ [19] now says "Food quality ▾"');
+  });
+});
+
 describe("Agent: custom dropdowns", () => {
   const HELP = "http://localhost:5174/#/help";
   const closed = page(HELP, { "19": element("Select category ▾", { role: "clickable", tag: "div" }) });
@@ -383,5 +401,448 @@ describe("Agent: no invented personal details", () => {
     );
     await run(agent, new RecordingIO());
     expect(browser.log).toEqual(["type 35 Asha Verma"]);
+  });
+});
+
+describe("Agent: one turn per form", () => {
+  const history = (llm: ScriptedLLM, i: number) => String(llm.calls[i].messages[1].content);
+
+  /** A search form whose station boxes show suggestions after typing, until one is clicked. */
+  class SearchForm extends FakeBrowser {
+    open: "" | "from" | "to" = "";
+    constructor() {
+      super({}, HOME);
+    }
+    override async snapshot() {
+      const els: Record<string, ReturnType<typeof element>> = {
+        "6": element("FROM", { role: "textbox", tag: "input" }),
+        "8": element("TO", { role: "textbox", tag: "input" }),
+        "11": element("Tomorrow", { role: "clickable", tag: "div" }),
+        "18": element("SEARCH TRAINS"),
+      };
+      if (this.open === "from")
+        Object.assign(els, {
+          "19": element("Chennai Central MAS Chennai", { role: "option" }),
+          "20": element("Chennai Egmore MS Chennai", { role: "option" }),
+        });
+      if (this.open === "to") Object.assign(els, { "21": element("KSR Bengaluru SBC Bengaluru", { role: "option" }) });
+      return page(HOME, els);
+    }
+    override async type(id: string | number, text: string) {
+      await super.type(id, text);
+      this.open = id === 6 ? "from" : "to";
+    }
+    override async click(id: string | number) {
+      await super.click(id);
+      this.open = "";
+    }
+  }
+
+  it("types and picks station suggestions, then carries on in the same turn", async () => {
+    const browser = new SearchForm();
+    const llm = new ScriptedLLM([
+      [
+        { name: "type_text", args: { id: 6, text: "Chennai", pick_suggestion: "Chennai", narration: "" } },
+        { name: "type_text", args: { id: 8, text: "Bengaluru", pick_suggestion: "Bengaluru", narration: "" } },
+        { name: "click", args: { id: 11, narration: "" } },
+        { name: "click", args: { id: 18, narration: "" } },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["type 6 Chennai", "click 19", "type 8 Bengaluru", "click 21", "click 11", "click 18"]);
+    expect(llm.calls).toHaveLength(2);
+    expect(history(llm, 1)).toContain('chose suggestion "Chennai Central MAS Chennai" (others offered: [20] "Chennai Egmore MS Chennai")');
+  });
+
+  it("picks the matching station when the model typed one and carried on without pick_suggestion", async () => {
+    const browser = new SearchForm();
+    const llm = new ScriptedLLM([
+      [
+        { name: "type_text", args: { id: 6, text: "Chennai", narration: "" } },
+        { name: "click", args: { id: 18, narration: "" } },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["type 6 Chennai", "click 19", "click 18"]);
+  });
+
+  it("asks the model to click a single suggestion that typing brought up", async () => {
+    const browser = new SearchForm();
+    browser.type = async (id, text) => {
+      browser.log.push(`type ${id} ${text}`);
+      browser.open = "to";
+    };
+    const llm = new ScriptedLLM([[{ name: "type_text", args: { id: 8, text: "Bengaluru", narration: "" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(history(llm, 1)).toContain('NEW OPTIONS: [21] "KSR Bengaluru SBC Bengaluru" — click the right one next');
+  });
+
+  it("drops the model's own click on a suggestion that was already picked", async () => {
+    const browser = new SearchForm();
+    const llm = new ScriptedLLM([
+      [
+        { name: "type_text", args: { id: 6, text: "Chennai", pick_suggestion: "Chennai", narration: "" } },
+        { name: "click", args: { id: 20, narration: "" } },
+        { name: "click", args: { id: 18, narration: "" } },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["type 6 Chennai", "click 19", "click 18"]);
+    expect(history(llm, 1)).toContain("(your click on [20] was not needed)");
+  });
+
+  it("stops the batch when suggestions are left open, so the model can look", async () => {
+    const browser = new SearchForm();
+    const llm = new ScriptedLLM([
+      [
+        { name: "type_text", args: { id: 6, text: "Chennai", narration: "" } },
+        { name: "click", args: { id: 11, narration: "" } },
+      ],
+    ]);
+    // Typed text that matches no suggestion: nothing is picked, and the model must look.
+    browser.type = async (id, text) => {
+      browser.log.push(`type ${id} ${text}`);
+      browser.open = "to";
+    };
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["type 6 Chennai"]);
+    expect(history(llm, 1)).toContain('no suggestion is like "Chennai"');
+    expect(history(llm, 1)).toContain(
+      'this failed, so these calls were skipped: click [11] "Tomorrow". Look again, then redo the ones still needed',
+    );
+  });
+
+  it("refuses select_option on an ordinary button instead of pressing it", async () => {
+    const form = page(HOME, {
+      "13": element("All Classes ▾", { role: "clickable", tag: "div" }),
+      "17": element("Senior Citizen", { role: "clickable", tag: "div" }),
+    });
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const llm = new ScriptedLLM([[{ name: "select_option", args: { id: 17, option: "Sleeper", narration: "" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual([]);
+    expect(history(llm, 1)).toContain("is a button, not a dropdown, so nothing was clicked");
+  });
+
+  it("reports the suggestions when none matches the pick", async () => {
+    const browser = new SearchForm();
+    const llm = new ScriptedLLM([
+      [
+        { name: "type_text", args: { id: 6, text: "Chennai", pick_suggestion: "Tambaram", narration: "" } },
+        { name: "click", args: { id: 18, narration: "" } },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["type 6 Chennai"]);
+    expect(history(llm, 1)).toContain('no suggestion is like "Tambaram". Suggestions: [19] "Chennai Central MAS Chennai"');
+  });
+
+  it("fills choice buttons and dropdowns in fill_form", async () => {
+    const form = page(HOME, {
+      "36": element("Age", { role: "textbox", tag: "input" }),
+      "37": element("Male", { role: "clickable", tag: "div" }),
+      "38": element("Female", { role: "clickable", tag: "div" }),
+      "40": element("Berth preference", { role: "select", tag: "select" }),
+      "43": element("CONTINUE"),
+    });
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const llm = new ScriptedLLM([
+      [
+        {
+          name: "fill_form",
+          args: {
+            fields: [
+              { id: 36, value: "34" },
+              { id: 37, value: "Female" },
+              { id: 40, value: "Lower" },
+            ],
+            narration: "",
+          },
+        },
+        { name: "click", args: { id: 43, narration: "" } },
+      ],
+    ]);
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() },
+      { profile: { name: "Asha Verma", age: "34", gender: "Female" } },
+    );
+    await run(agent, new RecordingIO());
+    expect(browser.log).toEqual(["type 36 34", "click 38", "select 40 Lower", "click 43"]);
+  });
+
+  it("refuses two people squeezed into one passenger row", async () => {
+    const form = page(HOME, {
+      "65": element("Name", { role: "textbox", tag: "input" }),
+      "67": element("Male", { role: "clickable", tag: "div" }),
+      "68": element("Female", { role: "clickable", tag: "div" }),
+    });
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const fill = (fields: { id: number; value: string }[]) => [{ name: "fill_form", args: { fields, narration: "" } }];
+    const llm = new ScriptedLLM([
+      fill([
+        { id: 65, value: "Asha Verma" },
+        { id: 65, value: "Ravi Verma" },
+      ]),
+      fill([
+        { id: 68, value: "Female" },
+        { id: 67, value: "Male" },
+      ]),
+    ]);
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() },
+      { profile: { name: "Asha Verma" } },
+    );
+    await agent.run("book for me and Ravi Verma", new RecordingIO(), new AbortController().signal);
+    expect(browser.log).toEqual([]);
+    expect(history(llm, 1)).toContain("[65] is given twice");
+    expect(history(llm, 2)).toContain("[67] is a second choice in the same button group");
+  });
+
+  it("sets the dropdown when a fill_form id slips onto the button next to it", async () => {
+    const form = page(
+      HOME,
+      {
+        "65": element("Male", { role: "clickable", tag: "div" }),
+        "66": element("Female", { role: "clickable", tag: "div" }),
+        "67": element("Transgender", { role: "clickable", tag: "div" }),
+        "68": element("Berth preference", { role: "select", tag: "select" }),
+      },
+      '[65] clickable "Male"\n[66] clickable "Female"\n[67] clickable "Transgender"\n[68] select "Berth preference" selected="Lower" options=[No preference | Lower | Upper]',
+    );
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const fields = [
+      { id: 65, value: "Female" },
+      { id: 67, value: "No preference" },
+    ];
+    const llm = new ScriptedLLM([[{ name: "fill_form", args: { fields, narration: "" } }]]);
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() },
+      { profile: { gender: "Female" } },
+    );
+    await run(agent, new RecordingIO());
+    expect(browser.log).toEqual(["click 66", "select 68 No preference"]);
+  });
+
+  it("never clicks a gated button through fill_form", async () => {
+    const form = page(
+      PAY,
+      { "1": element("Coach", { role: "textbox" }), "7": element("PAY ₹845") },
+      '- Amount payable ₹845\n[7] button "PAY ₹845"',
+    );
+    const browser = new FakeBrowser({ [PAY]: form }, PAY);
+    const llm = new ScriptedLLM([
+      [
+        {
+          name: "fill_form",
+          args: {
+            fields: [
+              { id: 1, value: "S4" },
+              { id: 7, value: "PAY ₹845" },
+            ],
+            narration: "",
+          },
+        },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["type 1 S4"]);
+    expect(history(llm, 1)).toContain("needs the user's confirmation");
+  });
+});
+
+describe("batchStop", () => {
+  const call = (id: number) => ({ id: "c", name: "click", args: { id } });
+  const before = page(HOME, { "9": element("Tue, 6 Oct, 2026"), "11": element("Tomorrow"), "18": element("SEARCH") });
+
+  it("carries on when a control was only renamed", () => {
+    const after = page(HOME, { "44": element("Wed, 7 Oct, 2026"), "11": element("Tomorrow"), "18": element("SEARCH") });
+    expect(batchStop(before, after, call(18))).toBe("");
+  });
+
+  it("stops for new controls, a missing target, alerts and dialogs", () => {
+    expect(batchStop(before, page(HOME, { ...before.elements, "50": element("1"), "51": element("2") }), call(18))).toBe(
+      "new options appeared",
+    );
+    expect(batchStop(before, page(HOME, { "9": element("x"), "11": element("y"), "60": element("z") }), call(18))).toBe(
+      "its target is no longer on the page",
+    );
+    expect(batchStop(before, { ...before, alerts: ["Select valid stations"] }, call(18))).toBe("an alert appeared");
+    expect(batchStop(before, { ...before, text: `${before.text}\n- No stations found` }, call(18))).toBe("the page shows new text");
+    expect(batchStop(before, { ...before, dialog: "Calendar" }, call(18))).toBe("a dialog opened");
+  });
+});
+
+describe("Agent: wrong class", () => {
+  const RESULTS = "http://localhost:5174/#/results";
+  const results = page(RESULTS, {
+    "26": element("book ticket (2S ₹90 14)", { role: "clickable", tag: "div" }),
+    "31": element("book ticket (SL ₹145 49)", { role: "clickable", tag: "div" }),
+  });
+
+  it("refuses to book a class the user did not ask for, before asking them", async () => {
+    const browser = new FakeBrowser({ [RESULTS]: results }, RESULTS);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 31, narration: "", confirmation_question: "Book SL?" } }]]);
+    const io = new RecordingIO(["haan"]);
+    await new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() }).run(
+      "ನಾಳೆ ಮೈಸೂರಿಗೆ second sitting ticket book ಮಾಡಿ",
+      io,
+      new AbortController().signal,
+    );
+    expect(browser.log).toEqual([]);
+    expect(io.asked).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("but this books Sleeper (SL)");
+  });
+});
+
+describe("Agent: filled forms", () => {
+  it("says a form is already filled and names the next button, instead of refilling it", async () => {
+    const elements = {
+      "77": element("Name", { role: "textbox", tag: "input" }),
+      "80": element("Female", { role: "clickable", tag: "div" }),
+      "85": element("CONTINUE", { role: "clickable", tag: "div" }),
+    };
+    const form = page(
+      HOME,
+      elements,
+      '[77] textbox "Name" value="Asha Verma"\n[80] clickable "Female" looks-selected\n[85] clickable "CONTINUE"',
+    );
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const fill = {
+      name: "fill_form",
+      args: {
+        fields: [
+          { id: 77, value: "Asha Verma" },
+          { id: 80, value: "Female" },
+        ],
+        narration: "",
+      },
+    };
+    const llm = new ScriptedLLM([[fill]]);
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() },
+      { profile: { name: "Asha Verma", gender: "Female" } },
+    );
+    await run(agent, new RecordingIO());
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain(
+      'nothing to do: "Name", "Female" already hold these values. Next: click [85] "CONTINUE"',
+    );
+  });
+
+  it("says a leftover alert clears only on Continue", async () => {
+    const form = page(
+      HOME,
+      { "43": element("Mobile number", { role: "textbox", tag: "input" }), "44": element("CONTINUE") },
+      '[43] textbox "Mobile number" value="9000000001"\n[44] button "CONTINUE"',
+    );
+    form.alerts = ["Enter a valid 10-digit mobile number."];
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const llm = new ScriptedLLM([[{ name: "fill_form", args: { fields: [{ id: 43, value: "9000000001" }], narration: "" } }]]);
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() },
+      { profile: { mobile: "9000000001" } },
+    );
+    await run(agent, new RecordingIO());
+    expect(String(llm.calls[1].messages[1].content)).toContain(
+      'Next: click [44] "CONTINUE". The alert "Enter a valid 10-digit mobile number." is from before; it clears only when you click it.',
+    );
+  });
+});
+
+describe("Agent: wrong quota", () => {
+  it("refuses a General ticket from the results page when Tatkal was asked", async () => {
+    const RESULTS = "http://localhost:5174/#/results";
+    const results = page(
+      RESULTS,
+      { "24": element("book ticket (SL ₹265 23)", { role: "clickable", tag: "div" }) },
+      '- Chennai Central (MAS) Madurai Junction (MDU) Tue, 6 Oct, 2026 · General quota · 9 trains found\nROW: Ganga Superfast Express · (11261) · [24] clickable "book ticket (SL ₹265 23)"',
+    );
+    const browser = new FakeBrowser({ [RESULTS]: results }, RESULTS);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 24, narration: "" } }]]);
+    const io = new RecordingIO(["சரி"]);
+    await new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() }).run(
+      "நாளைக்கு மதுரைக்கு தட்கல்ல ஒரு ஸ்லீப்பர் டிக்கெட்",
+      io,
+      new AbortController().signal,
+    );
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain(
+      "the user asked for the Tatkal quota, but this is General. Class, quota and date are chosen on the search form",
+    );
+  });
+});
+
+describe("Agent: wrong date", () => {
+  it("refuses to pay for a ticket on another day than the user asked", async () => {
+    const REVIEW = "http://localhost:5174/#/review";
+    const review = page(
+      REVIEW,
+      { "44": element("PROCEED TO PAY") },
+      '- Train Chennai–Madurai Mail (12200) Date Tue, 6 Oct, 2026 Class Sleeper (SL) Total ₹265\n[44] button "PROCEED TO PAY"',
+    );
+    const browser = new FakeBrowser({ [REVIEW]: review }, REVIEW);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 44, narration: "", confirmation_question: "Pay 265?" } }]]);
+    const io = new RecordingIO(["haan"]);
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() },
+      { now: () => new Date("2026-10-05T09:30:00+05:30") },
+    );
+    await agent.run("परसों चेन्नई से मदुरै की स्लीपर टिकट बुक करो", io, new AbortController().signal);
+    expect(browser.log).toEqual([]);
+    expect(io.asked).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain(
+      "the user asked for the day after tomorrow (Wed, 7 Oct), but this is for Tue, 6 Oct",
+    );
+  });
+});
+
+describe("Agent: knowing when to stop", () => {
+  const HELP = "http://localhost:5174/#/help";
+  const box = page(HELP, { "21": element("Describe your issue", { role: "textbox", tag: "textarea" }) });
+
+  it("does not click a free-text box, and points to dictation", async () => {
+    const browser = new FakeBrowser({ [HELP]: box }, HELP);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 21, narration: "" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("Use compose_with_kivi on it");
+  });
+
+  it("still clicks a Submit complaint button (with confirmation)", async () => {
+    const form = page(HELP, { "22": element("SUBMIT COMPLAINT", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HELP]: form }, HELP);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 22, narration: "" } }]]);
+    const io = new RecordingIO(["haan"]);
+    await run(agentFor(browser, llm), io);
+    expect(browser.log).toEqual(["click 22"]);
+    expect(io.asked[0].kind).toBe("confirm");
+  });
+
+  it("stops offering dictation after the user rejected it twice", async () => {
+    class Dictating extends RecordingIO {
+      override async compose() {
+        return "Coach mein bahut gandagi thi.";
+      }
+    }
+    const browser = new FakeBrowser({ [HELP]: box }, HELP);
+    const kivi = [{ name: "compose_with_kivi", args: { id: 21, what: "complaint" } }];
+    const llm = new ScriptedLLM([kivi, kivi, kivi]);
+    const io = new Dictating(Array(6).fill("nahi"));
+    await run(agentFor(browser, llm), io);
+    expect(io.asked).toHaveLength(6);
+    expect(String(llm.calls[3].messages[1].content)).toContain("REFUSED: the user already rejected the dictated text twice");
+  });
+
+  it("tells the model to finish after the user said no twice", async () => {
+    const RESULTS = "http://localhost:5174/#/results";
+    const results = page(RESULTS, { "61": element("book ticket (SL ₹160 11)"), "62": element("book ticket (SL ₹170 86)") });
+    const browser = new FakeBrowser({ [RESULTS]: results }, RESULTS);
+    const llm = new ScriptedLLM([
+      [{ name: "click", args: { id: 61, narration: "" } }],
+      [{ name: "click", args: { id: 62, narration: "" } }],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO(["nahi", "nahi"]));
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[2].messages[1].content)).toContain("USER DECLINED again. Stop: call done now");
   });
 });

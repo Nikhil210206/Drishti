@@ -1,31 +1,59 @@
 {
  "version": 1,
  "task": "read-en-pmkisan-amount",
- "recordedAt": "2026-10-04T14:42:57.652Z",
+ "recordedAt": "2026-10-04T17:07:32.678Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "b9c7c394409c2375",
+   "hash": "732edfe0d6156eb0",
    "response": {
     "content": "",
     "toolCalls": [
      {
       "id": "rec_0",
-      "name": "done",
+      "name": "read_page",
       "args": {
-       "speech": "Under the PM-KISAN scheme, the Central Government gives 6000 rupees per year per eligible farmer family. This is paid in three equal installments of 2000 rupees each, every four months."
+       "mode": "summary",
+       "narration": "Reading PM-KISAN scheme details"
       }
      }
     ],
-    "ms": 4563,
+    "ms": 627,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 5034,
-     "total_tokens": 5634,
+     "completion_tokens": 36,
+     "prompt_tokens": 5335,
+     "total_tokens": 5371,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
+     }
+    },
+    "raw": "[\n{\"name\": \"read_page\", \"parameters\": {\"mode\": \"summary\", \"narration\": \"Reading PM-KISAN scheme details\"}}"
+   }
+  },
+  {
+   "hash": "e4dd7f1e7680f000",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_2db10b27891f4d16b5eb71ab",
+      "name": "done",
+      "args": {
+       "speech": "The PM-KISAN scheme gives eligible farmers a financial benefit of Rs. 6000 per year. This amount is paid in three equal installments of Rs. 2000 each, every four months."
+      }
+     }
+    ],
+    "ms": 574,
+    "usage": {
+     "completion_tokens": 61,
+     "prompt_tokens": 5532,
+     "total_tokens": 5593,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3648
      }
     }
    }

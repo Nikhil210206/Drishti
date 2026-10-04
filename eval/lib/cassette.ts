@@ -83,7 +83,7 @@ export class Cassette {
         }
         if (entry.hash !== hash) this.drift++;
         // Count the recorded spend, so replayed reports show what the run cost live.
-        if (entry.response.usage) costMeter.addLlm(entry.response.usage.prompt_tokens ?? 0, entry.response.usage.completion_tokens ?? 0);
+        if (entry.response.usage) costMeter.addLlm(entry.response.usage);
         return structuredClone(entry.response);
       },
     };

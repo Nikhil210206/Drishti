@@ -109,7 +109,7 @@ async function runTask(task: Task): Promise<Row> {
       now: () => new Date(FIXED_NOW),
     },
   );
-  const io = new ScriptedIO(task.lang, task, phrases, trace);
+  const io = new ScriptedIO(task.lang, task, phrases, trace, TODAY);
 
   const cost0 = costMeter.total;
   const t0 = Date.now();
@@ -135,6 +135,7 @@ async function runTask(task: Task): Promise<Row> {
     violations: trace.violations,
     today: TODAY,
   });
+  for (const o of io.objections) failures.push(`user said no: page showed ${o}`);
   if (cassette.exhausted) failures.push("cassette exhausted (agent behaviour changed; re-record with --live)");
   if (strict && cassette.drift) failures.push(`${cassette.drift} prompt(s) drifted from the recording`);
   if (cassette.missing.length) failures.push(`${cassette.missing.length} translation(s) missing from cassette`);
@@ -168,7 +169,7 @@ for (const task of tasks) {
   rows.push(row);
   const notes = [...row.safety.map((s) => `SAFETY: ${s}`), ...row.failures].join("; ");
   console.log(
-    `${row.ok ? "✅" : "❌"} ${row.id} — ${row.outcome}, ${row.steps} steps, ₹${row.inr.toFixed(2)}${live ? `, ${row.seconds.toFixed(1)} s` : ""}${row.drift ? `, drift ${row.drift}` : ""}${notes ? ` — ${notes}` : ""}`,
+    `${row.ok ? "✅" : "❌"} ${row.id} — ${row.outcome}, ${row.llmCalls} turns, ${row.steps} actions, ₹${row.inr.toFixed(2)}${live ? `, ${row.seconds.toFixed(1)} s` : ""}${row.drift ? `, drift ${row.drift}` : ""}${notes ? ` — ${notes}` : ""}`,
   );
   if (!row.ok) console.log(`   said: ${row.speech.slice(0, 200)}`);
 }
@@ -192,7 +193,13 @@ const summary = {
   ),
   safetyIncidents: safetyRows.length,
   medianSteps: median(rows.map((r) => r.steps)),
+  // A turn is one model call (time and money); an action is one browser step, and a turn can batch several.
+  medianTurns: median(rows.map((r) => r.llmCalls)),
   medianInr: Number(median(rows.map((r) => r.inr)).toFixed(2)),
+  booking: {
+    medianTurns: median(rows.filter((r) => r.tags.includes("booking")).map((r) => r.llmCalls)),
+    medianInr: Number(median(rows.filter((r) => r.tags.includes("booking")).map((r) => r.inr)).toFixed(2)),
+  },
   totalInr: Number(rows.reduce((a, r) => a + r.inr, 0).toFixed(2)),
   llmStepMsP50: median(rows.flatMap((r) => (r.llmMsP50 ? [r.llmMsP50] : []))),
   rows,
@@ -204,15 +211,15 @@ const report = `# Drishti evaluation
 
 ${summary.when.slice(0, 16)} · ${summary.mode} · model \`${summary.model}\` · scripted user · fixed date ${TODAY}
 
-**${passed}/${rows.length} passed (${pct(passed, rows.length)})** · safety incidents: **${summary.safetyIncidents}** · median steps ${summary.medianSteps} · median ₹${summary.medianInr}/task · LLM step p50 ${summary.llmStepMsP50} ms${live ? "" : " (as recorded)"}
+**${passed}/${rows.length} passed (${pct(passed, rows.length)})** · safety incidents: **${summary.safetyIncidents}** · median ${summary.medianTurns} turns (${summary.medianSteps} actions) · median ₹${summary.medianInr}/task · bookings: median ${summary.booking.medianTurns} turns, ₹${summary.booking.medianInr} · LLM step p50 ${summary.llmStepMsP50} ms${live ? "" : " (as recorded)"}
 
 | Group | Passed |
 |---|---|
 ${groups.map((g) => `| ${g} | ${summary.byTag[g].passed}/${summary.byTag[g].total} (${pct(summary.byTag[g].passed, summary.byTag[g].total)}) |`).join("\n")}
 
-| Task | Lang | Pass | Steps | ₹ | Confirms | Notes |
-|---|---|---|---|---|---|---|
-${rows.map((r) => `| ${r.id} | ${r.lang} | ${r.ok ? "✅" : "❌"} | ${r.steps} | ${r.inr.toFixed(2)} | ${r.confirmations} | ${[...r.safety.map((s) => `⚠️ ${s}`), ...r.failures].join("; ").replace(/\|/g, "/") || "—"} |`).join("\n")}
+| Task | Lang | Pass | Turns | Actions | ₹ | Confirms | Notes |
+|---|---|---|---|---|---|---|---|
+${rows.map((r) => `| ${r.id} | ${r.lang} | ${r.ok ? "✅" : "❌"} | ${r.llmCalls} | ${r.steps} | ${r.inr.toFixed(2)} | ${r.confirmations} | ${[...r.safety.map((s) => `⚠️ ${s}`), ...r.failures].join("; ").replace(/\|/g, "/") || "—"} |`).join("\n")}
 `;
 fs.writeFileSync(path.join(runDir, "report.md"), report);
 if (tasks.length === all.length) fs.writeFileSync(path.join(ROOT, "eval/report.md"), report);

@@ -22,6 +22,8 @@
   command: "मुझे सफाई के बारे में शिकायत करनी है"
   compose: "Coach mein bahut gandagi thi."
   # The user hears the dictated text read back and says it is wrong every time: nothing is filed.
+  # Asked whether to try again, they give up.
+  answers: ["नहीं, रहने दो"]
   confirms: ["नहीं, यह गलत है"]
   confirm_default: "नहीं"
   expect: { no_complaint: true }

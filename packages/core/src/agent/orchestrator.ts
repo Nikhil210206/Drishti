@@ -4,8 +4,10 @@ import { TOOLS } from "./tools.js";
 import { systemPrompt, stepMessage } from "./prompts.js";
 import { needsConfirmation, isSensitiveField, yesNo } from "./safety.js";
 import { NavigationPolicy, linkTarget } from "./policy.js";
-import { looksComplete, readback } from "./readback.js";
+import { duplicatePassenger, looksComplete, readback } from "./readback.js";
 import { saidBy } from "./match.js";
+import { classMismatch, quotaMismatch } from "./classes.js";
+import { dateMismatch } from "./dates.js";
 import type { PhraseBook, PhraseKey } from "./phrases.js";
 
 /** Everything the agent needs from the outside world (voice session, or the eval harness). */
@@ -55,6 +57,8 @@ export class Agent {
   private stepCounter = 0;
   private lastTool = "";
   private tried = new Set<string>();
+  private declines = 0;
+  private composeRejections = 0;
   /** Everything the user actually said or dictated this task: the only text allowed into free-text fields. */
   private userTexts: string[] = [];
   private browser: BrowserDriver;
@@ -82,6 +86,8 @@ export class Agent {
     let lastBatch: number[] = [];
     // Loop guard: the same action on the same unchanged page never helps a second time.
     this.tried = new Set<string>();
+    this.declines = 0;
+    this.composeRejections = 0;
     const p = this.opts.profile;
     this.userTexts = [task, ...io.recent(), ...(p ? [p.name, p.age, p.gender, p.mobile].filter((v): v is string => !!v) : [])];
     let unchanged = 0;
@@ -105,7 +111,6 @@ export class Agent {
         page,
         interjections,
         recent: io.recent(),
-        stepIndex: step,
       });
       if (lastOutput) {
         content += `\n\nOUTPUT OF YOUR LAST TOOL\n${lastOutput}`;
@@ -130,6 +135,7 @@ export class Agent {
           toolChoice: "required",
           reasoning,
           maxTokens,
+          stop: RUNAWAY_STOPS,
           signal,
         });
       try {
@@ -160,10 +166,10 @@ export class Agent {
 
       lastBatch = [];
       const urlBefore = snap.url;
-      let sig = await this.browser.signature();
-      for (const call of calls) {
+      let cur = snap;
+      for (const [k, call] of calls.entries()) {
         if (signal.aborted) return { outcome: "aborted" };
-        const r = await this.execute(call, snap, io, signal, fingerprint(snap));
+        const r = await this.execute(call, cur, io, signal, fingerprint(cur), k < calls.length - 1);
         if (!r.terminal) {
           const blocked = await this.enforcePolicy(urlBefore, io);
           if (blocked) ((r.line += ` ⇒ ${blocked}`), (r.failed = true));
@@ -178,15 +184,31 @@ export class Agent {
           await io.sayPhrase("stuck");
           return { outcome: "stuck" };
         }
-        // Element ids in the rest of the batch belong to the old page, and new popups or
-        // suggestions need a fresh look before acting further.
-        if ((await this.browser.url()) !== urlBefore) break;
-        const now = await this.browser.signature();
-        if (now !== sig && calls.indexOf(call) < calls.length - 1) {
-          history[history.length - 1] += " ⇒ page content changed (new options/popup?) — look again before continuing";
+        if (k === calls.length - 1) break;
+        // The rest of the batch was planned on the old page. Carry on while the page only changed
+        // in place (a value filled, a suggestion chosen, a button renamed); stop when the model
+        // needs to look again first.
+        const after = (await this.browser.url()) !== urlBefore ? undefined : await this.browser.snapshot();
+        // The model often plans its own click on the suggestion too; once one was picked, that click is moot.
+        const nextId = calls[k + 1].args?.id;
+        if (r.picked && after && calls[k + 1].name === "click" && nextId !== undefined && !after.elements[String(nextId)]) {
+          calls.splice(k + 1, 1);
+          history[history.length - 1] += ` (your click on [${nextId}] was not needed)`;
+          if (!calls[k + 1]) break;
+        }
+        const stop = r.failed ? "this failed" : after ? batchStop(cur, after, calls[k + 1]) : "the page changed";
+        if (stop) {
+          const skipped = calls
+            .slice(k + 1)
+            .map((c) => {
+              const t = cur.elements[String(c.args?.id)];
+              return `${c.name}${c.args?.id !== undefined ? ` [${c.args.id}]${t ? ` "${t.name.slice(0, 40)}"` : ""}` : ""}`;
+            })
+            .join(", ");
+          history[history.length - 1] += ` ⇒ ${stop}, so these calls were skipped: ${skipped}. Look again, then redo the ones still needed`;
           break;
         }
-        sig = now;
+        cur = after!;
       }
     }
     await io.sayPhrase("stuck");
@@ -199,7 +221,8 @@ export class Agent {
     io: AgentIO,
     signal: AbortSignal,
     pageKey = "",
-  ): Promise<{ line: string; output?: string; terminal?: boolean; speech?: string; failed?: boolean }> {
+    more = false,
+  ): Promise<{ line: string; output?: string; terminal?: boolean; speech?: string; failed?: boolean; picked?: boolean }> {
     const a = call.args ?? {};
     const repeatRead = this.lastTool === "read_page" && call.name === "read_page";
     this.lastTool = call.name;
@@ -212,7 +235,7 @@ export class Agent {
     if (a.narration && typeof a.narration === "string") io.say(a.narration);
 
     const describe = () =>
-      `${call.name}${target ? " " + target : ""}${a.text ? ` text="${a.text}"` : ""}${a.option ? ` option="${a.option}"` : ""}`;
+      `${call.name}${target ? " " + target : ""}${a.text ? ` text="${a.text}"` : ""}${a.pick_suggestion ? ` pick="${a.pick_suggestion}"` : ""}${a.option ? ` option="${a.option}"` : ""}${call.name === "navigate" && a.url ? ` url="${a.url}"` : ""}`;
 
     try {
       if (a.id !== undefined && !el && ["click", "type_text", "select_option", "compose_with_kivi", "read_document"].includes(call.name)) {
@@ -222,8 +245,10 @@ export class Agent {
         const key = `${pageKey}|${call.name}|${a.id ?? ""}|${a.text ?? ""}|${a.option ?? ""}|${a.key ?? ""}|${a.url ?? ""}|${JSON.stringify(a.fields ?? "")}`;
         if (this.tried.has(key)) {
           emit({ status: "failed", result: "repeated" });
+          const ids = Array.isArray(a.fields) ? a.fields.map((f: any) => Number(f?.id)).filter((n: number) => n >= 0) : [];
+          const next = call.name === "fill_form" && ids.length ? nextButton(snap, Math.max(...ids)) : undefined;
           return {
-            line: `${describe()} → REFUSED: you already did exactly this on this same page and it did not help. Do something different, or ask_user.`,
+            line: `${describe()} → REFUSED: you already did exactly this on this same page and it did not help. ${next ? `The form is filled: click [${next[0]}] "${next[1].name}".` : "Do something different, or ask_user."}`,
             failed: true,
           };
         }
@@ -237,12 +262,40 @@ export class Agent {
             io.emit({ type: "audit", action: "click", target: el?.name, reason: `link to ${hostOf(dest)} not allowed`, confirmed: false });
             return { line: `${describe()} → BLOCKED: this link opens ${hostOf(dest)}, which Drishti may not open.`, failed: true };
           }
+          if (el && (el.tag === "textarea" || TEXT_ROLES.has(el.role)) && isFreeTextField(el)) {
+            emit({ status: "failed", result: "text box" });
+            return {
+              line: `${describe()} → not clicked: [${a.id}] is a text box for the user's own words. Use compose_with_kivi on it so the user dictates the text.`,
+              failed: true,
+            };
+          }
           const gate = needsConfirmation(el, { pageText: snap.text });
           // The model may add a confirmation, except on clearly harmless controls; it can never remove one.
           const confirmNeeded = gate.required || (!!a.confirmation_question && !gate.safe);
+          // The model's question can be wrong; the readback is what the page itself says.
+          const facts = confirmNeeded ? readback(snap, a.id, el) : "";
+          // Never book what the user did not ask for: another class, quota or date (cheaper, seats left,
+          // or an id slip), or the same person twice.
+          const mismatch =
+            el && !looksLikeDropdown(snap, a.id, el)
+              ? classMismatch(this.userTexts, el.name) ||
+                classMismatch(this.userTexts, facts) ||
+                (confirmNeeded &&
+                  (quotaMismatch(this.userTexts, facts) ||
+                    // Results pages state the quota once in their header ("· General quota · 9 trains found").
+                    quotaMismatch(this.userTexts, pageLines(snap)))) ||
+                dateMismatch(this.userTexts, facts, this.opts.now?.() ?? new Date()) ||
+                duplicatePassenger(facts)
+              : "";
+          if (mismatch) {
+            emit({ status: "blocked", result: "not what the user asked for" });
+            io.emit({ type: "audit", action: "click", target: el?.name, reason: mismatch, confirmed: false });
+            return {
+              line: `${describe()} → REFUSED: ${mismatch}. ${/passenger/.test(mismatch) ? "Fix the passenger rows first" : "Class, quota and date are chosen on the search form: go back to it (or use Modify search), set them and search again"}; if it is not available, ask_user whether something else is fine.`,
+              failed: true,
+            };
+          }
           if (confirmNeeded) {
-            // The model's question can be wrong; the readback is what the page itself says.
-            const facts = readback(snap, a.id, el);
             const question = a.confirmation_question || `${el?.name ?? ""}. ${await this.phrase("confirmGeneric", io.lang)}`;
             const ok = await this.confirm(
               io,
@@ -253,11 +306,18 @@ export class Agent {
             if (!ok) {
               emit({ status: "declined", result: "user said no" });
               await io.sayPhrase("cancelled");
-              return { line: `${describe()} → USER DECLINED. Do not click it again; call done or ask what to do instead.` };
+              this.declines++;
+              return {
+                line:
+                  this.declines >= 2
+                    ? `${describe()} → USER DECLINED again. Stop: call done now and tell the user nothing was booked, paid or sent.`
+                    : `${describe()} → USER DECLINED. Do not click it again; call done or ask what to do instead.`,
+              };
             }
           }
           await this.browser.click(a.id);
-          const { summary, after } = await this.changes(snap);
+          const { summary: news, after, renamed } = await this.changes(snap);
+          const summary = [news, renamed].filter(Boolean).join("; ");
           const confirmed = confirmNeeded ? " (user confirmed)" : "";
           emit({ status: "ok", result: summary || undefined });
           // After the irreversible step lands on a success page, the task is over: report, don't start again.
@@ -272,18 +332,45 @@ export class Agent {
           if (this.inventedFreeText(el, String(a.text ?? ""))) return this.refuseFreeText(a.id, emit, describe());
           if (this.inventedPersonal(el, String(a.text ?? ""))) return this.refusePersonal(a.id, emit, describe());
           await this.browser.type(a.id, String(a.text ?? ""), !!a.submit);
-          const { summary, appeared } = await this.changes(snap);
+          // A station box typed into mid-batch: the model means to carry on, so pick the suggestion
+          // that matches what it typed, as if it had given pick_suggestion.
+          const pick =
+            typeof a.pick_suggestion === "string" && a.pick_suggestion.trim()
+              ? a.pick_suggestion
+              : more && isStationBox(el)
+                ? String(a.text ?? "")
+                : "";
+          if (pick && !a.submit) return await this.pickSuggestion(pick, snap, emit, describe());
+          const { summary, appeared } = await this.changes(snap, true);
           emit({ status: "ok", result: summary || undefined });
           if (summary) return { line: `${describe()} → ok ⇒ ${summary}` };
           if (!appeared && !a.submit && isLookupBox(el))
             return {
               line: `${describe()} → ok, but no suggestions appeared. If this box needs a choice from a list, try another spelling or a shorter word.`,
+              failed: true,
             };
           break;
         }
         case "fill_form": {
           const fields: { id: number; value: string }[] = Array.isArray(a.fields) ? a.fields : [];
+          // One value per field and one choice per button group; two people in one row means a
+          // missing "+ Add passenger" (traces: the second passenger overwrote the first).
+          const choices = fields.map((f) => choiceFor(snap, f.id, String(f.value ?? ""))?.[0]);
+          const ids = fields.map((f, i) => choices[i] ?? String(f.id));
+          const groups = choices.filter((id): id is string => !!id);
+          const twice = ids.find((id, i) => ids.indexOf(id) !== i);
+          const clash = groups.find((id, i) =>
+            groups.some((other, j) => j < i && other !== id && Math.abs(Number(other) - Number(id)) === 1),
+          );
+          if (twice || clash) {
+            emit({ status: "failed", result: "conflicting fields" });
+            return {
+              line: `fill_form → REFUSED, nothing filled: ${twice ? `[${twice}] is given twice` : `[${clash}] is a second choice in the same button group`}. Give each field one value. For another passenger, click "+ Add passenger" (or similar) first and fill their own new row.`,
+              failed: true,
+            };
+          }
           const done: string[] = [];
+          const already: string[] = [];
           let base = snap;
           for (const f of fields) {
             const fe = snap.elements[String(f.id)];
@@ -294,14 +381,38 @@ export class Agent {
               return this.refuseFreeText(f.id, emit, `fill_form (stopped at [${f.id}])${rest}`);
             if (this.inventedPersonal(fe, String(f.value ?? "")))
               return this.refusePersonal(f.id, emit, `fill_form (stopped at [${f.id}])${rest}`);
-            if (!TEXT_ROLES.has(fe.role)) {
-              emit({ status: "failed", result: `[${f.id}] is not a text field` });
-              return {
-                line: `fill_form → STOPPED at [${f.id}] "${fe.name}": it is a ${fe.role}, not a text field — click or select it instead.${rest}`,
-                failed: true,
-              };
+            // Refilling a filled form changes nothing; say so instead of letting the model loop.
+            if (holds(snap, f.id, fe, String(f.value ?? ""))) {
+              already.push(`"${fe.name}"`);
+              continue;
             }
-            await this.browser.type(f.id, String(f.value ?? ""));
+            if (fe.tag === "select") {
+              await this.browser.selectOption(f.id, String(f.value ?? ""));
+            } else if (!TEXT_ROLES.has(fe.role)) {
+              // A choice button (gender, berth, yes/no): click the one whose text is the value.
+              const choice = choiceFor(snap, f.id, String(f.value ?? ""));
+              // An id slip onto a button next to a dropdown that offers this value: set the dropdown.
+              const sel = choice ? undefined : nearbySelect(snap, f.id, String(f.value ?? ""));
+              if (sel) {
+                await this.browser.selectOption(sel[0], String(f.value ?? ""));
+                done.push(`[${sel[0]}] "${sel[1].name}"="${f.value}"`);
+                base = await this.browser.snapshot();
+                continue;
+              }
+              const stop = !choice
+                ? `it is a ${fe.role}, not a text field, and no button next to it says "${f.value}" — click it instead`
+                : needsConfirmation(choice[1], { pageText: snap.text }).required
+                  ? `"${choice[1].name}" needs the user's confirmation — click it with confirmation_question`
+                  : "";
+              if (stop) {
+                emit({ status: "failed", result: `[${f.id}] is not a text field` });
+                return { line: `fill_form → STOPPED at [${f.id}] "${fe.name}": ${stop}.${rest}`, failed: true };
+              }
+              await this.browser.click(choice![0]);
+              done.push(`[${choice![0]}] "${choice![1].name}" clicked`);
+              base = await this.browser.snapshot();
+              continue;
+            } else await this.browser.type(f.id, String(f.value ?? ""));
             done.push(`[${f.id}] "${fe.name}"="${f.value}"`);
             const c = await this.changes(base);
             base = c.after;
@@ -311,13 +422,27 @@ export class Agent {
             }
           }
           emit({ status: "ok", detail: done.join(", ") });
-          return { line: `fill_form ${done.join(", ")} → ok` };
+          const next = nextButton(base, Math.max(...fields.map((f) => Number(f.id))));
+          // Sites keep a validation alert up until the form is submitted again.
+          const stale =
+            next && base.alerts.length ? ` The alert "${base.alerts[0]}" is from before; it clears only when you click it.` : "";
+          const then = next ? ` Next: click [${next[0]}] "${next[1].name}".${stale}` : "";
+          if (!done.length) return { line: `fill_form → nothing to do: ${already.join(", ")} already hold these values.${then}` };
+          return { line: `fill_form ${done.join(", ")}${already.length ? `; already set: ${already.join(", ")}` : ""} → ok.${then}` };
         }
         case "select_option":
           if (el && TEXT_ROLES.has(el.role) && el.tag !== "select") {
             emit({ status: "failed", result: "not a dropdown" });
             return {
               line: `${describe()} → REFUSED: [${a.id}] is a text box, not a dropdown. type_text into it, then click one of the suggestions.`,
+              failed: true,
+            };
+          }
+          if (el && el.tag !== "select" && !looksLikeDropdown(snap, a.id, el)) {
+            // Clicking an ordinary button to "open" it would press it (a quota, a filter, a submit).
+            emit({ status: "failed", result: "not a dropdown" });
+            return {
+              line: `${describe()} → REFUSED: [${a.id}] "${el.name}" is a button, not a dropdown, so nothing was clicked. Find the dropdown for "${a.option}" (often marked ▾), or click this button only if you really mean it.`,
               failed: true,
             };
           }
@@ -337,7 +462,21 @@ export class Agent {
           const url = String(a.url ?? "");
           if (!this.policy.allows(url)) {
             emit({ status: "blocked", result: "site not allowed" });
-            return { line: `${describe()} url=${url} → BLOCKED: Drishti may not open this site.`, failed: true };
+            return { line: `${describe()} → BLOCKED: Drishti may not open this site.`, failed: true };
+          }
+          // Guessed addresses on the current site lead to 404s (traces: "/help" on a hash-routed
+          // site). Within a site, only go where the page itself links.
+          const dest = linkTarget(url, snap.url);
+          if (
+            dest &&
+            sameOrigin(dest, snap.url) &&
+            !Object.values(snap.elements).some((e) => e.href && linkTarget(e.href, snap.url) === dest)
+          ) {
+            emit({ status: "failed", result: "guessed address" });
+            return {
+              line: `${describe()} → REFUSED: this page does not link to ${url}. Don't guess addresses on this site: use its links, menus and icons (help, account, menu).`,
+              failed: true,
+            };
           }
           await this.browser.navigate(url);
           break;
@@ -411,14 +550,17 @@ export class Agent {
    * What an action changed, in words the model can act on: new controls (suggestions, menus)
    * and new text (errors, "no results"). Navigation and dialogs are reported at the next step.
    */
-  private async changes(before: Snapshot): Promise<{ summary: string; appeared: boolean; after: Snapshot }> {
+  private async changes(
+    before: Snapshot,
+    typed = false,
+  ): Promise<{ summary: string; appeared: boolean; after: Snapshot; renamed: string }> {
     const after = await this.browser.snapshot();
-    if (after.url !== before.url || after.dialog !== before.dialog) return { summary: "", appeared: true, after };
+    if (after.url !== before.url || after.dialog !== before.dialog) return { summary: "", appeared: true, after, renamed: "" };
     const had = new Set(Object.values(before.elements).map((e) => `${e.role}|${e.name}`));
-    const fresh = Object.entries(after.elements)
-      .filter(([id, e]) => !before.elements[id] && e.name && !had.has(`${e.role}|${e.name}`))
-      .slice(0, 6)
-      .map(([id, e]) => `[${id}] "${e.name}"`);
+    const added = Object.entries(after.elements).filter(([id, e]) => !before.elements[id] && e.name && !had.has(`${e.role}|${e.name}`));
+    const fresh = added.slice(0, 6).map(([id, e]) => `[${id}] "${e.name}"`);
+    // Suggestions and menus are options to pick from; a lone new control (a remove button) is not.
+    const options = typed || added.length >= 2 || added.some(([, e]) => /option|menuitem|listitem|treeitem/.test(e.role));
     const oldLines = new Set(before.text.split("\n"));
     const text = after.text
       .split("\n")
@@ -427,10 +569,17 @@ export class Agent {
       .map((l) => `"${l.slice(2, 140)}"`);
     const newAlerts = after.alerts.filter((x) => !before.alerts.includes(x));
     const parts = [];
-    if (fresh.length) parts.push(`NEW OPTIONS: ${fresh.join(", ")} — click the right one next`);
+    if (fresh.length)
+      parts.push(options ? `NEW OPTIONS: ${fresh.join(", ")} — click the right one next` : `new on the page: ${fresh.join(", ")}`);
     if (newAlerts.length) parts.push(`ALERT: ${newAlerts.join(" | ")}`);
     else if (text.length) parts.push(`page now says: ${text.join(" ")}`);
-    return { summary: parts.join("; "), appeared: fresh.length > 0 || after.text !== before.text, after };
+    // Controls that now say something else (a dropdown showing the chosen option, a date button).
+    const renamed = Object.entries(after.elements)
+      .filter(([id, e]) => before.elements[id] && e.name && e.name !== before.elements[id].name)
+      .slice(0, 3)
+      .map(([id, e]) => `[${id}] now says "${e.name.slice(0, 60)}"`)
+      .join(", ");
+    return { summary: parts.join("; "), appeared: fresh.length > 0 || after.text !== before.text, after, renamed };
   }
 
   private async confirm(io: AgentIO, question: string, what: string): Promise<boolean> {
@@ -471,6 +620,41 @@ export class Agent {
     await this.browser.click(pick[0]);
     emit({ status: "ok", result: `chose "${pick[1].name}"` });
     return { line: `${line} → chose [${pick[0]}] "${pick[1].name}"` };
+  }
+
+  /**
+   * Autocomplete in one call: after typing, wait for suggestions and click the one closest to
+   * what the model asked for, so the rest of a form can follow in the same turn.
+   */
+  private async pickSuggestion(want: string, snap: Snapshot, emit: (p: Partial<StepEvent>) => void, line: string) {
+    let shown: [string, ElementInfo][] = [];
+    for (let wait = 0; wait < 3 && !shown.length; wait++) {
+      if (wait) await new Promise((r) => setTimeout(r, 300 * wait));
+      const after = await this.browser.snapshot();
+      shown = Object.entries(after.elements).filter(([i, e]) => !snap.elements[i] && e.name && !TEXT_ROLES.has(e.role));
+    }
+    const pick = bestMatch(shown, want);
+    if (!pick) {
+      const list = shown
+        .slice(0, 8)
+        .map(([i, e]) => `[${i}] "${e.name}"`)
+        .join(", ");
+      emit({ status: "failed", result: `no suggestion like "${want}"` });
+      return {
+        line: `${line} → typed, but ${list ? `no suggestion is like "${want}". Suggestions: ${list}. Click the right one` : "no suggestions appeared. Try the official name, a shorter word or the station code"}.`,
+        failed: true,
+      };
+    }
+    await this.browser.click(pick[0]);
+    const others = shown
+      .filter(([i]) => i !== pick[0])
+      .slice(0, 3)
+      .map(([i, e]) => `[${i}] "${e.name}"`);
+    emit({ status: "ok", result: `chose "${pick[1].name}"` });
+    return {
+      line: `${line} → chose suggestion "${pick[1].name}"${others.length ? ` (others offered: ${others.join(", ")})` : ""}`,
+      picked: true,
+    };
   }
 
   /**
@@ -519,6 +703,13 @@ export class Agent {
   }
 
   private async composeWithKivi(a: Record<string, any>, el: any, io: AgentIO, emit: (p: Partial<StepEvent>) => void, line: string) {
+    if (this.composeRejections >= 2) {
+      emit({ status: "failed", result: "dictation rejected twice" });
+      return {
+        line: `${line} → REFUSED: the user already rejected the dictated text twice. Call done and tell them nothing was sent; they can start again whenever they like.`,
+        failed: true,
+      };
+    }
     const prompt = `${a.what ? a.what + ". " : ""}${await this.phrase("composePrompt", io.lang)}`;
     for (let attempt = 0; attempt < 3; attempt++) {
       const text = await io.compose(prompt, el?.name ?? "");
@@ -535,6 +726,7 @@ export class Agent {
         return { line: `${line} → user dictated with Kivi and approved; field filled with: "${text}"` };
       }
     }
+    this.composeRejections++;
     emit({ status: "declined", result: "user did not approve text" });
     return {
       line: `${line} → the user rejected the dictated text 3 times. Do not start dictation again on your own: ask_user whether to try again or stop.`,
@@ -555,6 +747,15 @@ export class Agent {
     return `BLOCKED: that opened ${hostOf(now)}, which Drishti may not open, so I went back`;
   }
 }
+
+const sameOrigin = (a: string, b: string) => {
+  try {
+    const o = new URL(a).origin;
+    return o !== "null" && o === new URL(b).origin;
+  } catch {
+    return false;
+  }
+};
 
 const hostOf = (url: string) => {
   try {
@@ -583,10 +784,39 @@ function diffSnapshots(a: Snapshot, b: Snapshot): string {
   return out.join("; ");
 }
 
+/**
+ * Why the rest of a batch must wait for a fresh look, or "" to carry on. Ids are stable across
+ * re-renders, so later calls stay valid unless new controls appeared (suggestions, a calendar,
+ * a new passenger row) or their target is gone.
+ */
+export function batchStop(before: Snapshot, after: Snapshot, next: ToolCall): string {
+  if (after.url !== before.url) return "the page changed";
+  if (after.dialog !== before.dialog) return after.dialog ? "a dialog opened" : "the dialog closed";
+  if (after.alerts.some((x) => !before.alerts.includes(x))) return "an alert appeared";
+  const added = Object.keys(after.elements).filter((id) => !before.elements[id]).length;
+  const removed = Object.keys(before.elements).filter((id) => !after.elements[id]).length;
+  if (added > removed) return "new options appeared";
+  // New text in place ("No stations found", "Enter a valid mobile number") needs reading first.
+  const lines = new Set(before.text.split("\n"));
+  if (after.text.split("\n").some((l) => l.startsWith("- ") && !lines.has(l))) return "the page shows new text";
+  const a = next.args ?? {};
+  const targets = [a.id, ...(Array.isArray(a.fields) ? a.fields.map((f: any) => f?.id) : [])].filter((x) => x !== undefined && x !== null);
+  if (targets.some((id) => !after.elements[String(id)])) return "its target is no longer on the page";
+  return "";
+}
+
 /** Actions that are pointless to repeat verbatim on an unchanged page. */
 const REPEATABLE = new Set(["click", "type_text", "fill_form", "select_option", "press_key", "navigate"]);
 const VERBATIM_CHARS = 800;
 const TEXT_ROLES = new Set(["textbox", "searchbox", "combobox", "spinbutton"]);
+
+/** A custom (non-<select>) dropdown: a combobox, a "▾" toggle, "Select …", or a control with an expanded/collapsed state. */
+function looksLikeDropdown(snap: Snapshot, id: number | string, el: ElementInfo) {
+  if (["combobox", "listbox"].includes(el.role)) return true;
+  if (/[▾▼⌄⏷]|^\s*(select|choose)\b/i.test(el.name)) return true;
+  const line = snap.text.split("\n").find((l) => l.includes(`[${id}] `)) ?? "";
+  return /\b(collapsed|expanded)\b/.test(line);
+}
 
 /** A box where typing should bring up suggestions (stations, cities, search). */
 function isLookupBox(el: { role: string; name: string; fieldHint: string } | undefined) {
@@ -598,6 +828,24 @@ function isLookupBox(el: { role: string; name: string; fieldHint: string } | und
   );
 }
 
+/** A from/to station or city box, where the typed name is also the suggestion to choose. */
+function isStationBox(el: ElementInfo | undefined) {
+  return (
+    !!el &&
+    TEXT_ROLES.has(el.role) &&
+    el.role !== "searchbox" &&
+    /\b(from|to|station|city|destination|origin|source)\b/i.test(`${el.name} ${el.fieldHint}`)
+  );
+}
+
+/** The page's text lines (not its controls), as one string. */
+function pageLines(s: Snapshot) {
+  return s.text
+    .split("\n")
+    .filter((l) => l.startsWith("- "))
+    .join(" ");
+}
+
 /** Identity of a page state: same URL, dialog and visible outline. */
 function fingerprint(s: Snapshot) {
   let h = 0;
@@ -607,6 +855,9 @@ function fingerprint(s: Snapshot) {
 }
 
 const STEP_MAX_TOKENS = 600;
+// Sometimes the model writes its tool call as text and then pads with blank lines up to the token
+// cap (3–4 s and ₹0.04 wasted each time). Blank lines never occur inside a tool call, so stop there.
+const RUNAWAY_STOPS = ["\n \n", "\n  \n", "\n    \n", "\n\n\n"];
 
 /** Fields for the user's own words: complaints, messages, reviews, descriptions, addresses. */
 function isFreeTextField(el: ElementInfo) {
@@ -640,6 +891,54 @@ function bestMatch(options: [string, ElementInfo][], want: string): [string, Ele
     if (s > score) ((best = o), (score = s));
   }
   return best;
+}
+
+/**
+ * The choice button meant by a fill_form entry: the element itself when its text is the value,
+ * else a nearby button (the same group, ids within a few) whose text is exactly the value.
+ */
+function choiceFor(snap: Snapshot, id: number, value: string): [string, ElementInfo] | undefined {
+  const norm = (t: string) =>
+    t
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .trim();
+  const v = norm(value);
+  if (!v) return undefined;
+  const self = snap.elements[String(id)];
+  if (self && norm(self.name) === v) return [String(id), self];
+  return Object.entries(snap.elements).find(([i, e]) => Math.abs(Number(i) - id) <= 6 && !TEXT_ROLES.has(e.role) && norm(e.name) === v);
+}
+
+/** The field already shows this value: the text in it, the selected option, or a selected choice button. */
+function holds(snap: Snapshot, id: number, el: ElementInfo, value: string) {
+  const line = snap.text.split("\n").find((l) => l.startsWith(`[${id}] `)) ?? "";
+  const v = value.trim().toLowerCase();
+  if (el.tag === "select") return line.toLowerCase().includes(`selected="${v}"`);
+  if (TEXT_ROLES.has(el.role)) return line.includes(`value="${value.trim()}"`) || (!v && line.includes('value=""'));
+  const choice = choiceFor(snap, id, value);
+  if (!choice) return false;
+  const chosen = snap.text.split("\n").find((l) => l.startsWith(`[${choice[0]}] `)) ?? "";
+  return /\b(looks-selected|checked|selected|pressed)\b/.test(chosen.replace(/selected="[^"]*"/, ""));
+}
+
+/** A dropdown within a few ids whose options include the value. */
+function nearbySelect(snap: Snapshot, id: number, value: string): [string, ElementInfo] | undefined {
+  const v = value.trim().toLowerCase();
+  if (!v) return undefined;
+  return Object.entries(snap.elements).find(([i, e]) => {
+    if (e.tag !== "select" || Math.abs(Number(i) - id) > 3) return false;
+    const line = snap.text.split("\n").find((l) => l.startsWith(`[${i}] `)) ?? "";
+    const opts = line.match(/options=\[(.*)\]/)?.[1] ?? "";
+    return opts.split(" | ").some((o) => o.trim().toLowerCase() === v);
+  });
+}
+
+/** The form's continue/next/submit button after its last field, to suggest as the next step. */
+function nextButton(snap: Snapshot, afterId: number): [string, ElementInfo] | undefined {
+  return Object.entries(snap.elements).find(
+    ([i, e]) => Number(i) > afterId && !TEXT_ROLES.has(e.role) && /^\s*(continue|next|proceed|submit|save|search)\b/i.test(e.name),
+  );
 }
 
 /** Fields about a real person: their name, age, phone, email or address. */

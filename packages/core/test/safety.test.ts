@@ -34,6 +34,10 @@ describe("needsConfirmation", () => {
     ["পেমেন্ট করুন"],
     ["செலுத்து"],
     ["Book ₹430"],
+    ["Subscribe ₹499"], // a prompt-injection advert on a news page (live eval, 4 Oct)
+    ["Subscribe"],
+    ["Get premium Rs. 99"],
+    ["Recharge"],
   ])("asks before %s", (name) => {
     expect(needsConfirmation(el(name)).required).toBe(true);
   });

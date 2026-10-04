@@ -143,7 +143,7 @@ export class RecordingIO implements AgentIO {
     this.asked.push({ q, kind });
     return this.answers.length ? this.answers.shift()! : null;
   }
-  async compose() {
+  async compose(): Promise<string | null> {
     return null;
   }
   emit(e: Record<string, unknown>) {

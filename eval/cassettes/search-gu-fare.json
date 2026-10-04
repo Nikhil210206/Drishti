@@ -1,212 +1,211 @@
 {
  "version": 1,
  "task": "search-gu-fare",
- "recordedAt": "2026-10-04T14:45:52.551Z",
+ "recordedAt": "2026-10-04T17:09:22.536Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "4554e57af5ee53d3",
+   "hash": "69ea73c018542424",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c8f129cebb3844d181c69c7c",
+      "id": "call_a8e62d5af5cb46beb91f50ec",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "Clicking FROM box"
+      }
+     },
+     {
+      "id": "call_66c449b6a0664d18bfba42dc",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Ahmedabad",
-       "narration": "From station Ahmedabad enter"
+       "narration": "Entering Ahmedabad"
       }
-     },
+     }
+    ],
+    "ms": 626,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4058,
+     "total_tokens": 4105,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3648
+     }
+    }
+   }
+  },
+  {
+   "hash": "0ea21b8dae1a4455",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_f85f876bf9a24cd68552448a",
+      "id": "call_c4bfd2d77c61491582e6fa70",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Jaipur",
-       "narration": "To station Jaipur enter"
+       "narration": "Jaipur enter karu chu"
+      }
+     }
+    ],
+    "ms": 471,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4120,
+     "total_tokens": 4151,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3648
+     }
+    }
+   }
+  },
+  {
+   "hash": "158110b771d0783b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5c1c030171a64b8cbab3749d",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "All Classes ▾",
+       "narration": "All classes select karu chu"
       }
      },
      {
-      "id": "call_8b3cf9bf62694c2896c5ba8b",
+      "id": "call_4d91edf1f33b4e94b0bd88c9",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "Select tomorrow's date"
-      }
-     }
-    ],
-    "ms": 687,
-    "usage": {
-     "completion_tokens": 78,
-     "prompt_tokens": 3760,
-     "total_tokens": 3838,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "9b17926c074f14fd",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_afc5c19713f94375897923ac",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Ahmedabad select કરો"
-      }
-     }
-    ],
-    "ms": 430,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 3829,
-     "total_tokens": 3871,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "3333d18800b593b1",
-   "response": {
-    "content": "",
-    "toolCalls": [],
-    "ms": 3906,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 3835,
-     "total_tokens": 4435,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "bb3f456dfb9a9631",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9f999ab18fb74dfe809645ed",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Jaipur",
-       "narration": "Jaipur type karo"
+       "narration": "Kal ni date select karu chu",
+       "confirmation_question": ""
       }
      },
      {
-      "id": "call_7bb9a89c7ddf4df79f62ede6",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Tomorrow select karo"
-      }
-     }
-    ],
-    "ms": 674,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 3856,
-     "total_tokens": 3905,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "1a6e9d9334ea2057",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_f4bfc05dd4924e1d914b3f52",
-      "name": "click",
-      "args": {
-       "id": 20,
-       "narration": "Jaipur select karo"
-      }
-     }
-    ],
-    "ms": 413,
-    "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 3907,
-     "total_tokens": 3955,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "e355fd37162f4d30",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_28869c6daa544dccba6487ad",
+      "id": "call_8b82aced93fa446186452ae2",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains",
+       "narration": "Search button click karu chu",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 415,
+    "ms": 948,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 3913,
-     "total_tokens": 3961,
+     "completion_tokens": 91,
+     "prompt_tokens": 4172,
+     "total_tokens": 4263,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "19de8c36a0c387fd",
+   "hash": "e6ee7618293adccb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
-      "name": "done",
+      "id": "call_367b0f6db8b74084a6a3892f",
+      "name": "click",
       "args": {
-       "speech": "કાલે Ahmedabad-થી Jaipur-નું Vande Bharat-નું fare CC class માટે ₹865 છે. બે Vande Bharat trains છે: પહેલી 05:15 વાગ્યે નીકળી 14:50 વાગ્યે પહોંચે છે, અને બીજી 05:30 વાગ્યે નીકળી 14:35 વાગ્યે પહોંચે છે. બંનેમાં 43 અને 119 seats available છે."
+       "id": 19,
+       "narration": "Select Ahmedabad station"
+      }
+     },
+     {
+      "id": "call_56454443f92d489aa292a1b9",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Select Jaipur station"
+      }
+     },
+     {
+      "id": "call_86b64870ce6a4a459092b4af",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
       }
      }
     ],
-    "ms": 3726,
+    "ms": 805,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 5160,
-     "total_tokens": 5760,
+     "completion_tokens": 114,
+     "prompt_tokens": 4288,
+     "total_tokens": 4402,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
+     }
+    }
+   }
+  },
+  {
+   "hash": "8a2528946c5d4525",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_fffbc6ca5cab45a4b249f571",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": ""
+      }
+     }
+    ],
+    "ms": 592,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 5521,
+     "total_tokens": 5566,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2624
+     }
+    }
+   }
+  },
+  {
+   "hash": "fc85de073ed8b1ff",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_fa7082fd88284dbf9f11b929",
+      "name": "done",
+      "args": {
+       "speech": "કાલે Ahmedabad-થી Jaipur-નું Vande Bharat-નું fare 865 rupees છે. બે Vande Bharat Express trains છે - એક 05:15 વાગ્યે (₹865) અને બીજી 05:30 વાગ્યે (₹865). બંનેમાં AC Chair Car (CC) class છે."
+      }
+     }
+    ],
+    "ms": 968,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 6155,
+     "total_tokens": 6261,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
      }
     }
    }

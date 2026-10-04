@@ -1,58 +1,31 @@
 {
  "version": 1,
  "task": "read-bn-news-summary",
- "recordedAt": "2026-10-04T14:43:20.995Z",
+ "recordedAt": "2026-10-04T17:12:15.225Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "7f476f4c4392e773",
+   "hash": "0f93e1e60841edb4",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_34c30fdddcd1487faf5bad0f",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "news summary পড়ছি"
-      }
-     }
-    ],
-    "ms": 556,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 3813,
-     "total_tokens": 3862,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "9edbbbe1ae1b4c4b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_81ddafdd138144dbb369d956",
+      "id": "call_db52f460085c41939fefcdd4",
       "name": "done",
       "args": {
-       "speech": "Pathik Rail 15 January 2027 থেকে 120টি accessible sleeper coach যোগ করছে। এতে ramp, চওড়া lower berth আর Braille numbering থাকবে। প্রথম route Chennai–Bengaluru, Mumbai–Pune এবং Howrah–Patna। Wheelchair user-রা "
+       "speech": "এই খবরটা হলো: Pathik Rail আগামী ১৫ জানুয়ারি ২০২৭ থেকে ১২০টি accessible sleeper coach চালু করছে। Chennai–Bengaluru, Mumbai–Pune এবং Howrah–Patna route-এ ramp, চওড়া lower berth আর Braille numbering থাকবে। Wheelchair ব্যবহারকারীরা 'Divyang' quota-তে বুক করতে পারবেন। Disability group audio announcement-এর দাবি করেছে, যা পরে এগারোটি ভাষায় আসবে।"
       }
      }
     ],
-    "ms": 959,
+    "ms": 1209,
     "usage": {
-     "completion_tokens": 90,
-     "prompt_tokens": 4047,
-     "total_tokens": 4137,
+     "completion_tokens": 119,
+     "prompt_tokens": 4139,
+     "total_tokens": 4258,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }

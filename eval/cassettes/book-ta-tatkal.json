@@ -1,126 +1,101 @@
 {
  "version": 1,
  "task": "book-ta-tatkal",
- "recordedAt": "2026-10-04T15:07:59.430Z",
+ "recordedAt": "2026-10-04T17:11:00.699Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "02ca824a8754abc2",
+   "hash": "93f3de1c6aabe26e",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ebf8661c16914024a4f3846c",
+      "id": "call_9dd339950d6b4e779e14c47b",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chennai",
-       "narration": "From-ஆ சென்னைய போட்டேன்"
+       "pick_suggestion": "Chennai Central",
+       "narration": "From station type Chennai"
       }
      }
     ],
-    "ms": 985,
+    "ms": 481,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 3768,
-     "total_tokens": 3821,
+     "completion_tokens": 62,
+     "prompt_tokens": 4083,
+     "total_tokens": 4145,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "d6ac086c0c166b5d",
+   "hash": "cd8595d9a1ab7c7d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c5384ab5b9564969b2224ed4",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "சென்னையை செலக்ட் பண்றேன்"
-      }
-     }
-    ],
-    "ms": 382,
-    "usage": {
-     "completion_tokens": 29,
-     "prompt_tokens": 3840,
-     "total_tokens": 3869,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "6fc43adb8275d24f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9c83b2d8429c4549a885b901",
+      "id": "call_feb4aa8c37a64d2aafaa5170",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Madurai",
-       "narration": "Madurai-க்கு type பண்றேன்"
+       "narration": "Enter destination Madurai to textbox TO"
       }
      }
     ],
-    "ms": 496,
+    "ms": 381,
     "usage": {
-     "completion_tokens": 34,
-     "prompt_tokens": 3833,
-     "total_tokens": 3867,
+     "completion_tokens": 32,
+     "prompt_tokens": 4128,
+     "total_tokens": 4160,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "748b78091ddd5de6",
+   "hash": "d034260c4dddba5b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7dcd40030a8c4fcbb019e02a",
-      "name": "click",
+      "id": "call_3ac599affbb64bbd879d20af",
+      "name": "type_text",
       "args": {
-       "id": 21,
-       "narration": "Click Madurai station"
+       "id": 8,
+       "text": "Madurai",
+       "narration": "Madurai-க்கு போறேன், Madrasai select பண்றேன். Pick suggestion: Madurai Junction MDU Madurai"
       }
      }
     ],
-    "ms": 410,
+    "ms": 511,
     "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 3894,
-     "total_tokens": 3925,
+     "completion_tokens": 51,
+     "prompt_tokens": 4185,
+     "total_tokens": 4236,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "26f7c8e2a41e2772",
+   "hash": "7632798823dfb2a6",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ad19bf17bd0945ee863bfadb",
+      "id": "call_b169f298d5a34f7781e2b928",
       "name": "click",
       "args": {
        "id": 18,
@@ -128,262 +103,430 @@
       }
      }
     ],
-    "ms": 468,
+    "ms": 383,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 3901,
-     "total_tokens": 3943,
+     "completion_tokens": 41,
+     "prompt_tokens": 4228,
+     "total_tokens": 4269,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "1adb6cedb57a425e",
+   "hash": "a371a1a87d5d0760",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6328f093e5f640b59cced576",
+      "id": "call_7b8c57d90ecf4fd19ae364de",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Madurai",
+       "narration": "To-வில் மதுரை என்று டைப் செய்கிறேன்"
+      }
+     }
+    ],
+    "ms": 684,
+    "usage": {
+     "completion_tokens": 34,
+     "prompt_tokens": 4298,
+     "total_tokens": 4332,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "04e2300402c2e6d6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c87eef627b244b159cdda015",
       "name": "click",
       "args": {
-       "id": 24,
-       "narration": "ஸ்லீப்பர் கிளாஸ் புக் பண்ணுதல்"
+       "id": 21,
+       "narration": "Madurai Junction-ஐ select பண்றேன்",
+       "confirmation_question": ""
       }
-     }
-    ],
-    "ms": 537,
-    "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 5156,
-     "total_tokens": 5207,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "3b15a280c781fa44",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_42ecf8a86cf74d0190232a34",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 43,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 44,
-         "value": "34"
-        },
-        {
-         "id": 45,
-         "value": "Female"
-        },
-        {
-         "id": 50,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Passenger details fill பண்றேன்"
-      }
-     }
-    ],
-    "ms": 743,
-    "usage": {
-     "completion_tokens": 74,
-     "prompt_tokens": 3972,
-     "total_tokens": 4046,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "7fa34db4281941ca",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_06e9f49fd94644c1a267f788",
+      "id": "call_802cf53ec63e49a4874ec57f",
       "name": "click",
       "args": {
-       "id": 46,
-       "narration": "Female-அ select பண்றேன்"
+       "id": 18,
+       "narration": "SEARCH TRAINS-ஐ click பண்றேன்",
+       "confirmation_question": "நாளைக்கு சென்னையிலிருந்து மதுரைக்கு தட்கல்ல ஒரு ஸ்லீப்பர் டிக்கெட் ₹845-க்கு புக் பண்ணட்டுமா?"
       }
      }
     ],
-    "ms": 507,
+    "ms": 904,
     "usage": {
-     "completion_tokens": 46,
-     "prompt_tokens": 4036,
-     "total_tokens": 4082,
+     "completion_tokens": 93,
+     "prompt_tokens": 4318,
+     "total_tokens": 4411,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "bb43623c42199c47",
+   "hash": "26a79a0f02f532d4",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_560c34f0b94f4331bda0d494",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 50,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Mobile number fill பண்றேன்"
-      }
-     }
-    ],
-    "ms": 754,
-    "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 4051,
-     "total_tokens": 4130,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "f2a39cb08207766f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9a1f42bc88464080a915b79e",
+      "id": "rec_0",
       "name": "click",
       "args": {
-       "id": 51,
-       "narration": "Continue button",
+       "id": 38,
+       "narration": "ஸ்லீப்பர் புக் பண்றேன்",
+       "confirmation_question": "சென்னையிலிருந்து மதுரைக்கு நாளைக்கு, 6 October, Sleeper class-ல் ஒரு ticket book பண்ண ₹245 ஆகும். Continue பண்ணலாமா?"
+      }
+     }
+    ],
+    "ms": 1220,
+    "usage": {
+     "completion_tokens": 93,
+     "prompt_tokens": 5552,
+     "total_tokens": 5645,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3584
+     }
+    },
+    "raw": "[\n{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 38,\n    \"narration\": \"ஸ்லீப்பர் புக் பண்றேன்\",\n    \"confirmation_question\": \"சென்னையிலிருந்து மதுரைக்கு நாளைக்கு, 6 October, Sleeper class-ல் ஒரு ticket book பண்ண ₹245 ஆகும். Continue பண்ணலாமா?\"\n  }\n}"
+   }
+  },
+  {
+   "hash": "f3cb9eb8ca04b22d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_09b2a298bf944c49bc9835a0",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Modify search"
+      }
+     }
+    ],
+    "ms": 492,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 5634,
+     "total_tokens": 5675,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3584
+     }
+    }
+   }
+  },
+  {
+   "hash": "816739678b224f08",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ed6a0f60f58e4cc9bf6c66e1",
+      "name": "click",
+      "args": {
+       "id": 15,
+       "narration": "Tatkal quota தேர்வு"
+      }
+     }
+    ],
+    "ms": 447,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4452,
+     "total_tokens": 4496,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
+     }
+    }
+   }
+  },
+  {
+   "hash": "6cea6f658684dcb8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_07c1a37ab8b84407adfef56b",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "Sleeper",
+       "narration": "Sleeper class-அ select பண்றேன்"
+      }
+     }
+    ],
+    "ms": 659,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4467,
+     "total_tokens": 4515,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "df4cf40b86311b6d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d0d7b7fc80c64c8891fd40ec",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 593,
+    "ms": 533,
     "usage": {
      "completion_tokens": 48,
-     "prompt_tokens": 4095,
-     "total_tokens": 4143,
+     "prompt_tokens": 4507,
+     "total_tokens": 4555,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3904
      }
     }
    }
   },
   {
-   "hash": "bdb7fb4bb7b2342c",
+   "hash": "3efd0e02e2934fbe",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_94971ed8632d49eba35f5b0b",
+      "id": "call_ee0f5a7ee7b44368b92852f2",
       "name": "click",
       "args": {
-       "id": 52,
-       "narration": "Proceed to pay",
-       "confirmation_question": "நாளை சென்னையிலிருந்து மதுரைக்கு Ganga Superfast Express-ல் ஒரு Sleeper டிக்கெட் ₹285-க்கு book பண்ணட்டுமா?"
+       "id": 24,
+       "narration": "ஸ்லீப்பர் டிக்கெட் புக் பண்ணுங்க",
+       "confirmation_question": "நாளைக்கு சென்னையிலிருந்து மதுரைக்கு Ganga Superfast Express-ல 23 சீட் இருக்கு, ஸ்லீப்பர் கிளாஸ் ₹265. இதை புக் பண்ணலாமா?"
       }
      }
     ],
-    "ms": 705,
+    "ms": 551,
     "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 4048,
-     "total_tokens": 4127,
+     "completion_tokens": 71,
+     "prompt_tokens": 4783,
+     "total_tokens": 4854,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 4032
      }
     }
    }
   },
   {
-   "hash": "1ba15f53a5a78669",
+   "hash": "a6ea0a5bc977ec37",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_bd79cd7f62b6459187e88a56",
-      "name": "click",
+      "id": "call_46d59117390d4231ba145f78",
+      "name": "fill_form",
       "args": {
-       "id": 56,
-       "narration": "₹285 செலுத்த",
-       "confirmation_question": "₹285 செலுத்தவா?"
+       "fields": [
+        {
+         "id": 50,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 51,
+         "value": "34"
+        },
+        {
+         "id": 53,
+         "value": "Female"
+        }
+       ],
+       "narration": "Passenger details fill panren"
       }
      }
     ],
-    "ms": 496,
+    "ms": 685,
     "usage": {
-     "completion_tokens": 46,
-     "prompt_tokens": 4038,
-     "total_tokens": 4084,
+     "completion_tokens": 93,
+     "prompt_tokens": 4576,
+     "total_tokens": 4669,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 4160
      }
     }
    }
   },
   {
-   "hash": "e1e48fb0e721217f",
+   "hash": "1ec6d5c10d28e02a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6a1cc96a589d470591faf015",
+      "id": "call_3b3013a29e534f86b94ac046",
+      "name": "type_text",
+      "args": {
+       "id": 57,
+       "text": "9000000001",
+       "narration": "Mobile number type"
+      }
+     }
+    ],
+    "ms": 539,
+    "usage": {
+     "completion_tokens": 66,
+     "prompt_tokens": 4636,
+     "total_tokens": 4702,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3904
+     }
+    }
+   }
+  },
+  {
+   "hash": "5762ed93bbb5eb71",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_bd351cee15114be8b57dfc3b",
+      "name": "click",
+      "args": {
+       "id": 58,
+       "narration": "CONTINUE கிளிக் செய்கிறேன்"
+      }
+     }
+    ],
+    "ms": 766,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4682,
+     "total_tokens": 4726,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4288
+     }
+    }
+   }
+  },
+  {
+   "hash": "43b0d47eb6278664",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6f9d74f7c65f452796a45ea8",
+      "name": "click",
+      "args": {
+       "id": 59,
+       "narration": "Proceed to payment",
+       "confirmation_question": "Confirm booking Ganga Superfast Express 11261 from Chennai Central to Madurai Junction on 6 Oct 2026, Sleeper class, 1 passenger Asha Verma, total ₹285?"
+      }
+     }
+    ],
+    "ms": 878,
+    "usage": {
+     "completion_tokens": 96,
+     "prompt_tokens": 4634,
+     "total_tokens": 4730,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4288
+     }
+    }
+   }
+  },
+  {
+   "hash": "a9b87ebf17c5fb02",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ea80528435534c3299b56fe0",
+      "name": "click",
+      "args": {
+       "id": 63,
+       "narration": "₹285 pay பண்ணுறேன்",
+       "confirmation_question": "நாளைக்கு சென்னை சென்ட்ரல்ல இருந்து மதுரைக்கு, ஸ்லீப்பர் கிளாஸ், தட்கல், அஷா வர்மாவுக்கு ₹285 pay பண்ணட்டுமா?"
+      }
+     }
+    ],
+    "ms": 704,
+    "usage": {
+     "completion_tokens": 92,
+     "prompt_tokens": 4624,
+     "total_tokens": 4716,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4352
+     }
+    }
+   }
+  },
+  {
+   "hash": "ce5d346e4350d53b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c7e6cdfa846f42ba97ad8e4e",
       "name": "done",
       "args": {
-       "speech": "உங்களுடைய தட்கல் டிக்கெட் புக் ஆகிவிட்டது. PNR எண் 4123456700. கங்கா சூப்பர்ஃபாஸ்ட் எக்ஸ்பிரஸ், சென்னை சென்ட்ரல்ல இருந்து மதுரைக்கு, அக்டோபர் 6, ஸ்லீப்பர் கிளாஸ், சீட் 12. ₹285 கட்டணம் செலுத்தப்பட்டுள்ளது."
+       "speech": "உங்களுடைய தட்கல் ஸ்லீப்பர் டிக்கெட் புக் ஆகிடுச்சு. PNR நம்பர் 4123456700. கங்கை சூப்பர்ஃபாஸ்ட் எக்ஸ்பிரஸ், சென்னை சென்ட்ரல்ல இருந்து மதுரைக்கு, 6 அக்டோபர் 2026-ல, சீட் 12. ₹285 கட்டாயிருக்கீங்க. வேற ஏதாவது உதவி வேணுமா?"
       }
      }
     ],
-    "ms": 1086,
+    "ms": 1079,
     "usage": {
-     "completion_tokens": 106,
-     "prompt_tokens": 4072,
-     "total_tokens": 4178,
+     "completion_tokens": 103,
+     "prompt_tokens": 4657,
+     "total_tokens": 4760,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 4224
      }
     }
    }
   }
  ],
  "translate": {
-  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
   "06d5f51c23d1c42f": "அந்த page-ல இப்படி போட்டுருக்கு:"
  },
  "docs": {}

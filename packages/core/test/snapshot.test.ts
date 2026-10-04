@@ -110,6 +110,15 @@ describe("snapshot icon buttons in cards", () => {
   });
 });
 
+describe("snapshot remove buttons", () => {
+  it("names an unlabelled remove icon from rm- classes or an × drawing, not its other class words", async () => {
+    const s = await snap(`<div class="pax"><input aria-label="Name">
+      <div class="rm-pax" style="cursor:pointer;width:20px;height:20px"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+      <div class="corner" style="cursor:pointer;width:20px;height:20px"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>`);
+    expect(Object.values(s.elements).map((e) => e.name)).toEqual(["Name", "remove", "close"]);
+  });
+});
+
 describe("snapshot stable ids", () => {
   it("gives re-rendered controls their old ids back", async () => {
     await snap(`<div id="f"></div><script>

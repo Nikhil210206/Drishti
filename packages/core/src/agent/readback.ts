@@ -58,9 +58,9 @@ export function readback(snap: Snapshot, id: string | number, el: ElementInfo | 
     // The page's own one-line summary often carries details the labels miss, like the quota:
     // "Express (20162) · SBC 19:50 → MYS 22:40 · Tue, 6 Oct, 2026 · SL · Tatkal". Only on a page
     // about exactly one train, never on a results list.
-    const line =
+    const summary =
       dates.length === 1 && trains.length === 1 ? lines.find((l) => l.startsWith("- ") && l.includes(dates[0]) && l.includes(" · ")) : "";
-    const parts = line ? line.slice(2).split(" · ") : [];
+    const parts = summary ? summary.slice(2).split(" · ") : [];
     const at = parts.findIndex((x) => x.includes(dates[0]));
     if (at >= 0)
       facts.push(
@@ -72,6 +72,27 @@ export function readback(snap: Snapshot, id: string | number, el: ElementInfo | 
     else if (!seen.has("date") && dates.length === 1) facts.push(dates[0]);
   }
   return distinct(facts).join("; ").slice(0, 300);
+}
+
+/** The passengers a readback lists ("Passengers Asha Verma (34, Female), Ravi Verma (36, Male)"). */
+export function readbackPassengers(facts: string): string[] {
+  const m = facts.match(/\bPassengers?\s+(.+?)(?:;|$)/i);
+  if (!m) return [];
+  return m[1]
+    .split(/(?<=\)),\s*/)
+    .map((x) => x.trim())
+    .filter(Boolean);
+}
+
+/** The same person listed twice: almost always a slip that books a ticket nobody asked for. */
+export function duplicatePassenger(facts: string): string {
+  const seen = new Set<string>();
+  for (const p of readbackPassengers(facts)) {
+    const k = p.toLowerCase().replace(/\s+/g, " ");
+    if (seen.has(k)) return `the same passenger is listed twice (${p})`;
+    seen.add(k);
+  }
+  return "";
 }
 
 /** The page says the task finished: a PNR, a reference or complaint number, a success message. */

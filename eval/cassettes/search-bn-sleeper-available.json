@@ -1,633 +1,150 @@
 {
  "version": 1,
  "task": "search-bn-sleeper-available",
- "recordedAt": "2026-10-04T14:45:04.874Z",
+ "recordedAt": "2026-10-04T17:08:59.087Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "20395ddc8dc76b6f",
+   "hash": "3888d97367e5ca44",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7c50a31ffb4349958f33e3dc",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "From-এ Howrah লিখছি"
-      }
-     }
-    ],
-    "ms": 593,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 3754,
-     "total_tokens": 3799,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2432
-     }
-    }
-   }
-  },
-  {
-   "hash": "94352eb72fa7dd6d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_ce58947d357b48c4b0606c8f",
+      "id": "call_debfca969c6f4a6e97ff17ec",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Howrah",
-       "narration": "Howrah লিখছি"
+       "narration": "Howrah লিখছি FROM-এ"
       }
      },
      {
-      "id": "call_1687e3b7574e4b55bd804ebf",
+      "id": "call_88405ce5ce464a78b7ecbf96",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bhubaneswar",
-       "narration": "Bhubaneswar লিখছি"
+       "narration": "Bhubaneswar লিখছি TO-তে"
       }
      },
      {
-      "id": "call_c2f515764b31415d97aebc1d",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "কাল সিলেক্ট করছি"
-      }
-     },
-     {
-      "id": "call_7dd89cc8d02e400d9c186078",
-      "name": "click",
-      "args": {
-       "id": 14,
-       "narration": "Sleeper সিলেক্ট করছি"
-      }
-     },
-     {
-      "id": "call_37d96362e3a446ebb912a23a",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search করছি"
-      }
-     }
-    ],
-    "ms": 1612,
-    "usage": {
-     "completion_tokens": 233,
-     "prompt_tokens": 3762,
-     "total_tokens": 3995,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "349bdf7562becf55",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bf700213667a4a7794df8f36",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Howrah Junction বেছে নিচ্ছি",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_998f5ab4fed34ef5baf959f7",
+      "id": "call_ea74febc38624118a15c6b91",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "কালকের date বেছে নিচ্ছি",
+       "narration": "কাল select করছি",
        "confirmation_question": ""
       }
      },
      {
-      "id": "call_9e4af3523858461bb352ed85",
+      "id": "call_e31a962ddff047df8e8c74d7",
       "name": "click",
-      "args": {
-       "id": 14,
-       "narration": "General class রাখছি",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_4b28f0d1a10445769d4e60c5",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS এ click করছি",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1644,
-    "usage": {
-     "completion_tokens": 218,
-     "prompt_tokens": 3835,
-     "total_tokens": 4053,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "64ba46db6f84bc53",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_6b6ef01ea2b4492182db39bf",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Bhubaneswar",
-       "narration": "Entering destination Bhubaneswar"
-      }
-     },
-     {
-      "id": "call_fb0d1cab63664474acce76ec",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Click search trains"
-      }
-     }
-    ],
-    "ms": 480,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 3857,
-     "total_tokens": 3906,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "d5c1a4b5bf554ab9",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9751ace346424dc4828a329d",
-      "name": "select_option",
-      "args": {
-       "id": 8,
-       "option": "Bhubaneswar BBS Bhubaneswar",
-       "narration": "Bhubaneswar select korchi"
-      }
-     }
-    ],
-    "ms": 391,
-    "usage": {
-     "completion_tokens": 34,
-     "prompt_tokens": 3931,
-     "total_tokens": 3965,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "fb6e5dbfba24beff",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_a2f4715707784bef9e210381",
-      "name": "select_option",
       "args": {
        "id": 13,
-       "option": "Sleeper",
-       "narration": "Sleeper class select korchi"
+       "narration": "Sleeper class select করছি",
+       "confirmation_question": ""
       }
-     }
-    ],
-    "ms": 388,
-    "usage": {
-     "completion_tokens": 35,
-     "prompt_tokens": 3980,
-     "total_tokens": 4015,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "0380bdfd87ae2476",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_d20cb3357c8f471495972dff",
+      "id": "call_bd2c439b9b8e482a849aff4a",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains"
+       "narration": "SEARCH TRAINS click করছি",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 374,
+    "ms": 3148,
     "usage": {
-     "completion_tokens": 22,
-     "prompt_tokens": 4018,
-     "total_tokens": 4040,
+     "completion_tokens": 147,
+     "prompt_tokens": 4055,
+     "total_tokens": 4202,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "b530761be5021535",
+   "hash": "fc13a1cb355ae127",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_b2a1c106ae594385b3f05df5",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "Howrah select করছি"
-      }
-     }
-    ],
-    "ms": 421,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4089,
-     "total_tokens": 4136,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "f1bf897c5581f2fe",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_e82786387fbd404483e841bd",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Clicking Howrah Junction"
-      }
-     },
-     {
-      "id": "call_43bd4ff549974c4daccf5ab5",
-      "name": "click",
-      "args": {
-       "id": 20,
-       "narration": "Clicking Bhubaneswar BBS"
-      }
-     },
-     {
-      "id": "call_da6112634f5f4ad7a4429da2",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Clicking Tomorrow"
-      }
-     },
-     {
-      "id": "call_07ac34afddba4adc95f0661e",
+      "id": "call_37bcc17f7adb4c62bc11f8b7",
       "name": "click",
       "args": {
        "id": 22,
-       "narration": "Clicking Sleeper class"
-      }
-     },
-     {
-      "id": "call_5b97b3aac9984a33a6940501",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Clicking SEARCH TRAINS"
+       "narration": "Sleeper class বেছে নিচ্ছি",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 1366,
+    "ms": 457,
     "usage": {
-     "completion_tokens": 109,
-     "prompt_tokens": 4102,
-     "total_tokens": 4211,
+     "completion_tokens": 53,
+     "prompt_tokens": 4350,
+     "total_tokens": 4403,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "53242fa3c887dd0a",
+   "hash": "c307dd422d4a72e5",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ca9b1adfa3304579ba9a4ec2",
+      "id": "call_6cdb6faddec040c390a4aba5",
       "name": "click",
       "args": {
-       "id": 9,
-       "narration": "ক্যালেন্ডার খুলছি",
-       "confirmation_question": ""
+       "id": 18,
+       "narration": "SEARCH TRAINS"
       }
      }
     ],
-    "ms": 436,
+    "ms": 371,
     "usage": {
      "completion_tokens": 41,
-     "prompt_tokens": 4148,
-     "total_tokens": 4189,
+     "prompt_tokens": 4278,
+     "total_tokens": 4319,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3904
      }
     }
    }
   },
   {
-   "hash": "0b62b722f805edf6",
+   "hash": "2353b58ae35d5cdb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
-      "name": "click",
-      "args": {
-       "id": 28,
-       "narration": "Close calendar dialog"
-      }
-     }
-    ],
-    "ms": 5498,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 4306,
-     "total_tokens": 4906,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "505f95af6c290a2b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_338aad3ecab7471ba9bfaa45",
-      "name": "click",
-      "args": {
-       "id": 28,
-       "narration": "back",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 486,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4116,
-     "total_tokens": 4163,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "ff550723abf0a300",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_08e2e241e7334aba82781637",
-      "name": "click",
-      "args": {
-       "id": 30,
-       "narration": "ক্যালেন্ডার বন্ধ করছি"
-      }
-     }
-    ],
-    "ms": 475,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4136,
-     "total_tokens": 4180,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "21fd06bc5b00b7b0",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_acd2ff76ec2643abb802ee05",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "Click FROM station"
-      }
-     },
-     {
-      "id": "call_d9b0618a969b470394af930c",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Select Howrah Junction"
-      }
-     }
-    ],
-    "ms": 494,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4281,
-     "total_tokens": 4323,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2432
-     }
-    }
-   }
-  },
-  {
-   "hash": "911094dddd6ac47f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_7304c0b764564c9a8324a89b",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "Howrah থেকে Bhubaneswar",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 531,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4320,
-     "total_tokens": 4370,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "b6da790b7b7a5ad0",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_8f56b0a114c0424c9b13cbb1",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "Howrah station select করছি"
-      }
-     }
-    ],
-    "ms": 565,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4333,
-     "total_tokens": 4375,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "46fc4c4acd27e26b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_883bb1d6f52d4998a06e3e7b",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains"
-      }
-     }
-    ],
-    "ms": 473,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4372,
-     "total_tokens": 4414,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "1c16c2e7e4ed6269",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "train list summary পড়ছি"
-      }
-     }
-    ],
-    "ms": 3658,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 4897,
-     "total_tokens": 5497,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "04b3aeb917839232",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5742872aed3f43519a2fff92",
+      "id": "call_c31e86850d6b47cf86b2d918",
       "name": "done",
       "args": {
-       "speech": "কাল 6 October-এ Howrah থেকে Bhubaneswar-এ sleeper seat-এর জন্য 7 টা train available আছে। সবথেকে ভালো option হলো Kolkata–Bhubaneswar Express (22921) — রাত 2:55-এ ছাড়বে, পৌঁছাবে 11:50-এ, price ₹200 আর 66 টা seat available। পরেরটা Narmada Sampark Kranti Express (11588) রাত 7-টায় ছাড়বে, price ₹220, 42 seat available। আপনি কি কোনোটার ticket book করতে চান?"
+       "speech": "কাল 6 অক্টোবর 2026-এ Howrah থেকে Bhubaneswar-এর sleeper (SL) seat available। 7 টা train দেখাচ্ছে, যার মধ্যে 5 টায় seat available (green) আর 2 টায় RAC (orange)। প্রথম train-টা হলো Kolkata–Bhubaneswar Express (22921), 02:55-এ ছেড়ে যাবে, fare ₹200, 66 seat available। আপনি কি কোনো specific train book করতে চান?"
       }
      }
     ],
-    "ms": 1379,
+    "ms": 879,
     "usage": {
-     "completion_tokens": 152,
-     "prompt_tokens": 5308,
-     "total_tokens": 5460,
+     "completion_tokens": 134,
+     "prompt_tokens": 4831,
+     "total_tokens": 4965,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3904
      }
     }
    }

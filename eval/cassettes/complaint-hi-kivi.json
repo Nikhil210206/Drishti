@@ -1,225 +1,319 @@
 {
  "version": 1,
  "task": "complaint-hi-kivi",
- "recordedAt": "2026-10-04T14:41:49.818Z",
+ "recordedAt": "2026-10-04T17:19:44.018Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "ff0422be5f4dc06f",
+   "hash": "33218c5211cc3608",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0387e75911834453ad6d9c14",
-      "name": "click",
-      "args": {
-       "id": 1,
-       "narration": "home page पर जाना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 656,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 3750,
-     "total_tokens": 3799,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "4892cbae138b0d6a",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_aedfbb44ee3a4c30aead5548",
-      "name": "click",
-      "args": {
-       "id": 1,
-       "narration": "Home page पर जाना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 498,
-    "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 3766,
-     "total_tokens": 3817,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "dc526d9bef141158",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_86ee73e8f24b4e1a809c40d3",
+      "id": "call_a2f48da2c6014931ad9f8e32",
       "name": "click",
       "args": {
        "id": 4,
-       "narration": "Help section पर जा रहा हूँ"
+       "narration": "help page पर जाना है"
       }
-     }
-    ],
-    "ms": 463,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 3780,
-     "total_tokens": 3825,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "3339ca7cdf833259",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_1ebd3a46a1ea41e5a4cd3731",
-      "name": "select_option",
+      "id": "call_3e624c38687648f08e153958",
+      "name": "click",
       "args": {
-       "id": 19,
-       "option": "Food Quality",
-       "narration": "Food Quality चुनें"
+       "id": 14,
+       "narration": "General quota चुनना है"
       }
      }
     ],
-    "ms": 601,
-    "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 3666,
-     "total_tokens": 3718,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "8484d0c0a80c3516",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_1027bca7f6a94920bf442269",
-      "name": "type_text",
-      "args": {
-       "id": 21,
-       "text": "खाने की क्वालिटी बहुत खराब थी, खाना ठंडा और बेस्वाद था",
-       "narration": "शिकायत दर्ज कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 529,
-    "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 3697,
-     "total_tokens": 3749,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "a264dbbb90c8d2d8",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b3be1e325a2948dcafd408a0",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "अपनी शिकायत बताएं"
-      }
-     }
-    ],
-    "ms": 547,
+    "ms": 468,
     "usage": {
      "completion_tokens": 46,
-     "prompt_tokens": 3770,
-     "total_tokens": 3816,
+     "prompt_tokens": 4075,
+     "total_tokens": 4121,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "13353b3cd39d8e8d",
+   "hash": "91cd7827295513b1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_550417bb8c904ed1bcd576b9",
+      "id": "call_341d1c318d9845d1b0bee341",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "category dropdown खोल रहा हूँ"
+      }
+     },
+     {
+      "id": "call_2bf7235221154750acd11ee4",
       "name": "click",
       "args": {
        "id": 22,
-       "narration": "शिकायत submit कर रहा हूँ",
-       "confirmation_question": "क्या आप Pathik Rail पर शिकायत submit करना चाहते हैं? विवरण: Train 12639, खाने की क्वालिटी, PNR खाली"
+       "narration": "complaint submit कर रहा हूँ",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 887,
+    "ms": 456,
     "usage": {
-     "completion_tokens": 82,
-     "prompt_tokens": 3851,
-     "total_tokens": 3933,
+     "completion_tokens": 52,
+     "prompt_tokens": 3985,
+     "total_tokens": 4037,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "c6532702f0890c63",
+   "hash": "f697046de4f526c5",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0accefd05b6f4cdfad3b416d",
-      "name": "done",
+      "id": "call_639f3a99f5bd4ffea95d8b55",
+      "name": "click",
       "args": {
-       "speech": "आपकी शिकायत दर्ज हो गई है। Reference number CMP1000 है। वे 48 घंटे के अंदर जवाब देंगे।"
+       "id": 26,
+       "narration": "Food quality चुन रहा हूँ"
       }
      }
     ],
-    "ms": 434,
+    "ms": 522,
     "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 3953,
-     "total_tokens": 4007,
+     "completion_tokens": 41,
+     "prompt_tokens": 4145,
+     "total_tokens": 4186,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "baba92dd2a26007b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_05e145788003447da710fe2a",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Food quality चुनने के लिए"
+      }
+     }
+    ],
+    "ms": 441,
+    "usage": {
+     "completion_tokens": 24,
+     "prompt_tokens": 4102,
+     "total_tokens": 4126,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "f483cf6e22d51ed3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7ee5700316db4198ab6ae7b1",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Food quality चुन रही हूँ"
+      }
+     }
+    ],
+    "ms": 388,
+    "usage": {
+     "completion_tokens": 24,
+     "prompt_tokens": 4126,
+     "total_tokens": 4150,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "08a317a3612f828b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9c35d11ac7174ca8b0008648",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Food quality select करना है"
+      }
+     }
+    ],
+    "ms": 377,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4150,
+     "total_tokens": 4175,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3904
+     }
+    }
+   }
+  },
+  {
+   "hash": "a0179e0d121096c9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_60ef58b7419147d390e46f87",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Food quality चुन रहा हूँ"
+      }
+     }
+    ],
+    "ms": 524,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4278,
+     "total_tokens": 4321,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "073c8f248c7c058d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_007022ea5d934bc59b5111ad",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Food quality चुनें"
+      }
+     }
+    ],
+    "ms": 608,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4235,
+     "total_tokens": 4276,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "743905b916caf8d3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9e1954c7c15d4f9cbb1a6f81",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Food quality select कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 680,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4259,
+     "total_tokens": 4305,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "65e314b254460589",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cefd9be060194e8497dcaf49",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Food quality चुन रहा हूँ"
+      }
+     }
+    ],
+    "ms": 841,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4283,
+     "total_tokens": 4326,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3904
+     }
+    }
+   }
+  },
+  {
+   "hash": "0c2cf2e49acd9653",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_39c14cfab1d743bb98592abd",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Food quality category select कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 423,
+    "usage": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4349,
+     "total_tokens": 4375,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
      }
     }
    }

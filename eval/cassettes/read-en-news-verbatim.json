@@ -1,58 +1,58 @@
 {
  "version": 1,
  "task": "read-en-news-verbatim",
- "recordedAt": "2026-10-04T14:43:23.346Z",
+ "recordedAt": "2026-10-04T17:07:44.458Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "6431194f9b22c6b8",
+   "hash": "8c7845c0d28210ff",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e35b5e9f6f264a029696bd20",
+      "id": "call_71e9d557cb5845a4b5349990",
       "name": "read_page",
       "args": {
        "mode": "verbatim",
-       "narration": "Reading the article word for word"
+       "narration": "Reading the first paragraph word for word"
       }
      }
     ],
-    "ms": 478,
+    "ms": 477,
     "usage": {
-     "completion_tokens": 46,
-     "prompt_tokens": 3818,
-     "total_tokens": 3864,
+     "completion_tokens": 47,
+     "prompt_tokens": 4120,
+     "total_tokens": 4167,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "117c0a01b1c573a9",
+   "hash": "7d89268314e1ac43",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_53a338b845c24a9e9d096116",
+      "id": "call_393890f2487f4e328531f618",
       "name": "done",
       "args": {
-       "speech": "I've read that first paragraph word for word. Would you like me to continue with the next part?"
+       "speech": "I've read the first paragraph to you. Would you like me to read the next paragraph as well?"
       }
      }
     ],
-    "ms": 392,
+    "ms": 480,
     "usage": {
-     "completion_tokens": 34,
-     "prompt_tokens": 3866,
-     "total_tokens": 3900,
+     "completion_tokens": 44,
+     "prompt_tokens": 4168,
+     "total_tokens": 4212,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
      }
     }
    }

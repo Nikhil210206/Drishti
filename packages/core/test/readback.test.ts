@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { looksComplete, readback } from "../src/agent/readback.js";
+import { duplicatePassenger, looksComplete, readback, readbackPassengers } from "../src/agent/readback.js";
 import { element, page } from "./fakes.js";
 
 const REVIEW = [
@@ -44,5 +44,17 @@ describe("looksComplete", () => {
 
   it("is false on a review page", () => {
     expect(looksComplete(page("x", {}, REVIEW))).toBe(false);
+  });
+});
+
+describe("passengers in a readback", () => {
+  const facts = "Train X (22576); Date Tue, 6 Oct, 2026; Passengers Asha Verma (34, Female), Asha Verma (34, Female); Tue, 6 Oct";
+  it("lists them", () => {
+    expect(readbackPassengers(facts)).toEqual(["Asha Verma (34, Female)", "Asha Verma (34, Female)"]);
+    expect(readbackPassengers("PAY ₹180")).toEqual([]);
+  });
+  it("flags the same person twice, not two different people", () => {
+    expect(duplicatePassenger(facts)).toBe("the same passenger is listed twice (Asha Verma (34, Female))");
+    expect(duplicatePassenger("Passengers Asha Verma (34, Female), Ravi Verma (36, Male)")).toBe("");
   });
 });

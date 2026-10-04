@@ -1,159 +1,64 @@
 {
  "version": 1,
  "task": "search-hi-cheapest",
- "recordedAt": "2026-10-04T14:44:29.220Z",
+ "recordedAt": "2026-10-04T17:08:46.636Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "e7b72d6a038e3886",
+   "hash": "83ef0f9daf1e301b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_350c3678f57741b69313918d",
+      "id": "call_f61bc01ab9464c8b9675003b",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Delhi",
-       "narration": "From station Delhi"
+       "narration": "From city Delhi type karna"
       }
-     }
-    ],
-    "ms": 570,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 3766,
-     "total_tokens": 3816,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "d37c3cc946150683",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_2e637c4b31dc42cd80ec6d77",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "New Delhi station चुनना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 541,
-    "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 3816,
-     "total_tokens": 3873,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "94681d81123f14e3",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_7a847b7e0b4344948153e0a4",
+      "id": "call_6cceed75c05644178dbf72cd",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Lucknow",
-       "narration": "Typing Lucknow in TO field"
-      }
-     }
-    ],
-    "ms": 415,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 3823,
-     "total_tokens": 3854,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "5130b5eeb11dfe0e",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b1d6a4dfdfb04a438661c21e",
-      "name": "click",
-      "args": {
-       "id": 20,
-       "narration": "Lucknow select kar raha hoon",
-       "confirmation_question": ""
+       "narration": "To city Lucknow type karna"
       }
      },
      {
-      "id": "call_abb4b5d3f8004904b5a4e34f",
+      "id": "call_b618f9d12d3b42c5bcdbb046",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "Tomorrow select kar raha hoon",
-       "confirmation_question": ""
+       "narration": "Tomorrow select karna"
       }
-     }
-    ],
-    "ms": 681,
-    "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 3886,
-     "total_tokens": 3943,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "a92b80fd036b1b8a",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_a2612414be5b4eea806dbf52",
+      "id": "call_155cb26dd43d40c28fc04974",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains for cheapest ticket"
+       "narration": "Search trains button click karna"
       }
      }
     ],
-    "ms": 370,
+    "ms": 1202,
     "usage": {
-     "completion_tokens": 25,
-     "prompt_tokens": 3910,
-     "total_tokens": 3935,
+     "completion_tokens": 186,
+     "prompt_tokens": 4062,
+     "total_tokens": 4248,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "1241d7b9eca5fed2",
+   "hash": "e633f7f48615c018",
    "response": {
     "content": "",
     "toolCalls": [
@@ -161,21 +66,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "कल दिल्ली से लखनऊ की सबसे सस्ती टिकट 2S class में ₹130 की है, जो Delhi–Lucknow Express (11188) में सुबह 02:30 बजे निकलेगी। इसके बाद 2S में Tapti Shatabdi Express ₹170 और Intercity Express ₹140 में है। अगर आप चाहें तो मैं और details बता सकता हूँ।"
+       "speech": "कल दिल्ली से लखनऊ की सबसे सस्ती टिकट सेकंड सिटिंग (2S) की है, जो 130 रुपये की है। यह Delhi–Lucknow Express (22734) पर है, लेकिन इस पर वेटिंग लिस्ट 2 है। अगर RAC या वेटिंग लिस्ट ठीक लगे, तो Ganga Superfast Express में भी सेकंड सिटिंग 170 रुपये में मिल रही है। क्या आपको किसी और class या train की detail चाहिए?"
       }
      }
     ],
-    "ms": 4118,
+    "ms": 993,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 5331,
-     "total_tokens": 5931,
+     "completion_tokens": 108,
+     "prompt_tokens": 5562,
+     "total_tokens": 5670,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3648
      }
-    }
+    },
+    "raw": "[\n{\"name\":\"done\",\"parameters\":{\"speech\":\"कल दिल्ली से लखनऊ की सबसे सस्ती टिकट सेकंड सिटिंग (2S) की है, जो 130 रुपये की है। यह Delhi–Lucknow Express (22734) पर है, लेकिन इस पर वेटिंग लिस्ट 2 है। अगर RAC या वेटिंग लिस्ट ठीक लगे, तो Ganga Superfast Express में भी सेकंड सिटिंग 170 रुपये में मिल रही है। क्या आपको किसी और class या train की detail चाहिए?\"}}"
    }
   }
  ],

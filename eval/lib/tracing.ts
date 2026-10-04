@@ -33,7 +33,7 @@ export class Trace {
         this.write("llm_request", { i, reasoning: opts.reasoning, toolChoice: opts.toolChoice, messages: opts.messages });
         try {
           const r = await inner.chat(opts);
-          this.write("llm_response", { i, ms: r.ms, content: r.content, toolCalls: r.toolCalls, usage: r.usage });
+          this.write("llm_response", { i, ms: r.ms, content: r.content, toolCalls: r.toolCalls, usage: r.usage, raw: r.raw });
           return r;
         } catch (e: any) {
           this.write("llm_error", { i, error: String(e?.message ?? e) });

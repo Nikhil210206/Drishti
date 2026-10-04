@@ -1,503 +1,256 @@
 {
  "version": 1,
  "task": "book-gu-adi-jp-cc",
- "recordedAt": "2026-10-04T14:37:35.791Z",
+ "recordedAt": "2026-10-04T17:02:23.271Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "a3c54a19eafd1cb3",
+   "hash": "58f3b5b362a1afae",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ff4c38255e27474fb682e13a",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "FROM box open કરું"
-      }
-     },
-     {
-      "id": "call_d4f7d985088f4b07999729d4",
+      "id": "call_02aa46a2faa246dfb69e71fc",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Ahmedabad",
-       "narration": "Ahmedabad type કરું"
-      }
-     }
-    ],
-    "ms": 557,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 3758,
-     "total_tokens": 3808,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "e8c85f0b67ba3855",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9d7251d8501d4827bd0ec2a2",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Ahmedabad select કરો",
-       "confirmation_question": ""
+       "narration": "From station Ahmedabad"
       }
      },
      {
-      "id": "call_719abe1c6e89406096691efa",
-      "name": "select_option",
-      "args": {
-       "id": 8,
-       "option": "Jaipur",
-       "narration": "Jaipur પસંદ કરો"
-      }
-     },
-     {
-      "id": "call_60388a9c92a841ba80dbb6d6",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Tomorrow select કરો",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_49a6c3a1b7f141c0804f7e2d",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "AC Chair Car",
-       "narration": "AC Chair Car પસંદ કરો"
-      }
-     },
-     {
-      "id": "call_d4c67b733b994a948a178fea",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1905,
-    "usage": {
-     "completion_tokens": 269,
-     "prompt_tokens": 3824,
-     "total_tokens": 4093,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "de524d81769aee4c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cd3fb26bd14c4f5a99b0ed45",
+      "id": "call_5ff4947e9fa64c129eabbd09",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Jaipur",
-       "narration": "Jaipur enter karu chhu"
+       "narration": "To station Jaipur"
       }
      },
      {
-      "id": "call_5515fe1adbfe44bf93504e44",
+      "id": "call_b1446e567f4d48d3b683df99",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "Kalni date select karu chhu"
-      }
-     }
-    ],
-    "ms": 537,
-    "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 3845,
-     "total_tokens": 3902,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "c62fff7d3b08fb85",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d17b87ff5bfc413d8a934f66",
-      "name": "click",
-      "args": {
-       "id": 20,
-       "narration": "Jaipur Junction select કરું"
-      }
-     }
-    ],
-    "ms": 850,
-    "usage": {
-     "completion_tokens": 24,
-     "prompt_tokens": 3917,
-     "total_tokens": 3941,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "98c3aa3083528cfc",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_2c1eec22ae344c269f567429",
-      "name": "click",
-      "args": {
-       "id": 9,
-       "narration": "Click Tomorrow date"
+       "narration": "Select Tomorrow's date",
+       "confirmation_question": ""
       }
      },
      {
-      "id": "call_963d5f80b54348b3b862fdcc",
-      "name": "click",
+      "id": "call_b0f398bc84534ac58e59caa0",
+      "name": "select_option",
       "args": {
-       "id": 14,
-       "narration": "Select General class"
+       "id": 13,
+       "option": "AC Chair Car",
+       "narration": "Select AC Chair Car class"
       }
      },
      {
-      "id": "call_aed18cc28c364175ba93bd5e",
+      "id": "call_7fcee2ec351b401eb0288a79",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains"
+       "narration": "Search for trains",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 661,
+    "ms": 2485,
     "usage": {
-     "completion_tokens": 62,
-     "prompt_tokens": 3923,
-     "total_tokens": 3985,
+     "completion_tokens": 259,
+     "prompt_tokens": 4057,
+     "total_tokens": 4316,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2048
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "a1109d550c16d305",
+   "hash": "e2bc47b8c88d94c3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7f4d7b5adb6049a391e6ad73",
+      "id": "call_7d9a46691ffe476bad4f65c0",
       "name": "click",
       "args": {
-       "id": 25,
-       "narration": "6 October select કરું છું"
+       "id": 32,
+       "narration": "Lalbagh Intercity Express book karta",
+       "confirmation_question": "Lalbagh Intercity Express, Ahmedabad-થી Jaipur, 6 Oct, AC Chair Car, ₹670, 1 seat book karu?"
       }
      }
     ],
-    "ms": 484,
+    "ms": 956,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4113,
-     "total_tokens": 4157,
+     "completion_tokens": 66,
+     "prompt_tokens": 4618,
+     "total_tokens": 4684,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "4519ce0ce462c75a",
+   "hash": "a607a332efda64cc",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9a53d8da9a6c47ac984a84cb",
-      "name": "click",
+      "id": "call_ec4594ede5cc485d8fb0dfb8",
+      "name": "fill_form",
       "args": {
-       "id": 18,
-       "narration": "Search trains"
+       "fields": [
+        {
+         "id": 35,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 36,
+         "value": "34"
+        },
+        {
+         "id": 37,
+         "value": "Female"
+        },
+        {
+         "id": 42,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details ભરું છું"
       }
      }
     ],
-    "ms": 633,
+    "ms": 1430,
     "usage": {
-     "completion_tokens": 40,
-     "prompt_tokens": 4040,
-     "total_tokens": 4080,
+     "completion_tokens": 149,
+     "prompt_tokens": 4238,
+     "total_tokens": 4387,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "456432ba75d43f55",
+   "hash": "f8d46ef32337e562",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1e822d98804d4f018cdefe7a",
+      "id": "call_37ea7e8798a94e1795f63fb0",
       "name": "click",
       "args": {
-       "id": 54,
-       "narration": "Shatabdi CC book karu chhu"
+       "id": 43,
+       "narration": "Continue to next step"
+      }
+     }
+    ],
+    "ms": 561,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 4334,
+     "total_tokens": 4376,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "91940e84e59a510a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_314aa14273924f47ad69c46d",
+      "name": "click",
+      "args": {
+       "id": 44,
+       "narration": "Proceed to pay",
+       "confirmation_question": "આ ticket book કરવા માટે ₹690 pay કરશો? Train Lalbagh Intercity Express, Ahmedabad to Jaipur, 6 Oct, AC Chair Car, 1 passenger"
+      }
+     }
+    ],
+    "ms": 1282,
+    "usage": {
+     "completion_tokens": 85,
+     "prompt_tokens": 4286,
+     "total_tokens": 4371,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2624
+     }
+    }
+   }
+  },
+  {
+   "hash": "7f25d1f33ae8b28e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_77a38e900e7d42ac96975e56",
+      "name": "click",
+      "args": {
+       "id": 48,
+       "narration": "₹690 pay કરો",
+       "confirmation_question": "₹690 pay કરીને AC Chair Car ticket book કરી દઉં?"
       }
      }
     ],
     "ms": 878,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 5287,
-     "total_tokens": 5335,
+     "completion_tokens": 67,
+     "prompt_tokens": 4274,
+     "total_tokens": 4341,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 2624
      }
     }
    }
   },
   {
-   "hash": "9f070976f2f73b22",
+   "hash": "bd758112ff3f5035",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9fd624e456ab4c7d951ba4b6",
-      "name": "click",
-      "args": {
-       "id": 75,
-       "narration": "Female પસંદ કરું છું"
-      }
-     }
-    ],
-    "ms": 480,
-    "usage": {
-     "completion_tokens": 34,
-     "prompt_tokens": 4114,
-     "total_tokens": 4148,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "124b898344e7debc",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_58f21a8d489749c6a6cfc02a",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 72,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 73,
-         "value": "34"
-        },
-        {
-         "id": 79,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Passenger details fill karta chhie"
-      }
-     }
-    ],
-    "ms": 1011,
-    "usage": {
-     "completion_tokens": 127,
-     "prompt_tokens": 4131,
-     "total_tokens": 4258,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "5e95085b0dac5cde",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b966d717cb0b4a809caa5784",
-      "name": "click",
-      "args": {
-       "id": 79,
-       "narration": "Mobile number continue"
-      }
-     }
-    ],
-    "ms": 481,
-    "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4205,
-     "total_tokens": 4246,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "a347a8b1045d0891",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_a8bbba375b564fe39eaa3cce",
-      "name": "click",
-      "args": {
-       "id": 80,
-       "narration": "Passenger details save કરવા continue કરું છું",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 397,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4224,
-     "total_tokens": 4255,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "9a1ea55f671c3a77",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_17ef122ca5a94fadb90ea932",
-      "name": "click",
-      "args": {
-       "id": 81,
-       "narration": "Proceed to pay",
-       "confirmation_question": "કાલે Ahmedabad-થી Jaipur Shatabdi Express, AC Chair Car, એક passenger, ₹820 total, book કરવું છે?"
-      }
-     }
-    ],
-    "ms": 864,
-    "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 4179,
-     "total_tokens": 4258,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "e2e23407c66325be",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_68527886c32749c7bb29669e",
-      "name": "click",
-      "args": {
-       "id": 85,
-       "narration": "Pay 820 rupees",
-       "confirmation_question": "Confirm payment of 820 rupees for Ahmedabad to Jaipur chair car ticket?"
-      }
-     }
-    ],
-    "ms": 612,
-    "usage": {
-     "completion_tokens": 68,
-     "prompt_tokens": 4166,
-     "total_tokens": 4234,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "49bcff660f3f3944",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_093807abd4f743d0ad200a6e",
+      "id": "call_d80628912a6444d99a18cff7",
       "name": "done",
       "args": {
-       "speech": "તમારી ticket book થઈ ગઈ છે. PNR નંબર 4123456700 છે. Shatabdi Express 20589 માં Ahmedabad થી Jaipur માટે chair car માં C3 seat 12 મળી છે. ₹820 payment થઈ ગયું છે."
+       "speech": "તમારી Ahmedabad થી Jaipur ની chair car ticket book થઈ ગઈ છે. PNR નંબર 4123456700 છે, Lalbagh Intercity Express (11602), મંગળવાર 6 ઓક્ટોબર, C3 seat 12, ₹690 ભર્યા છે."
       }
      }
     ],
-    "ms": 1005,
+    "ms": 903,
     "usage": {
-     "completion_tokens": 86,
-     "prompt_tokens": 4200,
-     "total_tokens": 4286,
+     "completion_tokens": 99,
+     "prompt_tokens": 4308,
+     "total_tokens": 4407,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3968
      }
     }
    }
   }
  ],
  "translate": {
-  "2110d1049caf339c": "શું હું આગળ જાઉં?",
   "2967966f8cc56ae2": "Page પર લખ્યું છે:"
  },
  "docs": {}

@@ -1,373 +1,508 @@
 {
  "version": 1,
  "task": "book-mr-mumbai-pune-sl",
- "recordedAt": "2026-10-04T14:37:15.623Z",
+ "recordedAt": "2026-10-04T17:09:56.824Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "6fd15ddec1179361",
+   "hash": "aaefb813569f7420",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e87fc2cf82ce4f54b4896418",
+      "id": "call_6c12b694392c49b4b51d62a8",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Mumbai",
-       "narration": "From station Mumbai"
+       "narration": "FROM मध्ये मुंबई टाकतेय"
       }
      }
     ],
-    "ms": 575,
+    "ms": 812,
     "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 3757,
-     "total_tokens": 3807,
+     "completion_tokens": 30,
+     "prompt_tokens": 4079,
+     "total_tokens": 4109,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2048
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "c071ec982b734828",
+   "hash": "baab2eded646ac30",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ed502c5aff6c4fbf9105f087",
+      "id": "call_5de753e107f64392822ec9c6",
       "name": "click",
       "args": {
        "id": 19,
-       "narration": "मुंबई CSMT निवडतोय",
-       "confirmation_question": ""
+       "narration": "Mumbai CSMT select करत आहे"
       }
      }
     ],
-    "ms": 882,
+    "ms": 715,
     "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 3843,
-     "total_tokens": 3895,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "45a15fb25ce430ef",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b9b19d4ec72f4b088af5a1a9",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Pune",
-       "narration": "पुणे टाकतोय"
-      }
-     },
-     {
-      "id": "call_6d9a5c4646bc47a6a0db3301",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "उद्याची तारीख निवडतोय",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1417,
-    "usage": {
-     "completion_tokens": 58,
-     "prompt_tokens": 3833,
-     "total_tokens": 3891,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "35b60b7612c56c92",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_6c66bd29460c45f68bf984bb",
-      "name": "click",
-      "args": {
-       "id": 21,
-       "narration": "Pune station निवडतोय",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 880,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 3903,
-     "total_tokens": 3956,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "4803aec053bde92b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9978512bdfdf45f398790197",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS वर click करणे",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 514,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 3910,
-     "total_tokens": 3963,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "7dcecbf04994faab",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_afee8bfc3d4249ddb93aeadb",
-      "name": "click",
-      "args": {
-       "id": 23,
-       "narration": "Sleeper ticket book करतोय",
-       "confirmation_question": "उद्या Mumbai CSMT ते Pune Junction, Sleeper class, ₹145, 1 seat book करू का?"
-      }
-     }
-    ],
-    "ms": 737,
-    "usage": {
-     "completion_tokens": 84,
-     "prompt_tokens": 5642,
-     "total_tokens": 5726,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "28dddfacbc52a10a",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cb49a721777242cf882597c7",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 53,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 54,
-         "value": "34"
-        },
-        {
-         "id": 55,
-         "value": ""
-        },
-        {
-         "id": 60,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Passenger details भरतेय"
-      }
-     }
-    ],
-    "ms": 1183,
-    "usage": {
-     "completion_tokens": 147,
-     "prompt_tokens": 3984,
-     "total_tokens": 4131,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "1c8548d0fd74243f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_96b8a5c1fc4942bdbea98dff",
-      "name": "click",
-      "args": {
-       "id": 56,
-       "narration": "Female निवडते",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 501,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 4048,
-     "total_tokens": 4097,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "930a59ce7e32b00f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c99b15efbc7640db93a4e00e",
-      "name": "type_text",
-      "args": {
-       "id": 60,
-       "text": "9000000001",
-       "narration": "Mobile number टाकत आहे"
-      }
-     },
-     {
-      "id": "call_a61e4282fdb54872850bd720",
-      "name": "click",
-      "args": {
-       "id": 61,
-       "narration": "Passenger details पुढे पाठवत आहे",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1028,
-    "usage": {
-     "completion_tokens": 106,
-     "prompt_tokens": 4063,
-     "total_tokens": 4169,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "88bf850357450ac6",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_82189c0ed070400da147675f",
-      "name": "click",
-      "args": {
-       "id": 62,
-       "narration": "Pay करण्यासाठी proceed करतोय",
-       "confirmation_question": "उद्याचा Mumbai CSMT ते Pune Sleeper ticket, ₹165, Asha Verma यांच्यासाठी book करू का?"
-      }
-     }
-    ],
-    "ms": 776,
-    "usage": {
-     "completion_tokens": 76,
-     "prompt_tokens": 4063,
-     "total_tokens": 4139,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2048
-     }
-    }
-   }
-  },
-  {
-   "hash": "80cbffa858058591",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0812b7e9633a4f1a9cd25138",
-      "name": "click",
-      "args": {
-       "id": 66,
-       "narration": "₹165 pay करा",
-       "confirmation_question": "₹165 pay करायचे आहेत, sleeper ticket confirm करायचे का?"
-      }
-     }
-    ],
-    "ms": 636,
-    "usage": {
-     "completion_tokens": 68,
-     "prompt_tokens": 4051,
-     "total_tokens": 4119,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "cd5c837776c05bb2",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b5e28d286eef4f8db5ef0d78",
-      "name": "done",
-      "args": {
-       "speech": "तुमचं booking झालं आहे. PNR नंबर 4123456700 आहे. उद्या, 6 ऑक्टोबरला सकाळी 10:00 वाजता CSMT वरून Pune साठी Rajdhani Superfast Express (16807) मध्ये sleeper class मध्ये seat 12 मिळाली आहे. Asha Verma या नावाने ticket आहे आणि ₹165 भरले आहेत."
-      }
-     }
-    ],
-    "ms": 802,
-    "usage": {
-     "completion_tokens": 111,
-     "prompt_tokens": 4085,
+     "completion_tokens": 31,
+     "prompt_tokens": 4165,
      "total_tokens": 4196,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2048
+      "cached_tokens": 3584
+     }
+    }
+   }
+  },
+  {
+   "hash": "894f2b681746cd7d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ba369ebe058643dfb6263e27",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "पुणे टाकतोय FROM मध्ये"
+      }
+     }
+    ],
+    "ms": 436,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4155,
+     "total_tokens": 4186,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2624
+     }
+    }
+   }
+  },
+  {
+   "hash": "5f600b2520285512",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4ada4582e51a4a609db3f405",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune Junction PUNE Pune",
+       "narration": "TO म्हणून Pune निवडतोय"
+      }
+     }
+    ],
+    "ms": 401,
+    "usage": {
+     "completion_tokens": 34,
+     "prompt_tokens": 4206,
+     "total_tokens": 4240,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "9bdd9f9464b14b72",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_6eb887015e43464686ae1a19",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Mumbai CSMT (CSMT)",
+       "narration": "FROM Mumbai CSMT set करा"
+      }
+     },
+     {
+      "id": "call_d6136b14bd2c4449b2e9ae55",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune Junction PUNE Pune",
+       "narration": "TO Pune set करा"
+      }
+     },
+     {
+      "id": "call_af6b9aed58f04cbca5139550",
+      "name": "select_option",
+      "args": {
+       "id": 8,
+       "option": "Pune Junction PUNE Pune",
+       "narration": "Pune Junction select करा"
+      }
+     },
+     {
+      "id": "call_56849391942e459d9b2f57b3",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "उद्याची तारीख select करा",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_7636531f1c554aeb83474471",
+      "name": "click",
+      "args": {
+       "id": 14,
+       "narration": "General quota select करा",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_4b75112abc154b1897209117",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button click करा",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1321,
+    "usage": {
+     "completion_tokens": 176,
+     "prompt_tokens": 4233,
+     "total_tokens": 4409,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "e2528eaba9345a96",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_621eefab0a754cffb54f29ca",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Pune",
+       "narration": "Pune station टाकतो"
+      }
+     }
+    ],
+    "ms": 438,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4369,
+     "total_tokens": 4397,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "ac0b146325f82f76",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_564a6b06f99b48b58a465a55",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "Pune station निवडतो",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_cd3cb962370d4809b07b088a",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "उद्याची तारीख निवडतो",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_0167816e462445cfac1a43e2",
+      "name": "click",
+      "args": {
+       "id": 14,
+       "narration": "General quota निवडतो",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_2acab515821a438bbea79540",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains करतो",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 931,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 4417,
+     "total_tokens": 4523,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3584
+     }
+    }
+   }
+  },
+  {
+   "hash": "6fdf368d1564022f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ffad28bfe35045e0896406ff",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "6 October निवडा"
+      }
+     }
+    ],
+    "ms": 701,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 4636,
+     "total_tokens": 4678,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3584
+     }
+    }
+   }
+  },
+  {
+   "hash": "29e1db92b8098f4b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ccc4da4aa12240fdae5619c1",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 502,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 4565,
+     "total_tokens": 4615,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4032
+     }
+    }
+   }
+  },
+  {
+   "hash": "659555598cec3025",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7a803927ed354085859f20ee",
+      "name": "click",
+      "args": {
+       "id": 53,
+       "narration": "Sleeper class book करा",
+       "confirmation_question": "उद्या 6 October ला Mumbai CSMT ते Pune Junction, Sleeper class, 1 passenger, ₹145, book करू का?"
+      }
+     }
+    ],
+    "ms": 1048,
+    "usage": {
+     "completion_tokens": 84,
+     "prompt_tokens": 6298,
+     "total_tokens": 6382,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3584
+     }
+    }
+   }
+  },
+  {
+   "hash": "5bf7b2036d87dda1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_be0e666aad554c7c93d8619f",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 83,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 84,
+         "value": "34"
+        },
+        {
+         "id": 85,
+         "value": "Female"
+        },
+        {
+         "id": 90,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill करा"
+      }
+     }
+    ],
+    "ms": 1404,
+    "usage": {
+     "completion_tokens": 148,
+     "prompt_tokens": 4641,
+     "total_tokens": 4789,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4224
+     }
+    }
+   }
+  },
+  {
+   "hash": "8164411c25ac901a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_694298b2d1144c58a45dc4f9",
+      "name": "click",
+      "args": {
+       "id": 91,
+       "narration": "Continue करून पुढचं page उघडतोय"
+      }
+     }
+    ],
+    "ms": 436,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4738,
+     "total_tokens": 4785,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
+     }
+    }
+   }
+  },
+  {
+   "hash": "800e8ac864900a2a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_29dd0ed5bc044ce289fcef69",
+      "name": "click",
+      "args": {
+       "id": 92,
+       "narration": "Proceed to pay",
+       "confirmation_question": "तुम्हाला उद्या Mumbai CSMT ते Pune Junction, Sleeper class मध्ये एक ticket ₹165 मध्ये book करायचे आहे का?"
+      }
+     }
+    ],
+    "ms": 674,
+    "usage": {
+     "completion_tokens": 78,
+     "prompt_tokens": 4693,
+     "total_tokens": 4771,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4160
+     }
+    }
+   }
+  },
+  {
+   "hash": "ac56589ce07b1188",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_114403140cc341bdae5b617e",
+      "name": "click",
+      "args": {
+       "id": 96,
+       "narration": "₹165 pay करा",
+       "confirmation_question": "उद्या Mumbai CSMT ते Pune, Sleeper class, 1 passenger, ₹165 - payment करायचं का?"
+      }
+     }
+    ],
+    "ms": 602,
+    "usage": {
+     "completion_tokens": 78,
+     "prompt_tokens": 4680,
+     "total_tokens": 4758,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4160
+     }
+    }
+   }
+  },
+  {
+   "hash": "f4a7f41778bf8908",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_20ead11617d4462c85d3d0d6",
+      "name": "done",
+      "args": {
+       "speech": "तुमचं sleeper ticket book झालं आहे. PNR 4123456700 आहे. राजधनी सुपरफास्ट एक्सप्रेस CSMT ते Pune, 6 ऑक्टोबर 2026, seat 12, S4. ₹165 pay झाले आहेत. आणखी ticket book करायचं आहे का?"
+      }
+     }
+    ],
+    "ms": 677,
+    "usage": {
+     "completion_tokens": 96,
+     "prompt_tokens": 4714,
+     "total_tokens": 4810,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4352
      }
     }
    }

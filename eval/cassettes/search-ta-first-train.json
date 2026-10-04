@@ -1,219 +1,64 @@
 {
  "version": 1,
  "task": "search-ta-first-train",
- "recordedAt": "2026-10-04T14:44:40.052Z",
+ "recordedAt": "2026-10-04T17:08:52.950Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "7f48912e50449b75",
+   "hash": "2b2bda56915f221a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_23dc4e83d25641c08d1c15a6",
-      "name": "click",
-      "args": {
-       "id": 6,
-       "narration": "Opening FROM station box"
-      }
-     },
-     {
-      "id": "call_ee9a4cea666d43a9b62c40b0",
+      "id": "call_5f7f678c2bd340ab9fb181d2",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chennai",
-       "narration": "Typing Chennai"
-      }
-     }
-    ],
-    "ms": 433,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 3756,
-     "total_tokens": 3803,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "a68763e3bd195855",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cae7d1478d674b25a00bb862",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "கிளிக் செய்",
-       "confirmation_question": ""
+       "narration": "From station set to Chennai"
       }
      },
      {
-      "id": "call_992b138250454f178f0482f0",
-      "name": "click",
-      "args": {
-       "id": 8,
-       "narration": "TO பெட்டியை கிளிக் செய்",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 449,
-    "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 3840,
-     "total_tokens": 3896,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "66b0a588b1c4a891",
-   "response": {
-    "content": "",
-    "toolCalls": [],
-    "ms": 3890,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 3848,
-     "total_tokens": 4448,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "1dae91f6de0ffc89",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cb74fc0cd7d34702ab718873",
-      "name": "click",
-      "args": {
-       "id": 8,
-       "narration": "Enter destination Madurai"
-      }
-     },
-     {
-      "id": "call_d0507bdda62c47539eb7cbef",
+      "id": "call_bde75ea943244eafa5d4fe2b",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Madurai",
-       "narration": "Type Madurai"
+       "narration": "To station set to Madurai"
       }
-     }
-    ],
-    "ms": 3343,
-    "usage": {
-     "completion_tokens": 85,
-     "prompt_tokens": 3869,
-     "total_tokens": 3954,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "668952d8cf98f663",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_271a0cb1ecef48bcb9e36b14",
+      "id": "call_4b0ca11f4eed4a728720f907",
       "name": "click",
       "args": {
-       "id": 21,
-       "narration": "கிளிக் Madurai"
+       "id": 12,
+       "narration": "Select tomorrow's date"
       }
-     }
-    ],
-    "ms": 569,
-    "usage": {
-     "completion_tokens": 33,
-     "prompt_tokens": 3921,
-     "total_tokens": 3954,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "5b395a1b1657fc20",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_6f82491d755a47c6b43bdd3e",
+      "id": "call_266fff2712534a79a7363e70",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "SEARCH TRAINS-அ click பண்றேன்"
+       "narration": "Search for trains"
       }
      }
     ],
-    "ms": 656,
+    "ms": 1106,
     "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 3928,
-     "total_tokens": 3977,
+     "completion_tokens": 100,
+     "prompt_tokens": 4056,
+     "total_tokens": 4156,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3648
      }
     }
    }
   },
   {
-   "hash": "5f8db19ffe293bef",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "click",
-      "args": {
-       "id": 23,
-       "narration": "First train-ஐ click பண்றேன்"
-      }
-     }
-    ],
-    "ms": 4188,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 5183,
-     "total_tokens": 5783,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "370587b2661f0688",
+   "hash": "164df47bd310c0aa",
    "response": {
     "content": "",
     "toolCalls": [
@@ -221,27 +66,25 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "நாளைக்கு 6 Oct, முதல் train Sahyadri Vande Bharat Express (16931) காலை 5:00 மணிக்கு Chennai Central-ல இருந்து Madurai-க்கு புறப்படுது. AC Chair Car-ல ₹675, 5 seats available இருக்கு."
+       "speech": "நாளைக்கு Chennai Central-ல இருந்து Madurai Junction-க்கு first train Sahyadri Vande Bharat Express, time 05:00-க்கு கிளம்பும். இது 11:25-க்கு Madurai போய் சேரும், AC Chair Car class-ல ₹675 fare. அடுத்தது Ganga Superfast Express 07:15-க்கு கிளம்பும். உங்களுக்கு இந்த train-ல book பண்ணணுமா?"
       }
      }
     ],
-    "ms": 4136,
+    "ms": 941,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 4001,
-     "total_tokens": 4601,
+     "completion_tokens": 127,
+     "prompt_tokens": 5405,
+     "total_tokens": 5532,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
-    }
+    },
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"நாளைக்கு Chennai Central-ல இருந்து Madurai Junction-க்கு first train Sahyadri Vande Bharat Express, time 05:00-க்கு கிளம்பும். இது 11:25-க்கு Madurai போய் சேரும், AC Chair Car class-ல ₹675 fare. அடுத்தது Ganga Superfast Express 07:15-க்கு கிளம்பும். உங்களுக்கு இந்த train-ல book பண்ணணுமா?\"\n  }\n}"
    }
   }
  ],
- "translate": {
-  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
-  "06d5f51c23d1c42f": "அந்த page-ல இப்படி போட்டுருக்கு:"
- },
+ "translate": {},
  "docs": {}
 }

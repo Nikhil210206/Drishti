@@ -21,6 +21,7 @@ const IRREVERSIBLE = [
   /confirm (booking|payment|order|ticket)/i,
   /book (now|and pay)/i,
   /\bdonate\b/i,
+  /\bsubscribe\b|\brecharge\b|\brenew\b|\bupgrade\b|add money/i,
   /भुगतान|भेजें|जमा करें|पुष्टि करें/,
   /পেমেন্ট|পাঠান|জমা দিন/,
   /செலுத்து|அனுப்பு|சமர்ப்பி/,
@@ -77,6 +78,9 @@ export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmConte
   if (MONEY.test(label) && /pay|book|confirm|proceed|buy|order/i.test(label))
     return { required: true, safe: false, reason: `"${label}" moves money` };
   if (SAFE.some((re) => re.test(label))) return { required: false, safe: true, reason: "" };
+  // Any other button carrying a price may spend it ("Subscribe ₹499", an advert's "Get it ₹99").
+  // Choosing a value (an option, a radio with a fare) only selects.
+  if (MONEY.test(label) && !VALUE_ROLES.has(el.role)) return { required: true, safe: false, reason: `"${label}" has a price` };
   const page = ctx.pageText ?? "";
   if (GENERIC_ADVANCE.test(label) && MONEY.test(page) && PAYMENT_CONTEXT.test(page)) {
     return { required: true, safe: false, reason: `"${label}" on a page asking for money` };

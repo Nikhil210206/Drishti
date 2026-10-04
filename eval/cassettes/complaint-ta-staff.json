@@ -1,16 +1,16 @@
 {
  "version": 1,
  "task": "complaint-ta-staff",
- "recordedAt": "2026-10-04T14:42:06.966Z",
+ "recordedAt": "2026-10-04T17:12:54.052Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "27af921f75feb976",
+   "hash": "7582363920839858",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
+      "id": "call_6a5b24b78de246f9824de395",
       "name": "click",
       "args": {
        "id": 4,
@@ -18,159 +18,150 @@
       }
      }
     ],
-    "ms": 4536,
+    "ms": 446,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 3747,
-     "total_tokens": 4347,
+     "completion_tokens": 44,
+     "prompt_tokens": 4072,
+     "total_tokens": 4116,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "0685ad95ceef0d62",
+   "hash": "cfdf59f668bf2716",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_5ab4dac974a14f75bfef87b8",
-      "name": "select_option",
+      "id": "call_fe92268da1a2454e8f16a020",
+      "name": "click",
       "args": {
        "id": 19,
-       "option": "Staff behaviour",
-       "narration": "Staff behaviour-அ select பண்றேன்"
+       "narration": "Select complaint category",
+       "confirmation_question": ""
       }
-     }
-    ],
-    "ms": 523,
-    "usage": {
-     "completion_tokens": 58,
-     "prompt_tokens": 3629,
-     "total_tokens": 3687,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "f73400fbec4d7e02",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_9d799f7381f549e19d7c78b9",
+      "id": "call_efe3c43c2fa4491e87e9ae93",
       "name": "click",
       "args": {
        "id": 22,
-       "narration": "Submit complaint button-அ click பண்றேன்"
+       "narration": "Submit complaint",
+       "confirmation_question": "Confirm complaint about staff behaviour?"
       }
      }
     ],
-    "ms": 302,
+    "ms": 1133,
     "usage": {
-     "completion_tokens": 29,
-     "prompt_tokens": 3660,
-     "total_tokens": 3689,
+     "completion_tokens": 56,
+     "prompt_tokens": 3954,
+     "total_tokens": 4010,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "e3e94c0b0172c01a",
+   "hash": "9be1cddcd76bfcf9",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_cb2a201dadaf4a1089663544",
-      "name": "type_text",
+      "id": "call_5bb9868ad4f54000b17d2bbe",
+      "name": "click",
       "args": {
-       "id": 21,
-       "text": "Staff behaviour complaint regarding rude staff at the counter.",
-       "narration": "Complaint-அ type பண்றேன்."
+       "id": 25,
+       "narration": "Staff behaviour-அ select பண்றேன்",
+       "confirmation_question": ""
       }
-     }
-    ],
-    "ms": 436,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 3741,
-     "total_tokens": 3783,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "3455fb5b8089d85a",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_c904303496d945a295b5a4f5",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "staff behaviour complaint"
-      }
-     }
-    ],
-    "ms": 447,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 3809,
-     "total_tokens": 3854,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "47fdf3b6d8146a4b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_f770445249c74ad88d970407",
+      "id": "call_76d496e5a6f643d281e727dd",
       "name": "click",
       "args": {
        "id": 22,
        "narration": "Complaint submit பண்றேன்",
-       "confirmation_question": "Staff behaviour complaint-ஐ submit பண்ணட்டுமா? Details: Train 16236 TTE was rude to my mother on 3 October. Submit பண்ணலாமா?"
+       "confirmation_question": "Staff behaviour complaint submit பண்ணலாமா?"
       }
      }
     ],
-    "ms": 921,
+    "ms": 686,
     "usage": {
-     "completion_tokens": 88,
-     "prompt_tokens": 3880,
-     "total_tokens": 3968,
+     "completion_tokens": 68,
+     "prompt_tokens": 4114,
+     "total_tokens": 4182,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "462125821ded3d7d",
+   "hash": "ea1436eb85c8fdc9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1cea08f2b46a47b7bb4d03ec",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "staff behaviour பத்தி complaint"
+      }
+     }
+    ],
+    "ms": 604,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4152,
+     "total_tokens": 4199,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "5f3835b83ea71eb1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3bf70593528449eb83407680",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submit complaint",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 422,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4223,
+     "total_tokens": 4271,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "f942de8340ff27a7",
    "response": {
     "content": "",
     "toolCalls": [
@@ -178,29 +169,30 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "உங்க complaint register ஆகிடுச்சு. Reference number CMP1000. 48 hours-ல response வரும்."
+       "speech": "உங்களோட complaint register ஆயிடுச்சு. Reference number CMP1000. 48 hours-க்குள்ள அவங்க respond பண்ணுவாங்க."
       }
      }
     ],
-    "ms": 4060,
+    "ms": 624,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 3952,
-     "total_tokens": 4552,
+     "completion_tokens": 61,
+     "prompt_tokens": 4295,
+     "total_tokens": 4356,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
-    }
+    },
+    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"உங்களோட complaint register ஆயிடுச்சு. Reference number CMP1000. 48 hours-க்குள்ள அவங்க respond பண்ணுவாங்க.\"\n  }\n}"
    }
   }
  ],
  "translate": {
-  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
   "162fbff513a12228": "Fn key-அ hold பண்ணிட்டு உங்க message-அ பேசுங்க. நான் அத உங்களுக்குத் திரும்பப் படிச்சுச் சொல்றேன்.",
   "dc03b57963107e2f": "நீங்க இப்படி எழுதீங்க:",
-  "d8372154987ad49c": "இது correct-ஆ?"
+  "d8372154987ad49c": "இது correct-ஆ?",
+  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?"
  },
  "docs": {}
 }

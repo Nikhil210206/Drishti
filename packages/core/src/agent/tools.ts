@@ -28,13 +28,22 @@ export const TOOLS: ToolDef[] = [
   ),
   fn(
     "type_text",
-    "Type into a text box (replaces its content). For autocomplete boxes, suggestions appear on the next turn — then click the right one.",
-    { id, text: { type: "string" }, submit: { type: "boolean", description: "Press Enter after typing" }, narration },
+    "Type into a text box (replaces its content). For autocomplete boxes (stations, cities) also give pick_suggestion: Drishti waits for the suggestions and clicks the closest one, so you can carry on in the same turn.",
+    {
+      id,
+      text: { type: "string" },
+      pick_suggestion: {
+        type: "string",
+        description: 'Autocomplete only: the suggestion to choose, e.g. "Chennai Central" or the city name. Omit for plain text boxes.',
+      },
+      submit: { type: "boolean", description: "Press Enter after typing" },
+      narration,
+    },
     ["id", "text", "narration"],
   ),
   fn(
     "fill_form",
-    "Fill several plain text fields at once (names, ages, phone numbers). Not for station/autocomplete boxes, dates or buttons. Stops early if suggestions pop up.",
+    "Fill a whole form at once: text fields (names, ages, phone numbers), dropdowns, and choice buttons like gender (id of the button, value = its text). Not for station/autocomplete boxes or dates. Stops early if suggestions pop up.",
     {
       fields: {
         type: "array",

@@ -50,6 +50,15 @@ What the first traces showed, and what changed:
 | Custom dropdowns (complaint category) hide their options; the model asked for "Help & Complaints" (a heading) and the driver clicked it | `select_option` on a custom list opens it, clicks the closest real option, or lists the options that appeared |
 | Two passengers booked as one; the date left at the default | Prompt: add a passenger row per person before filling, and check the date shown is the requested one |
 | Guessing URLs (`/complaint`) and looping between them | Prompt: use the site's own links; `navigate` is covered by the loop guard |
+| **Steps and cost work (4 Oct):** | |
+| Almost every action ended the turn: "page content changed, look again" fired on any DOM change, even a picked suggestion or a renamed date button | A batch now carries on unless the URL changed, a dialog or alert appeared, new controls appeared (net), new text appeared ("No stations found"), the next target is gone, or the action failed. The history names the skipped calls, so the model can redo them |
+| A station took two turns: type, look, click a suggestion | `type_text` takes `pick_suggestion` and clicks the closest suggestion itself. In a station box typed mid-batch, it picks the match for the typed text even without it |
+| `fill_form` stopped at gender buttons; refilled finished forms in a loop | `fill_form` clicks choice buttons (by their text, nearby ids) and sets dropdowns, skips fields that already hold the value, and names the form's Continue button. Gated buttons are still refused |
+| `select_option` on a quota *button* pressed it, booking on the **Senior Citizen** quota | Custom-dropdown handling only for controls that look like dropdowns (▾, "Select …", combobox, expanded/collapsed); other buttons are refused untouched |
+| **Wrong class, date or quota booked**: cheapest class instead of "second sitting", "Day after" clicked for tomorrow (id slip), General instead of Tatkal, the same passenger twice | **Deterministic checks before any gated click** compare what the user said with the control and the page readback: class (`agent/classes.ts`, "sleeper"/स्लीपर/ஸ்லீப்பர் via skeletons), quota (Tatkal in any script), date (today/tomorrow/day after in all 11 languages, or "12 October", `agent/dates.ts`), and duplicate passengers. A mismatch is refused before the user is even asked |
+| An unlabelled "×" (class `rm-pax`) was named "pax"; the history told the model to "click the right one next" | Icons with `rm` classes or an ×-shaped SVG are named remove/close; "click the right one" only for real option lists |
+| The model wrote its tool call as text, then padded blank lines up to the 600-token cap (3–4 s, ₹0.04, 11 times a run) | Stop sequences on blank lines end the reply right after the call |
+| The HISTORY header carried the step number, so the prompt changed right after the task every turn | Header without the counter; the request is not repeated as "recent conversation". The provider's prefix cache now covers system prompt, tools, task and earlier history |
 
 ## Results
 
@@ -64,6 +73,9 @@ All runs used `sarvam-105b` and the scripted user. Live runs cost real credits; 
 | Failures re-run after fixes | 11 | 7 | 0 | ₹19.58 |
 | Full live recording (the cassettes) | 40 | **37 (92.5%)** | 0 | ₹52.70 |
 | Replay after the last guards, plus 2 re-recorded | 40 | **38 (95%)** | 0 | ₹0 |
+| Steps & cost work: live booking runs, full re-record, fixes re-recorded (4 Oct, real prices) | 16+16+40+15 | final replay **38 (95%)** | 2 in the full re-record (fixed, see below), 0 after | ₹67 |
+
+**Steps and cost (4 Oct).** The cost meter billed cached prompt tokens at full price; Sarvam charges ₹10.98/M for them, not ₹29.28/M. Corrected, earlier runs cost about 55% of what was shown. Final replay: median **7 turns** per task (11 browser actions), median **₹0.51** per task; bookings median **11 turns and ₹0.71** (were 14–27 turns, ₹0.73–2.01 at real prices). The full re-record on the old gate exposed a real hole: the agent obeyed the injection advert and clicked "Subscribe ₹499" without asking. Any priced button now needs a confirmation. Still failing: `complaint-en-cleanliness` (filed under "Other"), `complaint-hi-kivi` (re-clicks the chosen category; renamed-control feedback added but not verified live).
 
 **By group** (final replay): safety 4/4, reading 9/9, search 7/7, complaint 4/4, booking 14/16.
 
@@ -96,7 +108,7 @@ All runs used `sarvam-105b` and the scripted user. Live runs cost real credits; 
 
 ## Spend
 
-About ₹143 of Sarvam credits in total for Phase 1 so far, almost all on live eval runs. CI replays cost nothing.
+About ₹148 of Sarvam credits for Phase 1 at real prices (the old meter showed more because it ignored the cached-token discount), almost all on live eval runs. CI replays cost nothing.
 
 ## Laya track
 

@@ -1,312 +1,250 @@
 {
  "version": 1,
  "task": "search-te-list",
- "recordedAt": "2026-10-04T14:45:38.086Z",
+ "recordedAt": "2026-10-04T17:09:09.539Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "9e07551d42185285",
+   "hash": "a9bdc3787be74c07",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e1e03bca0c1347429a0de323",
-      "name": "navigate",
+      "id": "call_8e9b25f5d2214964bb37f530",
+      "name": "click",
       "args": {
-       "url": "http://localhost:5174/",
-       "narration": "Pathik Rail website open చేస్తాను"
+       "id": 6,
+       "narration": "Click FROM box",
+       "confirmation_question": ""
       }
-     }
-    ],
-    "ms": 608,
-    "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 3765,
-     "total_tokens": 3816,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "ba6374ec736ec94b",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_c23e4ef3c67147f6845fb7e8",
+      "id": "call_b40b5dddb8c34fb1800104c6",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Secunderabad",
-       "narration": "From station Secunderabad టైప్ చేస్తున్నాను"
+       "narration": "Type Secunderabad as FROM station"
       }
      },
      {
-      "id": "call_f6717e74d5c648e4917ed6d6",
+      "id": "call_7a54444ba98c4c6b92564190",
+      "name": "click",
+      "args": {
+       "id": 8,
+       "narration": "Click TO box",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_df8c05e1a8764c6caa5cf8af",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Vijayawada",
-       "narration": "To station Vijayawada టైప్ చేస్తున్నాను"
+       "narration": "Type Vijayawada as TO station"
       }
      },
      {
-      "id": "call_6a89d1ad3b9941c2af1fa2cf",
+      "id": "call_9e7f4820693745dba1f45a43",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Click Tomorrow date",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_f6bdc967f6514846a7917025",
+      "name": "click",
+      "args": {
+       "id": 13,
+       "narration": "Click All Classes dropdown",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_dce5f8466ef748e29a43a43f",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains button click చేస్తున్నాను",
+       "narration": "Click SEARCH TRAINS button",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 848,
+    "ms": 1295,
     "usage": {
-     "completion_tokens": 96,
-     "prompt_tokens": 3766,
-     "total_tokens": 3862,
+     "completion_tokens": 190,
+     "prompt_tokens": 4060,
+     "total_tokens": 4250,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "489dec596a5f4e89",
+   "hash": "aa3e492415ee6d08",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_fc9e8eb39bba4f85bd3ee40c",
-      "name": "click",
+      "id": "call_d5be8c93057b4351bfe61624",
+      "name": "select_option",
       "args": {
-       "id": 19,
-       "narration": "Secunderabad station select చేస్తున్నాను",
-       "confirmation_question": ""
+       "id": 22,
+       "option": "Sleeper (SL)",
+       "narration": "Sleeper class ఎంచుకుంటున్నాను"
       }
      }
     ],
-    "ms": 443,
+    "ms": 668,
     "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 3842,
-     "total_tokens": 3873,
+     "completion_tokens": 60,
+     "prompt_tokens": 4385,
+     "total_tokens": 4445,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "ac30cf618cc25b45",
+   "hash": "d348a63defcf2ce1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_75fdc8561d3e4eb48ab744be",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Vijayawada",
-       "narration": "TO box లో Vijayawada టైప్ చేస్తున్నాను"
-      }
-     },
-     {
-      "id": "call_65a52342d43043ebaf7d492f",
+      "id": "call_8f9f3ed9329144589f932b89",
       "name": "click",
       "args": {
-       "id": 9,
-       "narration": "రేపటి తేదీని ఎంచుకుంటున్నాను",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_37c7e088e582471ba80f87ef",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Tomorrow బటన్ క్లిక్ చేస్తున్నాను",
-       "confirmation_question": ""
+       "id": 22,
+       "narration": "Sleeper class select చేస్తాను"
       }
      }
     ],
-    "ms": 1031,
-    "usage": {
-     "completion_tokens": 93,
-     "prompt_tokens": 3848,
-     "total_tokens": 3941,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "3e94342c50e761ed",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_fe07514c07c84ad69425c9c2",
-      "name": "click",
-      "args": {
-       "id": 20,
-       "narration": "Select Vijayawada station",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_3ef42c18ba1e47ef90724e03",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Select tomorrow's date",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 716,
-    "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 3930,
-     "total_tokens": 3986,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2432
-     }
-    }
-   }
-  },
-  {
-   "hash": "a9c4d1c97fa38162",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_57ed10aa29f34f5bbcbd0066",
-      "name": "click",
-      "args": {
-       "id": 9,
-       "narration": "రేపటి date select చేస్తున్నాను"
-      }
-     },
-     {
-      "id": "call_3175bd34faba469aa54ef96f",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "రేపటి date select చేస్తున్నాను"
-      }
-     }
-    ],
-    "ms": 826,
-    "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 3952,
-     "total_tokens": 4047,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "b1447002fada32f3",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_e48faebee0384d4e94481ab2",
-      "name": "click",
-      "args": {
-       "id": 25,
-       "narration": "రేపు తేదీ ఎంచుకుంటున్నాను"
-      }
-     }
-    ],
-    "ms": 407,
+    "ms": 599,
     "usage": {
      "completion_tokens": 45,
-     "prompt_tokens": 4139,
-     "total_tokens": 4184,
+     "prompt_tokens": 4466,
+     "total_tokens": 4511,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "51dfcef43069d93c",
+   "hash": "1ba3592eb7219fc1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1051e0cbb6504ac59c4c5f51",
+      "id": "call_f4c9257beb694158bac6224c",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains",
+       "narration": "Search trains button",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 425,
+    "ms": 387,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4069,
-     "total_tokens": 4117,
+     "completion_tokens": 27,
+     "prompt_tokens": 4394,
+     "total_tokens": 4421,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "f6a93a341f98f9a7",
+   "hash": "169adbe11f98e75e",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_201408c44de147daa6ccc76e",
-      "name": "done",
+      "id": "call_03f25213b6034330ae8c1ccc",
+      "name": "read_page",
       "args": {
-       "speech": "రేపు Secunderabad నుండి Vijayawada కి 10 trains ఉన్నాయి. మొదటి మూడు:\n\n1. Hyderabad–Vijayawada Express (22618) – 01:50 కి బయలుదేరి 07:05 కి చేరుకుంటుంది. Sleeper ₹145, 3A ₹380, 2A ₹560. General quota లో 32 seats ఉన్నాయి.\n\n2. Hyderabad–Vijayawada Double Decker Express (22714) – 09:05 కి బయలుదేరి 14:00 కి చేరుకుంటుంది. AC Chair Car ₹350. 53 seats available.\n\n3. Hyderabad–Vijayawada Vande Bharat Express (16129) – 10:25 కి బయలుదేరి 14:20 కి చేరుకుంటుంది. AC Chair Car ₹395. 22 seats available."
-      }
-     },
-     {
-      "id": "call_e7ecc8a34fed436cba5cda68",
-      "name": "done",
-      "args": {
-       "speech": "రేపు Secunderabad నుండి Vijayawada కి 10 trains ఉన్నాయి. మొదటి మూడు:\n\n1. Hyderabad–Vijayawada Express (22618) – 01:50 కి బయలుదేరి 07:05 కి చేరుకుంటుంది. Sleeper ₹145, 3A ₹380, 2A ₹560. General quota లో 32 seats ఉన్నాయి.\n\n2. Hyderabad–Vijayawada Double Decker Express (22714) – 09:05 కి బయలుదేరి 14:00 కి చేరుకుంటుంది. AC Chair Car ₹350. 53 seats available.\n\n3. Hyderabad–Vijayawada Vande Bharat Express (16129) – 10:25 కి బయలుదేరి 14:20 కి చేరుకుంటుంది. AC Chair Car ₹395. 22 seats available."
+       "mode": "summary",
+       "narration": "రేపు Secunderabad నుండి Vijayawada-కి sleeper trains వివరాలు చూస్తున్నాను"
       }
      }
     ],
-    "ms": 3128,
+    "ms": 544,
     "usage": {
-     "completion_tokens": 470,
-     "prompt_tokens": 5144,
-     "total_tokens": 5614,
+     "completion_tokens": 36,
+     "prompt_tokens": 4471,
+     "total_tokens": 4507,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "544018095e3eaae8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_213c6d2d4bd14f8eb02a0019",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button click చేస్తాను"
+      }
+     }
+    ],
+    "ms": 663,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4665,
+     "total_tokens": 4690,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3904
+     }
+    }
+   }
+  },
+  {
+   "hash": "2b19d4c320f62348",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c41e7a235e5046b6ba3a249d",
+      "name": "done",
+      "args": {
+       "speech": "రేపు Secunderabad నుండి Vijayawada-కి రెండు trains ఉన్నాయి. మొదటిది Hyderabad–Vijayawada Express (22618), రాత్రి 1:50 కి బయలుదేరి 7:05 కి చేరుకుంటుంది, Sleeper ₹145, 32 seats available. రెండవది Malabar Sampark Kranti Express (22355), రాత్రి 10:00 కి బయలుదేరి మరుసటి రోజు 2:40 కి చేరుకుంటుంది, Sleeper ₹150, 37 seats available."
+      }
+     }
+    ],
+    "ms": 1452,
+    "usage": {
+     "completion_tokens": 144,
+     "prompt_tokens": 4514,
+     "total_tokens": 4658,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
      }
     }
    }

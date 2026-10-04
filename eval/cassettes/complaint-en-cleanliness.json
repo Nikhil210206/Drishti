@@ -1,203 +1,196 @@
 {
  "version": 1,
  "task": "complaint-en-cleanliness",
- "recordedAt": "2026-10-04T14:41:59.521Z",
+ "recordedAt": "2026-10-04T17:12:44.593Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "73f7e9471e77242a",
+   "hash": "13d4c21379948c04",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_775cc873f99a4fa18bb48283",
+      "id": "call_50e5d36ee39c4de6af0b17c3",
       "name": "click",
       "args": {
        "id": 4,
-       "narration": "Open help page"
-      }
-     },
-     {
-      "id": "call_350ac3625e0f44ab9dfc5b21",
-      "name": "click",
-      "args": {
-       "id": 5,
-       "narration": "Open account page"
+       "narration": "Opening help section"
       }
      }
     ],
-    "ms": 367,
+    "ms": 808,
     "usage": {
      "completion_tokens": 40,
-     "prompt_tokens": 3747,
-     "total_tokens": 3787,
+     "prompt_tokens": 4072,
+     "total_tokens": 4112,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "aa3f07fa6e923c49",
+   "hash": "9108f8585c7ee4e3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_69f347add64448379036c895",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Select complaint category"
-      }
-     }
-    ],
-    "ms": 415,
-    "usage": {
-     "completion_tokens": 43,
-     "prompt_tokens": 3629,
-     "total_tokens": 3672,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "a4efabff13245e4d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_452c314911694f2a9cf2b287",
-      "name": "click",
-      "args": {
-       "id": 24,
-       "narration": "Selecting Cleanliness category"
-      }
-     }
-    ],
-    "ms": 420,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 3757,
-     "total_tokens": 3799,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3392
-     }
-    }
-   }
-  },
-  {
-   "hash": "8c423498f0802e44",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c86a24e72ced4051b4b55f2d",
-      "name": "type_text",
-      "args": {
-       "id": 21,
-       "text": "The coach was very dirty. There was garbage on the floor and seats, and the toilets were not clean. This made the journey uncomfortable.",
-       "narration": "Typing the complaint about the dirty coach"
-      }
-     }
-    ],
-    "ms": 691,
-    "usage": {
-     "completion_tokens": 60,
-     "prompt_tokens": 3714,
-     "total_tokens": 3774,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "891016aa3bee6876",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_8d435e9b8c184166a2f39b84",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "your complaint about the dirty coach"
-      }
-     }
-    ],
-    "ms": 486,
-    "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 3800,
-     "total_tokens": 3848,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3328
-     }
-    }
-   }
-  },
-  {
-   "hash": "c694fcd922dc2a96",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_8599cf42b3d84f49953f6ed7",
+      "id": "call_4aed9e0561c446fc95f9f396",
       "name": "click",
       "args": {
        "id": 22,
-       "narration": "Submit the complaint form",
-       "confirmation_question": "Submit the complaint about the dirty coach?"
+       "narration": "Opening complaint form"
       }
      }
     ],
-    "ms": 415,
+    "ms": 410,
     "usage": {
-     "completion_tokens": 35,
-     "prompt_tokens": 3876,
-     "total_tokens": 3911,
+     "completion_tokens": 22,
+     "prompt_tokens": 3954,
+     "total_tokens": 3976,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3392
+      "cached_tokens": 3584
      }
     }
    }
   },
   {
-   "hash": "10111687facc158b",
+   "hash": "5cbe06c9f6908eb4",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_59a7a48025084fb39fa8114e",
-      "name": "done",
+      "id": "call_67f39723acbf47faacf0e26f",
+      "name": "select_option",
       "args": {
-       "speech": "Your complaint has been submitted successfully. The reference number is CMP1000, and they will respond within 48 hours."
+       "id": 19,
+       "option": "Other",
+       "narration": "Selecting complaint category"
       }
      }
     ],
-    "ms": 532,
+    "ms": 414,
     "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 3978,
-     "total_tokens": 4032,
+     "completion_tokens": 28,
+     "prompt_tokens": 4007,
+     "total_tokens": 4035,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3328
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "9a5b34c8345088bf",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8779739238094c56b4ba681e",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "your complaint"
+      }
+     }
+    ],
+    "ms": 688,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4035,
+     "total_tokens": 4079,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "9d0912329923cc0f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e5c8c858d9b9428e9f2cc77b",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Other",
+       "narration": "Selecting Other category"
+      }
+     }
+    ],
+    "ms": 552,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 4111,
+     "total_tokens": 4162,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "c1b0e07d7d2f191d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3cd4d31e618b4323997dc708",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submitting the complaint",
+       "confirmation_question": "Submit complaint about dirty coach on train 12627?"
+      }
+     }
+    ],
+    "ms": 587,
+    "usage": {
+     "completion_tokens": 66,
+     "prompt_tokens": 4138,
+     "total_tokens": 4204,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "3dbcc11c10f59764",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b516728793774354ab5f2608",
+      "name": "done",
+      "args": {
+       "speech": "Your complaint has been registered successfully. The reference number is CMP1000, and you should receive a response within 48 hours."
+      }
+     }
+    ],
+    "ms": 542,
+    "usage": {
+     "completion_tokens": 56,
+     "prompt_tokens": 4225,
+     "total_tokens": 4281,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
      }
     }
    }
