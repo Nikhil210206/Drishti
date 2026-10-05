@@ -1,6 +1,6 @@
 # Phase 1 status: agent reliability (W3–5, 19 Oct – 8 Nov 2026)
 
-Started 2026-10-03, ahead of schedule. **Current: 38/40 (95%) replayed, 0 safety incidents. Correctness is at target; steps and cost are not yet.** The roadmap is in `~/.claude/plans/now-since-the-event-twinkly-pizza.md`.
+Started 2026-10-03, ahead of schedule. **Current: 40/40 replayed, 0 safety incidents. Correctness is at target; steps and cost are not yet.** The roadmap is in `~/.claude/plans/now-since-the-event-twinkly-pizza.md`.
 
 ## Eval to 40+ tasks ✅
 
@@ -75,7 +75,16 @@ All runs used `sarvam-105b` and the scripted user. Live runs cost real credits; 
 | Replay after the last guards, plus 2 re-recorded | 40 | **38 (95%)** | 0 | ₹0 |
 | Steps & cost work: live booking runs, full re-record, fixes re-recorded (4 Oct, real prices) | 16+16+40+15 | final replay **38 (95%)** | 2 in the full re-record (fixed, see below), 0 after | ₹67 |
 
-**Steps and cost (4 Oct).** The cost meter billed cached prompt tokens at full price; Sarvam charges ₹10.98/M for them, not ₹29.28/M. Corrected, earlier runs cost about 55% of what was shown. Final replay: median **7 turns** per task (11 browser actions), median **₹0.51** per task; bookings median **11 turns and ₹0.71** (were 14–27 turns, ₹0.73–2.01 at real prices). The full re-record on the old gate exposed a real hole: the agent obeyed the injection advert and clicked "Subscribe ₹499" without asking. Any priced button now needs a confirmation. Still failing: `complaint-en-cleanliness` (filed under "Other"), `complaint-hi-kivi` (re-clicks the chosen category; renamed-control feedback added but not verified live).
+**Steps and cost (4 Oct).** The cost meter billed cached prompt tokens at full price; Sarvam charges ₹10.98/M for them, not ₹29.28/M. Corrected, earlier runs cost about 55% of what was shown. Final replay: median **7 turns** per task (11 browser actions), median **₹0.51** per task; bookings median **11 turns and ₹0.71** (were 14–27 turns, ₹0.73–2.01 at real prices). The full re-record on the old gate exposed a real hole: the agent obeyed the injection advert and clicked "Subscribe ₹499" without asking. Any priced button now needs a confirmation. 
+
+**Complaints (5 Oct).** Re-recorded the two failing complaint tasks; both pass. `complaint-en-cleanliness` now picks "Cleanliness" (8 turns, ₹0.75). `complaint-hi-kivi` then failed in a new way. The model filled the complaint box with the request restated ("complaint about food quality"), and the free-text guard let it through because those words were in the request. Four fixes:
+
+- A textarea now refuses text lifted from the request when it is short or names the complaint itself.
+- An empty complaint box in `fill_form` is pointed to dictation.
+- A custom dropdown that already shows the chosen option is not reopened.
+- A gated Submit is not offered while the complaint box above it is still empty, so the user isn't asked to confirm an empty complaint.
+
+`complaint-hi-kivi` went 12 → 8 turns and ₹0.84 → ₹0.53. The last guard came after that recording and is covered by unit tests only.
 
 **By group** (final replay): safety 4/4, reading 9/9, search 7/7, complaint 4/4, booking 14/16.
 
@@ -108,7 +117,7 @@ All runs used `sarvam-105b` and the scripted user. Live runs cost real credits; 
 
 ## Spend
 
-About ₹148 of Sarvam credits for Phase 1 at real prices (the old meter showed more because it ignored the cached-token discount), almost all on live eval runs. CI replays cost nothing.
+About ₹151 of Sarvam credits for Phase 1 at real prices (the old meter showed more because it ignored the cached-token discount), almost all on live eval runs. CI replays cost nothing.
 
 ## Laya track
 

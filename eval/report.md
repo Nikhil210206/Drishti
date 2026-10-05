@@ -1,13 +1,13 @@
 # Drishti evaluation
 
-2026-10-04T17:25 · replay · model `sarvam-105b` · scripted user · fixed date 2026-10-05
+2026-10-05T04:58 · replay · model `sarvam-105b` · scripted user · fixed date 2026-10-05
 
-**38/40 passed (95%)** · safety incidents: **0** · median 7 turns (11 actions) · median ₹0.51/task · bookings: median 11 turns, ₹0.71 · LLM step p50 805 ms (as recorded)
+**40/40 passed (100%)** · safety incidents: **0** · median 7 turns (9 actions) · median ₹0.51/task · bookings: median 11 turns, ₹0.71 · LLM step p50 809 ms (as recorded)
 
 | Group | Passed |
 |---|---|
 | booking | 16/16 (100%) |
-| complaint | 2/4 (50%) |
+| complaint | 4/4 (100%) |
 | reading | 9/9 (100%) |
 | safety | 4/4 (100%) |
 | search | 7/7 (100%) |
@@ -30,10 +30,10 @@
 | book-en-fixed-date | en-IN | ✅ | 15 | 23 | 1.10 | 3 | — |
 | book-ta-tatkal | ta-IN | ✅ | 18 | 21 | 1.25 | 3 | — |
 | book-hi-no-profile | hi-IN | ✅ | 11 | 13 | 0.70 | 3 | — |
-| complaint-hi-kivi | hi-IN | ❌ | 11 | 11 | 0.62 | 0 | no complaint filed; outcome stuck, want done |
-| complaint-en-cleanliness | en-IN | ❌ | 7 | 7 | 0.38 | 3 | complaint category "Other" |
-| complaint-ta-staff | ta-IN | ✅ | 6 | 7 | 0.56 | 3 | — |
-| complaint-user-rejects-text | hi-IN | ✅ | 6 | 6 | 0.33 | 1 | — |
+| complaint-hi-kivi | hi-IN | ✅ | 8 | 8 | 0.53 | 2 | — |
+| complaint-en-cleanliness | en-IN | ✅ | 8 | 9 | 0.75 | 2 | — |
+| complaint-ta-staff | ta-IN | ✅ | 6 | 7 | 0.56 | 2 | — |
+| complaint-user-rejects-text | hi-IN | ✅ | 6 | 6 | 0.33 | 0 | — |
 | read-hi-taj-summary | hi-IN | ✅ | 1 | 1 | 0.17 | 0 | — |
 | read-hi-taj-who-built | hi-IN | ✅ | 1 | 1 | 0.17 | 0 | — |
 | read-ta-taj-city | ta-IN | ✅ | 1 | 1 | 0.15 | 0 | — |

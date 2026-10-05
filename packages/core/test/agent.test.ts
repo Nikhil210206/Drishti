@@ -9,7 +9,7 @@ const PAY = "http://localhost:5174/#/pay";
 function agentFor(browser: FakeBrowser, llm: ScriptedLLM) {
   return new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases(), policy: new NavigationPolicy() });
 }
-const run = (agent: Agent, io: RecordingIO) => agent.run("book it", io, new AbortController().signal);
+const run = (agent: Agent, io: RecordingIO, task = "book it") => agent.run(task, io, new AbortController().signal);
 
 describe("Agent safety gate", () => {
   const payPage = page(PAY, { "7": element("PAY ₹845") }, '- Amount payable ₹845\n[7] button "PAY ₹845"');
@@ -808,6 +808,43 @@ describe("Agent: knowing when to stop", () => {
     expect(String(llm.calls[1].messages[1].content)).toContain("Use compose_with_kivi on it");
   });
 
+  it("does not fill a complaint box with words lifted from the request", async () => {
+    const browser = new FakeBrowser({ [HELP]: box }, HELP);
+    const llm = new ScriptedLLM([[{ name: "fill_form", args: { fields: [{ id: 21, value: "खाने की क्वालिटी के बारे में शिकायत" }] } }]]);
+    await run(agentFor(browser, llm), new RecordingIO(), "मुझे खाने की क्वालिटी के बारे में शिकायत दर्ज करनी है");
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("Use compose_with_kivi");
+  });
+
+  it("points an empty complaint box in fill_form to dictation", async () => {
+    const browser = new FakeBrowser({ [HELP]: box }, HELP);
+    const llm = new ScriptedLLM([[{ name: "fill_form", args: { fields: [{ id: 21, value: "" }] } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("use compose_with_kivi on it");
+  });
+
+  it("does not reopen a dropdown that already shows the chosen option", async () => {
+    const closed = page(HELP, { "19": element("Select category ▾", { role: "clickable", tag: "div" }) });
+    const open = page(`${HELP}/open`, {
+      "19": element("Select category ▾", { role: "clickable", tag: "div" }),
+      "25": element("Cleanliness", { role: "clickable", tag: "div" }),
+      "26": element("Food quality", { role: "clickable", tag: "div" }),
+    });
+    const chosen = page(`${HELP}/set`, { "19": element("Food quality ▾", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HELP]: closed, [`${HELP}/open`]: open, [`${HELP}/set`]: chosen }, HELP, {
+      "19": `${HELP}/open`,
+      "26": `${HELP}/set`,
+    });
+    const llm = new ScriptedLLM([
+      [{ name: "select_option", args: { id: 19, option: "Food Quality" } }],
+      [{ name: "click", args: { id: 19 } }],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["click 19", "click 26"]);
+    expect(String(llm.calls[2].messages[1].content)).toContain('already shows "Food quality"');
+  });
+
   it("still clicks a Submit complaint button (with confirmation)", async () => {
     const form = page(HELP, { "22": element("SUBMIT COMPLAINT", { role: "clickable", tag: "div" }) });
     const browser = new FakeBrowser({ [HELP]: form }, HELP);
@@ -816,6 +853,21 @@ describe("Agent: knowing when to stop", () => {
     await run(agentFor(browser, llm), io);
     expect(browser.log).toEqual(["click 22"]);
     expect(io.asked[0].kind).toBe("confirm");
+  });
+
+  it("does not ask to submit while the complaint box is empty", async () => {
+    const form = page(HELP, {
+      "21": element("Describe your issue", { role: "textbox", tag: "textarea" }),
+      "22": element("SUBMIT COMPLAINT", { role: "clickable", tag: "div" }),
+    });
+    form.text = '[21] textbox "Describe your issue" value=""\n[22] clickable "SUBMIT COMPLAINT"';
+    const browser = new FakeBrowser({ [HELP]: form }, HELP);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 22, narration: "" } }]]);
+    const io = new RecordingIO(["haan"]);
+    await run(agentFor(browser, llm), io);
+    expect(browser.log).toEqual([]);
+    expect(io.asked).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("is still empty. Use compose_with_kivi");
   });
 
   it("stops offering dictation after the user rejected it twice", async () => {

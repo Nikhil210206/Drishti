@@ -59,8 +59,12 @@ export class Agent {
   private tried = new Set<string>();
   private declines = 0;
   private composeRejections = 0;
+  /** Custom dropdowns already set this task: id → the option chosen. */
+  private chosen = new Map<string, string>();
   /** Everything the user actually said or dictated this task: the only text allowed into free-text fields. */
   private userTexts: string[] = [];
+  /** What the user dictated or answered, as opposed to the request itself. */
+  private userWords: string[] = [];
   private browser: BrowserDriver;
   private policy: NavigationPolicy;
   private opts: Required<Omit<AgentOptions, "profile" | "now">> & Pick<AgentOptions, "profile" | "now">;
@@ -88,7 +92,9 @@ export class Agent {
     this.tried = new Set<string>();
     this.declines = 0;
     this.composeRejections = 0;
+    this.chosen = new Map();
     const p = this.opts.profile;
+    this.userWords = [];
     this.userTexts = [task, ...io.recent(), ...(p ? [p.name, p.age, p.gender, p.mobile].filter((v): v is string => !!v) : [])];
     let unchanged = 0;
 
@@ -256,6 +262,16 @@ export class Agent {
       }
       switch (call.name) {
         case "click": {
+          // Reopening a dropdown that already shows the chosen option only costs turns (traces:
+          // the complaint category reopened after every hiccup elsewhere on the form).
+          const set = this.chosen.get(String(a.id));
+          if (el && set && el.name.toLowerCase().includes(set.toLowerCase())) {
+            emit({ status: "failed", result: `already "${set}"` });
+            return {
+              line: `${describe()} → not clicked: [${a.id}] already shows "${set}", which you chose. Carry on with the rest of the form; use select_option only to change it.`,
+              failed: true,
+            };
+          }
           const dest = linkTarget(el?.href ?? "", snap.url);
           if (dest && !this.policy.allows(dest)) {
             emit({ status: "blocked", result: "site not allowed" });
@@ -287,6 +303,15 @@ export class Agent {
                 dateMismatch(this.userTexts, facts, this.opts.now?.() ?? new Date()) ||
                 duplicatePassenger(facts)
               : "";
+          // Asking "Submit complaint?" about an empty complaint wastes the user's answer and a turn.
+          const empty = confirmNeeded ? emptyFreeText(snap, a.id) : undefined;
+          if (empty) {
+            emit({ status: "failed", result: `[${empty[0]}] is empty` });
+            return {
+              line: `${describe()} → not clicked: [${empty[0]}] "${empty[1].name}" is still empty. Use compose_with_kivi on it first.`,
+              failed: true,
+            };
+          }
           if (mismatch) {
             emit({ status: "blocked", result: "not what the user asked for" });
             io.emit({ type: "audit", action: "click", target: el?.name, reason: mismatch, confirmed: false });
@@ -379,6 +404,13 @@ export class Agent {
             if (isSensitiveField(fe)) return await this.blockSensitive(f.id, io, emit, `fill_form (stopped at [${f.id}])`);
             if (this.inventedFreeText(fe, String(f.value ?? "")))
               return this.refuseFreeText(f.id, emit, `fill_form (stopped at [${f.id}])${rest}`);
+            if (!String(f.value ?? "").trim() && isFreeTextField(fe) && TEXT_ROLES.has(fe.role)) {
+              emit({ status: "failed", result: "free text needs dictation" });
+              return {
+                line: `fill_form (stopped at [${f.id}]) → [${f.id}] "${fe.name}" is for the user's own words, so leave it out of fill_form and use compose_with_kivi on it.${rest}`,
+                failed: true,
+              };
+            }
             if (this.inventedPersonal(fe, String(f.value ?? "")))
               return this.refusePersonal(f.id, emit, `fill_form (stopped at [${f.id}])${rest}`);
             // Refilling a filled form changes nothing; say so instead of letting the model loop.
@@ -520,7 +552,7 @@ export class Agent {
         }
         case "ask_user": {
           const answer = await io.ask(String(a.question ?? ""), "question");
-          if (answer) this.userTexts.push(answer);
+          if (answer) (this.userTexts.push(answer), this.userWords.push(answer));
           if (answer === null) {
             if (!signal.aborted) await io.sayPhrase("noAnswer");
             return { line: "ask_user → no answer", terminal: true };
@@ -618,6 +650,7 @@ export class Agent {
       };
     }
     await this.browser.click(pick[0]);
+    this.chosen.set(String(id), pick[1].name);
     emit({ status: "ok", result: `chose "${pick[1].name}"` });
     return { line: `${line} → chose [${pick[0]}] "${pick[1].name}"` };
   }
@@ -659,17 +692,22 @@ export class Agent {
 
   /**
    * A complaint, message or review must be in the user's own words. Long text for a free-text
-   * field that the user never said or dictated was written by the model: refuse it.
+   * field that the user never said or dictated was written by the model: refuse it. Words lifted
+   * from the request into a long-form box (a textarea) must be the message itself, not the request
+   * restated: a live trace filed "complaint about food quality" as the complaint.
    */
   private inventedFreeText(el: ElementInfo | undefined, text: string) {
-    if (!el || !isFreeTextField(el) || text.trim().length <= 30) return false;
+    if (!el || !isFreeTextField(el) || !text.trim()) return false;
     const norm = (t: string) =>
       t
         .toLowerCase()
         .replace(/[^\p{L}\p{N}]+/gu, " ")
         .trim();
-    const said = norm(this.userTexts.join(" \n "));
-    return !said.includes(norm(text));
+    if (norm(this.userWords.join(" \n ")).includes(norm(text))) return false;
+    const said = norm(this.userTexts.join(" \n ")).includes(norm(text));
+    if (el.tag === "textarea" || (el.tag === "div" && TEXT_ROLES.has(el.role)))
+      return !said || text.trim().length <= 30 || REQUEST_WORDS.test(text);
+    return text.trim().length > 30 && !said;
   }
 
   /** Names, ages, phone numbers and addresses must come from the profile or the user, never be made up. */
@@ -689,7 +727,7 @@ export class Agent {
   private refuseFreeText(id: number, emit: (p: Partial<StepEvent>) => void, line: string) {
     emit({ status: "blocked", result: "free text must come from the user" });
     return {
-      line: `${line} → REFUSED: [${id}] is a free-text field. Never write the user's message yourself. Use compose_with_kivi so the user dictates it in their own words.`,
+      line: `${line} → REFUSED: [${id}] is a free-text field. Never write the user's message yourself, not even by restating their request. Use compose_with_kivi so the user dictates it in their own words.`,
       failed: true,
     };
   }
@@ -721,6 +759,7 @@ export class Agent {
       const answer = await io.ask(check, "confirm");
       if (answer !== null && yesNo(answer) === "yes") {
         this.userTexts.push(text);
+        this.userWords.push(text);
         await this.browser.type(a.id, text);
         emit({ status: "ok", result: `filled ${text.length} chars from Kivi` });
         return { line: `${line} → user dictated with Kivi and approved; field filled with: "${text}"` };
@@ -859,12 +898,28 @@ const STEP_MAX_TOKENS = 600;
 // cap (3–4 s and ₹0.04 wasted each time). Blank lines never occur inside a tool call, so stop there.
 const RUNAWAY_STOPS = ["\n \n", "\n  \n", "\n    \n", "\n\n\n"];
 
+// "Complaint" and its kin in the 11 languages: text that names them describes the request, not the message.
+const REQUEST_WORDS = /complain|grievance|feedback|शिकायत|तक्रार|புகார்|ఫిర్యాదు|ದೂರು|പരാതി|অভিযোগ|ફરિયાદ|ਸ਼ਿਕਾਇਤ|ଅଭିଯୋଗ/i;
+
 /** Fields for the user's own words: complaints, messages, reviews, descriptions, addresses. */
 function isFreeTextField(el: ElementInfo) {
   if (el.tag === "textarea") return true;
   if (!["textbox", "searchbox"].includes(el.role) && el.tag !== "div") return false;
   return /complain|comment|message|feedback|describe|description|details|review|grievance|query|issue|remarks|शिकायत|संदेश/i.test(
     `${el.name} ${el.fieldHint}`,
+  );
+}
+
+/** An empty box for the user's own words just above a submit button, unless it says it's optional. */
+function emptyFreeText(snap: Snapshot, buttonId: number) {
+  return Object.entries(snap.elements).find(
+    ([i, e]) =>
+      e.tag === "textarea" &&
+      isFreeTextField(e) &&
+      Number(i) < buttonId &&
+      buttonId - Number(i) <= 8 &&
+      !/optional/i.test(`${e.name} ${e.fieldHint}`) &&
+      holds(snap, Number(i), e, ""),
   );
 }
 
