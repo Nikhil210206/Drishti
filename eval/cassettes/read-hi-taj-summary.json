@@ -1,31 +1,31 @@
 {
  "version": 1,
  "task": "read-hi-taj-summary",
- "recordedAt": "2026-10-04T17:07:26.289Z",
+ "recordedAt": "2026-10-05T06:12:27.062Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "3d80b1c7afaa8018",
+   "hash": "cc75911f1afac452",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d56e20a3cdfd4f52b7aa657b",
+      "id": "call_baf68e44c7b744c389224aef",
       "name": "done",
       "args": {
-       "speech": "यह पेज ताज महल पर विकिपीडिया लेख है। इसमें ताज महल की वास्तुकला, निर्माण, इतिहास और अन्य जानकारी दी गई है।"
+       "speech": "यह पेज ताजमहल के बारे में विकिपीडिया का लेख है। इसमें इसकी वास्तुकला, निर्माण, इतिहास और अन्य जानकारियों का विस्तृत वर्णन किया गया है।"
       }
      }
     ],
-    "ms": 708,
+    "ms": 924,
     "usage": {
-     "completion_tokens": 64,
-     "prompt_tokens": 7856,
-     "total_tokens": 7920,
+     "completion_tokens": 68,
+     "prompt_tokens": 7897,
+     "total_tokens": 7965,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
     }
    }

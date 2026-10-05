@@ -1,61 +1,34 @@
 {
  "version": 1,
  "task": "read-en-pmkisan-amount",
- "recordedAt": "2026-10-04T17:07:32.678Z",
+ "recordedAt": "2026-10-05T06:12:40.589Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "732edfe0d6156eb0",
+   "hash": "c6e6e32189f48b4a",
    "response": {
     "content": "",
     "toolCalls": [
      {
       "id": "rec_0",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "Reading PM-KISAN scheme details"
-      }
-     }
-    ],
-    "ms": 627,
-    "usage": {
-     "completion_tokens": 36,
-     "prompt_tokens": 5335,
-     "total_tokens": 5371,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3648
-     }
-    },
-    "raw": "[\n{\"name\": \"read_page\", \"parameters\": {\"mode\": \"summary\", \"narration\": \"Reading PM-KISAN scheme details\"}}"
-   }
-  },
-  {
-   "hash": "e4dd7f1e7680f000",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_2db10b27891f4d16b5eb71ab",
       "name": "done",
       "args": {
-       "speech": "The PM-KISAN scheme gives eligible farmers a financial benefit of Rs. 6000 per year. This amount is paid in three equal installments of Rs. 2000 each, every four months."
+       "speech": "PM-KISAN gives eligible farmer families Rs. 6,000 per year, paid in three equal installments of Rs. 2,000 each every four months."
       }
      }
     ],
-    "ms": 574,
+    "ms": 629,
     "usage": {
-     "completion_tokens": 61,
-     "prompt_tokens": 5532,
-     "total_tokens": 5593,
+     "completion_tokens": 54,
+     "prompt_tokens": 5376,
+     "total_tokens": 5430,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
-    }
+    },
+    "raw": "[\n{\"name\":\"done\",\"parameters\":{\"speech\":\"PM-KISAN gives eligible farmer families Rs. 6,000 per year, paid in three equal installments of Rs. 2,000 each every four months.\"}}"
    }
   }
  ],

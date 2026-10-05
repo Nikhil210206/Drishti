@@ -1,11 +1,11 @@
 {
  "version": 1,
  "task": "read-mr-pmkisan-documents",
- "recordedAt": "2026-10-04T17:07:36.260Z",
+ "recordedAt": "2026-10-05T06:12:43.551Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "0ac16c906830c5bc",
+   "hash": "6adc377d4803a77d",
    "response": {
     "content": "",
     "toolCalls": [
@@ -13,55 +13,52 @@
       "id": "rec_0",
       "name": "read_page",
       "args": {
-       "mode": "verbatim",
-       "narration": "PM Kisan साठी लागणारे documents वाचत आहे"
+       "mode": "summary",
+       "narration": "PM Kisan scheme-चे details वाचतोय"
       }
      }
     ],
-    "ms": 690,
+    "ms": 516,
     "usage": {
-     "completion_tokens": 39,
-     "prompt_tokens": 5333,
-     "total_tokens": 5372,
+     "completion_tokens": 38,
+     "prompt_tokens": 5374,
+     "total_tokens": 5412,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 2112
      }
     },
-    "raw": "[\n{\"name\": \"read_page\", \"parameters\": {\"mode\": \"verbatim\", \"narration\": \"PM Kisan साठी लागणारे documents वाचत आहे\"}}"
+    "raw": "[\n{\"name\": \"read_page\", \"parameters\": {\"mode\": \"summary\", \"narration\": \"PM Kisan scheme-चे details वाचतोय\"}}"
    }
   },
   {
-   "hash": "932d2dbd53f2c89f",
+   "hash": "4d513cbefeb06845",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
+      "id": "call_072dd620c7f74a9db33aca21",
       "name": "done",
       "args": {
-       "speech": "PM किसान योजनेसाठी आधार कार्ड, जमिनीची कागदपत्रे आणि बँक खात्याची माहिती आवश्यक आहे. अधिक माहितीसाठी मी कायदेशीर कागदपत्रांची यादी वाचून दाखवू का?"
+       "speech": "PM किसान योजनेसाठी आवश्यक कागदपत्रे आहेत: आधार कार्ड, जमिनीचे कागदपत्रे आणि सेव्हिंग बँक खाते. तुम्ही CSC केंद्रावर जाऊन ऑनलाइन अर्ज करू शकता."
       }
      }
     ],
-    "ms": 801,
+    "ms": 757,
     "usage": {
-     "completion_tokens": 73,
-     "prompt_tokens": 5381,
-     "total_tokens": 5454,
+     "completion_tokens": 50,
+     "prompt_tokens": 5571,
+     "total_tokens": 5621,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 3712
      }
-    },
-    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"PM किसान योजनेसाठी आधार कार्ड, जमिनीची कागदपत्रे आणि बँक खात्याची माहिती आवश्यक आहे. अधिक माहितीसाठी मी कायदेशीर कागदपत्रांची यादी वाचून दाखवू का?\"\n  }\n}"
+    }
    }
   }
  ],
- "translate": {
-  "5150ce7b601ba660": "चरण 2: व्हीएलई (VLE) राज्य, जिल्हा, उप जिल्हा, तालुका आणि गाव यांसारख्या शेतकरी नोंदणी तपशीलांची संपूर्ण माहिती भरेल, आधार क्रमांक, लाभार्थीचे नाव, प्रवर्ग, बँक तपशील, जमीन नोंदणी आयडी आणि आधार कार्डवर छापलेल्या जन्मतारखे प्रमाणपत्रासाठी तपशील भरेल. चरण 3: व्हीएलई जमीन मालकीच्या कागदपत्रांमध्ये नमूद केल्यानुसार जमिनीचा तपशील जसे की सर्वेक्षण/काहता क्रमांक, खसरा क्रमांक आणि जमिनीचे क्षेत्रफळ भरेल. चरण 4: जमीन, आधार आणि बँक पासबुक यांसारखी कागदपत्रे अपलोड करा. चरण 5: स्व-घोषणापत्र स्वीकारा आणि अर्ज जतन करा. चरण 6: अर्ज जतन केल्यानंतर CSC ID द्वारे पेमेंट करा. चरण 7: आधार क्रमांकाद्वारे लाभार्थी स्थिती तपासा."
- },
+ "translate": {},
  "docs": {}
 }

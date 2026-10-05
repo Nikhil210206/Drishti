@@ -1,155 +1,304 @@
 {
  "version": 1,
  "task": "search-bn-sleeper-available",
- "recordedAt": "2026-10-04T17:08:59.087Z",
+ "recordedAt": "2026-10-05T06:14:28.912Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "3888d97367e5ca44",
+   "hash": "663daed46bba455c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_debfca969c6f4a6e97ff17ec",
+      "id": "call_be07e1c40c4948ab8ee8e31e",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Howrah",
-       "narration": "Howrah লিখছি FROM-এ"
+       "narration": "From Howrah typing"
       }
      },
      {
-      "id": "call_88405ce5ce464a78b7ecbf96",
+      "id": "call_4eab12272c7d409a80e5b3d4",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bhubaneswar",
-       "narration": "Bhubaneswar লিখছি TO-তে"
+       "narration": "To Bhubaneswar typing"
       }
      },
      {
-      "id": "call_ea74febc38624118a15c6b91",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "কাল select করছি",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_e31a962ddff047df8e8c74d7",
-      "name": "click",
-      "args": {
-       "id": 13,
-       "narration": "Sleeper class select করছি",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_bd2c439b9b8e482a849aff4a",
+      "id": "call_5f14e27a7b2d44e4b23fd70a",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "SEARCH TRAINS click করছি",
-       "confirmation_question": ""
+       "narration": "Search trains clicked"
       }
      }
     ],
-    "ms": 3148,
+    "ms": 863,
     "usage": {
-     "completion_tokens": 147,
-     "prompt_tokens": 4055,
-     "total_tokens": 4202,
+     "completion_tokens": 76,
+     "prompt_tokens": 4096,
+     "total_tokens": 4172,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "fc13a1cb355ae127",
+   "hash": "cc38157eb90b5dab",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_37bcc17f7adb4c62bc11f8b7",
+      "id": "rec_0",
       "name": "click",
       "args": {
        "id": 22,
-       "narration": "Sleeper class বেছে নিচ্ছি",
+       "narration": "Sleeper book korun",
+       "confirmation_question": "Howrah থেকে Bhubaneswar, 6 Oct, Sleeper class, 1 passenger, 200 rupees। বুক করব?"
+      }
+     }
+    ],
+    "ms": 835,
+    "usage": {
+     "completion_tokens": 82,
+     "prompt_tokens": 6015,
+     "total_tokens": 6097,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    },
+    "raw": "[\n{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 22,\n    \"narration\": \"Sleeper book korun\",\n    \"confirmation_question\": \"Howrah থেকে Bhubaneswar, 6 Oct, Sleeper class, 1 passenger, 200 rupees। বুক করব?\"\n  }\n}"
+   }
+  },
+  {
+   "hash": "43fd2afd59d9fec9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d2687316c94b46c8b13ca3f1",
+      "name": "select_option",
+      "args": {
+       "id": 56,
+       "option": "Male",
+       "narration": "Gender select"
+      }
+     },
+     {
+      "id": "call_e8a0dcf662654249957d6e09",
+      "name": "type_text",
+      "args": {
+       "id": 54,
+       "text": "Asha",
+       "narration": "Name enter"
+      }
+     },
+     {
+      "id": "call_c8278eafb83b4d8fa87b39c8",
+      "name": "type_text",
+      "args": {
+       "id": 55,
+       "text": "34",
+       "narration": "Age enter"
+      }
+     },
+     {
+      "id": "call_1510578866484dd58cc44613",
+      "name": "type_text",
+      "args": {
+       "id": 61,
+       "text": "9000000001",
+       "narration": "Mobile enter"
+      }
+     },
+     {
+      "id": "call_d35ce7414bbe415dbb2e30dc",
+      "name": "click",
+      "args": {
+       "id": 62,
+       "narration": "Continue click"
+      }
+     }
+    ],
+    "ms": 1870,
+    "usage": {
+     "completion_tokens": 265,
+     "prompt_tokens": 4233,
+     "total_tokens": 4498,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "2be841299a23ea2b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d0359a068377427dae10e98d",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 54,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 55,
+         "value": "34"
+        },
+        {
+         "id": 56,
+         "value": "Female"
+        },
+        {
+         "id": 61,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details filling"
+      }
+     }
+    ],
+    "ms": 793,
+    "usage": {
+     "completion_tokens": 70,
+     "prompt_tokens": 4361,
+     "total_tokens": 4431,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "4913fffdb9faca54",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ef874d5d34ed41418761ba3e",
+      "name": "click",
+      "args": {
+       "id": 62,
+       "narration": "Continue button click",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 457,
+    "ms": 586,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4350,
-     "total_tokens": 4403,
+     "completion_tokens": 49,
+     "prompt_tokens": 4457,
+     "total_tokens": 4506,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "c307dd422d4a72e5",
+   "hash": "44014fccb84d0e63",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6cdb6faddec040c390a4aba5",
+      "id": "call_010e750a17cb486cbf09746a",
       "name": "click",
       "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS"
+       "id": 63,
+       "narration": "Proceed to pay",
+       "confirmation_question": "Confirm booking Kolkata–Bhubaneswar Express 22921, Howrah to Bhubaneswar, 6 Oct, Sleeper, 1 passenger, total ₹220?"
       }
      }
     ],
-    "ms": 371,
+    "ms": 753,
     "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4278,
-     "total_tokens": 4319,
+     "completion_tokens": 88,
+     "prompt_tokens": 4410,
+     "total_tokens": 4498,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3904
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "2353b58ae35d5cdb",
+   "hash": "61621e1c8f3df7e8",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c31e86850d6b47cf86b2d918",
-      "name": "done",
+      "id": "call_75c2b0bbb5d449f2a49b6f14",
+      "name": "click",
       "args": {
-       "speech": "কাল 6 অক্টোবর 2026-এ Howrah থেকে Bhubaneswar-এর sleeper (SL) seat available। 7 টা train দেখাচ্ছে, যার মধ্যে 5 টায় seat available (green) আর 2 টায় RAC (orange)। প্রথম train-টা হলো Kolkata–Bhubaneswar Express (22921), 02:55-এ ছেড়ে যাবে, fare ₹200, 66 seat available। আপনি কি কোনো specific train book করতে চান?"
+       "id": 67,
+       "narration": "₹220 payment confirm করছি",
+       "confirmation_question": "₹220 payment confirm করবেন?"
       }
      }
     ],
-    "ms": 879,
+    "ms": 1022,
     "usage": {
-     "completion_tokens": 134,
-     "prompt_tokens": 4831,
-     "total_tokens": 4965,
+     "completion_tokens": 61,
+     "prompt_tokens": 4397,
+     "total_tokens": 4458,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3904
+      "cached_tokens": 3712
      }
     }
+   }
+  },
+  {
+   "hash": "ae74082ea2a9497d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "done",
+      "args": {
+       "speech": "আপনার booking confirm হয়ে গেছে। PNR নম্বর 4123456700। 6 October-এ Howrah থেকে Bhubaneswar-এর জন্য Kolkata–Bhubaneswar Express (22921)-এ Sleeper seat S4, seat 12-এ Asha Verma-র নামে ticket বুক হয়েছে। Paid amount ₹220।"
+      }
+     }
+    ],
+    "ms": 1158,
+    "usage": {
+     "completion_tokens": 104,
+     "prompt_tokens": 4430,
+     "total_tokens": 4534,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    },
+    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"আপনার booking confirm হয়ে গেছে। PNR নম্বর 4123456700। 6 October-এ Howrah থেকে Bhubaneswar-এর জন্য Kolkata–Bhubaneswar Express (22921)-এ Sleeper seat S4, seat 12-এ Asha Verma-র নামে ticket বুক হয়েছে। Paid amount ₹220।\"\n  }\n}"
    }
   }
  ],
- "translate": {},
+ "translate": {
+  "b3cb319abd0dba2f": "Page-এ বলা হয়েছে:"
+ },
  "docs": {}
 }

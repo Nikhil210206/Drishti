@@ -1,33 +1,34 @@
 {
  "version": 1,
  "task": "read-ta-taj-city",
- "recordedAt": "2026-10-04T17:07:29.451Z",
+ "recordedAt": "2026-10-05T06:12:35.500Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "3b7a703ec49f13fa",
+   "hash": "2e787a0dd37882c2",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_4fe7141d294646b8ab2ff2f1",
+      "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "தாஜ் மகால் ஆக்ரா நகரத்தில் இருக்கு. இது உத்தரப் பிரதேசம் மாநிலத்துல இருக்கு."
+       "speech": "தாஜ் மகால் ஆக்ரா நகரத்துல இருக்கு. இது உத்தரப் பிரதேசம் மாநிலத்துல இருக்கு. இந்த city பேரு ஆக்ரா."
       }
      }
     ],
-    "ms": 902,
+    "ms": 1279,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 7188,
-     "total_tokens": 7236,
+     "completion_tokens": 61,
+     "prompt_tokens": 7229,
+     "total_tokens": 7290,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
-    }
+    },
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"தாஜ் மகால் ஆக்ரா நகரத்துல இருக்கு. இது உத்தரப் பிரதேசம் மாநிலத்துல இருக்கு. இந்த city பேரு ஆக்ரா.\"\n  }\n}"
    }
   }
  ],

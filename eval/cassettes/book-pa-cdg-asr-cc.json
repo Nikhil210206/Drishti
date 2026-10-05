@@ -1,277 +1,48 @@
 {
  "version": 1,
  "task": "book-pa-cdg-asr-cc",
- "recordedAt": "2026-10-04T17:10:23.677Z",
+ "recordedAt": "2026-10-05T06:08:17.735Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "d8808cb90a69e426",
+   "hash": "def94a7191ff2d11",
    "response": {
     "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0c5022abf2ba4724a2add929",
-      "name": "type_text",
-      "args": {
-       "id": 6,
-       "text": "Chandigarh",
-       "narration": "FROM ਵਿੱਚ Chandigarh ਪਾ ਰਿਹਾ ਹਾਂ"
-      }
-     },
-     {
-      "id": "call_f1980cfbe6864bda904bdc76",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Amritsar",
-       "narration": "TO ਵਿੱਚ Amritsar ਪਾ ਰਿਹਾ ਹਾਂ"
-      }
-     },
-     {
-      "id": "call_db124d58cbba47b9ae155bd6",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "ਕੱਲ੍ਹ ਦੀ date select ਕਰ ਰਿਹਾ ਹਾਂ"
-      }
-     },
-     {
-      "id": "call_9f70c609b6fd464ea8f17a7a",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "AC Chair Car",
-       "narration": "AC Chair Car select ਕਰ ਰਿਹਾ ਹਾਂ"
-      }
-     },
-     {
-      "id": "call_ad8422cb92e54b65bb2f684a",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS button click ਕਰ ਰਿਹਾ ਹਾਂ"
-      }
-     }
-    ],
-    "ms": 1922,
+    "toolCalls": [],
+    "ms": 745,
     "usage": {
-     "completion_tokens": 266,
-     "prompt_tokens": 4081,
-     "total_tokens": 4347,
+     "completion_tokens": 54,
+     "prompt_tokens": 4101,
+     "total_tokens": 4155,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3584
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "b2609f0cc08ccd86",
+   "hash": "88c11136acfc08a7",
    "response": {
     "content": "",
-    "toolCalls": [
-     {
-      "id": "call_072d9dbd268e432fa54999e1",
-      "name": "click",
-      "args": {
-       "id": 29,
-       "narration": "CC ticket book ਕਰ ਰਿਹਾ ਹਾਂ",
-       "confirmation_question": "ਕੀ ਮੈਂ Chandigarh ਤੋਂ Amritsar ਲਈ ਕੱਲ੍ਹ AC Chair Car (CC) ਦੀ ticket ₹310 ਵਿੱਚ book ਕਰ ਦੇਵਾਂ?"
-      }
-     }
-    ],
-    "ms": 771,
+    "toolCalls": [],
+    "ms": 2055,
     "usage": {
-     "completion_tokens": 81,
-     "prompt_tokens": 4565,
-     "total_tokens": 4646,
+     "completion_tokens": 182,
+     "prompt_tokens": 4122,
+     "total_tokens": 4304,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3584
-     }
-    }
-   }
-  },
-  {
-   "hash": "a2dc78eaa148f039",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_ae42c8c9c9244e188b4e3a95",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 34,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 35,
-         "value": "34"
-        },
-        {
-         "id": 37,
-         "value": "Female"
-        }
-       ],
-       "narration": "Passenger details ਭਰ ਰਿਹਾ ਹਾਂ"
-      }
-     }
-    ],
-    "ms": 883,
-    "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 4271,
-     "total_tokens": 4366,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3584
-     }
-    }
-   }
-  },
-  {
-   "hash": "b8fb1344c6c32320",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_f6aff62ba7c4437fb5903d61",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 34,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 35,
-         "value": "34"
-        },
-        {
-         "id": 37,
-         "value": "Female"
-        },
-        {
-         "id": 41,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Passenger details fill ਕਰ ਰਿਹਾ ਹਾਂ"
-      }
-     },
-     {
-      "id": "call_2c35ad5d71404574b944b981",
-      "name": "click",
-      "args": {
-       "id": 42,
-       "narration": "Continue ਕਰ ਰਿਹਾ ਹਾਂ",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 938,
-    "usage": {
-     "completion_tokens": 104,
-     "prompt_tokens": 4330,
-     "total_tokens": 4434,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3584
-     }
-    }
-   }
-  },
-  {
-   "hash": "181a1df8472e9dd1",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d309561f000847f5aab21582",
-      "name": "click",
-      "args": {
-       "id": 43,
-       "narration": "Proceed to pay",
-       "confirmation_question": "ਕੀ ਮੈਂ ₹330 ਦੀ payment proceed ਕਰਾਂ?"
-      }
-     }
-    ],
-    "ms": 1079,
-    "usage": {
-     "completion_tokens": 62,
-     "prompt_tokens": 4354,
-     "total_tokens": 4416,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3584
-     }
-    }
-   }
-  },
-  {
-   "hash": "35fad5698ae4d194",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_7428e26d283b428d8971264b",
-      "name": "click",
-      "args": {
-       "id": 47,
-       "narration": "Pay ₹330",
-       "confirmation_question": "ਕੀ ਮੈਂ ₹330 ਦਾ payment ਕਰ ਦੇਵਾਂ?"
-      }
-     }
-    ],
-    "ms": 675,
-    "usage": {
-     "completion_tokens": 63,
-     "prompt_tokens": 4339,
-     "total_tokens": 4402,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "9f79c75f636a334b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_389d0906d4524f8a870c60dd",
-      "name": "done",
-      "args": {
-       "speech": "ਤੁਹਾਡੀ ticket book ਹੋ ਗਈ ਹੈ! PNR 4123456700 ਹੈ। 6 ਅਕਤੂਬਰ ਨੂੰ ਚੰਡੀਗੜ੍ਹ ਤੋਂ ਅੰਮ੍ਰਿਤਸਰ Intercity Express (22441) ਦੀ AC Chair Car ਵਿੱਚ seat 12 ਮਿਲੀ ਹੈ, amount ₹330। ਹੋਰ ਕੁਝ ਚਾਹੀਦਾ ਹੈ?"
-      }
-     }
-    ],
-    "ms": 777,
-    "usage": {
-     "completion_tokens": 91,
-     "prompt_tokens": 4373,
-     "total_tokens": 4464,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3584
+      "cached_tokens": 2112
      }
     }
    }
   }
  ],
  "translate": {
-  "ae3f67e8588f2608": "Page 'ਤੇ ਲਿਖਿਆ ਹੈ:"
+  "3d948dd1d740e516": "ਮੈਂ ਇਸ page 'ਤੇ stuck ਹਾਂ। ਮੈਨੂੰ ਦੱਸੋ ਕਿ next ਕੀ try ਕਰਨਾ ਹੈ।"
  },
  "docs": {}
 }

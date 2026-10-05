@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "complaint-ta-staff",
- "recordedAt": "2026-10-05T05:36:53.205Z",
+ "recordedAt": "2026-10-05T06:12:03.570Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,34 +10,34 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7c0b5f0a4d67423a85fa3e49",
+      "id": "call_cf9b1536c9ea462c8b004333",
       "name": "navigate",
       "args": {
-       "url": "http://localhost:5174/complaint",
-       "narration": "Complaint page-க்கு போறேன்"
+       "url": "http://localhost:5174/help",
+       "narration": "help page-க்கு போறேன்"
       }
      }
     ],
-    "ms": 1541,
+    "ms": 506,
     "usage": {
-     "completion_tokens": 60,
+     "completion_tokens": 34,
      "prompt_tokens": 4092,
-     "total_tokens": 4152,
+     "total_tokens": 4126,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "76ece5de15a63dd7",
+   "hash": "6f22faf71699c49f",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9519004fbf0e4bce95943f68",
+      "id": "call_583050b35acf4545a23bb639",
       "name": "click",
       "args": {
        "id": 4,
@@ -45,103 +45,94 @@
       }
      }
     ],
-    "ms": 1094,
+    "ms": 550,
     "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4150,
-     "total_tokens": 4197,
+     "completion_tokens": 46,
+     "prompt_tokens": 4148,
+     "total_tokens": 4194,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "5d1f70d20324800f",
+   "hash": "40a3ae0ec5ebd9c4",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_48d40a14d5844be4b0316590",
+      "id": "call_4f231047bff0464094231ad5",
       "name": "select_option",
       "args": {
        "id": 19,
        "option": "Staff behaviour",
        "narration": "Staff behaviour-அ select பண்றேன்"
       }
-     },
+     }
+    ],
+    "ms": 600,
+    "usage": {
+     "completion_tokens": 35,
+     "prompt_tokens": 4035,
+     "total_tokens": 4070,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "92a50d668f3cfbaa",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_f9f8aa0acc29480384e7b938",
+      "id": "call_3f57b9c105e540c389ac5969",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "your complaint about staff behaviour"
+      }
+     }
+    ],
+    "ms": 452,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4066,
+     "total_tokens": 4094,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "1b589a312b0d8c83",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_dffcf77c46b04cbbb506fa1e",
       "name": "click",
       "args": {
        "id": 22,
        "narration": "Complaint submit பண்றேன்",
-       "confirmation_question": "Staff behaviour complaint-அ submit பண்ணலாமா? PNR எதுவும் இல்ல, issue description-அ நீங்க சொல்லணும்."
+       "confirmation_question": "உங்க complaint-அ submit பண்ணட்டுமா?"
       }
      }
     ],
-    "ms": 2522,
+    "ms": 976,
     "usage": {
-     "completion_tokens": 142,
-     "prompt_tokens": 4037,
-     "total_tokens": 4179,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "9f45b9402c5c8ec3",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_ca0f0e416b0f4c3cadfa633b",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "Staff behaviour"
-      }
-     }
-    ],
-    "ms": 1201,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4111,
-     "total_tokens": 4155,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "2b6e4611762f9ed5",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_da68c990916a48ea8c8d0c8b",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "Complaint submit பண்ணப் போறேன்",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1493,
-    "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 4182,
-     "total_tokens": 4239,
+     "completion_tokens": 62,
+     "prompt_tokens": 4137,
+     "total_tokens": 4199,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -151,37 +142,36 @@
    }
   },
   {
-   "hash": "0186eb69d1bf9014",
+   "hash": "1d17a63ac36676f3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_665764613dec44a281e5141c",
+      "id": "call_d840cb7244b5413caf7847e1",
       "name": "done",
       "args": {
-       "speech": "உங்க complaint register ஆயிடுச்சு. Reference number CMP1000. 48 hours-குள்ள response வரும்."
+       "speech": "Staff behaviour பத்தி complaint submit ஆகிடுச்சு. Reference number CMP1000. 48 hours-ல response வரும்."
       }
      }
     ],
-    "ms": 1456,
+    "ms": 1078,
     "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4284,
-     "total_tokens": 4338,
+     "completion_tokens": 40,
+     "prompt_tokens": 4239,
+     "total_tokens": 4279,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 3712
      }
     }
    }
   }
  ],
  "translate": {
-  "162fbff513a12228": "Fn key-அ hold பண்ணிட்டு message-அ பேசுங்க. நான் அத உங்களுக்குத் திரும்பப் படிச்சுச் சொல்றேன்.",
+  "162fbff513a12228": "Fn key-அ hold பண்ணிட்டு உங்க message-அ பேசுங்க. நான் அத உங்களுக்குத் திரும்பப் படிச்சுச் சொல்றேன்.",
   "dc03b57963107e2f": "நீங்க இப்படி எழுதீங்க:",
-  "d8372154987ad49c": "இது correct-ஆ?",
-  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?"
+  "d8372154987ad49c": "இது correct-ஆ?"
  },
  "docs": {}
 }

@@ -1,64 +1,110 @@
 {
  "version": 1,
  "task": "search-hi-cheapest",
- "recordedAt": "2026-10-04T17:08:46.636Z",
+ "recordedAt": "2026-10-05T06:14:07.020Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "83ef0f9daf1e301b",
+   "hash": "d35296e0568b6546",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_f61bc01ab9464c8b9675003b",
+      "id": "call_190a40751c124fa0adf15d30",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Delhi",
-       "narration": "From city Delhi type karna"
+       "narration": "Delhi enter kar raha hoon"
       }
      },
      {
-      "id": "call_6cceed75c05644178dbf72cd",
+      "id": "call_3f94c51b5edd4cd19930077e",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Lucknow",
-       "narration": "To city Lucknow type karna"
+       "narration": "Lucknow enter kar raha hoon"
       }
      },
      {
-      "id": "call_b618f9d12d3b42c5bcdbb046",
+      "id": "call_d1d2f8a609364f6ca708d4cc",
       "name": "click",
       "args": {
-       "id": 11,
-       "narration": "Tomorrow select karna"
-      }
-     },
-     {
-      "id": "call_155cb26dd43d40c28fc04974",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains button click karna"
+       "id": 9,
+       "narration": "kal ki date select kar raha hoon"
       }
      }
     ],
-    "ms": 1202,
+    "ms": 758,
     "usage": {
-     "completion_tokens": 186,
-     "prompt_tokens": 4062,
-     "total_tokens": 4248,
+     "completion_tokens": 81,
+     "prompt_tokens": 4103,
+     "total_tokens": 4184,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "e633f7f48615c018",
+   "hash": "6f84ca41634e181d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e95a5cb2f30d47778f647b6b",
+      "name": "click",
+      "args": {
+       "id": 25,
+       "narration": "6 October select कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 905,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4341,
+     "total_tokens": 4385,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "9d6ffa8725b55879",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b27f24bfbc9945379b0cef9f",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
+      }
+     }
+    ],
+    "ms": 468,
+    "usage": {
+     "completion_tokens": 40,
+     "prompt_tokens": 4271,
+     "total_tokens": 4311,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "129e8e8b7fefa6fb",
    "response": {
     "content": "",
     "toolCalls": [
@@ -66,22 +112,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "कल दिल्ली से लखनऊ की सबसे सस्ती टिकट सेकंड सिटिंग (2S) की है, जो 130 रुपये की है। यह Delhi–Lucknow Express (22734) पर है, लेकिन इस पर वेटिंग लिस्ट 2 है। अगर RAC या वेटिंग लिस्ट ठीक लगे, तो Ganga Superfast Express में भी सेकंड सिटिंग 170 रुपये में मिल रही है। क्या आपको किसी और class या train की detail चाहिए?"
+       "speech": "कल दिल्ली से लखनऊ की सबसे सस्ती टिकट ₹130 की है, जो 2S (Second Sitting) class में है। यह Delhi–Lucknow Express (22734) में 2S में ₹130 और Tapti Shatabdi (20918) में 2S में ₹170 है। 2S सबसे सस्ता class है, लेकिन इसमें seat नहीं मिलती, सिर्फ standing allowed है।"
       }
      }
     ],
-    "ms": 993,
+    "ms": 1118,
     "usage": {
-     "completion_tokens": 108,
-     "prompt_tokens": 5562,
-     "total_tokens": 5670,
+     "completion_tokens": 114,
+     "prompt_tokens": 5692,
+     "total_tokens": 5806,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3904
      }
     },
-    "raw": "[\n{\"name\":\"done\",\"parameters\":{\"speech\":\"कल दिल्ली से लखनऊ की सबसे सस्ती टिकट सेकंड सिटिंग (2S) की है, जो 130 रुपये की है। यह Delhi–Lucknow Express (22734) पर है, लेकिन इस पर वेटिंग लिस्ट 2 है। अगर RAC या वेटिंग लिस्ट ठीक लगे, तो Ganga Superfast Express में भी सेकंड सिटिंग 170 रुपये में मिल रही है। क्या आपको किसी और class या train की detail चाहिए?\"}}"
+    "raw": "[\n{\"name\": \"done\", \"parameters\": {\"speech\": \"कल दिल्ली से लखनऊ की सबसे सस्ती टिकट ₹130 की है, जो 2S (Second Sitting) class में है। यह Delhi–Lucknow Express (22734) में 2S में ₹130 और Tapti Shatabdi (20918) में 2S में ₹170 है। 2S सबसे सस्ता class है, लेकिन इसमें seat नहीं मिलती, सिर्फ standing allowed है।\"}\n}"
    }
   }
  ],

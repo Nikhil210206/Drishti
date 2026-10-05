@@ -1,108 +1,108 @@
 {
  "version": 1,
  "task": "book-gu-adi-jp-cc",
- "recordedAt": "2026-10-04T17:02:23.271Z",
+ "recordedAt": "2026-10-05T06:07:56.250Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "58f3b5b362a1afae",
+   "hash": "a08a05767255f10c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_02aa46a2faa246dfb69e71fc",
+      "id": "call_af5559f792fd4a06a9e952ea",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Ahmedabad",
-       "narration": "From station Ahmedabad"
+       "pick_suggestion": "Ahmedabad",
+       "narration": "From Ahmedabad"
       }
      },
      {
-      "id": "call_5ff4947e9fa64c129eabbd09",
+      "id": "call_7a0c61182ee54e0d964cb5b3",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Jaipur",
-       "narration": "To station Jaipur"
+       "pick_suggestion": "Jaipur",
+       "narration": "To Jaipur"
       }
      },
      {
-      "id": "call_b1446e567f4d48d3b683df99",
+      "id": "call_d7b54b79a9cc4cc195114fc7",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "Select Tomorrow's date",
-       "confirmation_question": ""
+       "narration": "Select tomorrow's date"
       }
      },
      {
-      "id": "call_b0f398bc84534ac58e59caa0",
+      "id": "call_b78db6f887bd43f5a5bb9f26",
       "name": "select_option",
       "args": {
        "id": 13,
        "option": "AC Chair Car",
-       "narration": "Select AC Chair Car class"
+       "narration": "Select Chair Car"
       }
      },
      {
-      "id": "call_7fcee2ec351b401eb0288a79",
+      "id": "call_0598cf4aee4e4ab6a834961c",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search for trains",
-       "confirmation_question": ""
+       "narration": "Search trains"
       }
      }
     ],
-    "ms": 2485,
+    "ms": 2519,
     "usage": {
-     "completion_tokens": 259,
-     "prompt_tokens": 4057,
-     "total_tokens": 4316,
+     "completion_tokens": 272,
+     "prompt_tokens": 4098,
+     "total_tokens": 4370,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "e2bc47b8c88d94c3",
+   "hash": "20582791f46c2672",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7d9a46691ffe476bad4f65c0",
+      "id": "call_d0fdcbe79a654ead873f4f56",
       "name": "click",
       "args": {
        "id": 32,
-       "narration": "Lalbagh Intercity Express book karta",
-       "confirmation_question": "Lalbagh Intercity Express, Ahmedabad-થી Jaipur, 6 Oct, AC Chair Car, ₹670, 1 seat book karu?"
+       "narration": "AC Chair Car book કરી રહ્યા છીએ",
+       "confirmation_question": "Lalbagh Intercity Express, Ahmedabad Junction થી Jaipur Junction, 6 October, AC Chair Car, ₹670, 1 seat માટે book કરીએ તો OK?"
       }
      }
     ],
-    "ms": 956,
+    "ms": 2409,
     "usage": {
      "completion_tokens": 66,
-     "prompt_tokens": 4618,
-     "total_tokens": 4684,
+     "prompt_tokens": 4669,
+     "total_tokens": 4735,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3840
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "a607a332efda64cc",
+   "hash": "b17a28ed049708ae",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ec4594ede5cc485d8fb0dfb8",
+      "id": "call_607f974ed01a466e8e81d06f",
       "name": "fill_form",
       "args": {
        "fields": [
@@ -123,128 +123,128 @@
          "value": "9000000001"
         }
        ],
-       "narration": "Passenger details ભરું છું"
+       "narration": "Passenger details ભરી રહ્યો છું"
       }
      }
     ],
-    "ms": 1430,
+    "ms": 1631,
     "usage": {
-     "completion_tokens": 149,
-     "prompt_tokens": 4238,
-     "total_tokens": 4387,
+     "completion_tokens": 150,
+     "prompt_tokens": 4289,
+     "total_tokens": 4439,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3840
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "f8d46ef32337e562",
+   "hash": "ae337733139d58af",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_37ea7e8798a94e1795f63fb0",
+      "id": "call_84c7074b78c04ba6b15caecc",
       "name": "click",
       "args": {
        "id": 43,
-       "narration": "Continue to next step"
+       "narration": "Passenger details continue karo"
       }
      }
     ],
-    "ms": 561,
+    "ms": 695,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4334,
-     "total_tokens": 4376,
+     "completion_tokens": 44,
+     "prompt_tokens": 4385,
+     "total_tokens": 4429,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3840
+      "cached_tokens": 3904
      }
     }
    }
   },
   {
-   "hash": "91940e84e59a510a",
+   "hash": "82109d29b8f696c3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_314aa14273924f47ad69c46d",
+      "id": "call_05ce7cc163a9471cb58953d1",
       "name": "click",
       "args": {
        "id": 44,
        "narration": "Proceed to pay",
-       "confirmation_question": "આ ticket book કરવા માટે ₹690 pay કરશો? Train Lalbagh Intercity Express, Ahmedabad to Jaipur, 6 Oct, AC Chair Car, 1 passenger"
+       "confirmation_question": "Confirm booking for Lalbagh Intercity Express 11602, Ahmedabad to Jaipur, 6 Oct, AC Chair Car, 1 passenger, total 690 rupees?"
       }
      }
     ],
-    "ms": 1282,
+    "ms": 927,
     "usage": {
-     "completion_tokens": 85,
-     "prompt_tokens": 4286,
-     "total_tokens": 4371,
+     "completion_tokens": 90,
+     "prompt_tokens": 4337,
+     "total_tokens": 4427,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2624
+      "cached_tokens": 4032
      }
     }
    }
   },
   {
-   "hash": "7f25d1f33ae8b28e",
+   "hash": "147b767972f7e964",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_77a38e900e7d42ac96975e56",
+      "id": "call_48ba505575874530841a3bce",
       "name": "click",
       "args": {
        "id": 48,
        "narration": "₹690 pay કરો",
-       "confirmation_question": "₹690 pay કરીને AC Chair Car ticket book કરી દઉં?"
+       "confirmation_question": "શું તમે ₹690 pay કરીને AC Chair Car ticket book કરવા માંગો છો?"
       }
      }
     ],
-    "ms": 878,
+    "ms": 1000,
     "usage": {
-     "completion_tokens": 67,
-     "prompt_tokens": 4274,
-     "total_tokens": 4341,
+     "completion_tokens": 69,
+     "prompt_tokens": 4325,
+     "total_tokens": 4394,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2624
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "bd758112ff3f5035",
+   "hash": "0c6d9d21dfd2ea6b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d80628912a6444d99a18cff7",
+      "id": "call_36d17b3e99a942bb8a8a9834",
       "name": "done",
       "args": {
-       "speech": "તમારી Ahmedabad થી Jaipur ની chair car ticket book થઈ ગઈ છે. PNR નંબર 4123456700 છે, Lalbagh Intercity Express (11602), મંગળવાર 6 ઓક્ટોબર, C3 seat 12, ₹690 ભર્યા છે."
+       "speech": "તમારી Ahmedabad થી Jaipur ની AC Chair Car ની ticket book થઈ ગઈ છે. PNR નંબર 4123456700 છે. Lalbagh Intercity Express (11602) માં તમારી seat C3, seat 12 છે અને ₹690 pay થયા છે."
       }
      }
     ],
-    "ms": 903,
+    "ms": 1096,
     "usage": {
-     "completion_tokens": 99,
-     "prompt_tokens": 4308,
-     "total_tokens": 4407,
+     "completion_tokens": 91,
+     "prompt_tokens": 4359,
+     "total_tokens": 4450,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3968
+      "cached_tokens": 2112
      }
     }
    }

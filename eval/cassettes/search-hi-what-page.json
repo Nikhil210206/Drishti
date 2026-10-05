@@ -1,109 +1,27 @@
 {
  "version": 1,
  "task": "search-hi-what-page",
- "recordedAt": "2026-10-04T17:09:34.225Z",
+ "recordedAt": "2026-10-05T06:15:20.661Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "0593d533c4178caa",
+   "hash": "767e5dc767f1c718",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_4a7354f46b6944bd8e4584de",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "इस पेज पर क्या क्या है, पढ़ रहा हूँ"
-      }
-     }
-    ],
-    "ms": 377,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4050,
-     "total_tokens": 4081,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3648
-     }
-    }
-   }
-  },
-  {
-   "hash": "22947aee2fbda826",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_a2ce844203a24e4aafc692b8",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "इस पेज पर क्या क्या है"
-      }
-     }
-    ],
-    "ms": 809,
-    "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 4223,
-     "total_tokens": 4274,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3648
-     }
-    }
-   }
-  },
-  {
-   "hash": "baa6ba6e418e960d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4846c9c705b44110883d30a8",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS पर click कर रहा हूँ",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 773,
-    "usage": {
-     "completion_tokens": 60,
-     "prompt_tokens": 4092,
-     "total_tokens": 4152,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "6e786ef95bed7db2",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_577f7493cd1f444d91a318b1",
+      "id": "call_811f7bdce7024ad8883b94d5",
       "name": "done",
       "args": {
-       "speech": "इस पेज पर train tickets book करने का form है। ऊपर से नीचे: FROM और TO के लिए station नाम लिखने की जगह है, DATE के लिए 6 Oct 2026, Today, Tomorrow, Day after के options हैं, CLASS में All Classes, General, Tatkal, Ladies, Senior Citizen हैं। SEARCH TRAINS button भी है, लेकिन अभी stations नहीं चुने गए हैं, इसलिए alert आ रहा है। Page के नीचे Tatkal booking time की जानकारी भी है। यह Pathik Rail demo website है।"
+       "speech": "इस पेज पर आप train tickets book कर सकते हैं — FROM, TO, DATE, CLASS और SEARCH TRAINS के options हैं। Tatkal booking की timing भी दी है। यह एक demo site है, कोई real booking नहीं होती।"
       }
      }
     ],
-    "ms": 1065,
+    "ms": 870,
     "usage": {
-     "completion_tokens": 133,
-     "prompt_tokens": 4163,
-     "total_tokens": 4296,
+     "completion_tokens": 80,
+     "prompt_tokens": 4091,
+     "total_tokens": 4171,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,

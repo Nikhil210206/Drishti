@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "complaint-user-rejects-text",
- "recordedAt": "2026-10-05T05:50:41.973Z",
+ "recordedAt": "2026-10-05T06:12:15.294Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,38 +10,20 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6e1a3569ed66448093821f7b",
+      "id": "call_57fe8f7f9e3d4dada12e355e",
       "name": "click",
       "args": {
        "id": 4,
        "narration": "help page खोल रहा हूँ",
        "confirmation_question": ""
       }
-     },
-     {
-      "id": "call_e3e9acf258cd40e2b8a378b7",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "search trains button",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_4928364126814c1c923f4418",
-      "name": "click",
-      "args": {
-       "id": 5,
-       "narration": "account page खोल रहा हूँ",
-       "confirmation_question": ""
-      }
      }
     ],
-    "ms": 1813,
+    "ms": 697,
     "usage": {
-     "completion_tokens": 79,
+     "completion_tokens": 51,
      "prompt_tokens": 4092,
-     "total_tokens": 4171,
+     "total_tokens": 4143,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -51,61 +33,157 @@
    }
   },
   {
-   "hash": "d2cdb99de9ada33c",
+   "hash": "505eb46fd531a045",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_31c7465458114f25853dcb83",
-      "name": "click",
+      "id": "call_13280008ad0e4fd89bda20d6",
+      "name": "fill_form",
       "args": {
-       "id": 19,
-       "narration": "Category dropdown खोल रहा हूँ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_2e70f8265808486098b999a9",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "Complaint submit कर रहा हूँ",
-       "confirmation_question": "क्या आप वाकई सफाई के बारे में शिकायत सबमिट करना चाहते हैं? यह एक demo website है और कोई real booking नहीं होगी।"
+       "fields": [
+        {
+         "id": 19,
+         "value": "Complaint about cleanliness"
+        },
+        {
+         "id": 20,
+         "value": ""
+        },
+        {
+         "id": 21,
+         "value": "The train coach was very dirty. There was garbage on the floor and the toilets were not cleaned properly. I want this to be noted and action taken."
+        }
+       ],
+       "narration": "Filling complaint form"
       }
      }
     ],
-    "ms": 1700,
+    "ms": 1146,
     "usage": {
-     "completion_tokens": 81,
-     "prompt_tokens": 4011,
-     "total_tokens": 4092,
+     "completion_tokens": 143,
+     "prompt_tokens": 3974,
+     "total_tokens": 4117,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "2b0ec0abdea13d2d",
+   "hash": "3872fd50cd338063",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_8978bf75f3ec42e78fa9081c",
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Category dropdown खोल रहा हूँ"
+      }
+     }
+    ],
+    "ms": 562,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4021,
+     "total_tokens": 4064,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    },
+    "raw": "[{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 19,\n    \"narration\": \"Category dropdown खोल रहा हूँ\"\n  }}"
+   }
+  },
+  {
+   "hash": "d7e105a4a2cc6ddc",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d55d6de9efb047d6bcbe240d",
       "name": "click",
       "args": {
        "id": 24,
-       "narration": "Cleanliness category चुन रहा हूँ",
+       "narration": "साफ-सफाई की शिकायत चुनना",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 6785,
+    "ms": 699,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4171,
+     "completion_tokens": 55,
+     "prompt_tokens": 4149,
+     "total_tokens": 4204,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "1a114e5719ee9aff",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cfc1ad7d889f4bf49d56c910",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Complaint category select करना",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_3682eeb6b8f846b6a586cb0b",
+      "name": "click",
+      "args": {
+       "id": 24,
+       "narration": "Cleanliness select करना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 639,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 4119,
+     "total_tokens": 4173,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "5ff1df0c2bb9fe98",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_98918910c41d48c1a82c3684",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Cleanliness",
+       "narration": "Complaint category चुनना है"
+      }
+     }
+    ],
+    "ms": 432,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4193,
      "total_tokens": 4224,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
@@ -116,34 +194,25 @@
    }
   },
   {
-   "hash": "47e7ed5a77d00deb",
+   "hash": "f8a6ade6f1138b85",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_89180b90e2d54180994ca459",
-      "name": "click",
+      "id": "call_49ff875b65c940f7823b88e0",
+      "name": "select_option",
       "args": {
-       "id": 24,
-       "narration": "Cleanliness चुन रही हूँ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_ebb675677832416f9abd3d87",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "Complaint submit कर रही हूँ",
-       "confirmation_question": "क्या आप Cleanliness की complaint submit करना चाहती हैं? यह complaint submit हो जाएगी।"
+       "id": 19,
+       "option": "Cleanliness",
+       "narration": "Cleanliness category select कर रहा हूँ"
       }
      }
     ],
-    "ms": 2730,
+    "ms": 389,
     "usage": {
-     "completion_tokens": 72,
-     "prompt_tokens": 4141,
-     "total_tokens": 4213,
+     "completion_tokens": 33,
+     "prompt_tokens": 4224,
+     "total_tokens": 4257,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -153,51 +222,25 @@
    }
   },
   {
-   "hash": "d4d8cb757e44a302",
+   "hash": "aba4df1d2c1ff2c7",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c8e54a48191f44f8ba1b4dd4",
-      "name": "compose_with_kivi",
+      "id": "call_5bf6c66cb561420c973ed977",
+      "name": "select_option",
       "args": {
-       "id": 21,
-       "what": "अपनी सफाई की शिकायत लिखें"
+       "id": 19,
+       "option": "Cleanliness",
+       "narration": "Cleanliness category चुनना"
       }
      }
     ],
-    "ms": 1274,
+    "ms": 786,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4222,
-     "total_tokens": 4270,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "6dadbef23bf0e0e1",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3e7a1bad73484c54ad841008",
-      "name": "click",
-      "args": {
-       "id": 24,
-       "narration": "Cleanliness select कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 1572,
-    "usage": {
-     "completion_tokens": 46,
-     "prompt_tokens": 4271,
-     "total_tokens": 4317,
+     "completion_tokens": 31,
+     "prompt_tokens": 4296,
+     "total_tokens": 4327,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -207,54 +250,83 @@
    }
   },
   {
-   "hash": "b2429d6c7456d034",
+   "hash": "d808b04efaf7ecc5",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
-      "name": "ask_user",
+      "id": "call_9d7880d7cae0442da9689210",
+      "name": "select_option",
       "args": {
-       "question": "आपने जो शिकायत का विवरण लिखा था, वह रिजेक्ट हो गया। क्या आप फिर से कोशिश करना चाहेंगे, या यहीं रुक जाएँ?"
+       "id": 19,
+       "option": "Cleanliness",
+       "narration": "Select cleanliness category"
       }
      }
     ],
-    "ms": 1275,
+    "ms": 474,
     "usage": {
-     "completion_tokens": 59,
-     "prompt_tokens": 4332,
-     "total_tokens": 4391,
+     "completion_tokens": 30,
+     "prompt_tokens": 4345,
+     "total_tokens": 4375,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 3712
      }
-    },
-    "raw": "[{\n  \"name\": \"ask_user\",\n  \"parameters\": {\n    \"question\": \"आपने जो शिकायत का विवरण लिखा था, वह रिजेक्ट हो गया। क्या आप फिर से कोशिश करना चाहेंगे, या यहीं रुक जाएँ?\"\n  }\n}"
+    }
    }
   },
   {
-   "hash": "e3911fe0dc40523e",
+   "hash": "5273641d220435af",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_b217997a4a864a27811302ee",
-      "name": "done",
+      "id": "call_fe56747c2e1545fa9cdf2446",
+      "name": "click",
       "args": {
-       "speech": "आपकी सफाई की शिकायत अभी submit नहीं हुई। अगर आप चाहें तो मैं फिर से शिकायत लिखने में मदद कर सकता हूँ।"
+       "id": 19,
+       "narration": "खुलने वाला dropdown चुनना है",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_4e251621b0094048a95d422d",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 20,
+         "value": ""
+        },
+        {
+         "id": 21,
+         "value": "सफाई के बारे में शिकायत है, कृपया ध्यान दें"
+        }
+       ],
+       "narration": "शिकायत का विवरण भरना है"
+      }
+     },
+     {
+      "id": "call_6bff7ebb7a0c44dab192fe3f",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "शिकायत सबमिट करना है",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 1510,
+    "ms": 1193,
     "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 4398,
-     "total_tokens": 4450,
+     "completion_tokens": 111,
+     "prompt_tokens": 4394,
+     "total_tokens": 4505,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 4096
      }
     }
    }

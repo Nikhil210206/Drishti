@@ -1,102 +1,30 @@
 {
  "version": 1,
  "task": "book-hi-day-after",
- "recordedAt": "2026-10-04T17:05:10.040Z",
+ "recordedAt": "2026-10-05T06:09:52.337Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "96e2b0b306ee12df",
+   "hash": "b0bc4b2b7be3f1d4",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_72d0894e43654dfdb3fe75a7",
+      "id": "call_1aeddc96c222404fae51963f",
       "name": "type_text",
       "args": {
        "id": 6,
-       "text": "Chennai",
-       "narration": "FROM में चेन्नई डाल रहा हूँ"
-      }
-     },
-     {
-      "id": "call_468985094e8b4c4baf6805c1",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Madurai",
-       "narration": "TO में मदुरै डाल रहा हूँ"
-      }
-     },
-     {
-      "id": "call_040913b810554fcd9e99128e",
-      "name": "type_text",
-      "args": {
-       "id": 12,
-       "text": "17",
-       "narration": "परसों की तारीख 17 Oct डाल रहा हूँ"
-      }
-     },
-     {
-      "id": "call_02476ee860b5413bbaa78d88",
-      "name": "click",
-      "args": {
-       "id": 13,
-       "narration": "All Classes खोल रहा हूँ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_c51d0953ed414ee28873b78a",
-      "name": "select_option",
-      "args": {
-       "id": 14,
-       "option": "Sleeper",
-       "narration": "Sleeper class चुन रहा हूँ"
-      }
-     },
-     {
-      "id": "call_4da0a8bb06514ee689b694b5",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search Trains दबा रहा हूँ",
-       "confirmation_question": ""
+       "text": "Chennai Central",
+       "pick_suggestion": "Chennai Central",
+       "narration": "From station डाल रही हूँ"
       }
      }
     ],
-    "ms": 2995,
+    "ms": 964,
     "usage": {
-     "completion_tokens": 329,
-     "prompt_tokens": 4059,
-     "total_tokens": 4388,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3648
-     }
-    }
-   }
-  },
-  {
-   "hash": "9ff703288f15ef7d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d042aaf5ea0e4786bb6017c8",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "Day after चुनना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 518,
-    "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 4244,
-     "total_tokens": 4296,
+     "completion_tokens": 65,
+     "prompt_tokens": 4100,
+     "total_tokens": 4165,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -106,189 +34,265 @@
    }
   },
   {
-   "hash": "4ec3b3f51fc19bcb",
+   "hash": "54c05515d567acde",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_726790afb0624cfba97987fc",
-      "name": "select_option",
+      "id": "call_2f36deae42b64afbb2b7061c",
+      "name": "type_text",
       "args": {
-       "id": 13,
-       "option": "SL",
-       "narration": "Sleeper class select"
+       "id": 8,
+       "text": "Madurai",
+       "narration": "मदुरै दर्ज कर रहा हूँ"
       }
      },
      {
-      "id": "call_ac8cd2ddeaac41e787060a13",
+      "id": "call_327f14085ab944d180c80ec9",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Madurai",
+       "narration": "मदुरै दर्ज कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_77b06216f0024409954e763c",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "Sleeper",
+       "narration": "स्लीपर क्लास चुन रहा हूँ"
+      }
+     },
+     {
+      "id": "call_8a9cd94bead14fb5a286b738",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains",
+       "narration": "सर्च ट्रेन बटन दबा रहा हूँ"
+      }
+     }
+    ],
+    "ms": 2226,
+    "usage": {
+     "completion_tokens": 224,
+     "prompt_tokens": 4131,
+     "total_tokens": 4355,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "bee3d8263008bfb9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8a1ada32be664f69b54c0275",
+      "name": "click",
+      "args": {
+       "id": 31,
+       "narration": "Lalbagh Sampark Kranti Express book कर रहा हूँ",
+       "confirmation_question": "परसों 7 अक्टूबर को चेन्नई सेंट्रल से मदुरै के लिए स्लीपर क्लास, 13 सीटें, ₹255 प्रति टिकट, कुल ₹255, क्या मैं बुक कर दूँ?"
+      }
+     }
+    ],
+    "ms": 2854,
+    "usage": {
+     "completion_tokens": 80,
+     "prompt_tokens": 4510,
+     "total_tokens": 4590,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "53e24884351e59e6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9ea2b081471b4370a2a9370e",
+      "name": "click",
+      "args": {
+       "id": 28,
+       "narration": "Modify search",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 875,
+    "ms": 1010,
     "usage": {
-     "completion_tokens": 109,
-     "prompt_tokens": 4258,
-     "total_tokens": 4367,
+     "completion_tokens": 49,
+     "prompt_tokens": 4603,
+     "total_tokens": 4652,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3840
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "8f68300403c0520b",
+   "hash": "d047edc384ead97d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_48df395a58434375bf475cbd",
+      "id": "call_83c12099ffab428e97c6c5b0",
       "name": "click",
       "args": {
-       "id": 30,
-       "narration": "Book Ganga Superfast Express ticket",
-       "confirmation_question": "क्या आप 7 अक्टूबर 2026 को चेन्नई सेंट्रल से मदुरै जंक्शन के लिए गंगा सुपरफास्ट एक्सप्रेस (11261) की स्लीपर टिकट ₹265 में बुक करना चाहती हैं?"
+       "id": 9,
+       "narration": "परसों की तारीख चुनें"
       }
      }
     ],
-    "ms": 885,
+    "ms": 1017,
     "usage": {
-     "completion_tokens": 106,
-     "prompt_tokens": 4570,
-     "total_tokens": 4676,
+     "completion_tokens": 44,
+     "prompt_tokens": 4401,
+     "total_tokens": 4445,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3904
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "21f80c9418cc89ac",
+   "hash": "26af52365678e2cc",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c6aaadcfae9347028e493850",
+      "id": "call_bb9e06f422924596a89f49ea",
+      "name": "click",
+      "args": {
+       "id": 38,
+       "narration": "7 अक्टूबर चुनना"
+      }
+     }
+    ],
+    "ms": 1414,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4572,
+     "total_tokens": 4616,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "cbecd54dcf14648c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_09d2842d9a0c453e9ed2d4f2",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "SEARCH TRAINS पर click करना"
+      }
+     },
+     {
+      "id": "call_5f9b695ae46a4235aaab1310",
+      "name": "click",
+      "args": {
+       "id": 31,
+       "narration": "book ticket पर click करना",
+       "confirmation_question": "क्या आप परसों, 7 अक्टूबर, चेन्नई सेंट्रल से मदुरै जंक्शन, स्लीपर क्लास, 1 टिकट ₹255 में बुक करना चाहती हैं?"
+      }
+     }
+    ],
+    "ms": 2221,
+    "usage": {
+     "completion_tokens": 139,
+     "prompt_tokens": 4503,
+     "total_tokens": 4642,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "34a1bbce26d2b503",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5f3711b74fb9486193326a12",
+      "name": "click",
+      "args": {
+       "id": 63,
+       "narration": "परसों की sleeper ticket book कर रहा हूँ",
+       "confirmation_question": "क्या मैं परसों 7 अक्टूबर को Chennai Central से Madurai Junction के लिए Ganga Superfast Express की sleeper ticket ₹265 में book कर दूँ?"
+      }
+     }
+    ],
+    "ms": 1020,
+    "usage": {
+     "completion_tokens": 65,
+     "prompt_tokens": 4803,
+     "total_tokens": 4868,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4032
+     }
+    }
+   }
+  },
+  {
+   "hash": "02d16aed51eadff3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5e88b13f7b694ee6b70bfb37",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 34,
+         "id": 67,
          "value": "Asha Verma"
         },
         {
-         "id": 35,
+         "id": 68,
          "value": "34"
         },
         {
-         "id": 36,
+         "id": 69,
          "value": "Female"
-        },
-        {
-         "id": 41,
-         "value": "9000000001"
         }
        ],
-       "narration": "Passenger details fill kar raha hoon"
+       "narration": ""
       }
      }
     ],
-    "ms": 1429,
+    "ms": 1460,
     "usage": {
-     "completion_tokens": 150,
-     "prompt_tokens": 4362,
-     "total_tokens": 4512,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3648
-     }
-    }
-   }
-  },
-  {
-   "hash": "d7ff0b305fa9a9a7",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bc63342ec83d4cdabfad2368",
-      "name": "click",
-      "args": {
-       "id": 42,
-       "narration": "Continue करें"
-      }
-     }
-    ],
-    "ms": 526,
-    "usage": {
-     "completion_tokens": 40,
-     "prompt_tokens": 4458,
-     "total_tokens": 4498,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3648
-     }
-    }
-   }
-  },
-  {
-   "hash": "8268e2c9bcb1fa88",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_7d5f63039c434aeb8d2aec4a",
-      "name": "click",
-      "args": {
-       "id": 43,
-       "narration": "Proceed to pay",
-       "confirmation_question": "Chennai Central से Madurai Junction, 7 Oct, Sleeper, 1 passenger, total 285 rupees — book करूँ?"
-      }
-     }
-    ],
-    "ms": 634,
-    "usage": {
-     "completion_tokens": 80,
-     "prompt_tokens": 4409,
-     "total_tokens": 4489,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3968
-     }
-    }
-   }
-  },
-  {
-   "hash": "7f3ef4a8e88731a7",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4d3cbdc5a2da4503aea3126b",
-      "name": "click",
-      "args": {
-       "id": 47,
-       "narration": "Pay ₹285",
-       "confirmation_question": "क्या आप ₹285 का payment करना चाहते हैं?"
-      }
-     }
-    ],
-    "ms": 713,
-    "usage": {
-     "completion_tokens": 63,
-     "prompt_tokens": 4399,
-     "total_tokens": 4462,
+     "completion_tokens": 111,
+     "prompt_tokens": 4596,
+     "total_tokens": 4707,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -298,27 +302,188 @@
    }
   },
   {
-   "hash": "88546b37d92cbfac",
+   "hash": "1c9ace6144bf6379",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_eec40e745dca4c018aca2088",
+      "id": "call_d867f2b36c4c4f75bd2450d0",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 67,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 68,
+         "value": "34"
+        },
+        {
+         "id": 70,
+         "value": "Female"
+        }
+       ],
+       "narration": "Passenger details fill कर रहा हूँ"
+      }
+     },
+     {
+      "id": "call_01bb3c91323d475593df2bb2",
+      "name": "click",
+      "args": {
+       "id": 75,
+       "narration": "Continue करना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1204,
+    "usage": {
+     "completion_tokens": 86,
+     "prompt_tokens": 4656,
+     "total_tokens": 4742,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "a87a0d247beffe74",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3775740ed18d4ee9b28d97b7",
+      "name": "type_text",
+      "args": {
+       "id": 74,
+       "text": "9000000001",
+       "narration": "filling mobile number"
+      }
+     }
+    ],
+    "ms": 872,
+    "usage": {
+     "completion_tokens": 37,
+     "prompt_tokens": 4764,
+     "total_tokens": 4801,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4224
+     }
+    }
+   }
+  },
+  {
+   "hash": "88cd18dc0a1edda2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_52116e4f1beb41a380d8881a",
+      "name": "click",
+      "args": {
+       "id": 75,
+       "narration": "Continue button दबा रहा हूँ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 982,
+    "usage": {
+     "completion_tokens": 51,
+     "prompt_tokens": 4810,
+     "total_tokens": 4861,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "96e29c7927e10ff7",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b8cce489e3454eb5bf1c642e",
+      "name": "click",
+      "args": {
+       "id": 76,
+       "narration": "Proceed to payment",
+       "confirmation_question": "क्या आप ₹285 में चेन्नई सेंट्रल से मदुरै जंक्शन, 7 अक्टूबर, स्लीपर क्लास, एक यात्री (Asha Verma) की टिकट बुक करना चाहते हैं?"
+      }
+     }
+    ],
+    "ms": 2158,
+    "usage": {
+     "completion_tokens": 90,
+     "prompt_tokens": 4734,
+     "total_tokens": 4824,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4224
+     }
+    }
+   }
+  },
+  {
+   "hash": "220abf47d7c9303a",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3d13662490de41c4a87ba70c",
+      "name": "click",
+      "args": {
+       "id": 80,
+       "narration": "Pay 285 rupees",
+       "confirmation_question": "क्या आप 285 रुपये का payment करना चाहते हैं?"
+      }
+     }
+    ],
+    "ms": 2427,
+    "usage": {
+     "completion_tokens": 65,
+     "prompt_tokens": 4724,
+     "total_tokens": 4789,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4416
+     }
+    }
+   }
+  },
+  {
+   "hash": "b1c14daa371d88f4",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_55e9cd9e56d344bda75059ed",
       "name": "done",
       "args": {
-       "speech": "आपकी बुकिंग कन्फर्म हो गई है। PNR नंबर 4123456700 है, गंगा सुपरफास्ट एक्सप्रेस (11261), चेन्नई सेंट्रल से मदुरै जंक्शन, 7 अक्टूबर 2026, स्लीपर क्लास, सीट 12, नाम आशा वर्मा। ₹285 का पेमेंट हो गया है।"
+       "speech": "आपकी परसों की चेन्नई सेंट्रल से मदुरै जंक्शन की स्लीपर टिकट बुक हो गई है। PNR 4123456700 है, Ganga Superfast Express (11261), S4 सीट 12, और ₹285 का भुगतान हो गया है। कुछ और चाहिए?"
       }
      }
     ],
-    "ms": 1075,
+    "ms": 1944,
     "usage": {
-     "completion_tokens": 106,
-     "prompt_tokens": 4433,
-     "total_tokens": 4539,
+     "completion_tokens": 98,
+     "prompt_tokens": 4758,
+     "total_tokens": 4856,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4096
+      "cached_tokens": 3712
      }
     }
    }

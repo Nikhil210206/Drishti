@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "complaint-hi-kivi",
- "recordedAt": "2026-10-05T05:36:22.940Z",
+ "recordedAt": "2026-10-05T06:11:40.028Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,47 +10,47 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_4cf31ff1879e4ba48cbab1dd",
-      "name": "navigate",
-      "args": {
-       "url": "http://localhost:5174/help",
-       "narration": "Help page खोल रहा हूँ"
-      }
-     }
-    ],
-    "ms": 1786,
-    "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 4095,
-     "total_tokens": 4146,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "300a47664b0584a9",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bf47b3f704d14657b6bb0f28",
+      "id": "call_b24389a842fd440c9edba1bb",
       "name": "click",
       "args": {
        "id": 4,
-       "narration": "help link पर click कर रहा हूँ",
+       "narration": "Help page पर जा रहा हूँ",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_4cd5ed74ca4b429f81ed47a0",
+      "name": "click",
+      "args": {
+       "id": 3,
+       "narration": "Document page पर जा रहा हूँ",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_0514a6093a214451b50a62ea",
+      "name": "click",
+      "args": {
+       "id": 5,
+       "narration": "Account page पर जा रहा हूँ",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_672f42a1ff69457798f5d543",
+      "name": "click",
+      "args": {
+       "id": 1,
+       "narration": "Home page पर जा रहा हूँ",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 1561,
+    "ms": 1299,
     "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 4151,
-     "total_tokens": 4203,
+     "completion_tokens": 110,
+     "prompt_tokens": 4095,
+     "total_tokens": 4205,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -60,24 +60,33 @@
    }
   },
   {
-   "hash": "3d9b033163891f38",
+   "hash": "8a8697c6c7cc7c17",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_cc31f83c43194b42ba1191b7",
-      "name": "compose_with_kivi",
+      "id": "call_06a26e7c982d4e60b7e71d5e",
+      "name": "fill_form",
       "args": {
-       "id": 21,
-       "what": "your complaint about food quality"
+       "fields": [
+        {
+         "id": 19,
+         "value": "Food Quality"
+        },
+        {
+         "id": 21,
+         "value": "The food quality was poor. The meal was stale and did not meet the expected standards for a train journey."
+        }
+       ],
+       "narration": "Complaint category और issue select कर रहा हूँ"
       }
      }
     ],
-    "ms": 862,
+    "ms": 1315,
     "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4038,
-     "total_tokens": 4085,
+     "completion_tokens": 115,
+     "prompt_tokens": 4020,
+     "total_tokens": 4135,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -87,25 +96,161 @@
    }
   },
   {
-   "hash": "fec77d25c73c8410",
+   "hash": "8168978ce4cc7b9b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_494bbc61e4464647afe1cfe4",
+      "id": "call_9ddee04647e740448d823065",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Food Quality category select karna hai",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_bd32690974324b5686da281b",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Complaint submit karne ke liye",
+       "confirmation_question": "Aap complaint 'Food Quality' category mein submit karna chahte hain, kya confirm karein?"
+      }
+     }
+    ],
+    "ms": 922,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4066,
+     "total_tokens": 4142,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "57ea6c90c135b2d9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f5d613ba3b5f4d5ca1d68210",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Food quality select kar raha hoon"
+      }
+     }
+    ],
+    "ms": 595,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4226,
+     "total_tokens": 4272,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "0d5e10a8b20e0ac8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c2d39c348d1d45138da5b10f",
+      "name": "click",
+      "args": {
+       "id": 21,
+       "narration": "Food quality category select किया",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_4da7b015ef0f4095a476b42d",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 20,
+         "value": ""
+        },
+        {
+         "id": 21,
+         "value": "Food quality"
+        }
+       ],
+       "narration": "Complaint details fill कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 963,
+    "usage": {
+     "completion_tokens": 71,
+     "prompt_tokens": 4196,
+     "total_tokens": 4267,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "ac2f94b3805187a4",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b930e9079c8f4bfe9a60204e",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "complaint about food quality"
+      }
+     }
+    ],
+    "ms": 787,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4268,
+     "total_tokens": 4316,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "f03dca5fbc3d1d2b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_5dc1d1cc27da4a1a94e0b5af",
       "name": "click",
       "args": {
        "id": 22,
        "narration": "शिकायत सबमिट कर रहा हूँ",
-       "confirmation_question": ""
+       "confirmation_question": "क्या आप Pathik Rail पर Food quality की शिकायत सबमिट करना चाहते हैं?"
       }
      }
     ],
-    "ms": 1377,
+    "ms": 662,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4119,
-     "total_tokens": 4172,
+     "completion_tokens": 69,
+     "prompt_tokens": 4349,
+     "total_tokens": 4418,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -115,83 +260,27 @@
    }
   },
   {
-   "hash": "3d8370138884c597",
+   "hash": "212a1e26cc9433ae",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_3aefea7749e145bbabfd14fa",
-      "name": "select_option",
-      "args": {
-       "id": 19,
-       "option": "Food and Catering",
-       "narration": "खाद्य श्रेणी चुन रहा हूँ"
-      }
-     }
-    ],
-    "ms": 1109,
-    "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 4171,
-     "total_tokens": 4227,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "dc66ddaae8072124",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c502d06cd40744de8fbb3288",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "शिकायत सबमिट करना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1114,
-    "usage": {
-     "completion_tokens": 29,
-     "prompt_tokens": 4203,
-     "total_tokens": 4232,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "bef08f2db76eb3be",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_6fda80b80410458f8c3fd0b3",
+      "id": "call_ed0e48c9ae44435fad0b988d",
       "name": "done",
       "args": {
-       "speech": "आपकी शिकायत दर्ज हो गई है। Reference number CMP1000 है। वे 48 घंटे में जवाब देंगे।"
+       "speech": "आपकी शिकायत दर्ज हो गई है। Reference number CMP1000 है। Pathik Rail 48 घंटों के अंदर जवाब देगा।"
       }
      }
     ],
-    "ms": 1191,
+    "ms": 672,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4290,
-     "total_tokens": 4343,
+     "completion_tokens": 56,
+     "prompt_tokens": 4451,
+     "total_tokens": 4507,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3904
+      "cached_tokens": 3968
      }
     }
    }

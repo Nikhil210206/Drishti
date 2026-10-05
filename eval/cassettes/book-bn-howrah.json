@@ -1,361 +1,330 @@
 {
  "version": 1,
  "task": "book-bn-howrah",
- "recordedAt": "2026-10-04T17:00:38.222Z",
+ "recordedAt": "2026-10-05T06:06:17.457Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "4723a6e40ce861bb",
+   "hash": "5c1586b7074aa4c6",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1a3d43e6ca5e4a2c846a8523",
+      "id": "call_0575524cd189478097ff9860",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Howrah",
-       "narration": "From station হাওড়া লিখছি"
+       "narration": "Howrah টাইপ করছি FROM-এ"
       }
      },
      {
-      "id": "call_3bb6fc34dbb840778bf46b40",
+      "id": "call_2f9b370d05d84675b052a546",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Patna",
-       "narration": "To station পাটনা লিখছি"
+       "narration": "Patna টাইপ করছি TO-তে"
       }
      },
      {
-      "id": "call_180c8b6ce5b341708ad3f212",
-      "name": "click",
+      "id": "call_1a309c52ad954276916a0a84",
+      "name": "type_text",
       "args": {
-       "id": 11,
-       "narration": "কালকের date নির্বাচন করছি"
+       "id": 9,
+       "text": "6 Oct",
+       "pick_suggestion": "Tue, 6 Oct, 2026",
+       "narration": "কালকের তারিখ বেছে নিচ্ছি"
       }
      },
      {
-      "id": "call_100ac3a104c84dcb87149cab",
+      "id": "call_ef60863fc3584758a04dc79d",
       "name": "click",
       "args": {
        "id": 13,
-       "narration": "Sleeper class নির্বাচন করছি"
+       "narration": "স্লিপার ক্লাস সিলেক্ট করছি"
       }
      },
      {
-      "id": "call_5ff7f207276d429f9d961f09",
+      "id": "call_0d776d8be599448a8b3e8323",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search button টিপছি"
+       "narration": "SEARCH TRAINS-এ ক্লিক করছি"
       }
      }
     ],
-    "ms": 1685,
+    "ms": 1284,
     "usage": {
-     "completion_tokens": 234,
-     "prompt_tokens": 4057,
-     "total_tokens": 4291,
+     "completion_tokens": 158,
+     "prompt_tokens": 4098,
+     "total_tokens": 4256,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2624
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "d26117ad05143d89",
+   "hash": "ebb628a42a07666c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_bbed14be8147454199ac5969",
+      "id": "call_8e3286bab3f5412cbbe49e11",
       "name": "click",
       "args": {
-       "id": 23,
-       "narration": "Sleeper class select করছি",
-       "confirmation_question": ""
+       "id": 9,
+       "narration": "কালকের তারিখ বেছে নিচ্ছি"
       }
      }
     ],
-    "ms": 536,
+    "ms": 804,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4373,
-     "total_tokens": 4426,
+     "completion_tokens": 50,
+     "prompt_tokens": 4305,
+     "total_tokens": 4355,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "e9a40feed6481cbf",
+   "hash": "c47df3ad0301db89",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e54eeb6c7f0d4496aca90c21",
+      "id": "call_20e64416f9c941e2ae0637be",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "6 October select করছি"
+      }
+     }
+    ],
+    "ms": 732,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 4478,
+     "total_tokens": 4520,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "429396acad4dc9ae",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_92111a5bc1634a94a5bef743",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "SEARCH TRAINS",
-       "confirmation_question": ""
+       "narration": "Search trains button"
       }
      }
     ],
-    "ms": 446,
+    "ms": 540,
     "usage": {
-     "completion_tokens": 27,
-     "prompt_tokens": 4301,
-     "total_tokens": 4328,
+     "completion_tokens": 41,
+     "prompt_tokens": 4407,
+     "total_tokens": 4448,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "89a17166d8f1272c",
+   "hash": "e42683727e73e933",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ef00cf32cc984d12ba5237ee",
+      "id": "call_9c5351f9c5504e5e9285090e",
       "name": "click",
       "args": {
-       "id": 31,
-       "narration": "Kolkata-Patna Express book",
-       "confirmation_question": "Kolkata-Patna Express-এ 1 seat sleeper ₹255, 6 October, Howrah থেকে Patna. বুক করব?"
+       "id": 58,
+       "narration": "Book Sleeper ticket",
+       "confirmation_question": "Confirm booking Kolkata–Patna Express Sleeper for 6 Oct, 1 seat, ₹255?"
       }
      }
     ],
-    "ms": 940,
+    "ms": 768,
     "usage": {
-     "completion_tokens": 84,
-     "prompt_tokens": 4752,
-     "total_tokens": 4836,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "591acd68ff5bffa2",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 36,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 37,
-         "value": "34"
-        },
-        {
-         "id": 39,
-         "value": "Female"
-        }
-       ],
-       "narration": "Passenger details fill করছি"
-      }
-     }
-    ],
-    "ms": 880,
-    "usage": {
-     "completion_tokens": 94,
-     "prompt_tokens": 4368,
-     "total_tokens": 4462,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    },
-    "raw": "[{\n  \"name\": \"fill_form\",\n  \"parameters\": {\n    \"fields\": [\n      {\"id\": 36, \"value\": \"Asha Verma\"},\n      {\"id\": 37, \"value\": \"34\"},\n      {\"id\": 39, \"value\": \"Female\"}\n    ],\n    \"narration\": \"Passenger details fill করছি\"\n  }\n}"
-   }
-  },
-  {
-   "hash": "ec434c32f1865d12",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_93b452b6bfb349c38fb5b201",
-      "name": "click",
-      "args": {
-       "id": 44,
-       "narration": "Continue করতে ক্লিক করছি",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 507,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4427,
-     "total_tokens": 4477,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "63d69c275b2657ef",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5a6ec27daadb48b086cdc6a4",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 43,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Enter mobile number"
-      }
-     }
-    ],
-    "ms": 625,
-    "usage": {
-     "completion_tokens": 76,
-     "prompt_tokens": 4497,
-     "total_tokens": 4573,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "b09ba145039bbe94",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_7af76b66cad34b708c95af64",
-      "name": "click",
-      "args": {
-       "id": 44,
-       "narration": "Continue button click করছি",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 597,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4554,
-     "total_tokens": 4604,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4096
-     }
-    }
-   }
-  },
-  {
-   "hash": "c32514394d01c270",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0d4918e8bbc64b04989fa261",
-      "name": "click",
-      "args": {
-       "id": 45,
-       "narration": "Proceed to pay",
-       "confirmation_question": "Confirm booking Kolkata-Patna Express 16 Oct 26, Sleeper, 1 passenger, total ₹275?"
-      }
-     }
-    ],
-    "ms": 851,
-    "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 4480,
-     "total_tokens": 4559,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2624
-     }
-    }
-   }
-  },
-  {
-   "hash": "85d584ef1de2ce35",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_07f37b75a2694eb197bfdef7",
-      "name": "click",
-      "args": {
-       "id": 49,
-       "narration": "₹275 payment করো",
-       "confirmation_question": "কাল Howrah থেকে Patna, Sleeper class, 1 passenger-এর জন্য ₹275 payment করবেন?"
-      }
-     }
-    ],
-    "ms": 662,
-    "usage": {
-     "completion_tokens": 75,
-     "prompt_tokens": 4468,
-     "total_tokens": 4543,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4160
-     }
-    }
-   }
-  },
-  {
-   "hash": "ccb3d5788c23c3ef",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3202f85bda5c4cd99113c705",
-      "name": "done",
-      "args": {
-       "speech": "আপনার টিকিট বুকিং সম্পন্ন হয়েছে। PNR নম্বর 4123456700। হাওড়া থেকে পাটনা যাওয়ার স্লিপার টিকিট, মঙ্গলবার ৬ অক্টোবর, আসন S4, সিট 12। মোট পেমেন্ট 275 টাকা করা হয়েছে।"
-      }
-     }
-    ],
-    "ms": 836,
-    "usage": {
-     "completion_tokens": 92,
-     "prompt_tokens": 4502,
-     "total_tokens": 4594,
+     "completion_tokens": 73,
+     "prompt_tokens": 6229,
+     "total_tokens": 6302,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 4032
+     }
+    }
+   }
+  },
+  {
+   "hash": "0b45f648309bb5cb",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_2b6cc355576e443aa9198c63",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 84,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 85,
+         "value": "34"
+        },
+        {
+         "id": 87,
+         "value": "Female"
+        },
+        {
+         "id": 91,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill korchi"
+      }
+     }
+    ],
+    "ms": 1173,
+    "usage": {
+     "completion_tokens": 149,
+     "prompt_tokens": 4478,
+     "total_tokens": 4627,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3904
+     }
+    }
+   }
+  },
+  {
+   "hash": "34a91766dab1a4f1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_03637ddf706746eaa79e807a",
+      "name": "click",
+      "args": {
+       "id": 92,
+       "narration": "Continue to payment"
+      }
+     }
+    ],
+    "ms": 568,
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 4574,
+     "total_tokens": 4615,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4032
+     }
+    }
+   }
+  },
+  {
+   "hash": "7ae3a310387f97da",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f6c79c127ab841a6bbb6c8d5",
+      "name": "click",
+      "args": {
+       "id": 93,
+       "narration": "Proceed to payment",
+       "confirmation_question": "কাল হাওড়া থেকে পাটনা যাওয়ার স্লিপার টিকিট, যাত্রীর নাম Asha Verma, ভাড়া 275 টাকা — আপনি কি payment করবেন?"
+      }
+     }
+    ],
+    "ms": 657,
+    "usage": {
+     "completion_tokens": 81,
+     "prompt_tokens": 4527,
+     "total_tokens": 4608,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "050c2ee7b17aab78",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7df9a1592cc34be084f2f125",
+      "name": "click",
+      "args": {
+       "id": 97,
+       "narration": "₹275 pay করছি",
+       "confirmation_question": "₹275 pay করতে চান?"
+      }
+     }
+    ],
+    "ms": 715,
+    "usage": {
+     "completion_tokens": 61,
+     "prompt_tokens": 4515,
+     "total_tokens": 4576,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "9a47ee16c0ff654d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_13b79e0e71bb4802ae2b6c35",
+      "name": "done",
+      "args": {
+       "speech": "আপনার টিকিট বুকিং সম্পন্ন হয়েছে। PNR নম্বর হলো 4123456700। হাওড়া থেকে পাটনা যাওয়ার কলকাতা–পাটনা এক্সপ্রেস (16636) স্লিপার ক্লাসের টিকিট, ৬ অক্টোবর, আসন S4, ১২। মোট ২৭৫ টাকা পেমেন্ট হয়েছে।"
+      }
+     }
+    ],
+    "ms": 691,
+    "usage": {
+     "completion_tokens": 93,
+     "prompt_tokens": 4549,
+     "total_tokens": 4642,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4224
      }
     }
    }

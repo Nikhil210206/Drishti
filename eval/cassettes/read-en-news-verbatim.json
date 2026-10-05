@@ -1,58 +1,58 @@
 {
  "version": 1,
  "task": "read-en-news-verbatim",
- "recordedAt": "2026-10-04T17:07:44.458Z",
+ "recordedAt": "2026-10-05T06:12:52.765Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "8c7845c0d28210ff",
+   "hash": "ab7a6773d7379332",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_71e9d557cb5845a4b5349990",
+      "id": "call_67f8e077abe1436d8d45277e",
       "name": "read_page",
       "args": {
        "mode": "verbatim",
-       "narration": "Reading the first paragraph word for word"
+       "narration": "Reading the first paragraph"
       }
      }
     ],
-    "ms": 477,
+    "ms": 522,
     "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4120,
-     "total_tokens": 4167,
+     "completion_tokens": 50,
+     "prompt_tokens": 4161,
+     "total_tokens": 4211,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "7d89268314e1ac43",
+   "hash": "23151d5e62806d9b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_393890f2487f4e328531f618",
+      "id": "call_32459fcc55e14377ae34c00c",
       "name": "done",
       "args": {
-       "speech": "I've read the first paragraph to you. Would you like me to read the next paragraph as well?"
+       "speech": "Done. Let me know if you'd like to hear the next paragraph or anything else from the article."
       }
      }
     ],
-    "ms": 480,
+    "ms": 500,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4168,
-     "total_tokens": 4212,
+     "completion_tokens": 45,
+     "prompt_tokens": 4209,
+     "total_tokens": 4254,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
     }
    }

@@ -1,51 +1,89 @@
 {
  "version": 1,
  "task": "book-ml-ers-tvc-cc",
- "recordedAt": "2026-10-04T17:01:36.615Z",
+ "recordedAt": "2026-10-05T06:07:14.777Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "00e5261e3bf2523d",
+   "hash": "709b8444ceef6780",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_fd7cacb2a323499f8cdc79f2",
+      "id": "call_d4039900ef1b43e1ad85b91b",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Ernakulam",
-       "narration": "From station type Ernakulam"
+       "narration": "From station Ernakulam"
       }
      },
      {
-      "id": "call_a658092053b34fa7ba7b00be",
+      "id": "call_18d5ed8ffc7646c18cac7a7f",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Thiruvananthapuram",
-       "narration": "To station type Thiruvananthapuram"
+       "narration": "To station Thiruvananthapuram"
       }
      },
      {
-      "id": "call_18134031ca444ed6a823e4eb",
+      "id": "call_f701e9edf55748049415cc2a",
       "name": "click",
       "args": {
        "id": 11,
        "narration": "Select tomorrow's date"
       }
-     },
+     }
+    ],
+    "ms": 869,
+    "usage": {
+     "completion_tokens": 86,
+     "prompt_tokens": 4108,
+     "total_tokens": 4194,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "e67add01ac871abf",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_35fe2f8bbbde4516878565e7",
+      "id": "call_2ab2fe9c6dbd4066b24b4825",
       "name": "select_option",
       "args": {
        "id": 13,
        "option": "AC Chair Car",
-       "narration": "Select AC Chair Car class"
+       "narration": "AC Chair Car class തിരഞ്ഞെടുക്കുന്നു"
       }
-     },
+     }
+    ],
+    "ms": 869,
+    "usage": {
+     "completion_tokens": 56,
+     "prompt_tokens": 4201,
+     "total_tokens": 4257,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "4dab838c6071c834",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_b80c5a83279342b2abb71ee9",
+      "id": "call_ac8e5e0f28b84b7aa3082543",
       "name": "click",
       "args": {
        "id": 18,
@@ -53,53 +91,107 @@
       }
      }
     ],
-    "ms": 2824,
+    "ms": 574,
     "usage": {
-     "completion_tokens": 248,
-     "prompt_tokens": 4067,
-     "total_tokens": 4315,
+     "completion_tokens": 40,
+     "prompt_tokens": 4240,
+     "total_tokens": 4280,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4032
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "ebf5dd5f128cb083",
+   "hash": "e4222f3e98c13b2a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_a0ef985219a245d8b7681b19",
-      "name": "click",
+      "id": "call_1674bb44347c4122aa0fcc43",
+      "name": "read_page",
       "args": {
-       "id": 29,
-       "narration": "First train-ൽ book ചെയ്യുന്നു"
+       "mode": "summary",
+       "narration": "Read train options for booking"
       }
      }
     ],
-    "ms": 422,
+    "ms": 456,
     "usage": {
-     "completion_tokens": 25,
-     "prompt_tokens": 4648,
-     "total_tokens": 4673,
+     "completion_tokens": 44,
+     "prompt_tokens": 4689,
+     "total_tokens": 4733,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "362005728539b68d",
+   "hash": "699a95d8b2be2e58",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_06d9928e2f784156836cf899",
+      "id": "call_61e7110a216947ea91177289",
+      "name": "ask_user",
+      "args": {
+       "question": "നാളെ Ernakulam Junction-ൽ നിന്ന് Thiruvananthapuram Central-ലേക്ക് 6 trains ഉണ്ട്. Charminar Shatabdi 05:20-ന് ₹310, Kochi-Thiruvananthapuram Double Decker 05:25-ന് ₹310, Godavari Double Decker 09:05-ന് ₹310, Brindavan Double Decker 09:35-ന് ₹310, Konark Vande Bharat 13:30-ന് ₹310 (RAC), Sahyadri Double Decker 14:35-ന് ₹310. ഇതിൽ ഏത് train ആണ് book ചെയ്യേണ്ടത്?"
+      }
+     }
+    ],
+    "ms": 1827,
+    "usage": {
+     "completion_tokens": 181,
+     "prompt_tokens": 5035,
+     "total_tokens": 5216,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "be42fa6225fcf6fe",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "click",
+      "args": {
+       "id": 29,
+       "narration": "ആദ്യത്തെ ട്രെയിൻ ബുക്ക് ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 445,
+    "usage": {
+     "completion_tokens": 35,
+     "prompt_tokens": 4869,
+     "total_tokens": 4904,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3904
+     }
+    },
+    "raw": "[\n{\"name\": \"click\", \"parameters\": {\"id\": 29, \"narration\": \"ആദ്യത്തെ ട്രെയിൻ ബുക്ക് ചെയ്യുന്നു\"}}"
+   }
+  },
+  {
+   "hash": "07bff3b159027371",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4bc5af24235a409e8987e466",
       "name": "fill_form",
       "args": {
        "fields": [
@@ -124,38 +216,11 @@
       }
      }
     ],
-    "ms": 1198,
+    "ms": 1696,
     "usage": {
      "completion_tokens": 148,
-     "prompt_tokens": 4264,
-     "total_tokens": 4412,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "22ec359178d82457",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_74459e63aa8241888d895b7e",
-      "name": "click",
-      "args": {
-       "id": 43,
-       "narration": "Continue to payment"
-      }
-     }
-    ],
-    "ms": 468,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4360,
-     "total_tokens": 4391,
+     "prompt_tokens": 4485,
+     "total_tokens": 4633,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -165,83 +230,110 @@
    }
   },
   {
-   "hash": "0d2ae80978334dde",
+   "hash": "e3d56d0916a30376",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6e52e930b67b440c8cfbb9a8",
+      "id": "call_c7a12b0c75bd4d1285bd0d20",
       "name": "click",
       "args": {
-       "id": 44,
-       "narration": "Proceed to pay",
-       "confirmation_question": "നാളെ Ernakulam Junction-ൽ നിന്ന് Thiruvananthapuram Central-ലേക്ക്, 6 October, AC Chair Car, 1 passenger, total ₹330. Proceed to pay ചെയ്യട്ടേ?"
+       "id": 43,
+       "narration": "Continue ബട്ടൺ ക്ലിക്ക് ചെയ്യുന്നു"
       }
      }
     ],
-    "ms": 876,
+    "ms": 1633,
     "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 4320,
-     "total_tokens": 4415,
+     "completion_tokens": 45,
+     "prompt_tokens": 4581,
+     "total_tokens": 4626,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3840
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "8a48313ec48dcd95",
+   "hash": "c335235a9f802b45",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_84bad694b9c94e30b7b4d803",
+      "id": "call_186c1b5339354880be175f04",
+      "name": "click",
+      "args": {
+       "id": 44,
+       "narration": "PROCEED TO PAY ബട്ടണിൽ ക്ലിക്ക് ചെയ്യുന്നു",
+       "confirmation_question": "നാളെ Ernakulam Junction-ൽ നിന്ന് Thiruvananthapuram Central-ലേക്ക് AC Chair Car-ൽ Charminar Shatabdi Express-ൽ Asha Verma-യ്ക്ക് ₹330 ticket book ചെയ്യട്ടേ?"
+      }
+     }
+    ],
+    "ms": 963,
+    "usage": {
+     "completion_tokens": 104,
+     "prompt_tokens": 4542,
+     "total_tokens": 4646,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "4baa4947300b9f9b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_fed1742d75af486daad86d3c",
       "name": "click",
       "args": {
        "id": 48,
        "narration": "₹330 pay ചെയ്യുന്നു",
-       "confirmation_question": "₹330 pay ചെയ്യാൻ confirm ചെയ്യുമോ?"
+       "confirmation_question": "₹330 pay ചെയ്യാൻ confirm ആണോ?"
       }
      }
     ],
-    "ms": 1203,
+    "ms": 797,
     "usage": {
      "completion_tokens": 63,
-     "prompt_tokens": 4300,
-     "total_tokens": 4363,
+     "prompt_tokens": 4523,
+     "total_tokens": 4586,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "4d1c94736186110e",
+   "hash": "bc83d93ee6c26dc2",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_caf919fd2265475a968ec799",
+      "id": "call_b8a4511f7b5e4fad8e6b2fef",
       "name": "done",
       "args": {
-       "speech": "നിങ്ങളുടെ booking confirm ആയിട്ടുണ്ട്. PNR 4123456700 ആണ്. Charminar Shatabdi Express, AC Chair Car, seat 12. Amount 330 rupees paid."
+       "speech": "നിങ്ങളുടെ ticket booking confirm ആയി. PNR 4123456700 ആണ്. Charminar Shatabdi Express (20772), ERS-ൽ നിന്ന് TVC-ലേക്ക്, Tuesday 6 Oct, AC Chair Car, seat C3, seat 12. Amount paid ₹330."
       }
      }
     ],
-    "ms": 561,
+    "ms": 1017,
     "usage": {
-     "completion_tokens": 73,
-     "prompt_tokens": 4334,
-     "total_tokens": 4407,
+     "completion_tokens": 98,
+     "prompt_tokens": 4557,
+     "total_tokens": 4655,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 4096
      }
     }
    }
@@ -249,7 +341,7 @@
  ],
  "translate": {
   "16c3f0393e8faf9c": "ഞാൻ continue ചെയ്യട്ടെ?",
-  "6354fb0d6a0739c1": "Page-ൽ ഇങ്ങനെ പറയുന്നു:"
+  "6354fb0d6a0739c1": "Page-ൽ ഇങ്ങനെയാണ് പറയുന്നത്:"
  },
  "docs": {}
 }

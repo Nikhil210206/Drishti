@@ -1,64 +1,102 @@
 {
  "version": 1,
  "task": "search-ta-first-train",
- "recordedAt": "2026-10-04T17:08:52.950Z",
+ "recordedAt": "2026-10-05T06:14:15.094Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "2b2bda56915f221a",
+   "hash": "aad8381a9bff8b7d",
    "response": {
     "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5f7f678c2bd340ab9fb181d2",
-      "name": "type_text",
-      "args": {
-       "id": 6,
-       "text": "Chennai",
-       "narration": "From station set to Chennai"
-      }
-     },
-     {
-      "id": "call_bde75ea943244eafa5d4fe2b",
-      "name": "type_text",
-      "args": {
-       "id": 8,
-       "text": "Madurai",
-       "narration": "To station set to Madurai"
-      }
-     },
-     {
-      "id": "call_4b0ca11f4eed4a728720f907",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "Select tomorrow's date"
-      }
-     },
-     {
-      "id": "call_266fff2712534a79a7363e70",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search for trains"
-      }
-     }
-    ],
-    "ms": 1106,
+    "toolCalls": [],
+    "ms": 5103,
     "usage": {
-     "completion_tokens": 100,
-     "prompt_tokens": 4056,
-     "total_tokens": 4156,
+     "completion_tokens": 600,
+     "prompt_tokens": 4097,
+     "total_tokens": 4697,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3648
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "164df47bd310c0aa",
+   "hash": "d0e2798e5f4a7278",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9d0ee43008554cb0800a9d89",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Chennai",
+       "narration": "FROM-ல Chennai type பண்றேன்"
+      }
+     },
+     {
+      "id": "call_dff615c5c90a496b82aeafa1",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "Madurai",
+       "narration": "TO-ல Madurai type பண்றேன்"
+      }
+     },
+     {
+      "id": "call_a453e80572be4cac91690e1f",
+      "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "நாளை date-அ select பண்றேன்"
+      }
+     }
+    ],
+    "ms": 2747,
+    "usage": {
+     "completion_tokens": 93,
+     "prompt_tokens": 4118,
+     "total_tokens": 4211,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "768720d937322901",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a74b0a973bba43fa9e00bd13",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains Chennai to Madurai tomorrow",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 925,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4186,
+     "total_tokens": 4217,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "ed09f7d2160f5176",
    "response": {
     "content": "",
     "toolCalls": [
@@ -66,22 +104,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "நாளைக்கு Chennai Central-ல இருந்து Madurai Junction-க்கு first train Sahyadri Vande Bharat Express, time 05:00-க்கு கிளம்பும். இது 11:25-க்கு Madurai போய் சேரும், AC Chair Car class-ல ₹675 fare. அடுத்தது Ganga Superfast Express 07:15-க்கு கிளம்பும். உங்களுக்கு இந்த train-ல book பண்ணணுமா?"
+       "speech": "நாளைக்கு Chennai Central-ல இருந்து Madurai-க்கு முதல் train Sahyadri Vande Bharat Express, 05:00 AM-க்கு கிளம்பும். இது 11:25 AM-க்கு Madurai-க்கு போய் சேரும், 6h 25m ஆகும். CC class-க்கு ₹675 ஆகும்."
       }
      }
     ],
-    "ms": 941,
+    "ms": 943,
     "usage": {
-     "completion_tokens": 127,
-     "prompt_tokens": 5405,
-     "total_tokens": 5532,
+     "completion_tokens": 103,
+     "prompt_tokens": 5441,
+     "total_tokens": 5544,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 3712
      }
     },
-    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"நாளைக்கு Chennai Central-ல இருந்து Madurai Junction-க்கு first train Sahyadri Vande Bharat Express, time 05:00-க்கு கிளம்பும். இது 11:25-க்கு Madurai போய் சேரும், AC Chair Car class-ல ₹675 fare. அடுத்தது Ganga Superfast Express 07:15-க்கு கிளம்பும். உங்களுக்கு இந்த train-ல book பண்ணணுமா?\"\n  }\n}"
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"நாளைக்கு Chennai Central-ல இருந்து Madurai-க்கு முதல் train Sahyadri Vande Bharat Express, 05:00 AM-க்கு கிளம்பும். இது 11:25 AM-க்கு Madurai-க்கு போய் சேரும், 6h 25m ஆகும். CC class-க்கு ₹675 ஆகும்.\"\n  }\n}"
    }
   }
  ],

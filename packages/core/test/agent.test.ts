@@ -897,6 +897,59 @@ describe("Agent: knowing when to stop", () => {
     expect(String(llm.calls[4].messages[1].content)).toContain('already shows "Cleanliness"');
   });
 
+  it("lets a batch go on past an option that is already chosen", async () => {
+    const closed = page(HELP, { "13": element("Select class ▾", { role: "clickable", tag: "div" }) });
+    const open = page(`${HELP}/open`, {
+      "13": element("Select class ▾", { role: "clickable", tag: "div" }),
+      "30": element("Sleeper (SL)", { role: "clickable", tag: "div" }),
+    });
+    const chosen = page(`${HELP}/set`, {
+      "13": element("Sleeper (SL) ▾", { role: "clickable", tag: "div" }),
+      "15": element("Tatkal", { role: "clickable", tag: "div" }),
+    });
+    const browser = new FakeBrowser({ [HELP]: closed, [`${HELP}/open`]: open, [`${HELP}/set`]: chosen }, HELP, {
+      "13": `${HELP}/open`,
+      "30": `${HELP}/set`,
+    });
+    const llm = new ScriptedLLM([
+      [{ name: "select_option", args: { id: 13, option: "Sleeper" } }],
+      [
+        { name: "click", args: { id: 13 } },
+        { name: "click", args: { id: 15 } },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["click 13", "click 30", "click 15"]);
+  });
+
+  it("does not type into a button, and says to click it", async () => {
+    const form = page(HELP, { "9": element("Tue, 6 Oct", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HELP]: form }, HELP);
+    const llm = new ScriptedLLM([[{ name: "type_text", args: { id: 9, text: "6 Oct 2026" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("is a clickable, not a text box. Click it");
+  });
+
+  it("does not retype a value the field holds, and points to the next button", async () => {
+    const form = page(HELP, {
+      "42": element("Mobile", { role: "textbox", tag: "input" }),
+      "43": element("Continue", { role: "button", tag: "button" }),
+    });
+    form.text = '[42] textbox "Mobile" value="9000000001"\n[43] button "Continue"';
+    form.alerts = ["Enter a valid 10-digit mobile number."];
+    const browser = new FakeBrowser({ [HELP]: form }, HELP);
+    const llm = new ScriptedLLM([
+      [
+        { name: "type_text", args: { id: 42, text: "9000000001" } },
+        { name: "click", args: { id: 43 } },
+      ],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["click 43"]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("already holds this. The alert");
+  });
+
   it("still clicks a Submit complaint button (with confirmation)", async () => {
     const form = page(HELP, { "22": element("SUBMIT COMPLAINT", { role: "clickable", tag: "div" }) });
     const browser = new FakeBrowser({ [HELP]: form }, HELP);

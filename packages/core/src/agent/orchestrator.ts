@@ -137,7 +137,7 @@ export class Agent {
       const reasoning = step === 0 ? this.opts.firstStepReasoning : "none";
       // A tool step needs well under 200 tokens. A cap keeps a runaway generation short.
       const maxTokens = reasoning === "none" ? STEP_MAX_TOKENS : 1500;
-      const ask = (nudge = "") =>
+      const ask = (nudge = "", stop: string[] | undefined = RUNAWAY_STOPS) =>
         this.deps.llm.chat({
           messages: [
             { role: "system", content: systemPrompt(io.lang, { profile: this.opts.profile, now: this.opts.now?.() }) },
@@ -147,7 +147,7 @@ export class Agent {
           toolChoice: "required",
           reasoning,
           maxTokens,
-          stop: RUNAWAY_STOPS,
+          stop,
           signal,
         });
       try {
@@ -156,7 +156,8 @@ export class Agent {
         const cutOff = (result.usage?.completion_tokens ?? 0) >= maxTokens;
         if (!valid && (!result.content.trim() || cutOff)) {
           io.emit({ type: "metric", name: "llm_retry", ms: result.ms });
-          result = await ask("\n\nYOUR LAST REPLY WAS EMPTY OR CUT OFF. Reply now with tool calls only, no other text.");
+          // Without the stop strings: live runs had replies stopped before any tool call (twice in a row).
+          result = await ask("\n\nYOUR LAST REPLY WAS EMPTY OR CUT OFF. Reply now with tool calls only, no other text.", undefined);
         }
       } catch (e: any) {
         io.emit({ type: "thinking", on: false });
@@ -269,6 +270,24 @@ export class Agent {
       if (a.id !== undefined && !el && ["click", "type_text", "select_option", "compose_with_kivi", "read_document"].includes(call.name)) {
         throw new Error(`element [${a.id}] is not on the page any more`);
       }
+      // Reopening a dropdown that already shows the chosen option only costs turns (traces: the
+      // complaint category reopened after every hiccup). Not a failure: the rest of the batch runs.
+      const set = call.name === "click" ? this.chosen.get(String(a.id)) : undefined;
+      if (el && set && el.name.toLowerCase().includes(set.toLowerCase())) {
+        emit({ status: "ok", result: `already "${set}"` });
+        return {
+          line: `${describe()} → not clicked: [${a.id}] already shows "${set}", which you chose. Carry on with the rest of the form; use select_option only to change it.`,
+        };
+      }
+      // Retyping a value the field already holds: say so and let the batch go on to the button.
+      if (call.name === "type_text" && el && TEXT_ROLES.has(el.role) && holds(snap, a.id, el, String(a.text ?? ""))) {
+        emit({ status: "ok", result: "already filled" });
+        const next = nextButton(snap, a.id);
+        const alert = snap.alerts.length ? ` The alert "${snap.alerts[0]}" is from before; it clears only when you submit.` : "";
+        return {
+          line: `${describe()} → not needed: [${a.id}] already holds this.${alert}${next ? ` Next: click [${next[0]}] "${next[1].name}".` : ""}`,
+        };
+      }
       if (REPEATABLE.has(call.name)) {
         const key = `${pageKey}|${call.name}|${a.id ?? ""}|${a.text ?? ""}|${a.option ?? ""}|${a.key ?? ""}|${a.url ?? ""}|${JSON.stringify(a.fields ?? "")}`;
         if (this.tried.has(key)) {
@@ -284,16 +303,6 @@ export class Agent {
       }
       switch (call.name) {
         case "click": {
-          // Reopening a dropdown that already shows the chosen option only costs turns (traces:
-          // the complaint category reopened after every hiccup elsewhere on the form).
-          const set = this.chosen.get(String(a.id));
-          if (el && set && el.name.toLowerCase().includes(set.toLowerCase())) {
-            emit({ status: "failed", result: `already "${set}"` });
-            return {
-              line: `${describe()} → not clicked: [${a.id}] already shows "${set}", which you chose. Carry on with the rest of the form; use select_option only to change it.`,
-              failed: true,
-            };
-          }
           const dest = linkTarget(el?.href ?? "", snap.url);
           if (dest && !this.policy.allows(dest)) {
             emit({ status: "blocked", result: "site not allowed" });
@@ -377,6 +386,14 @@ export class Agent {
         }
         case "type_text": {
           if (isSensitiveField(el)) return await this.blockSensitive(a.id, io, emit, describe());
+          // A date or choice shown as a button: typing into it only raises a Playwright error.
+          if (el && !TEXT_ROLES.has(el.role) && el.tag !== "textarea") {
+            emit({ status: "failed", result: "not a text box" });
+            return {
+              line: `${describe()} → not typed: [${a.id}] is a ${el.role}, not a text box. Click it, then choose from what opens (for a date, the day's button).`,
+              failed: true,
+            };
+          }
           if (this.inventedFreeText(el, String(a.text ?? ""))) return this.refuseFreeText(a.id, emit, describe());
           if (this.inventedPersonal(el, String(a.text ?? ""))) return this.refusePersonal(a.id, emit, describe());
           await this.browser.type(a.id, String(a.text ?? ""), !!a.submit);
@@ -779,7 +796,10 @@ export class Agent {
     await io.sayPhrase("sensitiveField");
     emit({ status: "blocked", result: "sensitive field — user types it" });
     io.emit({ type: "audit", action: "type", target: String(id), reason: "sensitive field", confirmed: false });
-    return { line: `${line} → BLOCKED: sensitive field. The user will type it; wait for them or ask_user when they are done.` };
+    // A trace asked "please type your password" eight times instead of handing over: hand over once.
+    return {
+      line: `${line} → BLOCKED: sensitive field, and the user has been told to type it themselves (the box is focused). Do the rest of the form, then call done: say what is left for them to type, and that they can ask you to carry on afterwards. Don't ask_user for it.`,
+    };
   }
 
   private async composeWithKivi(a: Record<string, any>, el: any, io: AgentIO, emit: (p: Partial<StepEvent>) => void, line: string) {

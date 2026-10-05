@@ -62,7 +62,11 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
         toolCalls,
         ms: Date.now() - t0,
         usage: data.usage,
-        ...(recovered.length ? { raw: content.slice(0, 4000) } : {}),
+        ...(recovered.length
+          ? { raw: content.slice(0, 4000) }
+          : !toolCalls.length && !clean
+            ? { raw: JSON.stringify({ finish: data.choices?.[0]?.finish_reason, ...msg }).slice(0, 4000) }
+            : {}),
       };
     } catch (e: any) {
       if (e?.name === "AbortError") throw e;

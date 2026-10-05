@@ -1,106 +1,167 @@
 {
  "version": 1,
  "task": "book-te-sc-bza-cc",
- "recordedAt": "2026-10-04T17:00:58.921Z",
+ "recordedAt": "2026-10-05T06:06:36.291Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "c6ce6b0d7e07be81",
+   "hash": "155c213503ec75de",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_376dd6497b2340448d6f5ccb",
+      "id": "call_56ba32870fca45a492b394da",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Secunderabad",
-       "narration": "From station type karna hai"
+       "narration": "From station type Secunderabad"
       }
      },
      {
-      "id": "call_ad80fad701dd4939b945b3e8",
+      "id": "call_722079d6f27f40268486cd2c",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Vijayawada",
-       "narration": "To station type karna hai"
+       "narration": "To station type Vijayawada"
       }
      },
      {
-      "id": "call_120446b7c3cf49c389242380",
+      "id": "call_b60f844dab854424acc7059d",
       "name": "click",
       "args": {
-       "id": 11,
-       "narration": "Kal ki date select kar raha hoon"
+       "id": 13,
+       "narration": "Open class dropdown"
       }
      },
      {
-      "id": "call_1db998e4fcae48998b75368c",
+      "id": "call_19b001667ce94ca5a6fb5ec0",
       "name": "select_option",
       "args": {
        "id": 13,
        "option": "CC",
-       "narration": "Chair car select kar raha hoon"
+       "narration": "Select chair car class"
       }
      },
      {
-      "id": "call_e06cbbc382d549ceb61b28f4",
+      "id": "call_c0bd323462c7455198a599b1",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains button click kar raha hoon"
+       "narration": "Search trains"
       }
      }
     ],
-    "ms": 2058,
+    "ms": 1836,
     "usage": {
-     "completion_tokens": 266,
-     "prompt_tokens": 4059,
-     "total_tokens": 4325,
+     "completion_tokens": 243,
+     "prompt_tokens": 4100,
+     "total_tokens": 4343,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2624
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "2b37525dfeb8afd9",
+   "hash": "91ee23fb386dd6a1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_13c895974a994bb89f277324",
+      "id": "call_d8306e4b53ea4dcc8f695189",
+      "name": "click",
+      "args": {
+       "id": 27,
+       "narration": "AC Chair Car select చేస్తున్నాను"
+      }
+     }
+    ],
+    "ms": 638,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 4401,
+     "total_tokens": 4446,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "e3b4391baa205a93",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_ec60ca675de341e88fa4080e",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains for tomorrow",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_2b3476f63f774a118fca7083",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Select tomorrow's date",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 567,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 4346,
+     "total_tokens": 4400,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "9259dd708849ad57",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3ab9bd8afa614483a68c9054",
       "name": "click",
       "args": {
        "id": 29,
-       "narration": "హైదరాబాద్-విజయవాడ డబుల్ డెక్కర్ బుక్",
-       "confirmation_question": "రేపు సెకందరాబాద్ నుండి విజయవాడకి AC Chair Car టికెట్ బుక్ చేయాలా? ధర 350 రూపాయలు, 53 సీట్లు ఉన్నాయి. కొనసాగాలా?"
+       "narration": "Hyderabad–Vijayawada Double Decker Express book",
+       "confirmation_question": "హైదరాబాద్–విజయవాడ డబుల్ డెక్కర్ ఎక్స్‌ప్రెస్, రేపు 6 అక్టోబర్, CC క్లాస్, ₹350, 53 సీట్లు. బుక్ చేయాలా?"
       }
      }
     ],
-    "ms": 993,
+    "ms": 1005,
     "usage": {
-     "completion_tokens": 105,
-     "prompt_tokens": 4449,
-     "total_tokens": 4554,
+     "completion_tokens": 100,
+     "prompt_tokens": 4652,
+     "total_tokens": 4752,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "3cc044f5bb4ff8ee",
+   "hash": "2e58a755bfb79653",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_4b000b1ba4e74959938feb73",
+      "id": "rec_0",
       "name": "fill_form",
       "args": {
        "fields": [
@@ -121,130 +182,133 @@
          "value": "9000000001"
         }
        ],
-       "narration": "Passenger details enter చేస్తున్నాను"
+       "narration": "Passenger details fill చేస్తున్నాను"
       }
      }
     ],
-    "ms": 1246,
+    "ms": 973,
     "usage": {
-     "completion_tokens": 149,
-     "prompt_tokens": 4248,
-     "total_tokens": 4397,
+     "completion_tokens": 119,
+     "prompt_tokens": 4451,
+     "total_tokens": 4570,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 4032
      }
-    }
+    },
+    "raw": "[{\n  \"name\": \"fill_form\",\n  \"parameters\": {\n    \"fields\": [\n      {\"id\": 33, \"value\": \"Asha Verma\"},\n      {\"id\": 34, \"value\": \"34\"},\n      {\"id\": 35, \"value\": \"Female\"},\n      {\"id\": 40, \"value\": \"9000000001\"}\n    ],\n    \"narration\": \"Passenger details fill చేస్తున్నాను\"\n  }\n}"
    }
   },
   {
-   "hash": "e73f905511490c8c",
+   "hash": "ee89a330930d9982",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9833e3f00f9649c589b66451",
+      "id": "call_1c90d6960b6b434892f2b216",
       "name": "click",
       "args": {
        "id": 41,
-       "narration": "Continue to next step"
+       "narration": "Passenger details continue",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 464,
+    "ms": 674,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4344,
-     "total_tokens": 4386,
+     "completion_tokens": 56,
+     "prompt_tokens": 4547,
+     "total_tokens": 4603,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3904
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "1e9d89dd12afae5b",
+   "hash": "60e5f14ae0b808bd",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_75ec48f9d41f43d79b09bc91",
+      "id": "call_de2adf2479ea454c8198d580",
       "name": "click",
       "args": {
        "id": 42,
        "narration": "Proceed to pay",
-       "confirmation_question": "Confirm payment of 370 rupees for AC Chair Car ticket from Secunderabad to Vijayawada on 6 Oct 2026 for Asha Verma?"
+       "confirmation_question": "Confirm booking for AC Chair Car ticket from Secunderabad to Vijayawada for tomorrow, 6 October 2026, for Asha Verma, total ₹370?"
       }
      }
     ],
-    "ms": 605,
+    "ms": 818,
     "usage": {
-     "completion_tokens": 83,
-     "prompt_tokens": 4305,
-     "total_tokens": 4388,
+     "completion_tokens": 88,
+     "prompt_tokens": 4508,
+     "total_tokens": 4596,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "aac46c73ff04ffb6",
+   "hash": "eaa92ba6e19129e8",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_a32bab30c0ea413aac19dd16",
+      "id": "call_6122cab98d454cceaf4ff24a",
       "name": "click",
       "args": {
        "id": 46,
-       "narration": "Pay 370 rupees",
-       "confirmation_question": "మీరు 370 rupees pay చేయడానికి confirm చేస్తున్నారా?"
+       "narration": "₹370 pay చేస్తాను",
+       "confirmation_question": "₹370 payment confirm చేస్తారా?"
       }
      }
     ],
-    "ms": 639,
+    "ms": 517,
     "usage": {
-     "completion_tokens": 66,
-     "prompt_tokens": 4284,
-     "total_tokens": 4350,
+     "completion_tokens": 62,
+     "prompt_tokens": 4487,
+     "total_tokens": 4549,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3776
+      "cached_tokens": 4160
      }
     }
    }
   },
   {
-   "hash": "7810c69031352dc8",
+   "hash": "a5950fd9b843375a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_94b8b41767404fc1a106902a",
+      "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "మీ AC Chair Car (CC) ticket విజయవంతంగా book అయింది. PNR నంబర్ 4123456700. 6 October 2026, Tuesday, Secunderabad నుండి Vijayawada వరకు Hyderabad–Vijayawada Double Decker Express (22714) లో మీ seat C3, seat 12. ₹370 amount pay చేశారు. Pathik Rail ఒక demo website మాత్రమే, real booking కాదు."
+       "speech": "మీ AC Chair Car ticket booking confirm అయింది. PNR నంబర్ 4123456700. Hyderabad–Vijayawada Double Decker Express (22714) లో మీ seat C3, seat 12. మీరు ₹370 pay చేశారు."
       }
      }
     ],
-    "ms": 905,
+    "ms": 738,
     "usage": {
-     "completion_tokens": 122,
-     "prompt_tokens": 4318,
-     "total_tokens": 4440,
+     "completion_tokens": 89,
+     "prompt_tokens": 4521,
+     "total_tokens": 4610,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3968
+      "cached_tokens": 4224
      }
-    }
+    },
+    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"మీ AC Chair Car ticket booking confirm అయింది. PNR నంబర్ 4123456700. Hyderabad–Vijayawada Double Decker Express (22714) లో మీ seat C3, seat 12. మీరు ₹370 pay చేశారు.\"\n  }\n}"
    }
   }
  ],
