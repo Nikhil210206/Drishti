@@ -2,7 +2,7 @@ import { guessDocLanguage, type LangCode } from "../lang.js";
 import type { BrowserDriver, DocReader, ElementInfo, LLM, Profile, Reasoning, Snapshot, ToolCall, Translator } from "../types.js";
 import { TOOLS } from "./tools.js";
 import { systemPrompt, stepMessage } from "./prompts.js";
-import { needsConfirmation, isSensitiveField, yesNo } from "./safety.js";
+import { needsConfirmation, isSensitiveField, givesUp, yesNo } from "./safety.js";
 import { NavigationPolicy, linkTarget } from "./policy.js";
 import { duplicatePassenger, looksComplete, readback } from "./readback.js";
 import { saidBy } from "./match.js";
@@ -61,6 +61,10 @@ export class Agent {
   private composeRejections = 0;
   /** Custom dropdowns already set this task: id → the option chosen. */
   private chosen = new Map<string, string>();
+  /** The options clicked to set them: option id → its dropdown's id. */
+  private chosenVia = new Map<string, string>();
+  /** The user said to leave it: only done is allowed from here. */
+  private gaveUp = false;
   /** Everything the user actually said or dictated this task: the only text allowed into free-text fields. */
   private userTexts: string[] = [];
   /** What the user dictated or answered, as opposed to the request itself. */
@@ -93,6 +97,8 @@ export class Agent {
     this.declines = 0;
     this.composeRejections = 0;
     this.chosen = new Map();
+    this.chosenVia = new Map();
+    this.gaveUp = false;
     const p = this.opts.profile;
     this.userWords = [];
     this.userTexts = [task, ...io.recent(), ...(p ? [p.name, p.age, p.gender, p.mobile].filter((v): v is string => !!v) : [])];
@@ -240,10 +246,26 @@ export class Agent {
     emit({});
     if (a.narration && typeof a.narration === "string") io.say(a.narration);
 
+    // A trace carried on filling a complaint after the user said "नहीं, रहने दो" (no, leave it).
+    if (this.gaveUp && call.name !== "done") {
+      emit({ status: "blocked", result: "the user said to stop" });
+      return {
+        line: `${call.name} → REFUSED: the user said to leave it. Call done now and tell them nothing was sent, submitted or booked.`,
+        failed: true,
+      };
+    }
     const describe = () =>
       `${call.name}${target ? " " + target : ""}${a.text ? ` text="${a.text}"` : ""}${a.pick_suggestion ? ` pick="${a.pick_suggestion}"` : ""}${a.option ? ` option="${a.option}"` : ""}${call.name === "navigate" && a.url ? ` url="${a.url}"` : ""}`;
 
     try {
+      // An option clicked again after its list closed (traces: three turns on a gone "Cleanliness").
+      const toggle = call.name === "click" && !el ? this.chosenVia.get(String(a.id)) : undefined;
+      if (toggle && snap.elements[toggle]) {
+        emit({ status: "ok", result: "already chosen" });
+        return {
+          line: `${describe()} → not needed: you already chose it, and [${toggle}] shows "${snap.elements[toggle].name}". Carry on with the rest of the form.`,
+        };
+      }
       if (a.id !== undefined && !el && ["click", "type_text", "select_option", "compose_with_kivi", "read_document"].includes(call.name)) {
         throw new Error(`element [${a.id}] is not on the page any more`);
       }
@@ -343,6 +365,7 @@ export class Agent {
           await this.browser.click(a.id);
           const { summary: news, after, renamed } = await this.changes(snap);
           const summary = [news, renamed].filter(Boolean).join("; ");
+          if (el) this.noteChoice(a.id, el, snap, after);
           const confirmed = confirmNeeded ? " (user confirmed)" : "";
           emit({ status: "ok", result: summary || undefined });
           // After the irreversible step lands on a success page, the task is over: report, don't start again.
@@ -558,6 +581,12 @@ export class Agent {
             return { line: "ask_user → no answer", terminal: true };
           }
           emit({ status: "ok", result: answer });
+          if (givesUp(answer)) {
+            this.gaveUp = true;
+            return {
+              line: `ask_user "${a.question}" → user answered: "${answer}" ⇒ The user wants to leave it. Call done now and tell them nothing was sent, submitted or booked.`,
+            };
+          }
           return { line: `ask_user "${a.question}" → user answered: "${answer}"` };
         }
         case "compose_with_kivi":
@@ -629,6 +658,18 @@ export class Agent {
     return false;
   }
 
+  /** A clicked option that closed its list and now shows on its dropdown: remember the choice. */
+  private noteChoice(id: number, el: ElementInfo, before: Snapshot, after: Snapshot) {
+    const name = el.name.trim().toLowerCase();
+    if (!name || after.elements[String(id)]) return;
+    const toggle = Object.entries(after.elements).find(
+      ([i, e]) => before.elements[i] && e.name !== before.elements[i].name && e.name.toLowerCase().includes(name),
+    );
+    if (!toggle) return;
+    this.chosen.set(toggle[0], el.name.trim());
+    this.chosenVia.set(String(id), toggle[0]);
+  }
+
   /**
    * Custom dropdowns hide their options until opened. Open it, look at what actually appeared,
    * and click the closest match, or list the real options so the model can pick one.
@@ -651,6 +692,7 @@ export class Agent {
     }
     await this.browser.click(pick[0]);
     this.chosen.set(String(id), pick[1].name);
+    this.chosenVia.set(pick[0], String(id));
     emit({ status: "ok", result: `chose "${pick[1].name}"` });
     return { line: `${line} → chose [${pick[0]}] "${pick[1].name}"` };
   }
@@ -719,7 +761,7 @@ export class Agent {
   private refusePersonal(id: number, emit: (p: Partial<StepEvent>) => void, line: string) {
     emit({ status: "blocked", result: "personal details must come from the user" });
     return {
-      line: `${line} → REFUSED: [${id}] asks for personal details, and this value did not come from the user or their saved profile. Never invent names, ages, phone numbers or addresses: ask_user for them.`,
+      line: `${line} → REFUSED: [${id}] asks for personal details, and this value did not come from the user or their saved profile. Never invent names, ages, phone numbers, addresses or numbers like a PNR: ask_user for them, or leave an optional field empty.`,
       failed: true,
     };
   }
@@ -1000,7 +1042,7 @@ function nextButton(snap: Snapshot, afterId: number): [string, ElementInfo] | un
 function isPersonalField(el: ElementInfo) {
   if (!TEXT_ROLES.has(el.role)) return false;
   if (/search|from|to\b|station|city|captcha|promo|coupon/i.test(el.name)) return false;
-  return /\b(name|age|mobile|phone|e-?mail|address|pin ?code|postal)\b|नाम|उम्र|मोबाइल|\btel\b|given-name|family-name|street-address/i.test(
+  return /\b(name|age|mobile|phone|e-?mail|address|pin ?code|postal|pnr|booking id|order id|ticket (no|number))\b|नाम|उम्र|मोबाइल|\btel\b|given-name|family-name|street-address/i.test(
     `${el.name} ${el.fieldHint} ${el.autocomplete}`,
   );
 }

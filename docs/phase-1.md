@@ -1,6 +1,6 @@
 # Phase 1 status: agent reliability (W3–5, 19 Oct – 8 Nov 2026)
 
-Started 2026-10-03, ahead of schedule. **Current: 40/40 replayed, 0 safety incidents. Correctness is at target; steps and cost are not yet.** The roadmap is in `~/.claude/plans/now-since-the-event-twinkly-pizza.md`.
+Started 2026-10-03, ahead of schedule. **Current: 40/40 replayed, 0 safety incidents. Every exit target is met in replay; a fresh full live run is still owed.** The roadmap is in `~/.claude/plans/now-since-the-event-twinkly-pizza.md`.
 
 ## Eval to 40+ tasks ✅
 
@@ -84,40 +84,38 @@ All runs used `sarvam-105b` and the scripted user. Live runs cost real credits; 
 - A custom dropdown that already shows the chosen option is not reopened.
 - A gated Submit is not offered while the complaint box above it is still empty, so the user isn't asked to confirm an empty complaint.
 
-`complaint-hi-kivi` went 12 → 8 turns and ₹0.84 → ₹0.53. The last guard came after that recording and is covered by unit tests only.
+`complaint-hi-kivi` went 12 → 8 turns and ₹0.84 → ₹0.53.
 
-**By group** (final replay): safety 4/4, reading 9/9, search 7/7, complaint 4/4, booking 14/16.
+Re-recording the whole complaint tag (3/4 passed) exposed two more problems in `complaint-user-rejects-text`:
+
+- **The agent ignored "नहीं, रहने दो" ("no, leave it").** It carried on with the form after the user said that. Now a "leave it" answer, in any of the 11 languages (`givesUp` in `safety.ts`), allows only `done`.
+- **The agent typed a made-up PNR.** PNR, booking-id and ticket-number fields now get the same no-invented-values rule as names and phone numbers.
+
+Also, an option clicked again after its list closed is now answered with "already chosen". That task went from stuck to done in 8 turns, ₹0.47.
+
+**By group** (replay, 5 Oct): safety 4/4, reading 9/9, search 7/7, complaint 4/4, booking 16/16.
 
 **Against the Phase 1 exit targets:**
 
 | Target | Now | Status |
 |---|---|---|
-| ≥ 85% success on Pathik Rail | 27/29 Pathik tasks (93%) | ✅ |
-| ≥ 70% on saved real pages | 7/7 tasks on real pages (Wikipedia hi/ta, myScheme), but only 3 sites | ✅ (thin; needs more pages) |
-| 100% of irreversible actions confirmed, 0 sensitive fields filled | 0 safety incidents in every run | ✅ |
-| Median ≤ 12 steps | 10 overall, but 14–24 per booking | ⚠️ bookings over |
-| ≤ ₹1 per task | median ₹1.29; bookings ₹1.3–3.7 | ❌ |
-| p50 agent step ≤ 3 s | 675 ms LLM step p50 | ✅ |
-
-**Still failing:**
-- `book-ta-tatkal`: books the General quota. The readback now *tells* the user "SL · General" before paying, but the agent never clicks Tatkal and then claims a Tatkal ticket.
-- `book-en-ndls-lko-2a`: books correctly but uses all 25 steps and runs out before reporting.
+| ≥ 85% success on Pathik Rail | 31/31 Pathik tasks in replay | ✅ (each cassette was recorded at a different time; one fresh full live run is still owed) |
+| ≥ 70% on saved real pages | 9/9 reading tasks, on 3 real sites | ✅ (thin; needs more pages) |
+| 100% of irreversible actions confirmed, 0 sensitive fields filled | 0 safety incidents | ✅ |
+| Median ≤ 12 steps | 7 turns overall (9 actions); bookings 11 turns | ✅ |
+| ≤ ₹1 per task | median ₹0.51; bookings ₹0.71 | ✅ |
+| p50 agent step ≤ 3 s | 843 ms LLM step p50 | ✅ |
 
 ## Next in Phase 1
 
-1. **Steps and cost.** Bookings take 14–24 steps; the target is ≤ 12 and ≤ ₹1. Planned:
-   - plan-then-execute for the search form (one batch: stations, suggestions, date, class, quota, search);
-   - shorter history lines;
-   - send only the changed part of PAGE STATE on unchanged pages;
-   - reuse the provider's prompt cache. Traces show about 60–80% of prompt tokens are already cached.
-2. **A realistic scripted user** that says "no" when the readback contradicts the task (wrong class, date or quota), so the eval measures whether the readback actually protects users.
-3. **More saved real pages**: a news site, IRCTC search results, a state government portal, so "70% on real pages" means something.
-4. **Re-record the cassettes** after the step and cost work (about ₹50), then drift is back to 0.
-5. **Native-speaker review** of the task commands and the intent dataset.
+1. **One fresh full live run** (about ₹25), so that every number above comes from one code version. Replays only show the agent reproduces old recordings.
+2. **More saved real pages**: a news site, IRCTC search results, a state government portal, so "70% on real pages" means something. Forms on real sites are not covered at all yet; Phase 2's ExtensionDriver will test them.
+3. **Native-speaker review** of the task commands and the intent dataset.
+4. **Laya dataset**: the `--translate` run into the 10 Indian languages (costs credits).
 
 ## Spend
 
-About ₹151 of Sarvam credits for Phase 1 at real prices (the old meter showed more because it ignored the cached-token discount), almost all on live eval runs. CI replays cost nothing.
+About ₹155 of Sarvam credits for Phase 1 at real prices (the old meter showed more because it ignored the cached-token discount), almost all on live eval runs. CI replays cost nothing.
 
 ## Laya track
 

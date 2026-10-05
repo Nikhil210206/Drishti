@@ -4,7 +4,7 @@ export { MemoryCache } from "./cache.js";
 export { Agent, formatPage, type AgentIO, type AgentDeps, type AgentOptions, type StepEvent } from "./agent/orchestrator.js";
 export { TOOLS } from "./agent/tools.js";
 export { systemPrompt, stepMessage } from "./agent/prompts.js";
-export { needsConfirmation, isSensitiveField, yesNo, quickCommand } from "./agent/safety.js";
+export { needsConfirmation, isSensitiveField, givesUp, yesNo, quickCommand } from "./agent/safety.js";
 export { shownClasses, requestedClasses, CLASS_NAMES } from "./agent/classes.js";
 export { pageDates, requestedDate } from "./agent/dates.js";
 export { readbackPassengers } from "./agent/readback.js";

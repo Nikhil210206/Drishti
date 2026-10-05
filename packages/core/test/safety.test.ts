@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isSensitiveField, needsConfirmation, quickCommand, yesNo, type ElementInfo } from "../src/index.js";
+import { givesUp, isSensitiveField, needsConfirmation, quickCommand, yesNo, type ElementInfo } from "../src/index.js";
 
 const el = (name: string, extra: Partial<ElementInfo> = {}): ElementInfo => ({
   role: "button",
@@ -158,6 +158,17 @@ describe("yesNo in all 11 languages", () => {
     expect(yesNo("what is the fare?")).toBe("unclear");
     expect(yesNo("")).toBe("unclear");
   });
+});
+
+describe("givesUp", () => {
+  it.each(["नहीं, रहने दो", "no, leave it", "chhodo yaar", "வேண்டாம் விடுங்க", "থাক", "ਰਹਿਣ ਦਿਓ", "ಬೇಡ ಬಿಡಿ", "Never mind."])(
+    "%s → gives up",
+    (t) => expect(givesUp(t)).toBe(true),
+  );
+  it.each(["नहीं", "no", "हाँ, फिर से कोशिश करो", "Ravi Kumar", "rehne do, it is fine but please book the 3 tier one tomorrow"])(
+    "%s → carries on",
+    (t) => expect(givesUp(t)).toBe(false),
+  );
 });
 
 describe("quickCommand", () => {

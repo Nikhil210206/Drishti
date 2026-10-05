@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "complaint-hi-kivi",
- "recordedAt": "2026-10-05T05:14:04.667Z",
+ "recordedAt": "2026-10-05T05:36:22.940Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,53 +10,19 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_071592c66cfb4ef4956f9f6d",
-      "name": "click",
+      "id": "call_4cf31ff1879e4ba48cbab1dd",
+      "name": "navigate",
       "args": {
-       "id": 4,
-       "narration": "help पेज खोल रहा हूँ",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_6fd90e86e097477eafaa58ac",
-      "name": "click",
-      "args": {
-       "id": 5,
-       "narration": "account पेज खोल रहा हूँ",
-       "confirmation_question": ""
+       "url": "http://localhost:5174/help",
+       "narration": "Help page खोल रहा हूँ"
       }
      }
     ],
-    "ms": 2402,
+    "ms": 1786,
     "usage": {
-     "completion_tokens": 68,
+     "completion_tokens": 51,
      "prompt_tokens": 4095,
-     "total_tokens": 4163,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    }
-   }
-  },
-  {
-   "hash": "53eff2f461cc8da5",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3d566e98ce3e42e7b377da95",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "your complaint about food quality"
-      }
-     }
-    ],
-    "ms": 1005,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4004,
-     "total_tokens": 4051,
+     "total_tokens": 4146,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -66,191 +32,162 @@
    }
   },
   {
-   "hash": "004909e4b3d904c9",
+   "hash": "300a47664b0584a9",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_40d971d98e074e489935f830",
+      "id": "call_bf47b3f704d14657b6bb0f28",
+      "name": "click",
+      "args": {
+       "id": 4,
+       "narration": "help link पर click कर रहा हूँ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1561,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 4151,
+     "total_tokens": 4203,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "3d9b033163891f38",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_cc31f83c43194b42ba1191b7",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "your complaint about food quality"
+      }
+     }
+    ],
+    "ms": 862,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4038,
+     "total_tokens": 4085,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "fec77d25c73c8410",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_494bbc61e4464647afe1cfe4",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "शिकायत सबमिट कर रहा हूँ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 1377,
+    "usage": {
+     "completion_tokens": 53,
+     "prompt_tokens": 4119,
+     "total_tokens": 4172,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
+    }
+   }
+  },
+  {
+   "hash": "3d8370138884c597",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3aefea7749e145bbabfd14fa",
+      "name": "select_option",
+      "args": {
+       "id": 19,
+       "option": "Food and Catering",
+       "narration": "खाद्य श्रेणी चुन रहा हूँ"
+      }
+     }
+    ],
+    "ms": 1109,
+    "usage": {
+     "completion_tokens": 56,
+     "prompt_tokens": 4171,
+     "total_tokens": 4227,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "dc66ddaae8072124",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c502d06cd40744de8fbb3288",
       "name": "click",
       "args": {
        "id": 22,
        "narration": "शिकायत सबमिट करना",
-       "confirmation_question": "क्या आप शिकायत दर्ज करना चाहते हैं?"
-      }
-     }
-    ],
-    "ms": 1067,
-    "usage": {
-     "completion_tokens": 61,
-     "prompt_tokens": 4085,
-     "total_tokens": 4146,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "fecc69c6f941c9c0",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d7b7c869530d4c33a49329b3",
-      "name": "select_option",
-      "args": {
-       "id": 19,
-       "option": "Food Quality",
-       "narration": "खाद्य गुणवत्ता चुनें"
-      }
-     }
-    ],
-    "ms": 1362,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4137,
-     "total_tokens": 4191,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    }
-   }
-  },
-  {
-   "hash": "df02b23833f332b2",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_6387e169a14042399835045e",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "category चुनना है",
        "confirmation_question": ""
       }
-     },
-     {
-      "id": "call_3520fd70215e488e8c503a3f",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "complaint submit करना है",
-       "confirmation_question": "क्या आप complaint submit करना चाहते हैं? यह Food quality category में Train 12639 के खाने की शिकायत दर्ज करेगी।"
-      }
      }
     ],
-    "ms": 1838,
+    "ms": 1114,
     "usage": {
-     "completion_tokens": 81,
-     "prompt_tokens": 4168,
-     "total_tokens": 4249,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    }
-   }
-  },
-  {
-   "hash": "14e8c59dd9562b16",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c8db6804115f40139290b763",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 19,
-         "value": "Food quality"
-        }
-       ],
-       "narration": "Food quality category select kar raha hoon"
-      }
-     }
-    ],
-    "ms": 1409,
-    "usage": {
-     "completion_tokens": 71,
-     "prompt_tokens": 4249,
-     "total_tokens": 4320,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    }
-   }
-  },
-  {
-   "hash": "4635733206a0a47a",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_2f39aef7bd6942c99a5af3e4",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Food quality category select kar raha hoon"
-      }
-     }
-    ],
-    "ms": 784,
-    "usage": {
-     "completion_tokens": 26,
-     "prompt_tokens": 4360,
-     "total_tokens": 4386,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    }
-   }
-  },
-  {
-   "hash": "a3bd3ea1f282c32b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c1cc81fe6ee74157b1333004",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "Complaint submit करना",
-       "confirmation_question": "क्या आप यह शिकायत सबमिट करना चाहते हैं?"
-      }
-     }
-    ],
-    "ms": 883,
-    "usage": {
-     "completion_tokens": 65,
-     "prompt_tokens": 4410,
-     "total_tokens": 4475,
+     "completion_tokens": 29,
+     "prompt_tokens": 4203,
+     "total_tokens": 4232,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3968
+      "cached_tokens": 3712
      }
     }
    }
   },
   {
-   "hash": "9c08c6056aff6e78",
+   "hash": "bef08f2db76eb3be",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_86581b18f2bb40719488507f",
+      "id": "call_6fda80b80410458f8c3fd0b3",
       "name": "done",
       "args": {
-       "speech": "आपकी शिकायत दर्ज हो गई है। Reference number CMP1000 है। 48 घंटे के अंदर जवाब मिलेगा।"
+       "speech": "आपकी शिकायत दर्ज हो गई है। Reference number CMP1000 है। वे 48 घंटे में जवाब देंगे।"
       }
      }
     ],
-    "ms": 730,
+    "ms": 1191,
     "usage": {
      "completion_tokens": 53,
-     "prompt_tokens": 4440,
-     "total_tokens": 4493,
+     "prompt_tokens": 4290,
+     "total_tokens": 4343,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,

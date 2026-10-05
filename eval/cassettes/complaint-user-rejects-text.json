@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "complaint-user-rejects-text",
- "recordedAt": "2026-10-05T05:14:45.801Z",
+ "recordedAt": "2026-10-05T05:50:41.973Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,7 +10,7 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_37f577351757415bb2001eff",
+      "id": "call_6e1a3569ed66448093821f7b",
       "name": "click",
       "args": {
        "id": 4,
@@ -19,7 +19,16 @@
       }
      },
      {
-      "id": "call_0f81d4e7f7cb4ff593290dc6",
+      "id": "call_e3e9acf258cd40e2b8a378b7",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "search trains button",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_4928364126814c1c923f4418",
       "name": "click",
       "args": {
        "id": 5,
@@ -28,11 +37,11 @@
       }
      }
     ],
-    "ms": 1422,
+    "ms": 1813,
     "usage": {
-     "completion_tokens": 54,
+     "completion_tokens": 79,
      "prompt_tokens": 4092,
-     "total_tokens": 4146,
+     "total_tokens": 4171,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -42,114 +51,34 @@
    }
   },
   {
-   "hash": "6e375b62cd5edcc7",
+   "hash": "d2cdb99de9ada33c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9845e952157142d18192b5a2",
+      "id": "call_31c7465458114f25853dcb83",
       "name": "click",
       "args": {
        "id": 19,
-       "narration": "श्रेणी चुन रहा हूँ"
+       "narration": "Category dropdown खोल रहा हूँ",
+       "confirmation_question": ""
       }
      },
      {
-      "id": "call_291f01cc09114117b16d0e89",
-      "name": "select_option",
-      "args": {
-       "id": 19,
-       "option": "Cleaning / Hygiene",
-       "narration": "सफाई की शिकायत चुन रहा हूँ"
-      }
-     },
-     {
-      "id": "call_85983e9dbb40485ea103ee6e",
-      "name": "type_text",
-      "args": {
-       "id": 21,
-       "text": "Train की सफाई ठीक नहीं है, seat और floor dirty हैं, और washroom भी साफ़ नहीं था।",
-       "narration": "शिकायत लिख रहा हूँ"
-      }
-     },
-     {
-      "id": "call_bb6b4423e32b463bb30d602a",
+      "id": "call_2e70f8265808486098b999a9",
       "name": "click",
       "args": {
        "id": 22,
-       "narration": "शिकायत submit कर रहा हूँ",
-       "confirmation_question": "क्या आप यह शिकायत submit करना चाहते हैं?"
+       "narration": "Complaint submit कर रहा हूँ",
+       "confirmation_question": "क्या आप वाकई सफाई के बारे में शिकायत सबमिट करना चाहते हैं? यह एक demo website है और कोई real booking नहीं होगी।"
       }
      }
     ],
-    "ms": 2713,
+    "ms": 1700,
     "usage": {
-     "completion_tokens": 247,
-     "prompt_tokens": 4001,
-     "total_tokens": 4248,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "3993ca2e96b2112a",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "click",
-      "args": {
-       "id": 24,
-       "narration": "साफ-सफाई की शिकायत चुनना"
-      }
-     }
-    ],
-    "ms": 6457,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4186,
-     "total_tokens": 4233,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    },
-    "raw": "[{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 24,\n    \"narration\": \"साफ-सफाई की शिकायत चुनना\"\n  }}"
-   }
-  },
-  {
-   "hash": "6a282ef6274aa6be",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bd8b98b7fb8145bd83b4906d",
-      "name": "click",
-      "args": {
-       "id": 21,
-       "narration": "Opening complaint text box"
-      }
-     },
-     {
-      "id": "call_8a299a0b560f4c3188516225",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "complaint about cleanliness"
-      }
-     }
-    ],
-    "ms": 1563,
-    "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4156,
-     "total_tokens": 4204,
+     "completion_tokens": 81,
+     "prompt_tokens": 4011,
+     "total_tokens": 4092,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -159,24 +88,25 @@
    }
   },
   {
-   "hash": "6c28808c1f6d9202",
+   "hash": "2b0ec0abdea13d2d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_3223a1f576f54d94ad9aa2b3",
-      "name": "compose_with_kivi",
+      "id": "call_8978bf75f3ec42e78fa9081c",
+      "name": "click",
       "args": {
-       "id": 21,
-       "what": "अपनी शिकायत लिखें"
+       "id": 24,
+       "narration": "Cleanliness category चुन रहा हूँ",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 1235,
+    "ms": 6785,
     "usage": {
-     "completion_tokens": 34,
-     "prompt_tokens": 4239,
-     "total_tokens": 4273,
+     "completion_tokens": 53,
+     "prompt_tokens": 4171,
+     "total_tokens": 4224,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -186,229 +116,61 @@
    }
   },
   {
-   "hash": "16d8ebd0277cd5ff",
+   "hash": "47e7ed5a77d00deb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_8f62506f220e440d9fde03b9",
-      "name": "ask_user",
+      "id": "call_89180b90e2d54180994ca459",
+      "name": "click",
       "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
+       "id": 24,
+       "narration": "Cleanliness चुन रही हूँ",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_ebb675677832416f9abd3d87",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Complaint submit कर रही हूँ",
+       "confirmation_question": "क्या आप Cleanliness की complaint submit करना चाहती हैं? यह complaint submit हो जाएगी।"
       }
      }
     ],
-    "ms": 1786,
+    "ms": 2730,
     "usage": {
-     "completion_tokens": 55,
-     "prompt_tokens": 4288,
-     "total_tokens": 4343,
+     "completion_tokens": 72,
+     "prompt_tokens": 4141,
+     "total_tokens": 4213,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "3b0472b862f6e882",
+   "hash": "d4d8cb757e44a302",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1ac033a31db84041805db3ec",
-      "name": "ask_user",
+      "id": "call_c8e54a48191f44f8ba1b4dd4",
+      "name": "compose_with_kivi",
       "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
+       "id": 21,
+       "what": "अपनी सफाई की शिकायत लिखें"
       }
      }
     ],
-    "ms": 1563,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4352,
-     "total_tokens": 4405,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "d7b38e5f917ff142",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "ask_user",
-      "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
-      }
-     }
-    ],
-    "ms": 1952,
-    "usage": {
-     "completion_tokens": 55,
-     "prompt_tokens": 4400,
-     "total_tokens": 4455,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    },
-    "raw": "[{\n  \"name\": \"ask_user\",\n  \"parameters\": {\n    \"question\": \"आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?\"\n  }\n}"
-   }
-  },
-  {
-   "hash": "0d9848f61f18f2f3",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_637340d7eaf44308884bc4fd",
-      "name": "ask_user",
-      "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
-      }
-     }
-    ],
-    "ms": 1629,
+    "ms": 1274,
     "usage": {
      "completion_tokens": 48,
-     "prompt_tokens": 4448,
-     "total_tokens": 4496,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4096
-     }
-    }
-   }
-  },
-  {
-   "hash": "97091a64ad644d77",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_75d29b048e3c47449bb86deb",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "Help page summary"
-      }
-     }
-    ],
-    "ms": 3688,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4496,
-     "total_tokens": 4538,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": null
-    }
-   }
-  },
-  {
-   "hash": "03e394d0f596e8e5",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "ask_user",
-      "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
-      }
-     }
-    ],
-    "ms": 1826,
-    "usage": {
-     "completion_tokens": 55,
-     "prompt_tokens": 4586,
-     "total_tokens": 4641,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4032
-     }
-    },
-    "raw": "[{\n  \"name\": \"ask_user\",\n  \"parameters\": {\n    \"question\": \"आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?\"\n  }\n}"
-   }
-  },
-  {
-   "hash": "849451d037851ec0",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3e7ab960857e4cb0964afcfa",
-      "name": "ask_user",
-      "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
-      }
-     }
-    ],
-    "ms": 1538,
-    "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 4565,
-     "total_tokens": 4621,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4224
-     }
-    }
-   }
-  },
-  {
-   "hash": "51d1c629e1d2aa53",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_27e262fab06a41c99fff00df",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "Describe your issue"
-      }
-     }
-    ],
-    "ms": 2294,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 4614,
-     "total_tokens": 4659,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4288
-     }
-    }
-   }
-  },
-  {
-   "hash": "57f202bc2414bc9c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cd517345b0364bc5a69fc8f5",
-      "name": "ask_user",
-      "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
-      }
-     }
-    ],
-    "ms": 1783,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4664,
-     "total_tokens": 4718,
+     "prompt_tokens": 4222,
+     "total_tokens": 4270,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -418,136 +180,83 @@
    }
   },
   {
-   "hash": "7bd83e05cab137f4",
+   "hash": "6dadbef23bf0e0e1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1477ca844e0f4b36975d8383",
-      "name": "ask_user",
+      "id": "call_3e7a1bad73484c54ad841008",
+      "name": "click",
       "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
+       "id": 24,
+       "narration": "Cleanliness select कर रहा हूँ"
       }
      }
     ],
-    "ms": 7872,
+    "ms": 1572,
     "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4713,
-     "total_tokens": 4766,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4416
-     }
-    }
-   }
-  },
-  {
-   "hash": "7fc394c5840c7808",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bf244e56248749038e728972",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "Help page पढ़ना"
-      }
-     }
-    ],
-    "ms": 4731,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4762,
-     "total_tokens": 4804,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4480
-     }
-    }
-   }
-  },
-  {
-   "hash": "65430910e3f0586c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d9b41383898240909ff6f7cd",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "Describe your issue"
-      }
-     }
-    ],
-    "ms": 2753,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 4852,
-     "total_tokens": 4897,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4160
-     }
-    }
-   }
-  },
-  {
-   "hash": "65a95ec6a6a0b1e1",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_6ff32de6dc72428aa2c0af35",
-      "name": "ask_user",
-      "args": {
-       "question": "आपकी शिकायत का विवरण नहीं लिया जा सका। क्या आप फिर से कोशिश करना चाहेंगे, या इसे यहीं रोक दें?"
-      }
-     }
-    ],
-    "ms": 1829,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4831,
-     "total_tokens": 4884,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4032
-     }
-    }
-   }
-  },
-  {
-   "hash": "6319e21afe7122e7",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "done",
-      "args": {
-       "speech": "आपकी शिकायत का विवरण नहीं लिया जा सका, इसलिए कोई शिकायत सबमिट नहीं हुई। आप जब चाहें फिर से कोशिश कर सकते हैं।"
-      }
-     }
-    ],
-    "ms": 1702,
-    "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 4880,
-     "total_tokens": 4937,
+     "completion_tokens": 46,
+     "prompt_tokens": 4271,
+     "total_tokens": 4317,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 3904
      }
+    }
+   }
+  },
+  {
+   "hash": "b2429d6c7456d034",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "rec_0",
+      "name": "ask_user",
+      "args": {
+       "question": "आपने जो शिकायत का विवरण लिखा था, वह रिजेक्ट हो गया। क्या आप फिर से कोशिश करना चाहेंगे, या यहीं रुक जाएँ?"
+      }
+     }
+    ],
+    "ms": 1275,
+    "usage": {
+     "completion_tokens": 59,
+     "prompt_tokens": 4332,
+     "total_tokens": 4391,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3712
+     }
     },
-    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"आपकी शिकायत का विवरण नहीं लिया जा सका, इसलिए कोई शिकायत सबमिट नहीं हुई। आप जब चाहें फिर से कोशिश कर सकते हैं।\"\n  }\n}"
+    "raw": "[{\n  \"name\": \"ask_user\",\n  \"parameters\": {\n    \"question\": \"आपने जो शिकायत का विवरण लिखा था, वह रिजेक्ट हो गया। क्या आप फिर से कोशिश करना चाहेंगे, या यहीं रुक जाएँ?\"\n  }\n}"
+   }
+  },
+  {
+   "hash": "e3911fe0dc40523e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_b217997a4a864a27811302ee",
+      "name": "done",
+      "args": {
+       "speech": "आपकी सफाई की शिकायत अभी submit नहीं हुई। अगर आप चाहें तो मैं फिर से शिकायत लिखने में मदद कर सकता हूँ।"
+      }
+     }
+    ],
+    "ms": 1510,
+    "usage": {
+     "completion_tokens": 52,
+     "prompt_tokens": 4398,
+     "total_tokens": 4450,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
    }
   }
  ],

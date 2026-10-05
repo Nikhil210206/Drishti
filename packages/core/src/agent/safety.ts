@@ -313,6 +313,68 @@ export function yesNo(text: string): "yes" | "no" | "unclear" {
   return "unclear";
 }
 
+// ---------- "leave it": the user giving up on the task ----------
+// Phrases, matched anywhere in a short answer. "No" alone is not one: it may answer the question.
+const GIVE_UP = [
+  "leave it",
+  "forget it",
+  "never mind",
+  "nevermind",
+  "cancel it",
+  "don't bother",
+  "rehne do",
+  "rahne do",
+  "jaane do",
+  "jane do",
+  "chhodo",
+  "chhod do",
+  "रहने दो",
+  "रहने दीजिए",
+  "जाने दो",
+  "छोड़ो",
+  "छोड़ दो",
+  "छोड़िए",
+  "राहू दे",
+  "राहूदे",
+  "सोडून दे",
+  "जाऊ दे",
+  "থাক",
+  "বাদ দাও",
+  "ছেড়ে দাও",
+  "விடுங்க",
+  "விட்டுடுங்க",
+  "வேண்டாம் விடு",
+  "వదిలేయండి",
+  "వదిలేయి",
+  "వద్దులే",
+  "ಬಿಡಿ",
+  "ಬಿಟ್ಟುಬಿಡಿ",
+  "ಬೇಡ ಬಿಡಿ",
+  "വിട്ടേക്ക്",
+  "വേണ്ട വിട്",
+  "રહેવા દો",
+  "જવા દો",
+  "છોડો",
+  "ਰਹਿਣ ਦਿਓ",
+  "ਛੱਡੋ",
+  "ਛੱਡ ਦਿਓ",
+  "ਜਾਣ ਦਿਓ",
+  "ଥାଉ",
+  "ଛାଡ଼ି ଦିଅ",
+  "ଛାଡ",
+];
+
+/** True when a short answer says to drop the task ("नहीं, रहने दो", "leave it"). */
+export function givesUp(text: string): boolean {
+  const t = ` ${text
+    .toLowerCase()
+    .replace(/[.,!?।॥"'`]/g, " ")
+    .replace(/\s+/g, " ")} `;
+  if (t.trim().split(" ").length > 6) return false;
+  // oxlint-disable-next-line no-control-regex -- ASCII range check, not a control character
+  return GIVE_UP.some((w) => (/^[\x00-\x7F]+$/.test(w) ? t.includes(` ${w} `) : t.includes(w)));
+}
+
 // ---------- quick local commands (no LLM round-trip) ----------
 const STOP = ["stop", "ruko", "bas", "रुको", "बस", "थांबा", "থামো", "நிறுத்து", "ఆపు", "ನಿಲ್ಲಿಸಿ", "നിർത്തൂ"];
 const REPEAT = ["repeat", "phir se", "dobara", "फिर से", "दोबारा", "আবার", "மீண்டும்", "మళ్ళీ", "ಮತ್ತೆ", "വീണ്ടും", "पुन्हा"];

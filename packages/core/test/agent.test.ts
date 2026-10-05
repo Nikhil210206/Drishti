@@ -346,6 +346,23 @@ describe("Agent: custom dropdowns", () => {
   });
 });
 
+describe("Agent: the user says to leave it", () => {
+  it("allows only done once the user gives up", async () => {
+    const form = page(HOME, { "22": element("SUBMIT COMPLAINT", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HOME]: form }, HOME);
+    const llm = new ScriptedLLM([
+      [{ name: "ask_user", args: { question: "फिर से कोशिश करें या रुकें?" } }],
+      [{ name: "click", args: { id: 22 } }],
+      [{ name: "done", args: { speech: "ठीक है, कुछ नहीं भेजा।" } }],
+    ]);
+    const result = await run(agentFor(browser, llm), new RecordingIO(["नहीं, रहने दो"]));
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("The user wants to leave it");
+    expect(String(llm.calls[2].messages[1].content)).toContain("REFUSED: the user said to leave it");
+    expect(result.outcome).toBe("done");
+  });
+});
+
 describe("Agent: no invented personal details", () => {
   const form = () =>
     page(HOME, { "35": element("Name", { role: "textbox", tag: "input" }), "36": element("Age", { role: "textbox", tag: "input" }) });
@@ -369,6 +386,15 @@ describe("Agent: no invented personal details", () => {
     await run(agentFor(browser, llm), new RecordingIO());
     expect(browser.log).toEqual([]);
     expect(String(llm.calls[1].messages[1].content)).toContain("Never invent names");
+  });
+
+  it("refuses a made-up PNR", async () => {
+    const pnr = page(HOME, { "20": element("PNR (optional)", { role: "textbox", tag: "input" }) });
+    const browser = new FakeBrowser({ [HOME]: pnr }, HOME);
+    const llm = new ScriptedLLM([[{ name: "type_text", args: { id: 20, text: "1234567890" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain("numbers like a PNR");
   });
 
   it("allows details the user gave when asked", async () => {
@@ -843,6 +869,32 @@ describe("Agent: knowing when to stop", () => {
     await run(agentFor(browser, llm), new RecordingIO());
     expect(browser.log).toEqual(["click 19", "click 26"]);
     expect(String(llm.calls[2].messages[1].content)).toContain('already shows "Food quality"');
+  });
+
+  it("remembers an option chosen by clicking, and does not reopen or re-click it", async () => {
+    const closed = page(HELP, { "19": element("Select category ▾", { role: "clickable", tag: "div" }) });
+    const open = page(`${HELP}/open`, {
+      "19": element("Select category ▾", { role: "clickable", tag: "div" }),
+      "24": element("Cleanliness", { role: "clickable", tag: "div" }),
+    });
+    const chosen = page(`${HELP}/open`, { "19": element("Cleanliness ▾", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HELP]: closed, [`${HELP}/open`]: open }, HELP, { "19": `${HELP}/open` });
+    browser.links["24"] = `${HELP}/open`;
+    const click = browser.click.bind(browser);
+    browser.click = async (id) => {
+      await click(id);
+      if (String(id) === "24") browser.pages[`${HELP}/open`] = chosen;
+    };
+    const llm = new ScriptedLLM([
+      [{ name: "click", args: { id: 19 } }],
+      [{ name: "click", args: { id: 24 } }],
+      [{ name: "click", args: { id: 24 } }],
+      [{ name: "click", args: { id: 19 } }],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["click 19", "click 24"]);
+    expect(String(llm.calls[3].messages[1].content)).toContain('not needed: you already chose it, and [19] shows "Cleanliness ▾"');
+    expect(String(llm.calls[4].messages[1].content)).toContain('already shows "Cleanliness"');
   });
 
   it("still clicks a Submit complaint button (with confirmation)", async () => {
