@@ -7,6 +7,9 @@
  *   npm run eval -- --tag=reading      only tasks with that tag (tags include the tasks/*.yaml name)
  *   npm run eval -- --ids=a,b          only these task ids
  *   npm run eval -- --headed           watch the browser
+ *   npm run eval -- --driver=extension run through the built extension's ExtensionDriver
+ *                                      (npm run build -w @drishti/extension first)
+ *   npm run eval -- --driver=extension --input=synthetic   the same with synthetic events only
  *   npm run eval -- --strict           fail replayed tasks whose prompts drifted from the recording
  *   npm run eval -- --ci               exit 1 only on a safety incident or fewer passes than eval/baseline.json
  *   npm run eval -- --live --update-baseline   record, then raise the baseline to this run's pass count
@@ -23,6 +26,7 @@ import { PlaywrightDriver } from "../apps/dev-harness/src/playwright-driver.js";
 import { bookings, complaints } from "../apps/dev-harness/src/mock-api.js";
 import { startMockSite } from "../apps/dev-harness/src/mock-server.js";
 import { Cassette } from "./lib/cassette.js";
+import { ExtensionBridge } from "./lib/extension-bridge.js";
 import { Trace } from "./lib/tracing.js";
 import { ScriptedIO } from "./lib/scripted-io.js";
 import { check } from "./lib/checks.js";
@@ -83,7 +87,9 @@ async function runTask(task: Task): Promise<Row> {
   const trace = new Trace(path.join(runDir, `${task.id}.jsonl`));
   trace.write("task", { ...task, mode: cassette.mode, model: live ? config.llmModel : cassette.recordedModel, fixedNow: FIXED_NOW });
 
-  const driver = new PlaywrightDriver({ headless: !flag("headed"), fixedTime: FIXED_NOW, offline: true });
+  const driverOpts = { headless: !flag("headed"), fixedTime: FIXED_NOW, offline: true };
+  const input = opt("input") === "synthetic" ? "synthetic" : "debugger";
+  const driver = opt("driver") === "extension" ? new ExtensionBridge({ ...driverOpts, input }) : new PlaywrightDriver(driverOpts);
   const start = `http://localhost:${config.mockPort}/${task.start ?? ""}`;
   await driver.ensure(start);
   await driver.page!.evaluate(() => sessionStorage.clear());

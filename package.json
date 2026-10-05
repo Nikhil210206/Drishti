@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "concurrently -k -n server,panel \"npm run server -w @drishti/dev-harness\" \"npm run dev -w @drishti/ui\"",
     "start": "npm run build && npm run start -w @drishti/dev-harness",
-    "build": "npm run build -w @drishti/ui",
+    "build": "npm run build -w @drishti/ui && npm run build -w @drishti/extension",
     "check": "npm run check -w @drishti/dev-harness --",
     "snapshot": "npm run snapshot -w @drishti/dev-harness --",
     "eval": "tsx eval/run.ts",
@@ -22,7 +22,8 @@
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "ci": "npm run lint && npm run format:check && npm run typecheck && npm test"
+    "ci": "npm run lint && npm run format:check && npm run typecheck && npm test",
+    "eval:extension": "tsx eval/run.ts --driver=extension"
   },
   "repository": {
     "type": "git",

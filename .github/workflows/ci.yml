@@ -34,6 +34,10 @@ jobs:
         run: npm test
       - name: Agent eval (replayed from cassettes, no API calls)
         run: npm run eval -- --ci
+      - name: Build extension
+        run: npm run build -w @drishti/extension
+      - name: Agent eval through the extension's ExtensionDriver (replayed, no API calls)
+        run: npm run eval:extension -- --ci
       - name: Upload eval traces
         if: always()
         uses: actions/upload-artifact@v4
@@ -42,4 +46,4 @@ jobs:
           path: eval/runs/
           retention-days: 14
       - name: Build panel
-        run: npm run build
+        run: npm run build -w @drishti/ui
