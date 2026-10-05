@@ -1,102 +1,82 @@
 {
  "version": 1,
  "task": "search-ta-first-train",
- "recordedAt": "2026-10-05T06:14:15.094Z",
+ "recordedAt": "2026-10-05T08:15:05.407Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "aad8381a9bff8b7d",
+   "hash": "082e8fc7e66b783f",
    "response": {
     "content": "",
     "toolCalls": [],
-    "ms": 5103,
+    "ms": 558,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 4097,
-     "total_tokens": 4697,
+     "completion_tokens": 69,
+     "prompt_tokens": 4157,
+     "total_tokens": 4226,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "d0e2798e5f4a7278",
+   "hash": "5ff865f8e5eb3fd3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9d0ee43008554cb0800a9d89",
+      "id": "call_c196e8e3bfe14a76a48a471a",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chennai",
-       "narration": "FROM-ல Chennai type பண்றேன்"
+       "narration": "Enter FROM station"
       }
      },
      {
-      "id": "call_dff615c5c90a496b82aeafa1",
+      "id": "call_12c7ed4ecb63404d9e36314e",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Madurai",
-       "narration": "TO-ல Madurai type பண்றேன்"
+       "narration": "Enter TO station"
       }
      },
      {
-      "id": "call_a453e80572be4cac91690e1f",
+      "id": "call_c3c36436cae742ee9ca4e40f",
       "name": "click",
       "args": {
        "id": 11,
-       "narration": "நாளை date-அ select பண்றேன்"
+       "narration": "Select tomorrow's date"
       }
-     }
-    ],
-    "ms": 2747,
-    "usage": {
-     "completion_tokens": 93,
-     "prompt_tokens": 4118,
-     "total_tokens": 4211,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "768720d937322901",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_a74b0a973bba43fa9e00bd13",
+      "id": "call_dc8fae2fc22445d3a0d3ed3c",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains Chennai to Madurai tomorrow",
-       "confirmation_question": ""
+       "narration": "Search trains"
       }
      }
     ],
-    "ms": 925,
+    "ms": 1435,
     "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4186,
-     "total_tokens": 4217,
+     "completion_tokens": 181,
+     "prompt_tokens": 4178,
+     "total_tokens": 4359,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "ed09f7d2160f5176",
+   "hash": "12055feac138f334",
    "response": {
     "content": "",
     "toolCalls": [
@@ -104,22 +84,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "நாளைக்கு Chennai Central-ல இருந்து Madurai-க்கு முதல் train Sahyadri Vande Bharat Express, 05:00 AM-க்கு கிளம்பும். இது 11:25 AM-க்கு Madurai-க்கு போய் சேரும், 6h 25m ஆகும். CC class-க்கு ₹675 ஆகும்."
+       "speech": "நாளைக்கு Chennai Central-ல இருந்து Madurai-க்கு first train Sahyadri Vande Bharat Express, 05:00-க்கு கிளம்பும். 11:25-க்கு Madurai-க்கு போய் சேரும். AC Chair Car class-ல ₹675 ஆகும்."
       }
      }
     ],
-    "ms": 943,
+    "ms": 1057,
     "usage": {
-     "completion_tokens": 103,
-     "prompt_tokens": 5441,
-     "total_tokens": 5544,
+     "completion_tokens": 94,
+     "prompt_tokens": 5501,
+     "total_tokens": 5595,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     },
-    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"நாளைக்கு Chennai Central-ல இருந்து Madurai-க்கு முதல் train Sahyadri Vande Bharat Express, 05:00 AM-க்கு கிளம்பும். இது 11:25 AM-க்கு Madurai-க்கு போய் சேரும், 6h 25m ஆகும். CC class-க்கு ₹675 ஆகும்.\"\n  }\n}"
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"நாளைக்கு Chennai Central-ல இருந்து Madurai-க்கு first train Sahyadri Vande Bharat Express, 05:00-க்கு கிளம்பும். 11:25-க்கு Madurai-க்கு போய் சேரும். AC Chair Car class-ல ₹675 ஆகும்.\"\n  }\n}"
    }
   }
  ],

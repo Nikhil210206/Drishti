@@ -1,11 +1,11 @@
 {
  "version": 1,
  "task": "read-mr-pmkisan-documents",
- "recordedAt": "2026-10-05T06:12:43.551Z",
+ "recordedAt": "2026-10-05T08:14:02.140Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "6adc377d4803a77d",
+   "hash": "c72171637ece4da6",
    "response": {
     "content": "",
     "toolCalls": [
@@ -14,46 +14,135 @@
       "name": "read_page",
       "args": {
        "mode": "summary",
-       "narration": "PM Kisan scheme-चे details वाचतोय"
+       "narration": "PM Kisan documents ची माहिती वाचत आहे"
       }
      }
     ],
-    "ms": 516,
+    "ms": 697,
     "usage": {
-     "completion_tokens": 38,
-     "prompt_tokens": 5374,
-     "total_tokens": 5412,
+     "completion_tokens": 52,
+     "prompt_tokens": 5434,
+     "total_tokens": 5486,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 2112
      }
     },
-    "raw": "[\n{\"name\": \"read_page\", \"parameters\": {\"mode\": \"summary\", \"narration\": \"PM Kisan scheme-चे details वाचतोय\"}}"
+    "raw": "[\n{\n  \"name\": \"read_page\",\n  \"parameters\": {\n    \"mode\": \"summary\",\n    \"narration\": \"PM Kisan documents ची माहिती वाचत आहे\"\n  }\n}\n"
    }
   },
   {
-   "hash": "4d513cbefeb06845",
+   "hash": "5411c9ec46ae1582",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_072dd620c7f74a9db33aca21",
-      "name": "done",
+      "id": "call_41a0e1e6697e44eab76f266d",
+      "name": "click",
       "args": {
-       "speech": "PM किसान योजनेसाठी आवश्यक कागदपत्रे आहेत: आधार कार्ड, जमिनीचे कागदपत्रे आणि सेव्हिंग बँक खाते. तुम्ही CSC केंद्रावर जाऊन ऑनलाइन अर्ज करू शकता."
+       "id": 9,
+       "narration": "Check eligibility वर क्लिक करत आहे"
       }
      }
     ],
-    "ms": 757,
+    "ms": 693,
     "usage": {
      "completion_tokens": 50,
-     "prompt_tokens": 5571,
-     "total_tokens": 5621,
+     "prompt_tokens": 5631,
+     "total_tokens": 5681,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "9a460067623de60e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0384c026257345c28800da89",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "PM Kisan documents वाचत आहे"
+      }
+     },
+     {
+      "id": "call_29acd7b55fb14d349590c053",
+      "name": "read_page",
+      "args": {
+       "mode": "verbatim",
+       "narration": "Documents Required section वाचत आहे"
+      }
+     }
+    ],
+    "ms": 1015,
+    "usage": {
+     "completion_tokens": 99,
+     "prompt_tokens": 5467,
+     "total_tokens": 5566,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "b95786ca453cc04b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_3b6260637dc24f938b5783eb",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "PM Kisan documents वाचतोय"
+      }
+     }
+    ],
+    "ms": 621,
+    "usage": {
+     "completion_tokens": 32,
+     "prompt_tokens": 5720,
+     "total_tokens": 5752,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "948c908e83b929b9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0aaaa6b0ac034a1b832d40a6",
+      "name": "done",
+      "args": {
+       "speech": "PM Kisan साठी लागणारे कागदपत्रे आहेत: Aadhaar Card, Landholding papers, आणि Savings Bank Account. अधिक माहिती हवी आहे का?"
+      }
+     }
+    ],
+    "ms": 685,
+    "usage": {
+     "completion_tokens": 64,
+     "prompt_tokens": 5567,
+     "total_tokens": 5631,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
      }
     }
    }

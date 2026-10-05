@@ -1,138 +1,28 @@
 {
  "version": 1,
  "task": "complaint-ta-staff",
- "recordedAt": "2026-10-05T06:12:03.570Z",
+ "recordedAt": "2026-10-05T08:13:28.651Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "7bf4b3f99c47bcfc",
+   "hash": "0a94376c582e0491",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_cf9b1536c9ea462c8b004333",
-      "name": "navigate",
-      "args": {
-       "url": "http://localhost:5174/help",
-       "narration": "help page-க்கு போறேன்"
-      }
-     }
-    ],
-    "ms": 506,
-    "usage": {
-     "completion_tokens": 34,
-     "prompt_tokens": 4092,
-     "total_tokens": 4126,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "6f22faf71699c49f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_583050b35acf4545a23bb639",
+      "id": "call_0847bca8b4f0409daf952b21",
       "name": "click",
       "args": {
-       "id": 4,
-       "narration": "help link-அ click பண்றேன்"
+       "id": 14,
+       "narration": "General quota select பண்றேன்"
       }
      }
     ],
-    "ms": 550,
+    "ms": 536,
     "usage": {
-     "completion_tokens": 46,
-     "prompt_tokens": 4148,
-     "total_tokens": 4194,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "40a3ae0ec5ebd9c4",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4f231047bff0464094231ad5",
-      "name": "select_option",
-      "args": {
-       "id": 19,
-       "option": "Staff behaviour",
-       "narration": "Staff behaviour-அ select பண்றேன்"
-      }
-     }
-    ],
-    "ms": 600,
-    "usage": {
-     "completion_tokens": 35,
-     "prompt_tokens": 4035,
-     "total_tokens": 4070,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "92a50d668f3cfbaa",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3f57b9c105e540c389ac5969",
-      "name": "compose_with_kivi",
-      "args": {
-       "id": 21,
-       "what": "your complaint about staff behaviour"
-      }
-     }
-    ],
-    "ms": 452,
-    "usage": {
-     "completion_tokens": 28,
-     "prompt_tokens": 4066,
-     "total_tokens": 4094,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "1b589a312b0d8c83",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_dffcf77c46b04cbbb506fa1e",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "Complaint submit பண்றேன்",
-       "confirmation_question": "உங்க complaint-அ submit பண்ணட்டுமா?"
-      }
-     }
-    ],
-    "ms": 976,
-    "usage": {
-     "completion_tokens": 62,
-     "prompt_tokens": 4137,
-     "total_tokens": 4199,
+     "completion_tokens": 45,
+     "prompt_tokens": 4152,
+     "total_tokens": 4197,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -142,27 +32,227 @@
    }
   },
   {
-   "hash": "1d17a63ac36676f3",
+   "hash": "9635bfcc7e5f9feb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d840cb7244b5413caf7847e1",
-      "name": "done",
+      "id": "call_c9e200cd33e94caebd148c0d",
+      "name": "click",
       "args": {
-       "speech": "Staff behaviour பத்தி complaint submit ஆகிடுச்சு. Reference number CMP1000. 48 hours-ல response வரும்."
+       "id": 4,
+       "narration": "help link click பண்றேன்"
       }
      }
     ],
-    "ms": 1078,
+    "ms": 394,
     "usage": {
-     "completion_tokens": 40,
-     "prompt_tokens": 4239,
-     "total_tokens": 4279,
+     "completion_tokens": 44,
+     "prompt_tokens": 4160,
+     "total_tokens": 4204,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "71e1be835511ced0",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f9f1d2445934486181ee255d",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Complaint category-அ select பண்றேன்"
+      }
+     },
+     {
+      "id": "call_e4d9d7ad35884833b14d7cc6",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Complaint submit பண்றேன்",
+       "confirmation_question": "Staff behavior complaint-அ submit பண்ணட்டுமா?"
+      }
+     }
+    ],
+    "ms": 637,
+    "usage": {
+     "completion_tokens": 65,
+     "prompt_tokens": 4047,
+     "total_tokens": 4112,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "5715e1b8a945d5e9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_84abe3754c3b422098124cf1",
+      "name": "click",
+      "args": {
+       "id": 25,
+       "narration": "Staff behaviour-ஐ select பண்றேன்"
+      }
+     }
+    ],
+    "ms": 1235,
+    "usage": {
+     "completion_tokens": 45,
+     "prompt_tokens": 4207,
+     "total_tokens": 4252,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "fefb34d467632b16",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0b8895104e0549359498310b",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submit complaint click pannuren"
+      }
+     }
+    ],
+    "ms": 328,
+    "usage": {
+     "completion_tokens": 24,
+     "prompt_tokens": 4177,
+     "total_tokens": 4201,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "05fe67921f209f22",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_06cc920169de4ec5855a7fe1",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "describe the staff behaviour issue"
+      }
+     }
+    ],
+    "ms": 602,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4220,
+     "total_tokens": 4267,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "f518eb7ee3cda2b0",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_35c209d87bfd4e7d9ef6b28f",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submit complaint",
+       "confirmation_question": "Submit complaint about staff behaviour? Confirm to proceed."
+      }
+     }
+    ],
+    "ms": 556,
+    "usage": {
+     "completion_tokens": 60,
+     "prompt_tokens": 4291,
+     "total_tokens": 4351,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
+     }
+    }
+   }
+  },
+  {
+   "hash": "ae6efc35a8a7c26f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8d860d7126cb482f8c6767ed",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Submit complaint",
+       "confirmation_question": "Staff behaviour complaint with reference CMP1000. Confirm?"
+      }
+     }
+    ],
+    "ms": 517,
+    "usage": {
+     "completion_tokens": 38,
+     "prompt_tokens": 4393,
+     "total_tokens": 4431,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "fb1af423dc9d50ec",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f4749d7f3f9b4f59ad44a77d",
+      "name": "done",
+      "args": {
+       "speech": "Complaint register ஆயிடுச்சு. Reference number CMP1001. 48 hours-க்குள்ள response வரும். வேற ஏதாவது help வேணுமா?"
+      }
+     }
+    ],
+    "ms": 565,
+    "usage": {
+     "completion_tokens": 59,
+     "prompt_tokens": 4476,
+     "total_tokens": 4535,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
      }
     }
    }

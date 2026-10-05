@@ -63,8 +63,14 @@ export class Agent {
   private chosen = new Map<string, string>();
   /** The options clicked to set them: option id → its dropdown's id. */
   private chosenVia = new Map<string, string>();
+  /** Options seen in a custom list: option id → the dropdown that opened it and the option's name. */
+  private optionOf = new Map<string, { toggle: string; name: string }>();
+  /** The page as it was when a dialog opened over it. */
+  private underDialog: Snapshot | undefined;
   /** The user said to leave it: only done is allowed from here. */
   private gaveUp = false;
+  /** Sensitive fields handed to the user to type. */
+  private handedOver = new Set<string>();
   /** Everything the user actually said or dictated this task: the only text allowed into free-text fields. */
   private userTexts: string[] = [];
   /** What the user dictated or answered, as opposed to the request itself. */
@@ -98,7 +104,10 @@ export class Agent {
     this.composeRejections = 0;
     this.chosen = new Map();
     this.chosenVia = new Map();
+    this.optionOf = new Map();
+    this.underDialog = undefined;
     this.gaveUp = false;
+    this.handedOver = new Set();
     const p = this.opts.profile;
     this.userWords = [];
     this.userTexts = [task, ...io.recent(), ...(p ? [p.name, p.age, p.gender, p.mobile].filter((v): v is string => !!v) : [])];
@@ -267,6 +276,17 @@ export class Agent {
           line: `${describe()} → not needed: you already chose it, and [${toggle}] shows "${snap.elements[toggle].name}". Carry on with the rest of the form.`,
         };
       }
+      // An option whose list has since closed (the model clicked the date, then the class it saw
+      // earlier; three live runs got stuck this way): reopen the list and choose it by name.
+      const opt = !el && (call.name === "click" || call.name === "select_option") ? this.optionOf.get(String(a.id)) : undefined;
+      if (opt && snap.elements[opt.toggle])
+        return await this.chooseFromCustomList(
+          Number(opt.toggle),
+          opt.name,
+          snap,
+          emit,
+          `${call.name} [${a.id}] "${opt.name}" (its list had closed, so reopened [${opt.toggle}])`,
+        );
       if (a.id !== undefined && !el && ["click", "type_text", "select_option", "compose_with_kivi", "read_document"].includes(call.name)) {
         throw new Error(`element [${a.id}] is not on the page any more`);
       }
@@ -295,7 +315,7 @@ export class Agent {
           const ids = Array.isArray(a.fields) ? a.fields.map((f: any) => Number(f?.id)).filter((n: number) => n >= 0) : [];
           const next = call.name === "fill_form" && ids.length ? nextButton(snap, Math.max(...ids)) : undefined;
           return {
-            line: `${describe()} → REFUSED: you already did exactly this on this same page and it did not help. ${next ? `The form is filled: click [${next[0]}] "${next[1].name}".` : "Do something different, or ask_user."}`,
+            line: `${describe()} → REFUSED: you already did exactly this on this same page and it did not help. ${next ? `The form is filled: click [${next[0]}] "${next[1].name}".` : "Do something different, or call done and tell the user where things stand."}`,
             failed: true,
           };
         }
@@ -303,6 +323,18 @@ export class Agent {
       }
       switch (call.name) {
         case "click": {
+          // Logging in without the password the user is to type: a trace pressed "Log in" five times.
+          const waiting = [...this.handedOver.keys()].find((id) => {
+            const f = snap.elements[id];
+            return f && holds(snap, Number(id), f, "");
+          });
+          if (el && waiting && /log ?in|sign ?in|submit|continue|verify|next|proceed/i.test(el.name)) {
+            emit({ status: "failed", result: "waiting for the user" });
+            return {
+              line: `${describe()} → not clicked: [${waiting}] "${snap.elements[waiting].name}" is still empty, and only the user may type it. Call done now: tell them to type it and press "${el.name}" themselves, or to ask you to carry on afterwards.`,
+              failed: true,
+            };
+          }
           const dest = linkTarget(el?.href ?? "", snap.url);
           if (dest && !this.policy.allows(dest)) {
             emit({ status: "blocked", result: "site not allowed" });
@@ -375,6 +407,7 @@ export class Agent {
           const { summary: news, after, renamed } = await this.changes(snap);
           const summary = [news, renamed].filter(Boolean).join("; ");
           if (el) this.noteChoice(a.id, el, snap, after);
+          if (el && looksLikeDropdown(snap, a.id, el)) this.noteOptions(a.id, snap, after);
           const confirmed = confirmNeeded ? " (user confirmed)" : "";
           emit({ status: "ok", result: summary || undefined });
           // After the irreversible step lands on a success page, the task is over: report, don't start again.
@@ -382,10 +415,19 @@ export class Agent {
             gate.required && looksComplete(after)
               ? " ⇒ The page shows the task is COMPLETE. Report the result with done now; do not start anything new."
               : "";
-          return { line: `${describe()} → ok${confirmed}${summary ? ` ⇒ ${summary}` : ""}${finished}` };
+          // A fix for a form's alert (a gender after "Select the gender"): the alert stays until the form
+          // is sent again. A live run took the quiet "ok" as the end and stopped mid-booking.
+          const next = !summary && !finished && after.alerts.length && after.url === snap.url ? nextButton(after, a.id) : undefined;
+          const resend = next
+            ? ` ⇒ The alert "${after.alerts[0]}" is from before; it clears when you click [${next[0]}] "${next[1].name}" again.`
+            : "";
+          return { line: `${describe()} → ok${confirmed}${summary ? ` ⇒ ${summary}` : ""}${finished}${resend}` };
         }
         case "type_text": {
           if (isSensitiveField(el)) return await this.blockSensitive(a.id, io, emit, describe());
+          // A custom dropdown: typing the option means choosing it.
+          if (el && !TEXT_ROLES.has(el.role) && el.tag !== "textarea" && looksLikeDropdown(snap, a.id, el))
+            return await this.chooseFromCustomList(a.id, String(a.text ?? ""), snap, emit, describe());
           // A date or choice shown as a button: typing into it only raises a Playwright error.
           if (el && !TEXT_ROLES.has(el.role) && el.tag !== "textarea") {
             emit({ status: "failed", result: "not a text box" });
@@ -510,6 +552,15 @@ export class Agent {
               failed: true,
             };
           }
+          // The id of an option in an open list, rather than of its dropdown: just click it.
+          if (el && this.optionOf.has(String(a.id))) {
+            await this.browser.click(a.id);
+            const toggle = this.optionOf.get(String(a.id))!.toggle;
+            this.chosen.set(toggle, el.name);
+            this.chosenVia.set(String(a.id), toggle);
+            emit({ status: "ok", result: `chose "${el.name}"` });
+            return { line: `${describe()} → chose [${a.id}] "${el.name}"` };
+          }
           if (el && el.tag !== "select" && !looksLikeDropdown(snap, a.id, el)) {
             // Clicking an ordinary button to "open" it would press it (a quota, a filter, a submit).
             emit({ status: "failed", result: "not a dropdown" });
@@ -633,6 +684,14 @@ export class Agent {
     typed = false,
   ): Promise<{ summary: string; appeared: boolean; after: Snapshot; renamed: string }> {
     const after = await this.browser.snapshot();
+    // A date picker is a dialog: when it closes, say what it set on the page underneath (a live run
+    // set 12 Oct, heard only "ok", and reopened the calendar for ten turns).
+    if (after.dialog && !before.dialog && after.url === before.url) this.underDialog = before;
+    if (!after.dialog && before.dialog && after.url === before.url && this.underDialog) {
+      const renamed = renamedBetween(this.underDialog, after);
+      this.underDialog = undefined;
+      return { summary: "", appeared: true, after, renamed };
+    }
     if (after.url !== before.url || after.dialog !== before.dialog) return { summary: "", appeared: true, after, renamed: "" };
     const had = new Set(Object.values(before.elements).map((e) => `${e.role}|${e.name}`));
     const added = Object.entries(after.elements).filter(([id, e]) => !before.elements[id] && e.name && !had.has(`${e.role}|${e.name}`));
@@ -651,12 +710,7 @@ export class Agent {
       parts.push(options ? `NEW OPTIONS: ${fresh.join(", ")} — click the right one next` : `new on the page: ${fresh.join(", ")}`);
     if (newAlerts.length) parts.push(`ALERT: ${newAlerts.join(" | ")}`);
     else if (text.length) parts.push(`page now says: ${text.join(" ")}`);
-    // Controls that now say something else (a dropdown showing the chosen option, a date button).
-    const renamed = Object.entries(after.elements)
-      .filter(([id, e]) => before.elements[id] && e.name && e.name !== before.elements[id].name)
-      .slice(0, 3)
-      .map(([id, e]) => `[${id}] now says "${e.name.slice(0, 60)}"`)
-      .join(", ");
+    const renamed = renamedBetween(before, after);
     return { summary: parts.join("; "), appeared: fresh.length > 0 || after.text !== before.text, after, renamed };
   }
 
@@ -673,6 +727,12 @@ export class Agent {
     }
     io.emit({ type: "confirm_resolved", answer: "no" });
     return false;
+  }
+
+  /** Remember the options a dropdown showed, so a click on one after the list closes can be redone. */
+  private noteOptions(toggle: number, before: Snapshot, after: Snapshot) {
+    for (const [i, e] of Object.entries(after.elements))
+      if (!before.elements[i] && e.name && !TEXT_ROLES.has(e.role)) this.optionOf.set(i, { toggle: String(toggle), name: e.name });
   }
 
   /** A clicked option that closed its list and now shows on its dropdown: remember the choice. */
@@ -694,6 +754,7 @@ export class Agent {
   private async chooseFromCustomList(id: number, option: string, snap: Snapshot, emit: (p: Partial<StepEvent>) => void, line: string) {
     await this.browser.click(id);
     const { after } = await this.changes(snap);
+    this.noteOptions(id, snap, after);
     const shown = Object.entries(after.elements).filter(([i, e]) => !snap.elements[i] && e.name);
     const pick = bestMatch(shown, option);
     if (!pick) {
@@ -792,6 +853,7 @@ export class Agent {
   }
 
   private async blockSensitive(id: number, io: AgentIO, emit: (p: Partial<StepEvent>) => void, line: string) {
+    this.handedOver.add(String(id));
     await this.browser.focus(id);
     await io.sayPhrase("sensitiveField");
     emit({ status: "blocked", result: "sensitive field — user types it" });
@@ -970,6 +1032,15 @@ function isFreeTextField(el: ElementInfo) {
   return /complain|comment|message|feedback|describe|description|details|review|grievance|query|issue|remarks|शिकायत|संदेश/i.test(
     `${el.name} ${el.fieldHint}`,
   );
+}
+
+/** Controls that now say something else (a dropdown showing the chosen option, a date button). */
+function renamedBetween(before: Snapshot, after: Snapshot) {
+  return Object.entries(after.elements)
+    .filter(([id, e]) => before.elements[id] && e.name && e.name !== before.elements[id].name)
+    .slice(0, 3)
+    .map(([id, e]) => `[${id}] now says "${e.name.slice(0, 60)}"`)
+    .join(", ");
 }
 
 /** An empty box for the user's own words just above a submit button, unless it says it's optional. */

@@ -1,138 +1,64 @@
 {
  "version": 1,
  "task": "search-te-list",
- "recordedAt": "2026-10-05T06:14:46.422Z",
+ "recordedAt": "2026-10-05T08:15:21.385Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "054435de4a6c4d68",
+   "hash": "98b30d435deaf97a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_49b7ed8f574b4d51bd054504",
-      "name": "navigate",
-      "args": {
-       "url": "http://localhost:5174/",
-       "narration": "Pathik Rail home page కి వెళ్తున్నాను"
-      }
-     }
-    ],
-    "ms": 675,
-    "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 4101,
-     "total_tokens": 4153,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "996ab114a31c6e5b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b6c4ea229b994a0889a1eabf",
+      "id": "call_edb564448d88465280ecfc9b",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Secunderabad",
-       "narration": "FROM box లో Secunderabad type చేస్తున్నాను"
+       "narration": "Secunderabad అని టైప్ చేస్తున్నాను"
       }
      },
      {
-      "id": "call_93e175bc6e0d48baa3cce79d",
+      "id": "call_cc7874e18e3241db92159185",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Vijayawada",
-       "narration": "TO box లో Vijayawada type చేస్తున్నాను"
+       "narration": "Vijayawada అని టైప్ చేస్తున్నాను"
       }
      },
      {
-      "id": "call_2ae06bf5eb424e14aa67b491",
+      "id": "call_b17b5472fbb14cd3a5a0ac8c",
       "name": "click",
       "args": {
-       "id": 9,
-       "narration": "రేపు తేదీ ఎంచుకుంటున్నాను"
+       "id": 11,
+       "narration": "రేపటి తేదీ ఎంచుకుంటున్నాను"
       }
-     }
-    ],
-    "ms": 1013,
-    "usage": {
-     "completion_tokens": 91,
-     "prompt_tokens": 4113,
-     "total_tokens": 4204,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "1046e0439f3d5bcc",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_f20d33728af9489996c8c128",
-      "name": "click",
-      "args": {
-       "id": 25,
-       "narration": "రేపు తేదీ ఎంచుకుంటున్నాను"
-      }
-     }
-    ],
-    "ms": 661,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4361,
-     "total_tokens": 4408,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "e19022c7b1ef4d91",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5f846ee16eaa4634b5185864",
+      "id": "call_f11dba1c651747d58bd4f197",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains",
-       "confirmation_question": ""
+       "narration": "Search trains నొక్కుతున్నాను"
       }
      }
     ],
-    "ms": 704,
+    "ms": 1590,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4291,
-     "total_tokens": 4339,
+     "completion_tokens": 200,
+     "prompt_tokens": 4161,
+     "total_tokens": 4361,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "7dbaddd9bc550131",
+   "hash": "5fefbb81a91435cd",
    "response": {
     "content": "",
     "toolCalls": [
@@ -140,22 +66,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "రేపు, 6 అక్టోబర్, Secunderabad నుండి Vijayawada-కి ఈ మూడు trains ఉన్నాయి:\n1. Hyderabad–Vijayawada Express (22618), 01:50 గంటలకు, 5h 15m duration, Sleeper ₹145, 32 seats available.\n2. Hyderabad–Vijayawada Double Decker Express (22714), 09:05 గంటలకు, 4h 55m duration, Chair Car ₹350, 53 seats available.\n3. Hyderabad–Vijayawada Vande Bharat Express (16129), 10:25 గంటలకు, 3h 55m duration, Chair Car ₹395, 22 seats available."
+       "speech": "రేపు Secunderabad నుండి Vijayawada కి 10 trains ఉన్నాయి. మొదటి మూడు ఇవి:\n\n1. Hyderabad–Vijayawada Express (22618) — ఉదయం 1:50 కి బయలుదేరి, 5h 15m లో Vijayawada చేరుకుంటుంది. Sleeper class ₹145, 32 seats available.\n\n2. Hyderabad–Vijayawada Double Decker Express (22714) — ఉదయం 9:05 కి బయలుదేరి, 4h 55m లో చేరుకుంటుంది. Chair Car ₹350, 53 seats available.\n\n3. Hyderabad–Vijayawada Vande Bharat Express (16129) — ఉదయం 10:25 కి బయలుదేరి, 3h 55m లో చేరుకుంటుంది. Chair Car ₹395, కానీ 22 seats మాత్రమే ఉన్నాయి (Waiting list)."
       }
      }
     ],
-    "ms": 2202,
+    "ms": 1795,
     "usage": {
-     "completion_tokens": 199,
-     "prompt_tokens": 5366,
-     "total_tokens": 5565,
+     "completion_tokens": 229,
+     "prompt_tokens": 5320,
+     "total_tokens": 5549,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 2112
      }
     },
-    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"రేపు, 6 అక్టోబర్, Secunderabad నుండి Vijayawada-కి ఈ మూడు trains ఉన్నాయి:\\n1. Hyderabad–Vijayawada Express (22618), 01:50 గంటలకు, 5h 15m duration, Sleeper ₹145, 32 seats available.\\n2. Hyderabad–Vijayawada Double Decker Express (22714), 09:05 గంటలకు, 4h 55m duration, Chair Car ₹350, 53 seats available.\\n3. Hyderabad–Vijayawada Vande Bharat Express (16129), 10:25 గంటలకు, 3h 55m duration, Chair Car ₹395, 22 seats available.\"\n  }\n}"
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"రేపు Secunderabad నుండి Vijayawada కి 10 trains ఉన్నాయి. మొదటి మూడు ఇవి:\\n\\n1. Hyderabad–Vijayawada Express (22618) — ఉదయం 1:50 కి బయలుదేరి, 5h 15m లో Vijayawada చేరుకుంటుంది. Sleeper class ₹145, 32 seats available.\\n\\n2. Hyderabad–Vijayawada Double Decker Express (22714) — ఉదయం 9:05 కి బయలుదేరి, 4h 55m లో చేరుకుంటుంది. Chair Car ₹350, 53 seats available.\\n\\n3. Hyderabad–Vijayawada Vande Bharat Express (16129) — ఉదయం 10:25 కి బయలుదేరి, 3h 55m లో చేరుకుంటుంది. Chair Car ₹395, కానీ 22 seats మాత్రమే ఉన్నాయి (Waiting list).\"}\n}"
    }
   }
  ],

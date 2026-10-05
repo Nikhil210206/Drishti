@@ -1,34 +1,33 @@
 {
  "version": 1,
  "task": "read-en-pmkisan-amount",
- "recordedAt": "2026-10-05T06:12:40.589Z",
+ "recordedAt": "2026-10-05T08:13:59.043Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "c6e6e32189f48b4a",
+   "hash": "33651457ce7a2eed",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
+      "id": "call_db9c199c799f484190393d07",
       "name": "done",
       "args": {
-       "speech": "PM-KISAN gives eligible farmer families Rs. 6,000 per year, paid in three equal installments of Rs. 2,000 each every four months."
+       "speech": "PM-KISAN gives eligible farmers 6000 rupees per year, paid in three equal installments of 2000 rupees each, every four months."
       }
      }
     ],
-    "ms": 629,
+    "ms": 948,
     "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 5376,
-     "total_tokens": 5430,
+     "completion_tokens": 67,
+     "prompt_tokens": 5436,
+     "total_tokens": 5503,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
-    },
-    "raw": "[\n{\"name\":\"done\",\"parameters\":{\"speech\":\"PM-KISAN gives eligible farmer families Rs. 6,000 per year, paid in three equal installments of Rs. 2,000 each every four months.\"}}"
+    }
    }
   }
  ],

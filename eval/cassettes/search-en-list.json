@@ -1,220 +1,127 @@
 {
  "version": 1,
  "task": "search-en-list",
- "recordedAt": "2026-10-05T06:13:51.747Z",
+ "recordedAt": "2026-10-05T08:14:48.020Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "fd5d0dac4c76122a",
+   "hash": "def42370fc1330ee",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_b5f79380cb014e2586cadb48",
+      "id": "call_27d5e9e2516d4323baee221e",
+      "name": "click",
+      "args": {
+       "id": 6,
+       "narration": "Click FROM box",
+       "confirmation_question": ""
+      }
+     },
+     {
+      "id": "call_af6f2588a66a4224868249ab",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Mumbai",
-       "narration": "Entering from station Mumbai"
+       "narration": "Type Mumbai as origin station"
       }
      },
      {
-      "id": "call_758a529a2c864b2bac678d34",
+      "id": "call_924ed83d101543efa2bdcbef",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Pune",
-       "narration": "Entering to station Pune"
+       "narration": "Type Pune as destination station"
       }
      },
      {
-      "id": "call_fc5c56a75c024249bab7f555",
-      "name": "type_text",
-      "args": {
-       "id": 9,
-       "text": "Tue, 6 Oct, 2026",
-       "narration": "Selecting tomorrow's date"
-      }
-     },
-     {
-      "id": "call_dfee26f5f99942058d7e824c",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Searching trains from Mumbai to Pune tomorrow"
-      }
-     }
-    ],
-    "ms": 867,
-    "usage": {
-     "completion_tokens": 115,
-     "prompt_tokens": 4098,
-     "total_tokens": 4213,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "ec3a02c567acfc58",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4a0f658f6a42418f9d2c46f6",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Click Tomorrow"
-      }
-     }
-    ],
-    "ms": 377,
-    "usage": {
-     "completion_tokens": 21,
-     "prompt_tokens": 4284,
-     "total_tokens": 4305,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "5c7becb57ff53fdb",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5c580318f9294a82af93a76b",
-      "name": "type_text",
-      "args": {
-       "id": 9,
-       "text": "6",
-       "narration": "Selecting 6th Oct"
-      }
-     }
-    ],
-    "ms": 527,
-    "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 4297,
-     "total_tokens": 4349,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "a81d92aca4608d8d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_57cd89b24c0844c1aa342069",
+      "id": "call_3b6e28dbbff74dd5bc5abff3",
       "name": "click",
       "args": {
        "id": 9,
        "narration": "Select tomorrow's date"
       }
-     }
-    ],
-    "ms": 450,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4363,
-     "total_tokens": 4407,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "19fa75f1bac8ddff",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_d85bfd47005a4a4c9632b991",
-      "name": "click",
-      "args": {
-       "id": 26,
-       "narration": "Select 6th October"
-      }
-     }
-    ],
-    "ms": 432,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4537,
-     "total_tokens": 4581,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "6953f89881506512",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0cde1fbdfc4f4a6cb59ebc5e",
+      "id": "call_445c515b751b4e6a9b036ca9",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search for trains",
-       "confirmation_question": ""
+       "narration": "Search for trains"
       }
      }
     ],
-    "ms": 501,
+    "ms": 923,
     "usage": {
-     "completion_tokens": 27,
-     "prompt_tokens": 4465,
-     "total_tokens": 4492,
+     "completion_tokens": 121,
+     "prompt_tokens": 4158,
+     "total_tokens": 4279,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "c93f6f5ee1e7bb1e",
+   "hash": "adfa583572e9c4a6",
    "response": {
-    "content": "[",
-    "toolCalls": [],
-    "ms": 4521,
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_2ad23a57d8bf41299d9bbcd1",
+      "name": "click",
+      "args": {
+       "id": 26,
+       "narration": "Click tomorrow's date"
+      }
+     }
+    ],
+    "ms": 521,
     "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 6197,
-     "total_tokens": 6797,
+     "completion_tokens": 43,
+     "prompt_tokens": 4455,
+     "total_tokens": 4498,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "170270ec77452ef9",
+   "hash": "1415d4f7b5d9171e",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c58b8763285b465199a9ce69",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
+      }
+     }
+    ],
+    "ms": 403,
+    "usage": {
+     "completion_tokens": 42,
+     "prompt_tokens": 4383,
+     "total_tokens": 4425,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "a6769d870f299ee4",
    "response": {
     "content": "",
     "toolCalls": [
@@ -222,22 +129,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "Here are the first three trains from Mumbai CSMT to Pune Junction tomorrow, Tuesday 6th October. First is Rajdhani Superfast Express, departing 03:00 and reaching 05:10. Second is Konark Express, departing 04:05 and reaching 06:50. Third is Vande Bharat Express, departing 06:20 and reaching 08:25. Would you like details on any of these?"
+       "speech": "The first three trains from Mumbai CSMT to Pune Junction tomorrow, 6 October, are: 1. Rajdhani Superfast Express (16807) departing 03:00, arriving 05:10, Sleeper class at 145 rupees. 2. Konark Express (20957) departing 04:05, arriving 06:50, Sleeper class at 145 rupees. 3. Mumbai–Pune Vande Bharat Express (12496) departing 06:20, arriving 08:25, Chair Car at 310 rupees."
       }
      }
     ],
-    "ms": 1550,
+    "ms": 1523,
     "usage": {
-     "completion_tokens": 131,
-     "prompt_tokens": 6218,
-     "total_tokens": 6349,
+     "completion_tokens": 178,
+     "prompt_tokens": 6115,
+     "total_tokens": 6293,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     },
-    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"Here are the first three trains from Mumbai CSMT to Pune Junction tomorrow, Tuesday 6th October. First is Rajdhani Superfast Express, departing 03:00 and reaching 05:10. Second is Konark Express, departing 04:05 and reaching 06:50. Third is Vande Bharat Express, departing 06:20 and reaching 08:25. Would you like details on any of these?\"\n  }\n}"
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"The first three trains from Mumbai CSMT to Pune Junction tomorrow, 6 October, are: 1. Rajdhani Superfast Express (16807) departing 03:00, arriving 05:10, Sleeper class at 145 rupees. 2. Konark Express (20957) departing 04:05, arriving 06:50, Sleeper class at 145 rupees. 3. Mumbai–Pune Vande Bharat Express (12496) departing 06:20, arriving 08:25, Chair Car at 310 rupees.\"\n  }\n}"
    }
   }
  ],

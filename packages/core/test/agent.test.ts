@@ -950,6 +950,82 @@ describe("Agent: knowing when to stop", () => {
     expect(String(llm.calls[1].messages[1].content)).toContain("already holds this. The alert");
   });
 
+  it("does not press Log in while the password handed to the user is empty", async () => {
+    const LOGIN = "http://localhost:5174/sites/login/";
+    const form = page(LOGIN, {
+      "2": element("Password", { role: "textbox", tag: "input", type: "password" }),
+      "4": element("Log in", { role: "button", tag: "button" }),
+    });
+    form.text = '[2] textbox "Password" value=""\n[4] button "Log in"';
+    const browser = new FakeBrowser({ [LOGIN]: form }, LOGIN);
+    const llm = new ScriptedLLM([[{ name: "type_text", args: { id: 2, text: "Kesari@2026" } }], [{ name: "click", args: { id: 4 } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["focus 2"]);
+    expect(String(llm.calls[2].messages[1].content)).toContain("only the user may type it. Call done now");
+  });
+
+  it("reopens a closed list to click an option the model saw earlier", async () => {
+    const closed = page(HELP, {
+      "9": element("Tue, 6 Oct", { role: "clickable", tag: "div" }),
+      "13": element("All Classes ▾", { role: "clickable", tag: "div" }),
+    });
+    const open = page(`${HELP}/open`, {
+      "9": element("Tue, 6 Oct", { role: "clickable", tag: "div" }),
+      "13": element("All Classes ▾", { role: "clickable", tag: "div" }),
+      "23": element("Sleeper (SL)", { role: "clickable", tag: "div" }),
+    });
+    const browser = new FakeBrowser({ [HELP]: closed, [`${HELP}/open`]: open }, HELP, { "13": `${HELP}/open`, "9": HELP });
+    const llm = new ScriptedLLM([
+      [{ name: "click", args: { id: 13 } }],
+      [{ name: "click", args: { id: 9 } }],
+      [{ name: "click", args: { id: 23 } }],
+    ]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["click 13", "click 9", "click 13", "click 23"]);
+    expect(String(llm.calls[3].messages[1].content)).toContain("its list had closed, so reopened [13]");
+  });
+
+  it("treats typing into a custom dropdown as choosing from it", async () => {
+    const closed = page(HELP, { "13": element("All Classes ▾", { role: "clickable", tag: "div" }) });
+    const open = page(`${HELP}/open`, {
+      "13": element("All Classes ▾", { role: "clickable", tag: "div" }),
+      "23": element("Sleeper (SL)", { role: "clickable", tag: "div" }),
+      "24": element("AC 3 Tier (3A)", { role: "clickable", tag: "div" }),
+    });
+    const browser = new FakeBrowser({ [HELP]: closed, [`${HELP}/open`]: open }, HELP, { "13": `${HELP}/open` });
+    const llm = new ScriptedLLM([[{ name: "type_text", args: { id: 13, text: "Sleeper" } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(browser.log).toEqual(["click 13", "click 23"]);
+  });
+
+  it("says what a closing date picker set on the page underneath", async () => {
+    const form = page(HELP, { "9": element("Tue, 6 Oct, 2026", { role: "clickable", tag: "div" }) });
+    const picker = page(HELP, { "31": element("12", { role: "clickable", tag: "div" }) });
+    picker.dialog = "October 2026";
+    const set = page(HELP, { "9": element("Mon, 12 Oct, 2026", { role: "clickable", tag: "div" }) });
+    const browser = new FakeBrowser({ [HELP]: form }, HELP);
+    const click = browser.click.bind(browser);
+    browser.click = async (id) => {
+      await click(id);
+      browser.pages[HELP] = String(id) === "9" ? picker : set;
+    };
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 9 } }], [{ name: "click", args: { id: 31 } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(String(llm.calls[2].messages[1].content)).toContain('[9] now says "Mon, 12 Oct, 2026"');
+  });
+
+  it("after fixing a form's alert, points back to the button that raised it", async () => {
+    const form = page(HELP, {
+      "81": element("Female", { role: "clickable", tag: "div" }),
+      "86": element("CONTINUE", { role: "clickable", tag: "div" }),
+    });
+    form.alerts = ["Select the gender of passenger 1."];
+    const browser = new FakeBrowser({ [HELP]: form }, HELP);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 81 } }]]);
+    await run(agentFor(browser, llm), new RecordingIO());
+    expect(String(llm.calls[1].messages[1].content)).toContain('it clears when you click [86] "CONTINUE" again');
+  });
+
   it("still clicks a Submit complaint button (with confirmation)", async () => {
     const form = page(HELP, { "22": element("SUBMIT COMPLAINT", { role: "clickable", tag: "div" }) });
     const browser = new FakeBrowser({ [HELP]: form }, HELP);

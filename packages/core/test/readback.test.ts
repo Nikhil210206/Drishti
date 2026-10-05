@@ -18,6 +18,21 @@ describe("readback", () => {
     expect(r).toContain("Total ₹165");
   });
 
+  it("reads a long passenger list, so a triple booking of one person is caught", () => {
+    // From a live run that paid for three identical passengers.
+    const text = [
+      "- Hyderabad–Vijayawada Double Decker Express (22714) · SC 09:05 → BZA 14:00 · Tue, 6 Oct, 2026 · CC · General Review your journey Train Hyderabad–Vijayawada Double Decker Express (22714) From",
+      "- Secunderabad Junction (SC) at 09:05 To Vijayawada Junction (BZA) at 14:00 Date Tue, 6 Oct, 2026 Class AC Chair Car (CC) Passengers",
+      "- Asha Verma (34, Female), Asha Verma (34, Female), Asha Verma (34, Female) Ticket fare × 3 ₹1050 Convenience fee ₹20 Total ₹1070",
+      '[56] clickable "PROCEED TO PAY"',
+    ].join("\n");
+    const s = page("http://localhost:5174/#/review", { "56": element("PROCEED TO PAY") }, text);
+    const r = readback(s, 56, s.elements["56"]);
+    expect(readbackPassengers(r)).toHaveLength(3);
+    expect(duplicatePassenger(r)).toContain("Asha Verma (34, Female)");
+    expect(r).toContain("Total ₹1070");
+  });
+
   it("names the train row and the class box of a book button in a results list", () => {
     const text = [
       "- Tue, 6 Oct, 2026 · 9 trains found",

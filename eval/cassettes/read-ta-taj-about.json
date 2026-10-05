@@ -1,61 +1,34 @@
 {
  "version": 1,
  "task": "read-ta-taj-about",
- "recordedAt": "2026-10-05T06:12:37.550Z",
+ "recordedAt": "2026-10-05T08:13:57.201Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "23020c0641affec2",
+   "hash": "a042c45762f2e863",
    "response": {
     "content": "",
     "toolCalls": [
      {
       "id": "rec_0",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "தாஜ் மகால் பற்றி சுருக்கமாக படிக்கிறேன்"
-      }
-     }
-    ],
-    "ms": 1180,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 7233,
-     "total_tokens": 7287,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    },
-    "raw": "[\n{\n  \"name\": \"read_page\",\n  \"parameters\": {\n    \"mode\": \"summary\",\n    \"narration\": \"தாஜ் மகால் பற்றி சுருக்கமாக படிக்கிறேன்\"\n  }\n}"
-   }
-  },
-  {
-   "hash": "4651f33fe7a4cf3b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_89514f0aa4994d79a2cb87b5",
       "name": "done",
       "args": {
-       "speech": "இந்த பக்கம் 'தாஜ் மகால்' பத்தின தமிழ் விக்கிப்பீடியா கட்டுரை. ஆக்ராவில் உள்ள தாஜ் மகால், அதோட கட்டிடக்கலை, வரலாறு, மற்றும் உலக அதிசயங்களில் ஒன்னா அதோட இடம் பத்தி விரிவாக சொல்லியிருக்கு."
+       "speech": "இந்த page தாஜ் மகால் பற்றிய தமிழ் விக்கிப்பீடியா கட்டுரை. முகலாய மன்னன் ஷாஜகான் கட்டிய தாஜ் மகால், ஆக்ராவில் உள்ள ஒரு உலக அதிசயமான பளிங்குக் கட்டிடம். இதோட வரலாறு, கட்டிடக்கலை, கட்டுமானம், மற்றும் அமில மழையால் ஏற்படும் பாதிப்புகள் பத்தி இங்க சொல்லியிருக்காங்க."
       }
      }
     ],
-    "ms": 882,
+    "ms": 1093,
     "usage": {
-     "completion_tokens": 66,
-     "prompt_tokens": 9213,
-     "total_tokens": 9279,
+     "completion_tokens": 105,
+     "prompt_tokens": 7293,
+     "total_tokens": 7398,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
-    }
+    },
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"இந்த page தாஜ் மகால் பற்றிய தமிழ் விக்கிப்பீடியா கட்டுரை. முகலாய மன்னன் ஷாஜகான் கட்டிய தாஜ் மகால், ஆக்ராவில் உள்ள ஒரு உலக அதிசயமான பளிங்குக் கட்டிடம். இதோட வரலாறு, கட்டிடக்கலை, கட்டுமானம், மற்றும் அமில மழையால் ஏற்படும் பாதிப்புகள் பத்தி இங்க சொல்லியிருக்காங்க.\"\n  }\n}"
    }
   }
  ],

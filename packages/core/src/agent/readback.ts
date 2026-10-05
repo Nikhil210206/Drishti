@@ -28,6 +28,10 @@ const LABELLED = new RegExp(
   "gi",
 );
 
+// Passenger lists run long: three people overflowed the 70 characters above, so a live run paid for
+// "Asha Verma (34, Female)" three times with nothing in the readback to catch it.
+const PASSENGERS = /\bPassengers?\s*:?\s+((?:[^()]{1,60}\([^)]{1,30}\)(?:,\s*)?){1,9})/i;
+
 const distinct = (xs: string[]) => [...new Set(xs.map((x) => x.trim()))];
 
 export function readback(snap: Snapshot, id: string | number, el: ElementInfo | undefined): string {
@@ -49,6 +53,11 @@ export function readback(snap: Snapshot, id: string | number, el: ElementInfo | 
   const trains = distinct([...text.matchAll(TRAIN_NO)].map((m) => m[1]));
   if (dates.length <= 1 && trains.length <= 1) {
     const seen = new Set<string>();
+    const people = text.match(PASSENGERS);
+    if (people) {
+      facts.push(`Passengers ${people[1].trim().replace(/,$/, "")}`);
+      seen.add("passenger");
+    }
     for (const m of text.matchAll(LABELLED)) {
       const label = m[1].toLowerCase().replace(/s$/, "");
       if (seen.has(label)) continue;
@@ -71,7 +80,7 @@ export function readback(snap: Snapshot, id: string | number, el: ElementInfo | 
       );
     else if (!seen.has("date") && dates.length === 1) facts.push(dates[0]);
   }
-  return distinct(facts).join("; ").slice(0, 300);
+  return distinct(facts).join("; ").slice(0, 500);
 }
 
 /** The passengers a readback lists ("Passengers Asha Verma (34, Female), Ravi Verma (36, Male)"). */

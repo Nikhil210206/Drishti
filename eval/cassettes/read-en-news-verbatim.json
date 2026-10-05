@@ -1,58 +1,76 @@
 {
  "version": 1,
  "task": "read-en-news-verbatim",
- "recordedAt": "2026-10-05T06:12:52.765Z",
+ "recordedAt": "2026-10-05T08:14:12.702Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "ab7a6773d7379332",
+   "hash": "314debc1142abb8b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_67f8e077abe1436d8d45277e",
+      "id": "call_d2f4e011a7334b9eb71ff935",
       "name": "read_page",
       "args": {
        "mode": "verbatim",
-       "narration": "Reading the first paragraph"
+       "narration": "Reading the first paragraph word for word"
       }
      }
     ],
-    "ms": 522,
+    "ms": 417,
     "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4161,
-     "total_tokens": 4211,
+     "completion_tokens": 45,
+     "prompt_tokens": 4221,
+     "total_tokens": 4266,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "23151d5e62806d9b",
+   "hash": "15b75f1dfa713e93",
+   "response": {
+    "content": "",
+    "toolCalls": [],
+    "ms": 457,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4269,
+     "total_tokens": 4313,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "f84fb22deb76c37d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_32459fcc55e14377ae34c00c",
+      "id": "call_56b6322bf1a548f4b2ae32d0",
       "name": "done",
       "args": {
-       "speech": "Done. Let me know if you'd like to hear the next paragraph or anything else from the article."
+       "speech": "I've read the first paragraph word for word. Would you like me to continue with the rest of the article?"
       }
      }
     ],
-    "ms": 500,
+    "ms": 1225,
     "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 4209,
-     "total_tokens": 4254,
+     "completion_tokens": 42,
+     "prompt_tokens": 4290,
+     "total_tokens": 4332,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
      }
     }
    }

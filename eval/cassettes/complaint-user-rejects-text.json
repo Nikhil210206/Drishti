@@ -1,218 +1,28 @@
 {
  "version": 1,
  "task": "complaint-user-rejects-text",
- "recordedAt": "2026-10-05T06:12:15.294Z",
+ "recordedAt": "2026-10-05T08:13:42.703Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "4f8de5c1729a03b3",
+   "hash": "77abc760e60416da",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_57fe8f7f9e3d4dada12e355e",
+      "id": "call_ca2bcdddd67c43b8876fe50b",
       "name": "click",
       "args": {
        "id": 4,
-       "narration": "help page खोल रहा हूँ",
-       "confirmation_question": ""
+       "narration": "Help पेज खोल रहा हूँ"
       }
      }
     ],
-    "ms": 697,
+    "ms": 433,
     "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 4092,
-     "total_tokens": 4143,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "505eb46fd531a045",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_13280008ad0e4fd89bda20d6",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 19,
-         "value": "Complaint about cleanliness"
-        },
-        {
-         "id": 20,
-         "value": ""
-        },
-        {
-         "id": 21,
-         "value": "The train coach was very dirty. There was garbage on the floor and the toilets were not cleaned properly. I want this to be noted and action taken."
-        }
-       ],
-       "narration": "Filling complaint form"
-      }
-     }
-    ],
-    "ms": 1146,
-    "usage": {
-     "completion_tokens": 143,
-     "prompt_tokens": 3974,
-     "total_tokens": 4117,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "3872fd50cd338063",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Category dropdown खोल रहा हूँ"
-      }
-     }
-    ],
-    "ms": 562,
-    "usage": {
-     "completion_tokens": 43,
-     "prompt_tokens": 4021,
-     "total_tokens": 4064,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    },
-    "raw": "[{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 19,\n    \"narration\": \"Category dropdown खोल रहा हूँ\"\n  }}"
-   }
-  },
-  {
-   "hash": "d7e105a4a2cc6ddc",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d55d6de9efb047d6bcbe240d",
-      "name": "click",
-      "args": {
-       "id": 24,
-       "narration": "साफ-सफाई की शिकायत चुनना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 699,
-    "usage": {
-     "completion_tokens": 55,
-     "prompt_tokens": 4149,
-     "total_tokens": 4204,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "1a114e5719ee9aff",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cfc1ad7d889f4bf49d56c910",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "Complaint category select करना",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_3682eeb6b8f846b6a586cb0b",
-      "name": "click",
-      "args": {
-       "id": 24,
-       "narration": "Cleanliness select करना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 639,
-    "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4119,
-     "total_tokens": 4173,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "5ff1df0c2bb9fe98",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_98918910c41d48c1a82c3684",
-      "name": "select_option",
-      "args": {
-       "id": 19,
-       "option": "Cleanliness",
-       "narration": "Complaint category चुनना है"
-      }
-     }
-    ],
-    "ms": 432,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4193,
-     "total_tokens": 4224,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "f8a6ade6f1138b85",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_49ff875b65c940f7823b88e0",
-      "name": "select_option",
-      "args": {
-       "id": 19,
-       "option": "Cleanliness",
-       "narration": "Cleanliness category select कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 389,
-    "usage": {
-     "completion_tokens": 33,
-     "prompt_tokens": 4224,
-     "total_tokens": 4257,
+     "completion_tokens": 42,
+     "prompt_tokens": 4152,
+     "total_tokens": 4194,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -222,25 +32,107 @@
    }
   },
   {
-   "hash": "aba4df1d2c1ff2c7",
+   "hash": "896275bc4f908ebd",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_5bf6c66cb561420c973ed977",
-      "name": "select_option",
+      "id": "call_b3b1e65c18334943853ebb6b",
+      "name": "click",
       "args": {
        "id": 19,
-       "option": "Cleanliness",
-       "narration": "Cleanliness category चुनना"
+       "narration": "Category select कर रही हूँ"
       }
      }
     ],
-    "ms": 786,
+    "ms": 430,
     "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4296,
-     "total_tokens": 4327,
+     "completion_tokens": 43,
+     "prompt_tokens": 4034,
+     "total_tokens": 4077,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "fd6e06d9dff12851",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_de150b9903c24bf0bb73b50f",
+      "name": "click",
+      "args": {
+       "id": 24,
+       "narration": "साफ-सफाई की शिकायत चुनना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 613,
+    "usage": {
+     "completion_tokens": 55,
+     "prompt_tokens": 4162,
+     "total_tokens": 4217,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "4f516fc83ccca1e2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9ac368c83fb14fed894402bd",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "शिकायत submit कर रहा हूँ",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 386,
+    "usage": {
+     "completion_tokens": 30,
+     "prompt_tokens": 4132,
+     "total_tokens": 4162,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "42030d7f7a6cb646",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1f6c9ba47286413ab29e4f35",
+      "name": "compose_with_kivi",
+      "args": {
+       "id": 21,
+       "what": "आपकी सफाई की शिकायत"
+      }
+     }
+    ],
+    "ms": 517,
+    "usage": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4175,
+     "total_tokens": 4224,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -250,83 +142,53 @@
    }
   },
   {
-   "hash": "d808b04efaf7ecc5",
+   "hash": "900ea62c629c20e8",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9d7880d7cae0442da9689210",
-      "name": "select_option",
+      "id": "call_102de5df34024d908658fe76",
+      "name": "ask_user",
       "args": {
-       "id": 19,
-       "option": "Cleanliness",
-       "narration": "Select cleanliness category"
+       "question": "आपकी सफाई की शिकायत के लिए विवरण तैयार नहीं हो पाया। क्या आप फिर से बताना चाहेंगे या यहीं रुक जाएं?"
       }
      }
     ],
-    "ms": 474,
+    "ms": 591,
     "usage": {
-     "completion_tokens": 30,
-     "prompt_tokens": 4345,
-     "total_tokens": 4375,
+     "completion_tokens": 53,
+     "prompt_tokens": 4224,
+     "total_tokens": 4277,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3968
      }
     }
    }
   },
   {
-   "hash": "5273641d220435af",
+   "hash": "76fdbf2022f59a13",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_fe56747c2e1545fa9cdf2446",
-      "name": "click",
+      "id": "call_69ddab3ef0654251b9296d38",
+      "name": "done",
       "args": {
-       "id": 19,
-       "narration": "खुलने वाला dropdown चुनना है",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_4e251621b0094048a95d422d",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 20,
-         "value": ""
-        },
-        {
-         "id": 21,
-         "value": "सफाई के बारे में शिकायत है, कृपया ध्यान दें"
-        }
-       ],
-       "narration": "शिकायत का विवरण भरना है"
-      }
-     },
-     {
-      "id": "call_6bff7ebb7a0c44dab192fe3f",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "शिकायत सबमिट करना है",
-       "confirmation_question": ""
+       "speech": "ठीक है, कोई बात नहीं। आपकी सफाई की शिकायत अभी नहीं भेजी गई है। अगर आप बाद में इसे पूरा करना चाहें, तो बता दीजिएगा।"
       }
      }
     ],
-    "ms": 1193,
+    "ms": 524,
     "usage": {
-     "completion_tokens": 111,
-     "prompt_tokens": 4394,
-     "total_tokens": 4505,
+     "completion_tokens": 57,
+     "prompt_tokens": 4310,
+     "total_tokens": 4367,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4096
+      "cached_tokens": 3776
      }
     }
    }

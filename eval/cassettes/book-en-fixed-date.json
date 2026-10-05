@@ -1,34 +1,42 @@
 {
  "version": 1,
  "task": "book-en-fixed-date",
- "recordedAt": "2026-10-05T06:10:30.544Z",
+ "recordedAt": "2026-10-05T08:21:03.353Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "a13a681daef0f39f",
+   "hash": "6b0cb8e9160c2ad1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_a0626e597adb435d9f38ef66",
+      "id": "call_11d06997028d4ad9926e6393",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Nagpur",
-       "narration": "Entering departure station Nagpur"
+       "narration": "Typing Nagpur as FROM station"
       }
      },
      {
-      "id": "call_c487ac83474f4b5d932dfd75",
+      "id": "call_756873678acb4f3a94319b1a",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bhopal",
-       "narration": "Entering destination Bhopal"
+       "narration": "Typing Bhopal as TO station"
       }
      },
      {
-      "id": "call_66ba48ca2e794abda17c5b43",
+      "id": "call_ae1549d196ed41889cec7dd9",
+      "name": "click",
+      "args": {
+       "id": 13,
+       "narration": "Opening class dropdown"
+      }
+     },
+     {
+      "id": "call_8adf71847ff1407d8c696870",
       "name": "select_option",
       "args": {
        "id": 13,
@@ -37,252 +45,275 @@
       }
      },
      {
-      "id": "call_d8d77a47a48c45fc80c10a1a",
+      "id": "call_c517a08f5911429382b290d3",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Searching for trains",
+       "narration": "Searching trains"
+      }
+     }
+    ],
+    "ms": 1794,
+    "usage": {
+     "completion_tokens": 241,
+     "prompt_tokens": 4158,
+     "total_tokens": 4399,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "feb57cccd4777f8c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0424c57b0a8f4811b906716a",
+      "name": "click",
+      "args": {
+       "id": 27,
+       "narration": "Select AC Chair Car"
+      }
+     }
+    ],
+    "ms": 567,
+    "usage": {
+     "completion_tokens": 43,
+     "prompt_tokens": 4456,
+     "total_tokens": 4499,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "9afa305b6a7772a9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9a43d2371a7d4d0babdda436",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains now",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 1370,
+    "ms": 508,
     "usage": {
-     "completion_tokens": 111,
-     "prompt_tokens": 4098,
-     "total_tokens": 4209,
+     "completion_tokens": 49,
+     "prompt_tokens": 4401,
+     "total_tokens": 4450,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "558633cb2486dda8",
+   "hash": "85619e05b98ea09f",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
+      "id": "call_485ec7a069ef4cf192ccdd9a",
       "name": "click",
       "args": {
-       "id": 34,
-       "narration": "Book Charminar Shatabdi CC ticket",
-       "confirmation_question": "Book Charminar Shatabdi Express from Nagpur to Bhopal on 12 October in AC Chair Car for 1 passenger at ₹435?"
+       "id": 29,
+       "narration": "Book chair car ticket"
       }
      }
     ],
-    "ms": 1024,
+    "ms": 525,
     "usage": {
-     "completion_tokens": 74,
-     "prompt_tokens": 4656,
-     "total_tokens": 4730,
+     "completion_tokens": 48,
+     "prompt_tokens": 4852,
+     "total_tokens": 4900,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    },
-    "raw": "[\n{\"name\": \"click\", \"parameters\": {\"id\": 34, \"narration\": \"Book Charminar Shatabdi CC ticket\", \"confirmation_question\": \"Book Charminar Shatabdi Express from Nagpur to Bhopal on 12 October in AC Chair Car for 1 passenger at ₹435?\"}}"
-   }
-  },
-  {
-   "hash": "ab19da6bcd7f6731",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9adcbf33348d4e19910266a4",
-      "name": "click",
-      "args": {
-       "id": 28,
-       "narration": "Open modify search"
-      }
-     }
-    ],
-    "ms": 494,
-    "usage": {
-     "completion_tokens": 43,
-     "prompt_tokens": 4745,
-     "total_tokens": 4788,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "2ba02eaede580d35",
+   "hash": "7cec870685927552",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9f9a36bbfeb84d96827c9eaf",
+      "id": "call_cc32649d36af4a3dbabe4878",
+      "name": "go_back",
+      "args": {
+       "narration": "Go back to search"
+      }
+     }
+    ],
+    "ms": 390,
+    "usage": {
+     "completion_tokens": 36,
+     "prompt_tokens": 4941,
+     "total_tokens": 4977,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4096
+     }
+    }
+   }
+  },
+  {
+   "hash": "2b79d648ace81a0d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_043ede98b1d5451e9cc5a348",
       "name": "click",
       "args": {
        "id": 9,
-       "narration": "Open date picker"
+       "narration": "Open the date picker"
+      }
+     },
+     {
+      "id": "call_2a16bc14ea6a41fcbf9ccc8c",
+      "name": "click",
+      "args": {
+       "id": 12,
+       "narration": "Select the day after tomorrow"
       }
      }
     ],
-    "ms": 511,
+    "ms": 532,
     "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4368,
-     "total_tokens": 4409,
+     "completion_tokens": 44,
+     "prompt_tokens": 4556,
+     "total_tokens": 4600,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "9303c13ef03d73e9",
+   "hash": "1270f9e78afa5a09",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_5491b0d09f6a4832a6635160",
+      "id": "call_3ed1fa6d37be446bbd285733",
       "name": "click",
       "args": {
        "id": 45,
-       "narration": "Select 12 October"
+       "narration": "Select 12th October"
       }
-     }
-    ],
-    "ms": 702,
-    "usage": {
-     "completion_tokens": 43,
-     "prompt_tokens": 4536,
-     "total_tokens": 4579,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "75d4c08c6d68faa3",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_eeff5237e82a4350b38265c0",
+      "id": "call_5e077e47ba9e4193bb24a8b5",
+      "name": "click",
+      "args": {
+       "id": 37,
+       "narration": "Close the calendar"
+      }
+     },
+     {
+      "id": "call_21ccdd7152d04823afe2169e",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains for 12 Oct"
+       "narration": "Search trains"
       }
-     }
-    ],
-    "ms": 776,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4472,
-     "total_tokens": 4519,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4096
-     }
-    }
-   }
-  },
-  {
-   "hash": "cef655aae828d36d",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_42ca70e9a1b7443cb4011c2f",
+      "id": "call_88b4e3fe8ba1439699624539",
       "name": "click",
       "args": {
-       "id": 68,
-       "narration": "Book Charminar Shatabdi CC",
-       "confirmation_question": "Book Charminar Shatabdi Express from Nagpur to Bhopal on 12 Oct, AC Chair Car for 1 passenger, ₹435?"
+       "id": 27,
+       "narration": "Select AC Chair Car"
       }
      }
     ],
-    "ms": 1144,
+    "ms": 945,
     "usage": {
-     "completion_tokens": 91,
-     "prompt_tokens": 4920,
-     "total_tokens": 5011,
+     "completion_tokens": 147,
+     "prompt_tokens": 4753,
+     "total_tokens": 4900,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4096
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "76e24d5858c9c155",
+   "hash": "5e88a4db1eb1f9d3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1ad76958828f4e18b0db5a98",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 71,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 72,
-         "value": "34"
-        },
-        {
-         "id": 75,
-         "value": "Female"
-        }
-       ],
-       "narration": "Filling passenger details"
-      }
-     }
-    ],
-    "ms": 886,
-    "usage": {
-     "completion_tokens": 91,
-     "prompt_tokens": 4540,
-     "total_tokens": 4631,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "705e31c828ec5253",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_c325b6295b5d4d64991a39ed",
+      "id": "call_52b74265a1224da3836c1da6",
       "name": "click",
       "args": {
-       "id": 79,
-       "narration": "Continue to next step"
+       "id": 27,
+       "narration": "Select AC Chair Car class"
       }
      }
     ],
-    "ms": 730,
+    "ms": 478,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4600,
-     "total_tokens": 4642,
+     "completion_tokens": 44,
+     "prompt_tokens": 4747,
+     "total_tokens": 4791,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4032
+     }
+    }
+   }
+  },
+  {
+   "hash": "68393dd56c7abeb5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_c060d5bed2ff4d44a760937e",
+      "name": "click",
+      "args": {
+       "id": 13,
+       "narration": "Choose AC Chair Car class"
+      }
+     },
+     {
+      "id": "call_a2d81ea54df940e3a4bf68b1",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains"
+      }
+     }
+    ],
+    "ms": 408,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4790,
+     "total_tokens": 4834,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -292,62 +323,176 @@
    }
   },
   {
-   "hash": "41cad5aa9fb2c918",
+   "hash": "7aaf1998e934fc08",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_25bf4bfbaaa04d8d90cad409",
-      "name": "type_text",
+      "id": "call_8a5db3e6df9540d8b5bfd9e7",
+      "name": "click",
       "args": {
-       "id": 78,
-       "text": "9000000001",
-       "narration": "Entering mobile number"
+       "id": 68,
+       "narration": "Book Nilgiri Shatabdi with 3 seats"
       }
      }
     ],
-    "ms": 916,
+    "ms": 473,
     "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 4671,
-     "total_tokens": 4716,
+     "completion_tokens": 51,
+     "prompt_tokens": 5298,
+     "total_tokens": 5349,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 4288
      }
     }
    }
   },
   {
-   "hash": "7dddcec9273de27c",
+   "hash": "013b73f4277507e7",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_420e8bebedf74401baab9f4e",
+      "id": "call_9c9f90c5eafa42168cb2183f",
       "name": "type_text",
       "args": {
-       "id": 78,
-       "text": "9000000001",
-       "narration": "Enter mobile number"
-      }
-     },
-     {
-      "id": "call_36d282049ca44e60a6ae9fa1",
-      "name": "click",
-      "args": {
-       "id": 79,
-       "narration": "Continue to payment",
-       "confirmation_question": "Confirm booking CC ₹435 for 1 passenger from Nagpur to Bhopal on 12 Oct?"
+       "id": 71,
+       "text": "Asha Verma",
+       "narration": "Enter passenger name"
       }
      }
     ],
-    "ms": 1130,
+    "ms": 559,
     "usage": {
-     "completion_tokens": 138,
-     "prompt_tokens": 4717,
-     "total_tokens": 4855,
+     "completion_tokens": 53,
+     "prompt_tokens": 4918,
+     "total_tokens": 4971,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "7fe72492e56db313",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4ad03da2fa7449bc8447a745",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 72,
+         "value": "34"
+        },
+        {
+         "id": 74,
+         "value": "Female"
+        },
+        {
+         "id": 78,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Filling age, gender and mobile"
+      }
+     }
+    ],
+    "ms": 892,
+    "usage": {
+     "completion_tokens": 125,
+     "prompt_tokens": 4945,
+     "total_tokens": 5070,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4416
+     }
+    }
+   }
+  },
+  {
+   "hash": "217a78e7e086c055",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_40534d6beba24c15863c5a5c",
+      "name": "click",
+      "args": {
+       "id": 79,
+       "narration": "Continuing to next step",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 519,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 5026,
+     "total_tokens": 5076,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4544
+     }
+    }
+   }
+  },
+  {
+   "hash": "ee4d06ad08fbce7d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_387069804a3c43f399deebb9",
+      "name": "click",
+      "args": {
+       "id": 80,
+       "narration": "Proceed to payment",
+       "confirmation_question": "Book AC Chair Car from Nagpur to Bhopal on 12 October for Asha Verma, total ₹455. Confirm?"
+      }
+     }
+    ],
+    "ms": 631,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4983,
+     "total_tokens": 5059,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4544
+     }
+    }
+   }
+  },
+  {
+   "hash": "adfb431f80af6be4",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_7129efb75d724c64a58582cc",
+      "name": "click",
+      "args": {
+       "id": 84,
+       "narration": "Pay 455 rupees",
+       "confirmation_question": "Pay 455 rupees for AC Chair Car ticket from Nagpur to Bhopal on 12 October for Asha Verma?"
+      }
+     }
+    ],
+    "ms": 689,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4968,
+     "total_tokens": 5044,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -357,83 +502,27 @@
    }
   },
   {
-   "hash": "6d9fbeb50faadbda",
+   "hash": "bbfa8e0b20b28a2a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_4563d0e49ef44299b0c2a157",
-      "name": "click",
+      "id": "call_c08935db88c1455396f8ed85",
+      "name": "done",
       "args": {
-       "id": 80,
-       "narration": "Proceeding to payment",
-       "confirmation_question": "Confirm payment of ₹455 for AC Chair Car ticket from Nagpur Junction to Bhopal Junction on Monday, 12 October 2026 for Asha Verma?"
+       "speech": "Your booking is confirmed. PNR 4123456700 for Nilgiri Shatabdi Express on 12 October from Nagpur to Bhopal in AC Chair Car, seat 12, name Asha Verma. Amount paid: 455 rupees."
       }
      }
     ],
-    "ms": 853,
+    "ms": 715,
     "usage": {
-     "completion_tokens": 84,
-     "prompt_tokens": 4684,
-     "total_tokens": 4768,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4224
-     }
-    }
-   }
-  },
-  {
-   "hash": "fedec3f0493117e5",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cce04a0d21654de0bae65add",
-      "name": "click",
-      "args": {
-       "id": 84,
-       "narration": "Pay 455 rupees",
-       "confirmation_question": "Pay 455 rupees for AC Chair Car from Nagpur to Bhopal on 12 October for Asha Verma? Say yes to proceed."
-      }
-     }
-    ],
-    "ms": 999,
-    "usage": {
-     "completion_tokens": 80,
-     "prompt_tokens": 4669,
-     "total_tokens": 4749,
+     "completion_tokens": 85,
+     "prompt_tokens": 5002,
+     "total_tokens": 5087,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
       "cached_tokens": 4352
-     }
-    }
-   }
-  },
-  {
-   "hash": "ae3c74902bd128aa",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_fd36bd5bcdf540f5b51ff3eb",
-      "name": "done",
-      "args": {
-       "speech": "Your ticket is confirmed! PNR 4123456700 for Nilgiri Shatabdi Express on Monday, 12 October from Nagpur to Bhopal in AC Chair Car, seat C3, name Asha Verma. Amount paid is 455 rupees."
-      }
-     }
-    ],
-    "ms": 1100,
-    "usage": {
-     "completion_tokens": 86,
-     "prompt_tokens": 4703,
-     "total_tokens": 4789,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
      }
     }
    }

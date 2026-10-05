@@ -1,34 +1,36 @@
 {
  "version": 1,
  "task": "book-te-sc-bza-cc",
- "recordedAt": "2026-10-05T06:06:36.291Z",
+ "recordedAt": "2026-10-05T08:20:11.474Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "155c213503ec75de",
+   "hash": "2305860baf391f35",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_56ba32870fca45a492b394da",
+      "id": "call_bdb9b4f965c3497aacceb917",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Secunderabad",
-       "narration": "From station type Secunderabad"
+       "pick_suggestion": "Secunderabad",
+       "narration": "From station Secunderabad"
       }
      },
      {
-      "id": "call_722079d6f27f40268486cd2c",
+      "id": "call_565562f85b4449c9890a0830",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Vijayawada",
-       "narration": "To station type Vijayawada"
+       "pick_suggestion": "Vijayawada",
+       "narration": "To station Vijayawada"
       }
      },
      {
-      "id": "call_b60f844dab854424acc7059d",
+      "id": "call_d1b71c69606740c7aa935157",
       "name": "click",
       "args": {
        "id": 13,
@@ -36,16 +38,15 @@
       }
      },
      {
-      "id": "call_19b001667ce94ca5a6fb5ec0",
-      "name": "select_option",
+      "id": "call_b1775fc6432644acbdd71488",
+      "name": "click",
       "args": {
-       "id": 13,
-       "option": "CC",
-       "narration": "Select chair car class"
+       "id": 17,
+       "narration": "Select Ladies quota"
       }
      },
      {
-      "id": "call_c0bd323462c7455198a599b1",
+      "id": "call_7b59b85aa8cc4966be361c12",
       "name": "click",
       "args": {
        "id": 18,
@@ -53,26 +54,26 @@
       }
      }
     ],
-    "ms": 1836,
+    "ms": 2055,
     "usage": {
-     "completion_tokens": 243,
-     "prompt_tokens": 4100,
-     "total_tokens": 4343,
+     "completion_tokens": 250,
+     "prompt_tokens": 4160,
+     "total_tokens": 4410,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "91ee23fb386dd6a1",
+   "hash": "be5f2f5722649da1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d8306e4b53ea4dcc8f695189",
+      "id": "call_057204fce61b4603bdd2a696",
       "name": "click",
       "args": {
        "id": 27,
@@ -80,83 +81,76 @@
       }
      }
     ],
-    "ms": 638,
+    "ms": 573,
     "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 4401,
-     "total_tokens": 4446,
+     "completion_tokens": 50,
+     "prompt_tokens": 4469,
+     "total_tokens": 4519,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "e3b4391baa205a93",
+   "hash": "892e7fecf4fb95e1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ec60ca675de341e88fa4080e",
+      "id": "call_f9104cdd81464adf83dbed72",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains for tomorrow",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_2b3476f63f774a118fca7083",
-      "name": "click",
-      "args": {
-       "id": 9,
-       "narration": "Select tomorrow's date",
-       "confirmation_question": ""
+       "narration": "Search trains"
       }
      }
     ],
-    "ms": 567,
+    "ms": 493,
     "usage": {
-     "completion_tokens": 54,
-     "prompt_tokens": 4346,
-     "total_tokens": 4400,
+     "completion_tokens": 46,
+     "prompt_tokens": 4414,
+     "total_tokens": 4460,
      "completion_tokens_details": null,
-     "prompt_tokens_details": null
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
     }
    }
   },
   {
-   "hash": "9259dd708849ad57",
+   "hash": "9f8785ba3bf4e96c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_3ab9bd8afa614483a68c9054",
+      "id": "call_bd387f251417421bacfa0338",
       "name": "click",
       "args": {
-       "id": 29,
-       "narration": "Hyderabad–Vijayawada Double Decker Express book",
-       "confirmation_question": "హైదరాబాద్–విజయవాడ డబుల్ డెక్కర్ ఎక్స్‌ప్రెస్, రేపు 6 అక్టోబర్, CC క్లాస్, ₹350, 53 సీట్లు. బుక్ చేయాలా?"
+       "id": 32,
+       "narration": "Lalbagh Intercity Express book",
+       "confirmation_question": "Lalbagh Intercity Express, 12:15, Secunderabad to Vijayawada, Chair Car ₹310, 1 passenger. Confirm?"
       }
      }
     ],
-    "ms": 1005,
+    "ms": 690,
     "usage": {
-     "completion_tokens": 100,
-     "prompt_tokens": 4652,
-     "total_tokens": 4752,
+     "completion_tokens": 96,
+     "prompt_tokens": 4683,
+     "total_tokens": 4779,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "2e58a755bfb79653",
+   "hash": "f804353042e54a4d",
    "response": {
     "content": "",
     "toolCalls": [
@@ -186,11 +180,11 @@
       }
      }
     ],
-    "ms": 973,
+    "ms": 795,
     "usage": {
      "completion_tokens": 119,
-     "prompt_tokens": 4451,
-     "total_tokens": 4570,
+     "prompt_tokens": 4480,
+     "total_tokens": 4599,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -201,91 +195,90 @@
    }
   },
   {
-   "hash": "ee89a330930d9982",
+   "hash": "ffa91a6b3e19a0a5",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1c90d6960b6b434892f2b216",
+      "id": "call_66de19b4399345a3b2829d42",
       "name": "click",
       "args": {
        "id": 41,
-       "narration": "Passenger details continue",
-       "confirmation_question": ""
+       "narration": "Passenger details continue"
       }
      }
     ],
-    "ms": 674,
+    "ms": 449,
     "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 4547,
-     "total_tokens": 4603,
+     "completion_tokens": 41,
+     "prompt_tokens": 4576,
+     "total_tokens": 4617,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "60e5f14ae0b808bd",
+   "hash": "91ffe3a0aa5742e1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_de2adf2479ea454c8198d580",
+      "id": "call_23c8453fdb7f4919b8036bbd",
       "name": "click",
       "args": {
        "id": 42,
-       "narration": "Proceed to pay",
-       "confirmation_question": "Confirm booking for AC Chair Car ticket from Secunderabad to Vijayawada for tomorrow, 6 October 2026, for Asha Verma, total ₹370?"
+       "narration": "Proceed to payment",
+       "confirmation_question": "Lalbagh Intercity Express, Secunderabad to Vijayawada, AC Chair Car, 6 October 2026, 1 passenger, total ₹330. Proceed to pay?"
       }
      }
     ],
-    "ms": 818,
+    "ms": 669,
     "usage": {
-     "completion_tokens": 88,
-     "prompt_tokens": 4508,
-     "total_tokens": 4596,
+     "completion_tokens": 92,
+     "prompt_tokens": 4533,
+     "total_tokens": 4625,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3840
      }
     }
    }
   },
   {
-   "hash": "eaa92ba6e19129e8",
+   "hash": "bbb4deb0fddd0d15",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6122cab98d454cceaf4ff24a",
+      "id": "call_d87515a5b5fe4ae294dbacc1",
       "name": "click",
       "args": {
        "id": 46,
-       "narration": "₹370 pay చేస్తాను",
-       "confirmation_question": "₹370 payment confirm చేస్తారా?"
+       "narration": "₹330 pay చేస్తాను",
+       "confirmation_question": "₹330 pay చేయడానికి confirm చేస్తారా?"
       }
      }
     ],
-    "ms": 517,
+    "ms": 496,
     "usage": {
-     "completion_tokens": 62,
-     "prompt_tokens": 4487,
-     "total_tokens": 4549,
+     "completion_tokens": 63,
+     "prompt_tokens": 4516,
+     "total_tokens": 4579,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4160
+      "cached_tokens": 4096
      }
     }
    }
   },
   {
-   "hash": "a5950fd9b843375a",
+   "hash": "263afa32b537e1a4",
    "response": {
     "content": "",
     "toolCalls": [
@@ -293,22 +286,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "మీ AC Chair Car ticket booking confirm అయింది. PNR నంబర్ 4123456700. Hyderabad–Vijayawada Double Decker Express (22714) లో మీ seat C3, seat 12. మీరు ₹370 pay చేశారు."
+       "speech": "మీ ticket booking పూర్తయింది. PNR 4123456700. Lalbagh Intercity Express (20407), Secunderabad నుండి Vijayawada-కి, రేపు 6 October, AC Chair Car, seat 12, పేరు Asha Verma. Paid amount ₹330. Pathik Rail demo website కాబట్టి ఇది real booking కాదు."
       }
      }
     ],
-    "ms": 738,
+    "ms": 1008,
     "usage": {
-     "completion_tokens": 89,
-     "prompt_tokens": 4521,
-     "total_tokens": 4610,
+     "completion_tokens": 109,
+     "prompt_tokens": 4550,
+     "total_tokens": 4659,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4224
+      "cached_tokens": 3840
      }
     },
-    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"మీ AC Chair Car ticket booking confirm అయింది. PNR నంబర్ 4123456700. Hyderabad–Vijayawada Double Decker Express (22714) లో మీ seat C3, seat 12. మీరు ₹370 pay చేశారు.\"\n  }\n}"
+    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"మీ ticket booking పూర్తయింది. PNR 4123456700. Lalbagh Intercity Express (20407), Secunderabad నుండి Vijayawada-కి, రేపు 6 October, AC Chair Car, seat 12, పేరు Asha Verma. Paid amount ₹330. Pathik Rail demo website కాబట్టి ఇది real booking కాదు.\"\n  }\n}"
    }
   }
  ],

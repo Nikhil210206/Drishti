@@ -1,249 +1,101 @@
 {
  "version": 1,
  "task": "search-gu-fare",
- "recordedAt": "2026-10-05T06:14:57.008Z",
+ "recordedAt": "2026-10-05T08:15:28.907Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "8193a4b3e68117b9",
+   "hash": "70249fb31fa8bb2c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ddd06a3c2ef44e82b48432a1",
+      "id": "call_8a5352239b70418b97803e40",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Ahmedabad",
-       "narration": "Ahmedabad select karu chhu"
+       "narration": "FROM box માં Ahmedabad type કરું છું"
       }
      },
      {
-      "id": "call_958ab512666b4eba91cf29c9",
+      "id": "call_4a27a8b324fb4d85aee48a80",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Jaipur",
-       "narration": "Jaipur select karu chhu"
+       "narration": "TO box માં Jaipur type કરું છું"
       }
      },
      {
-      "id": "call_defec12b2ab34252b83bfaa1",
-      "name": "type_text",
-      "args": {
-       "id": 9,
-       "text": "Tue, 6 Oct, 2026",
-       "narration": "Kaal ni date select karu chhu"
-      }
-     },
-     {
-      "id": "call_7fa7ae91c9bb474f871adca9",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "Vande Bharat",
-       "narration": "Vande Bharat class select karu chhu"
-      }
-     },
-     {
-      "id": "call_ad07ec7f64db4587b4935d5b",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search karu chhu",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1659,
-    "usage": {
-     "completion_tokens": 164,
-     "prompt_tokens": 4099,
-     "total_tokens": 4263,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "c47b32bb84120bf1",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9eabee6e611f4aae8901c4c1",
-      "name": "press_key",
-      "args": {
-       "key": "Tab",
-       "narration": "Tab to date field"
-      }
-     }
-    ],
-    "ms": 575,
-    "usage": {
-     "completion_tokens": 24,
-     "prompt_tokens": 4279,
-     "total_tokens": 4303,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "9b2342042114de76",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_40ef7c0bcb594924aea609a8",
-      "name": "type_text",
-      "args": {
-       "id": 9,
-       "text": "Tue, 6 Oct, 2026",
-       "narration": "Selecting tomorrow's date"
-      }
-     },
-     {
-      "id": "call_9cc898b84a504aac808b3029",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "All Classes",
-       "narration": "Selecting all classes"
-      }
-     },
-     {
-      "id": "call_f6313ea40fcf4b42a79071e6",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Searching for trains",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1758,
-    "usage": {
-     "completion_tokens": 173,
-     "prompt_tokens": 4302,
-     "total_tokens": 4475,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "6eef312f4baa869b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_5f8c70240bbc46cd9ee975fa",
-      "name": "type_text",
-      "args": {
-       "id": 9,
-       "text": "6 Oct 2026",
-       "narration": "તારીખ પસંદ કરો"
-      }
-     }
-    ],
-    "ms": 711,
-    "usage": {
-     "completion_tokens": 57,
-     "prompt_tokens": 4420,
-     "total_tokens": 4477,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "45e54000c2fb3c4d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4cb33445868f4a2badc5bb0e",
-      "name": "type_text",
-      "args": {
-       "id": 9,
-       "text": "6 Oct 2026",
-       "narration": "તારીખ પસંદ કરું છું"
-      }
-     }
-    ],
-    "ms": 787,
-    "usage": {
-     "completion_tokens": 60,
-     "prompt_tokens": 4492,
-     "total_tokens": 4552,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "38e582c4d8ffbe01",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_29590f7863914eeba7075931",
+      "id": "call_848139b4e4434f9491b4010a",
       "name": "click",
       "args": {
        "id": 9,
-       "narration": "Select journey date"
+       "narration": "કાલની date select કરું છું"
       }
      }
     ],
-    "ms": 768,
+    "ms": 623,
     "usage": {
-     "completion_tokens": 40,
-     "prompt_tokens": 4575,
-     "total_tokens": 4615,
+     "completion_tokens": 84,
+     "prompt_tokens": 4159,
+     "total_tokens": 4243,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4096
+      "cached_tokens": 3776
      }
     }
    }
   },
   {
-   "hash": "c688591a4a7cd24e",
+   "hash": "8c3df16067e723eb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_2773be64d3934347ad9bc5dd",
+      "id": "call_9169aac7d5d34aadb7ad0982",
       "name": "click",
       "args": {
        "id": 25,
-       "narration": "6 October select કરો",
+       "narration": "6 October select કરો"
+      }
+     }
+    ],
+    "ms": 780,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4396,
+     "total_tokens": 4440,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "966147db6f3a1a85",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_4e44a07730ea4dafa85c1bf3",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 863,
+    "ms": 524,
     "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4712,
-     "total_tokens": 4762,
+     "completion_tokens": 48,
+     "prompt_tokens": 4323,
+     "total_tokens": 4371,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -253,215 +105,7 @@
    }
   },
   {
-   "hash": "82135a11128c8d90",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_425df543a625416d91baa91b",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "Vande Bharat Express",
-       "narration": "Vande Bharat class select karu chhu"
-      }
-     },
-     {
-      "id": "call_7649a4b1c5084f4e98793186",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search karu chhu"
-      }
-     }
-    ],
-    "ms": 955,
-    "usage": {
-     "completion_tokens": 59,
-     "prompt_tokens": 4653,
-     "total_tokens": 4712,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3904
-     }
-    }
-   }
-  },
-  {
-   "hash": "30287b3b02a43b52",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_16e37056d8c7433f841348ff",
-      "name": "click",
-      "args": {
-       "id": 13,
-       "narration": "Vande Bharat class પસંદ કરો"
-      }
-     }
-    ],
-    "ms": 852,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4901,
-     "total_tokens": 4945,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "25d6de05a952fff4",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_e46c3901f48d4ffcbd5a4f22",
-      "name": "click",
-      "args": {
-       "id": 52,
-       "narration": "Choose AC 3 Tier class"
-      }
-     }
-    ],
-    "ms": 660,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4825,
-     "total_tokens": 4869,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4416
-     }
-    }
-   }
-  },
-  {
-   "hash": "fbb9b63f8ac15d0f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_78fa1b8c3e264cedbad8aa08",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "AC 2 Tier (2A)",
-       "narration": "AC 2 Tier select karo"
-      }
-     }
-    ],
-    "ms": 926,
-    "usage": {
-     "completion_tokens": 62,
-     "prompt_tokens": 4850,
-     "total_tokens": 4912,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3904
-     }
-    }
-   }
-  },
-  {
-   "hash": "93b6bc870e5561a4",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_226895a0d9664fe99394f820",
-      "name": "click",
-      "args": {
-       "id": 52,
-       "narration": "Vande Bharat માટે AC 2 Tier select કરો"
-      }
-     }
-    ],
-    "ms": 630,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4898,
-     "total_tokens": 4948,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4416
-     }
-    }
-   }
-  },
-  {
-   "hash": "e3fe3bfb16a8802b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_f8114288d6b342a585cd078c",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS"
-      }
-     }
-    ],
-    "ms": 641,
-    "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4923,
-     "total_tokens": 4964,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "cb629c6a9db75bf2",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bbb18da3d5e34a91825ae0f0",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "All Classes",
-       "narration": "All classes select karo"
-      }
-     },
-     {
-      "id": "call_dc057cb9d52342ff9e433644",
-      "name": "click",
-      "args": {
-       "id": 51,
-       "narration": "Vande Bharat select karo"
-      }
-     }
-    ],
-    "ms": 1077,
-    "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 5119,
-     "total_tokens": 5214,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4480
-     }
-    }
-   }
-  },
-  {
-   "hash": "54da078d765df68f",
+   "hash": "812c3cd2caba8278",
    "response": {
     "content": "",
     "toolCalls": [
@@ -469,22 +113,22 @@
       "id": "rec_0",
       "name": "done",
       "args": {
-       "speech": "કાલે અમદાવાદથી જયપુર માટે Vande Bharat Express નથી. 2A class માં ત્રણ trains છે: Sampark Kranti Express ₹1215, Tapti Sampark Kranti Express ₹1215, અને Superfast Express ₹1275. Vande Bharat fare જાણવા માટે બીજી class કે date check કરું?"
+       "speech": "કાલે Ahmedabad Junction થી Jaipur Junction માટે Vande Bharat Express નું fare 865 rupees છે. CC class માં 43 seats available છે. બીજી Vande Bharat Nilgiri Express પણ 865 rupees માં છે પણ તેમાં 119 seats છે."
       }
      }
     ],
-    "ms": 1208,
+    "ms": 709,
     "usage": {
-     "completion_tokens": 99,
-     "prompt_tokens": 5175,
-     "total_tokens": 5274,
+     "completion_tokens": 87,
+     "prompt_tokens": 5570,
+     "total_tokens": 5657,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2112
+      "cached_tokens": 3776
      }
     },
-    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"કાલે અમદાવાદથી જયપુર માટે Vande Bharat Express નથી. 2A class માં ત્રણ trains છે: Sampark Kranti Express ₹1215, Tapti Sampark Kranti Express ₹1215, અને Superfast Express ₹1275. Vande Bharat fare જાણવા માટે બીજી class કે date check કરું?\"\n  }\n}"
+    "raw": "[\n{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"કાલે Ahmedabad Junction થી Jaipur Junction માટે Vande Bharat Express નું fare 865 rupees છે. CC class માં 43 seats available છે. બીજી Vande Bharat Nilgiri Express પણ 865 rupees માં છે પણ તેમાં 119 seats છે.\"\n  }\n}"
    }
   }
  ],

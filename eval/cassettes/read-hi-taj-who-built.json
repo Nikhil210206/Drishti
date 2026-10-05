@@ -1,146 +1,31 @@
 {
  "version": 1,
  "task": "read-hi-taj-who-built",
- "recordedAt": "2026-10-05T06:12:28.886Z",
+ "recordedAt": "2026-10-05T08:13:53.964Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "8ab1b62e74e588ee",
+   "hash": "a3ec70e1990003b6",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d086ce36a4c6480183d911af",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "ताजमहल किसने बनवाया"
-      }
-     }
-    ],
-    "ms": 623,
-    "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 7893,
-     "total_tokens": 7924,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "aeba82b2044e360c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_7f4c9b95b33a471cbfaf0089",
-      "name": "click",
-      "args": {
-       "id": 1,
-       "narration": "इतिहास वाला section खोल रहा हूँ"
-      }
-     },
-     {
-      "id": "call_9f01a994c00f453fa8f35188",
-      "name": "click",
-      "args": {
-       "id": 27,
-       "narration": "इतिहास लिंक पर क्लिक कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 1067,
-    "usage": {
-     "completion_tokens": 98,
-     "prompt_tokens": 10110,
-     "total_tokens": 10208,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "64a52bd4b409af23",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d0af46b2623e48fdb95a8a47",
-      "name": "go_back",
-      "args": {
-       "narration": "वापस मुख्य पृष्ठ पर जा रहा हूँ"
-      }
-     }
-    ],
-    "ms": 528,
-    "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4089,
-     "total_tokens": 4131,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "b56ce12a8f7dc366",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_a34ccacf900d463685ef3fe8",
-      "name": "read_page",
-      "args": {
-       "mode": "summary",
-       "narration": "ताजमहल का इतिहास पढ़ रहा हूँ"
-      }
-     }
-    ],
-    "ms": 764,
-    "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 8119,
-     "total_tokens": 8171,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "8b2955e53a14422d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_8822a7587474445cb4f15769",
+      "id": "call_3da57018387041ae888cb517",
       "name": "done",
       "args": {
-       "speech": "ताजमहल का निर्माण मुगल सम्राट शाहजहाँ ने करवाया था। उन्होंने इसे अपनी पत्नी मुमताज़ महल की याद में बनवाया था।"
+       "speech": "ताजमहल को मुग़ल सम्राट शाहजहाँ ने अपनी पत्नी मुमताज़ महल की याद में बनवाया था।"
       }
      }
     ],
-    "ms": 977,
+    "ms": 827,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 10341,
-     "total_tokens": 10385,
+     "completion_tokens": 52,
+     "prompt_tokens": 7953,
+     "total_tokens": 8005,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3968
+      "cached_tokens": 3776
      }
     }
    }

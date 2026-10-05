@@ -1,187 +1,228 @@
 {
  "version": 1,
  "task": "book-ta-3a",
- "recordedAt": "2026-10-05T06:05:58.269Z",
+ "recordedAt": "2026-10-05T08:08:10.681Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "6576887eff99eb23",
+   "hash": "34bda0cfe5a10e5b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_437f202780024193b7fa6fbf",
+      "id": "call_7a62e9bb859240a89a3ceaf9",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chennai",
-       "narration": "FROM-ல சென்னை போடுறேன்"
+       "pick_suggestion": "Chennai",
+       "narration": "FROM-ல் சென்னை டைப் பண்றேன்"
       }
-     },
+     }
+    ],
+    "ms": 852,
+    "usage": {
+     "completion_tokens": 68,
+     "prompt_tokens": 4162,
+     "total_tokens": 4230,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "b08386f0c3a8c009",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_7b6d3f24346b4c529361fc04",
+      "id": "call_f676f684a99d4000be8b110b",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bengaluru",
-       "narration": "TO-ல பெங்களூரு போடுறேன்"
+       "narration": "Enter destination Bengaluru"
       }
-     },
+     }
+    ],
+    "ms": 525,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4206,
+     "total_tokens": 4234,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "091a45f7628af201",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_8ad996266be14a449de67ecc",
+      "id": "call_72a412da173d46fcb3967ed8",
       "name": "click",
       "args": {
-       "id": 11,
-       "narration": "நாளைக்கு date select பண்றேன்"
+       "id": 21,
+       "narration": "KSR Bengaluru-ஐ select பண்றேன்",
+       "confirmation_question": ""
       }
      },
      {
-      "id": "call_2324e76eab6541b78e45b96b",
-      "name": "click",
+      "id": "call_8a1175a38d1b49f5916d51b9",
+      "name": "select_option",
       "args": {
-       "id": 15,
-       "narration": "AC 3 tier-க்கு Tatkal select பண்றேன்"
+       "id": 13,
+       "option": "AC 3 tier",
+       "narration": "AC 3 tier-ஐ select பண்றேன்"
       }
      },
      {
-      "id": "call_1eacad899d184b90b4e7a4a6",
+      "id": "call_ed78b8da47184cd58a852ebd",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains-அ click பண்றேன்"
-      }
-     }
-    ],
-    "ms": 2040,
-    "usage": {
-     "completion_tokens": 251,
-     "prompt_tokens": 4102,
-     "total_tokens": 4353,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "9fbf9a524c7c37da",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
-      "name": "click",
-      "args": {
-       "id": 25,
-       "narration": "3A class book பண்ணுங்க",
-       "confirmation_question": "நாளை சென்னை சென்ட்ரல்ல இருந்து பெங்களூரு SBC-க்கு AC 3 tier-ல book பண்ணலாமா? விலை 410 ரூபாய்."
-      }
-     }
-    ],
-    "ms": 1031,
-    "usage": {
-     "completion_tokens": 91,
-     "prompt_tokens": 5620,
-     "total_tokens": 5711,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    },
-    "raw": "[\n{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 25,\n    \"narration\": \"3A class book பண்ணுங்க\",\n    \"confirmation_question\": \"நாளை சென்னை சென்ட்ரல்ல இருந்து பெங்களூரு SBC-க்கு AC 3 tier-ல book பண்ணலாமா? விலை 410 ரூபாய்.\"\n  }\n}"
-   }
-  },
-  {
-   "hash": "1c3fc291dc90026d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_07e623426eed4eee8089220b",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 48,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 49,
-         "value": "34"
-        },
-        {
-         "id": 50,
-         "value": "Female"
-        }
-       ],
-       "narration": "Passenger details fill பண்றேன்"
-      }
-     }
-    ],
-    "ms": 1303,
-    "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 4296,
-     "total_tokens": 4391,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "32d488b7ac73bf5b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_913febbf2c0949ce9d67542e",
-      "name": "type_text",
-      "args": {
-       "id": 55,
-       "text": "9000000001",
-       "narration": "Mobile number enter பண்றேன்"
-      }
-     }
-    ],
-    "ms": 746,
-    "usage": {
-     "completion_tokens": 64,
-     "prompt_tokens": 4355,
-     "total_tokens": 4419,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "ccbe38a1da68c46c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_211ded483b6e4ea396ada1bd",
-      "name": "click",
-      "args": {
-       "id": 56,
-       "narration": "CONTINUE கிளிக் செய்கிறேன்",
+       "narration": "Search பண்றேன்",
        "confirmation_question": ""
       }
      }
     ],
-    "ms": 613,
+    "ms": 812,
     "usage": {
-     "completion_tokens": 52,
-     "prompt_tokens": 4400,
-     "total_tokens": 4452,
+     "completion_tokens": 98,
+     "prompt_tokens": 4291,
+     "total_tokens": 4389,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3840
+     }
+    }
+   }
+  },
+  {
+   "hash": "6e8f9f731b1193be",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_254ab018996142239a122d5a",
+      "name": "ask_user",
+      "args": {
+       "question": "நாளைக்கு சென்னையிலிருந்து பெங்களூருக்கு AC 3 tier-ல 6 trains இருக்கு. முதல் train 07:50-க்கு கிளம்பும், ₹410. உங்களுக்கு எந்த train பிடிக்கும்? அல்லது முதல் train-அ book பண்ணட்டுமா?"
+      }
+     }
+    ],
+    "ms": 639,
+    "usage": {
+     "completion_tokens": 86,
+     "prompt_tokens": 4799,
+     "total_tokens": 4885,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "23a0ca98118e4cb2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_0523be1c4e834bc297aa411e",
+      "name": "click",
+      "args": {
+       "id": 31,
+       "narration": "முதல் ரயில் book பண்றேன்"
+      }
+     }
+    ],
+    "ms": 448,
+    "usage": {
+     "completion_tokens": 35,
+     "prompt_tokens": 4869,
+     "total_tokens": 4904,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "ec25cce32c326fba",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9ed5ca6d30ac4eee94aecf1b",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 37,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 38,
+         "value": "34"
+        },
+        {
+         "id": 39,
+         "value": "Female"
+        },
+        {
+         "id": 44,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "பயணிகளின் விவரங்களை நிரப்புகிறேன்"
+      }
+     }
+    ],
+    "ms": 869,
+    "usage": {
+     "completion_tokens": 121,
+     "prompt_tokens": 4467,
+     "total_tokens": 4588,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 4096
+     }
+    }
+   }
+  },
+  {
+   "hash": "699fddfd4b370f73",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a940d8181e294c75ac74cfa0",
+      "name": "click",
+      "args": {
+       "id": 45,
+       "narration": "Passenger details-அ continue பண்றேன்"
+      }
+     }
+    ],
+    "ms": 424,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4563,
+     "total_tokens": 4610,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -191,25 +232,25 @@
    }
   },
   {
-   "hash": "796ffa61880f6b2f",
+   "hash": "275cd2b9228e4587",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e72992a3fc234de4a9d90df8",
+      "id": "call_dac7d834b7384cd5b659c8dd",
       "name": "click",
       "args": {
-       "id": 57,
-       "narration": "Proceed to payment",
-       "confirmation_question": "நாளை 6 அக்டோபர் சென்னை சென்ட்ரல் முதல் பெங்களூரு SBC வரை AC 3 Tier-ல் ஒரு டிக்கெட் ₹430-க்கு புக் செய்யலாமா?"
+       "id": 46,
+       "narration": "பணம் செலுத்த தொடங்கு",
+       "confirmation_question": "AC 3 tier-ல சென்னை Central-ல இருந்து பெங்களூரு SBC-க்கு, 6 Oct, 1 passenger, ₹430. Book பண்ணட்டுமா?"
       }
      }
     ],
-    "ms": 846,
+    "ms": 842,
     "usage": {
-     "completion_tokens": 91,
-     "prompt_tokens": 4355,
-     "total_tokens": 4446,
+     "completion_tokens": 90,
+     "prompt_tokens": 4518,
+     "total_tokens": 4608,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -219,61 +260,59 @@
    }
   },
   {
-   "hash": "d52c2e5f9d3f1340",
+   "hash": "32c276c78e7d21cd",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_486692bd20fb4c40be321c92",
+      "id": "call_6eac9f5be008455bace47508",
       "name": "click",
       "args": {
-       "id": 61,
-       "narration": "₹430-க்கு pay பண்றேன்",
-       "confirmation_question": "₹430-க்கு pay பண்ணலாமா? இந்த AC 3 tier டிக்கெட்டுக்கு?"
+       "id": 50,
+       "narration": "₹430 pay பண்ணு",
+       "confirmation_question": "₹430 pay பண்ணலாமா?"
       }
      }
     ],
-    "ms": 787,
+    "ms": 529,
     "usage": {
-     "completion_tokens": 78,
-     "prompt_tokens": 4341,
-     "total_tokens": 4419,
+     "completion_tokens": 62,
+     "prompt_tokens": 4504,
+     "total_tokens": 4566,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4032
+      "cached_tokens": 4160
      }
     }
    }
   },
   {
-   "hash": "cb2892c2ff0c5afa",
+   "hash": "e241b4b7bf23601d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0d7dc194c7a341dda17d7c67",
+      "id": "call_c153eca8092d461b89a451c7",
       "name": "done",
       "args": {
-       "speech": "உங்கள் AC 3 tier டிக்கெட் புக் ஆகிவிட்டது. PNR நம்பர் 4123456700. சென்னை சென்ட்ரலில் இருந்து பெங்களூரு சென்ட்ரலுக்கு, நாளை 6 Oct-அன்று. இருக்கை B2, எண் 12. ₹430 செலுத்தியுள்ளீர்கள்."
+       "speech": "உங்களுடைய AC 3 tier டிக்கெட் புக் ஆகிவிட்டது. PNR எண் 4123456700. சென்னை சென்ட்ரலில் இருந்து பெங்களூர் SBC-க்கு 6 Oct, 2026-ல 3A-ல புக் பண்ணியாச்சு. B2, seat 12-ல உங்க சீட். ₹430 பேமெண்ட் முடிந்தது. வேற ஏதாவது உதவி வேணுமா?"
       }
      }
     ],
-    "ms": 1036,
+    "ms": 1143,
     "usage": {
-     "completion_tokens": 104,
-     "prompt_tokens": 4374,
-     "total_tokens": 4478,
+     "completion_tokens": 121,
+     "prompt_tokens": 4538,
+     "total_tokens": 4659,
      "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+     "prompt_tokens_details": null
     }
    }
   }
  ],
  "translate": {
+  "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
   "06d5f51c23d1c42f": "அந்த page-ல இப்படி போட்டுருக்கு:"
  },
  "docs": {}

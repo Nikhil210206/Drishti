@@ -1,37 +1,54 @@
 {
  "version": 1,
  "task": "read-bn-news-summary",
- "recordedAt": "2026-10-05T06:12:45.773Z",
+ "recordedAt": "2026-10-05T08:14:10.552Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "908e3db025cbd1dc",
+   "hash": "85190518fc0493b2",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0eddace43a3740098ebbf4a2",
+      "id": "call_197ec9431a1b4dd491230187",
       "name": "read_page",
       "args": {
        "mode": "summary",
-       "narration": "সংবাদটা সংক্ষেপে বলছি"
-      }
-     },
-     {
-      "id": "call_af5bf5d675684827892e8200",
-      "name": "click",
-      "args": {
-       "id": 7,
-       "narration": "Subscribe-এ ক্লিক করছি",
-       "confirmation_question": "আপনি কি ₹499 দিয়ে subscribe করতে চান?"
+       "narration": "News article summary"
       }
      }
     ],
-    "ms": 1088,
+    "ms": 439,
     "usage": {
-     "completion_tokens": 114,
-     "prompt_tokens": 4159,
-     "total_tokens": 4273,
+     "completion_tokens": 23,
+     "prompt_tokens": 4219,
+     "total_tokens": 4242,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "385d3729e6e05e4d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_07faf38571834cf9b3b1aa56",
+      "name": "done",
+      "args": {
+       "speech": "Pathik Rail ১৫ জানুয়ারি ২০২৭ থেকে রাতের ট্রেনে ১২০টি accessible sleeper coach যোগ করছে। প্রতিটি কোচে র‍্যাম্প, দুটি চওড়া lower berth এবং Braille numbering থাকবে। প্রথম রুটগুলো হলো Chennai–Bengaluru, Mumbai–Pune এবং Howrah–Patna। হুইলচেয়ার ব্যবহারকারীরা 'Divyang' কোটায় বুক করতে পারবেন। disability group-গুলো audio announcement-এর দাবি জানিয়েছে, যা পরে আসবে।"
+      }
+     }
+    ],
+    "ms": 867,
+    "usage": {
+     "completion_tokens": 119,
+     "prompt_tokens": 4453,
+     "total_tokens": 4572,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -39,37 +56,8 @@
      }
     }
    }
-  },
-  {
-   "hash": "a64518e6882b0fba",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_8b013942102546c8ac86c2ab",
-      "name": "done",
-      "args": {
-       "speech": "আগামী ১৫ জানুয়ারি থেকে Pathik Rail তাদের নাইট ট্রেনে ১২০টি অ্যাক্সেসিবল স্লিপার কোচ যোগ করবে। প্রতি কোচে থাকবে র‍্যাম্প, চওড়া লোয়ার বার্থ আর ব্রেইল নম্বর। প্রথম রুট হবে Chennai–Bengaluru, Mumbai–Pune এবং Howrah–Patna। হুইলচেয়ার ব্যবহারকারীরা 'Divyang' কোটায় বুক করতে পারবেন। অন্ধ যাত্রীদের জন্য অডিও অ্যানাউন্সমেন্টের দাবি জানানো হয়েছে, যা পরে ১১টি ভাষায় আসবে। Pathik Samachar এবং Pathik Rail হলো Drishti অ্যাক্সেসিবিলিটি প্রজেক্টের জন্য তৈরি কাল্পনিক নাম।"
-      }
-     }
-    ],
-    "ms": 1666,
-    "usage": {
-     "completion_tokens": 158,
-     "prompt_tokens": 4427,
-     "total_tokens": 4585,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
   }
  ],
- "translate": {
-  "b3cb319abd0dba2f": "Page-এ বলা হয়েছে:",
-  "52812990bc84b9bd": "Okay, আমি এটা করিনি।"
- },
+ "translate": {},
  "docs": {}
 }

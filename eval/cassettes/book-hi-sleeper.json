@@ -1,176 +1,284 @@
 {
  "version": 1,
  "task": "book-hi-sleeper",
- "recordedAt": "2026-10-05T06:05:24.603Z",
+ "recordedAt": "2026-10-05T08:07:51.029Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "c4cfcf61bb776fd9",
+   "hash": "103f4932b6880ced",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e9fed8ff9e044e79bf8885a7",
+      "id": "call_333d711425084ddda87ef4a9",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Chennai",
-       "narration": "Chennai enter kar raha hoon"
+       "pick_suggestion": "Chennai Central",
+       "narration": "FROM में चेन्नई डाल रहा हूँ"
       }
-     },
+     }
+    ],
+    "ms": 1873,
+    "usage": {
+     "completion_tokens": 64,
+     "prompt_tokens": 4161,
+     "total_tokens": 4225,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "0aa441ec8500ff1e",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_a4ced3a0b86849fa95e92a3d",
+      "id": "call_76002c6ce1ba493897716305",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bengaluru",
        "narration": "Bengaluru enter kar raha hoon"
       }
-     },
+     }
+    ],
+    "ms": 495,
+    "usage": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4206,
+     "total_tokens": 4237,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "df4e26a5699c1bd2",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_2d163a076fc94d2cb3732c1b",
-      "name": "select_option",
+      "id": "call_09c41ae0afe744acaa577cad",
+      "name": "click",
       "args": {
-       "id": 13,
-       "option": "Sleeper",
-       "narration": "Sleeper class select kar raha hoon"
+       "id": 21,
+       "narration": "Select Bengaluru station"
       }
-     },
+     }
+    ],
+    "ms": 466,
+    "usage": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4291,
+     "total_tokens": 4338,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "582662d668ae5a54",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_45a5cb467033441fbfe8368f",
+      "id": "call_31e6adcc03f9406890e93d25",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains par click kar raha hoon"
+       "narration": "Search trains",
+       "confirmation_question": ""
       }
      }
     ],
-    "ms": 6606,
+    "ms": 594,
     "usage": {
-     "completion_tokens": 206,
-     "prompt_tokens": 4101,
-     "total_tokens": 4307,
+     "completion_tokens": 48,
+     "prompt_tokens": 4283,
+     "total_tokens": 4331,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "aaf50ad778fbf37a",
+   "hash": "eb1bd1868649b9b8",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_093c8129691049feb7e9b915",
-      "name": "ask_user",
-      "args": {
-       "question": "कल चेन्नई सेंट्रल से बेंगलुरु SBC के लिए 4 स्लीपर क्लास ट्रेनें मिली हैं। पहली चेन्नई–बेंगलुरु एक्सप्रेस 00:45 से 07:50, ₹160, RAC 11। दूसरी लालबाग मेल 18:30 से 00:40+1, ₹170, Available 86। तीसरी चेन्नई–बेंगलुरु मेल 19:15 से 02:15+1, ₹170, Waiting list 46। चौथी संपर्क क्रांति एक्सप्रेस 21:10 से 03:30+1, ₹175, RAC 47। कौन सी ट्रेन बुक करनी है?"
-      }
-     }
-    ],
-    "ms": 2308,
-    "usage": {
-     "completion_tokens": 183,
-     "prompt_tokens": 4499,
-     "total_tokens": 4682,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "bcbf7b23f7ca84a9",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_e065a6cf34034332b43e2623",
+      "id": "call_f9797aff59ff476ca69a02cd",
       "name": "click",
       "args": {
-       "id": 31,
-       "narration": "पहली ट्रेन बुक कर रहा हूँ",
-       "confirmation_question": "क्या आप चेन्नई सेंट्रल से बेंगलुरु SBC के लिए कल 6 अक्टूबर 2026, स्लीपर क्लास, चेन्नई-बेंगलुरु एक्सप्रेस (12147) की टिकट बुक करना चाहते हैं? किराया ₹160 है।"
+       "id": 24,
+       "narration": "स्लीपर क्लास बुक कर रहा हूँ",
+       "confirmation_question": "कल चेन्नई सेंट्रल से बेंगलुरु SBC, स्लीपर क्लास, 1 टिकट, ₹160, क्या मैं बुक कर दूँ?"
       }
      }
     ],
-    "ms": 1476,
+    "ms": 796,
     "usage": {
-     "completion_tokens": 104,
-     "prompt_tokens": 4668,
-     "total_tokens": 4772,
+     "completion_tokens": 82,
+     "prompt_tokens": 5682,
+     "total_tokens": 5764,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3904
      }
     }
    }
   },
   {
-   "hash": "3c8b50e9d9e33fe8",
+   "hash": "9163e29564139caf",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_22477012bc63419ba46794a2",
-      "name": "fill_form",
+      "id": "call_e2119c3570584b3db0537ad2",
+      "name": "type_text",
       "args": {
-       "fields": [
-        {
-         "id": 35,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 36,
-         "value": "34"
-        },
-        {
-         "id": 38,
-         "value": "Female"
-        }
-       ],
-       "narration": "Passenger details भरना"
+       "id": 48,
+       "text": "Asha Verma",
+       "narration": "Name डाल रही हूँ"
       }
-     }
-    ],
-    "ms": 4619,
-    "usage": {
-     "completion_tokens": 93,
-     "prompt_tokens": 4467,
-     "total_tokens": 4560,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "d3d3d5226d88366b",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_2a6ff334ad0240e494c5c255",
+      "id": "call_77acf805881d433da56fdc85",
+      "name": "type_text",
+      "args": {
+       "id": 49,
+       "text": "34",
+       "narration": "Age डाल रही हूँ"
+      }
+     },
+     {
+      "id": "call_71168e1f8d5446c88d2b72fa",
       "name": "click",
       "args": {
-       "id": 43,
-       "narration": "Continue करना"
+       "id": 51,
+       "narration": "Female चुन रही हूँ"
+      }
+     },
+     {
+      "id": "call_d51967110a194fec83c63b77",
+      "name": "click",
+      "args": {
+       "id": 55,
+       "narration": "Mobile नंबर डाल रही हूँ"
+      }
+     },
+     {
+      "id": "call_8ff9b77d80c047d8b8efa65c",
+      "name": "type_text",
+      "args": {
+       "id": 55,
+       "text": "9000000001",
+       "narration": "Mobile नंबर डाल रही हूँ"
       }
      }
     ],
-    "ms": 1120,
+    "ms": 1759,
     "usage": {
-     "completion_tokens": 40,
-     "prompt_tokens": 4526,
-     "total_tokens": 4566,
+     "completion_tokens": 248,
+     "prompt_tokens": 4354,
+     "total_tokens": 4602,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
+     }
+    }
+   }
+  },
+  {
+   "hash": "dfdb594fcc7a430b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_a2a0ef817975405b85ba052f",
+      "name": "click",
+      "args": {
+       "id": 56,
+       "narration": "Continue करना",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 475,
+    "usage": {
+     "completion_tokens": 48,
+     "prompt_tokens": 4482,
+     "total_tokens": 4530,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3968
+     }
+    }
+   }
+  },
+  {
+   "hash": "83b22573c902266f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d55b633af26149afb0876960",
+      "name": "click",
+      "args": {
+       "id": 57,
+       "narration": "Proceed to payment",
+       "confirmation_question": "कल चेन्नई सेंट्रल से बेंगलुरु SBC की स्लीपर क्लास में एक टिकट बुक करें, कुल ₹180 का पेमेंट करें — क्या सही है?"
+      }
+     }
+    ],
+    "ms": 865,
+    "usage": {
+     "completion_tokens": 79,
+     "prompt_tokens": 4435,
+     "total_tokens": 4514,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "9155337aad55f51f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_d878b94d8f7c4b4f8c8ff7b6",
+      "name": "click",
+      "args": {
+       "id": 61,
+       "narration": "Pay 180 rupees",
+       "confirmation_question": "Confirm payment of 180 rupees for Sleeper class ticket Chennai Central to Bengaluru SBC on 6 Oct? (This is a demo, no real money moves.)"
+      }
+     }
+    ],
+    "ms": 625,
+    "usage": {
+     "completion_tokens": 87,
+     "prompt_tokens": 4424,
+     "total_tokens": 4511,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -180,139 +288,27 @@
    }
   },
   {
-   "hash": "023b1f0b397128a8",
+   "hash": "ebf941e9f0417a42",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c618939b51644cb68e5191f3",
-      "name": "type_text",
-      "args": {
-       "id": 42,
-       "text": "9000000001",
-       "narration": "मोबाइल नंबर डाल रहा हूँ"
-      }
-     }
-    ],
-    "ms": 733,
-    "usage": {
-     "completion_tokens": 39,
-     "prompt_tokens": 4596,
-     "total_tokens": 4635,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "7418a3cf38dc01bd",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3f82306b2e004718b1298705",
-      "name": "click",
-      "args": {
-       "id": 43,
-       "narration": "Continue बटन दबाना",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 3115,
-    "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4641,
-     "total_tokens": 4691,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "9939cd0bc174e336",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_15d26b92a1074286abb176b0",
-      "name": "click",
-      "args": {
-       "id": 44,
-       "narration": "Proceed to pay",
-       "confirmation_question": "कल चेन्नई सेंट्रल से बेंगलुरु SBC, स्लीपर क्लास, 1 टिकट, ₹180 total. Pay करें?"
-      }
-     }
-    ],
-    "ms": 875,
-    "usage": {
-     "completion_tokens": 76,
-     "prompt_tokens": 4566,
-     "total_tokens": 4642,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4160
-     }
-    }
-   }
-  },
-  {
-   "hash": "3d47a5f3baf57a85",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_2e1f4395f2484c0393c50135",
-      "name": "click",
-      "args": {
-       "id": 48,
-       "narration": "Pay 180 rupees",
-       "confirmation_question": "क्या आप ₹180 का payment करना चाहती हैं?"
-      }
-     }
-    ],
-    "ms": 780,
-    "usage": {
-     "completion_tokens": 64,
-     "prompt_tokens": 4555,
-     "total_tokens": 4619,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4224
-     }
-    }
-   }
-  },
-  {
-   "hash": "d0bd0f27cfc167e3",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_53dd66e616594c20abe3a9f3",
+      "id": "call_c0ac86bc57134d59a5564c1a",
       "name": "done",
       "args": {
-       "speech": "आपकी टिकट बुक हो गई है। PNR 4123456700 है। चेन्नई–बेंगलुरु एक्सप्रेस, स्लीपर क्लास, सीट 12, ₹180 का भुगतान हो गया।"
+       "speech": "आपकी बुकिंग कन्फर्म हो गई है। PNR 4123456700 है, चेन्नई से बेंगलुरु Express 12147, Sleeper class, सीट 12, S4। ₹180 का पेमेंट हो गया है। कल 6 अक्टूबर, 2026 की यात्रा के लिए तैयार हैं।"
       }
      }
     ],
-    "ms": 1028,
+    "ms": 1233,
     "usage": {
-     "completion_tokens": 83,
-     "prompt_tokens": 4589,
-     "total_tokens": 4672,
+     "completion_tokens": 101,
+     "prompt_tokens": 4458,
+     "total_tokens": 4559,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 2112
      }
     }
    }

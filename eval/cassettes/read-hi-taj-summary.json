@@ -1,31 +1,93 @@
 {
  "version": 1,
  "task": "read-hi-taj-summary",
- "recordedAt": "2026-10-05T06:12:27.062Z",
+ "recordedAt": "2026-10-05T08:13:49.432Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "cc75911f1afac452",
+   "hash": "51a221b94d2c013a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_baf68e44c7b744c389224aef",
-      "name": "done",
+      "id": "call_17f907be8ef746ceb297f93f",
+      "name": "read_page",
       "args": {
-       "speech": "यह पेज ताजमहल के बारे में विकिपीडिया का लेख है। इसमें इसकी वास्तुकला, निर्माण, इतिहास और अन्य जानकारियों का विस्तृत वर्णन किया गया है।"
+       "mode": "summary",
+       "narration": "ताजमहल पेज की जानकारी पढ़ रहा हूँ"
       }
      }
     ],
-    "ms": 924,
+    "ms": 554,
     "usage": {
-     "completion_tokens": 68,
-     "prompt_tokens": 7897,
-     "total_tokens": 7965,
+     "completion_tokens": 48,
+     "prompt_tokens": 7957,
+     "total_tokens": 8005,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "cedfecdbb519e307",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1c1b28e1ef89444e9decd6d9",
+      "name": "read_page",
+      "args": {
+       "mode": "summary",
+       "narration": "ताजमहल के पेज का सार पढ़ रहा हूँ"
+      }
+     }
+    ],
+    "ms": 984,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 10174,
+     "total_tokens": 10228,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "d757b73093d203a5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_17993f555067474886fae4c8",
+      "name": "click",
+      "args": {
+       "id": 10,
+       "narration": "सामग्री दिखाएँ"
+      }
+     },
+     {
+      "id": "call_425e85c49c3e4bf8bf1ec931",
+      "name": "done",
+      "args": {
+       "speech": "यह पेज ताजमहल पर विकिपीडिया लेख है। इसमें इसकी वास्तुकला, निर्माण इतिहास, और पर्यटन की जानकारी दी गई है।"
+      }
+     }
+    ],
+    "ms": 937,
+    "usage": {
+     "completion_tokens": 106,
+     "prompt_tokens": 7999,
+     "total_tokens": 8105,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
      }
     }
    }

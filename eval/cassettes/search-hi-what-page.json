@@ -1,31 +1,58 @@
 {
  "version": 1,
  "task": "search-hi-what-page",
- "recordedAt": "2026-10-05T06:15:20.661Z",
+ "recordedAt": "2026-10-05T08:15:36.399Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "767e5dc767f1c718",
+   "hash": "e60d5a439b45af5e",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_811f7bdce7024ad8883b94d5",
-      "name": "done",
+      "id": "call_efc6fdc58bd240d19af81c3b",
+      "name": "read_page",
       "args": {
-       "speech": "इस पेज पर आप train tickets book कर सकते हैं — FROM, TO, DATE, CLASS और SEARCH TRAINS के options हैं। Tatkal booking की timing भी दी है। यह एक demo site है, कोई real booking नहीं होती।"
+       "mode": "summary",
+       "narration": "इस पेज पर क्या-क्या है"
       }
      }
     ],
-    "ms": 870,
+    "ms": 495,
     "usage": {
-     "completion_tokens": 80,
-     "prompt_tokens": 4091,
-     "total_tokens": 4171,
+     "completion_tokens": 52,
+     "prompt_tokens": 4151,
+     "total_tokens": 4203,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3712
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "f60ecb3c217a0d2d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8473f308ab2f45289d8c7f6e",
+      "name": "done",
+      "args": {
+       "speech": "इस पेज पर आप train ticket book कर सकते हैं। यहाँ से FROM, TO और DATE डालकर train search कर सकते हैं। Class में General, Tatkal, Ladies, Senior Citizen जैसे options हैं। नीचे SEARCH TRAINS button है जो search करता है। यह Pathik Rail नाम की एक demo website है, यहाँ कोई real booking या payment नहीं होता।"
+      }
+     }
+    ],
+    "ms": 716,
+    "usage": {
+     "completion_tokens": 104,
+     "prompt_tokens": 4324,
+     "total_tokens": 4428,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
      }
     }
    }

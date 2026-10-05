@@ -12,6 +12,8 @@ export class SarvamLLM implements LLM {
   }
 }
 
+const ATTEMPT_MS = 45_000;
+
 async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Promise<ChatResult> {
   requireKey(cfg);
   const body: Record<string, any> = {
@@ -37,7 +39,8 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
         method: "POST",
         headers: { "api-subscription-key": cfg.apiKey, "content-type": "application/json" },
         body: JSON.stringify(body),
-        signal: opts.signal,
+        // A live run once hung 15 minutes on one request: give each attempt a deadline, then retry.
+        signal: opts.signal ? AbortSignal.any([opts.signal, AbortSignal.timeout(ATTEMPT_MS)]) : AbortSignal.timeout(ATTEMPT_MS),
       });
       if (res.status === 429 || res.status >= 500) {
         lastErr = new Error(`LLM HTTP ${res.status}: ${await res.text()}`);
@@ -62,14 +65,16 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
         toolCalls,
         ms: Date.now() - t0,
         usage: data.usage,
+        // Keep what the model wrote whenever tool calls came from text or came out empty: the trace
+        // then shows why (a Punjabi task twice wrote a tool call as text that could not be parsed).
         ...(recovered.length
           ? { raw: content.slice(0, 4000) }
-          : !toolCalls.length && !clean
+          : !toolCalls.length
             ? { raw: JSON.stringify({ finish: data.choices?.[0]?.finish_reason, ...msg }).slice(0, 4000) }
             : {}),
       };
     } catch (e: any) {
-      if (e?.name === "AbortError") throw e;
+      if (opts.signal?.aborted) throw e;
       lastErr = e;
       if (attempt < 3) await sleep(600 * 2 ** attempt);
     }
@@ -108,7 +113,41 @@ export function recoverToolCalls(content: string): ToolCall[] {
         return list.map((o, i) => ({ id: `rec_${i}`, name: o.name, args: parseArgs(o.arguments ?? o.args ?? o.parameters) }));
     } catch {}
   }
-  return [];
+  // Several calls written one after another ({..}\n{..}), or a list cut short: take each complete
+  // top-level object that parses.
+  const list = topLevelObjects(text)
+    .map((c) => {
+      try {
+        return JSON.parse(c);
+      } catch {
+        return undefined;
+      }
+    })
+    .filter((o) => typeof o?.name === "string");
+  return list.map((o, i) => ({ id: `rec_${i}`, name: o.name, args: parseArgs(o.arguments ?? o.args ?? o.parameters) }));
+}
+
+/** The balanced {...} spans at the outermost level of the text (or of a [...] list), skipping braces in strings. */
+function topLevelObjects(text: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let start = -1;
+  let inString = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inString) {
+      if (ch === "\\") i++;
+      else if (ch === '"') inString = false;
+    } else if (ch === '"') inString = true;
+    else if (ch === "{") {
+      if (depth === 0) start = i;
+      depth++;
+    } else if (ch === "}" && depth > 0) {
+      depth--;
+      if (depth === 0) out.push(text.slice(start, i + 1));
+    }
+  }
+  return out;
 }
 
 export function stripThink(s: string) {

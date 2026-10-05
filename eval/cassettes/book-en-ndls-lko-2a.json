@@ -1,46 +1,137 @@
 {
  "version": 1,
  "task": "book-en-ndls-lko-2a",
- "recordedAt": "2026-10-05T06:08:51.732Z",
+ "recordedAt": "2026-10-05T08:10:57.180Z",
  "model": "sarvam-105b",
  "llm": [
   {
-   "hash": "b88ee453333008c1",
+   "hash": "5a1a1873da6fb4b3",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_3669336a1c56434db4d57f41",
+      "id": "call_e4e558dfdf21442b97081a54",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "New Delhi",
-       "narration": "Typing from station New Delhi"
+       "narration": "Entering FROM station New Delhi"
       }
      },
      {
-      "id": "call_9ac5ca480c21462b91eb538b",
+      "id": "call_e4e01959d6e348959fee62d0",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Lucknow",
-       "narration": "Typing to station Lucknow"
+       "narration": "Entering TO station Lucknow"
       }
      },
      {
-      "id": "call_46f80e8ebbe44a25977e42ac",
+      "id": "call_79f0b8085c4f4febbe05c00a",
       "name": "click",
       "args": {
-       "id": 18,
-       "narration": "Clicking search trains"
+       "id": 9,
+       "narration": "Selecting tomorrow's date"
       }
      }
     ],
-    "ms": 1213,
+    "ms": 1004,
     "usage": {
-     "completion_tokens": 80,
-     "prompt_tokens": 4107,
-     "total_tokens": 4187,
+     "completion_tokens": 78,
+     "prompt_tokens": 4167,
+     "total_tokens": 4245,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "e6950739ce78fc30",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_f5e9fe7703ef482bba43b6af",
+      "name": "click",
+      "args": {
+       "id": 25,
+       "narration": "Select tomorrow's date"
+      }
+     }
+    ],
+    "ms": 472,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4406,
+     "total_tokens": 4450,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "1650e367cf810bf2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_93d7bb22164549b2b7fd3297",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "AC 2 Tier",
+       "narration": "Select AC 2 tier"
+      }
+     },
+     {
+      "id": "call_7187d060ca3b4047a50aa682",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search for trains"
+      }
+     }
+    ],
+    "ms": 942,
+    "usage": {
+     "completion_tokens": 98,
+     "prompt_tokens": 4336,
+     "total_tokens": 4434,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
+     }
+    }
+   }
+  },
+  {
+   "hash": "18cc295d3c7d5c71",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_9a41fb24f09e48deae9b8216",
+      "name": "click",
+      "args": {
+       "id": 59,
+       "narration": "Book first 2A train",
+       "confirmation_question": "Book Delhi–Lucknow Express (2A, ₹850) for tomorrow, 6 Oct, from New Delhi to Lucknow, 1 passenger? Yes or no?"
+      }
+     }
+    ],
+    "ms": 1054,
+    "usage": {
+     "completion_tokens": 88,
+     "prompt_tokens": 4655,
+     "total_tokens": 4743,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -50,70 +141,41 @@
    }
   },
   {
-   "hash": "432ae0bfc2b2fa74",
+   "hash": "8e7848f0d5746524",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
-      "name": "click",
-      "args": {
-       "id": 24,
-       "narration": "Book AC 2 tier ticket",
-       "confirmation_question": "Book AC 2 tier ticket on Delhi–Lucknow Express (11188) departing 02:30 tomorrow for 850 rupees per passenger?"
-      }
-     }
-    ],
-    "ms": 1388,
-    "usage": {
-     "completion_tokens": 68,
-     "prompt_tokens": 5595,
-     "total_tokens": 5663,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    },
-    "raw": "[\n{\"name\":\"click\",\"parameters\":{\"id\":24,\"narration\":\"Book AC 2 tier ticket\",\"confirmation_question\":\"Book AC 2 tier ticket on Delhi–Lucknow Express (11188) departing 02:30 tomorrow for 850 rupees per passenger?\"}}"
-   }
-  },
-  {
-   "hash": "3130619be92b1079",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_90271d44155b497f8aac5484",
+      "id": "call_6441f360a56b453195fb7b5d",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 45,
+         "id": 63,
          "value": "Asha Verma"
         },
         {
-         "id": 46,
+         "id": 64,
          "value": "34"
         },
         {
-         "id": 48,
+         "id": 65,
          "value": "Female"
         },
         {
-         "id": 52,
-         "value": "9000000001"
+         "id": 66,
+         "value": "Female"
         }
        ],
-       "narration": "Filling passenger details"
+       "narration": "Filling passenger details for Asha Verma"
       }
      }
     ],
-    "ms": 1538,
+    "ms": 1477,
     "usage": {
-     "completion_tokens": 147,
-     "prompt_tokens": 4248,
-     "total_tokens": 4395,
+     "completion_tokens": 141,
+     "prompt_tokens": 4449,
+     "total_tokens": 4590,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
@@ -123,110 +185,182 @@
    }
   },
   {
-   "hash": "997d037eef7b2c16",
+   "hash": "4b1561c3a76d09cc",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_2440d60c65b84b849425ed6a",
+      "id": "call_78131ee592654f63af186d9b",
       "name": "click",
       "args": {
-       "id": 53,
+       "id": 70,
+       "narration": "Continue to next step",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 762,
+    "usage": {
+     "completion_tokens": 50,
+     "prompt_tokens": 4497,
+     "total_tokens": 4547,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "ad2c61e082d67770",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_e9ab3c7d8f28479b82dd0987",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 63,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 64,
+         "value": "34"
+        },
+        {
+         "id": 66,
+         "value": "Female"
+        },
+        {
+         "id": 70,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Filling passenger details for Asha Verma"
+      }
+     }
+    ],
+    "ms": 1285,
+    "usage": {
+     "completion_tokens": 150,
+     "prompt_tokens": 4516,
+     "total_tokens": 4666,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2112
+     }
+    }
+   }
+  },
+  {
+   "hash": "47aacbbe946c8203",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_8239a2d94974406eaa9b758d",
+      "name": "click",
+      "args": {
+       "id": 71,
        "narration": "Continue to next step"
       }
      }
     ],
-    "ms": 929,
+    "ms": 674,
     "usage": {
-     "completion_tokens": 23,
-     "prompt_tokens": 4344,
-     "total_tokens": 4367,
+     "completion_tokens": 42,
+     "prompt_tokens": 4612,
+     "total_tokens": 4654,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3904
+      "cached_tokens": 2112
      }
     }
    }
   },
   {
-   "hash": "72be93d39c2682d5",
+   "hash": "432677252199a16a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_52fc564578a341a3bc4ac132",
+      "id": "call_5b5afed0203e4413ae7ad5a4",
       "name": "click",
       "args": {
-       "id": 54,
+       "id": 72,
        "narration": "Proceed to payment",
-       "confirmation_question": "Proceed to pay ₹870 for AC 2 tier from New Delhi to Lucknow for tomorrow for 1 passenger? Confirm with yes or no."
+       "confirmation_question": "Book AC 2 tier ticket for Delhi to Lucknow on 6 Oct for ₹870?"
       }
      }
     ],
-    "ms": 921,
+    "ms": 794,
     "usage": {
-     "completion_tokens": 81,
-     "prompt_tokens": 4301,
-     "total_tokens": 4382,
+     "completion_tokens": 71,
+     "prompt_tokens": 4570,
+     "total_tokens": 4641,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 3968
+      "cached_tokens": 4160
      }
     }
    }
   },
   {
-   "hash": "d9f86f64b08a1f57",
+   "hash": "e27a96b27027a715",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_a194a33686d644488d7bc22e",
+      "id": "call_f8e1f584165944f78932acce",
       "name": "click",
       "args": {
-       "id": 58,
+       "id": 76,
        "narration": "Pay 870 rupees",
-       "confirmation_question": "Pay 870 rupees for AC 2 tier New Delhi to Lucknow? Confirm yes to proceed."
+       "confirmation_question": "Pay 870 rupees for AC 2 tier from New Delhi to Lucknow on 6 October 2026, 1 passenger?"
       }
      }
     ],
-    "ms": 831,
-    "usage": {
-     "completion_tokens": 73,
-     "prompt_tokens": 4284,
-     "total_tokens": 4357,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3968
-     }
-    }
-   }
-  },
-  {
-   "hash": "63cc4fe62485a0cb",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_1df395559a8b40c682d5120a",
-      "name": "done",
-      "args": {
-       "speech": "Your AC 2 tier ticket is booked! PNR 4123456700 for Delhi–Lucknow Express on 6 Oct, seat A1 seat 12, amount paid 870 rupees."
-      }
-     }
-    ],
-    "ms": 1056,
+    "ms": 864,
     "usage": {
      "completion_tokens": 82,
-     "prompt_tokens": 4317,
-     "total_tokens": 4399,
+     "prompt_tokens": 4554,
+     "total_tokens": 4636,
      "completion_tokens_details": null,
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 4032
+      "cached_tokens": 3968
+     }
+    }
+   }
+  },
+  {
+   "hash": "c70790212dea4618",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "call_1a1e54b2034e4e8eb5fc78d9",
+      "name": "done",
+      "args": {
+       "speech": "Your AC 2 tier ticket is confirmed. PNR 4123456700, Delhi–Lucknow Express 11188, seat A1 12, paid 870 rupees."
+      }
+     }
+    ],
+    "ms": 788,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4588,
+     "total_tokens": 4664,
+     "completion_tokens_details": null,
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 3776
      }
     }
    }

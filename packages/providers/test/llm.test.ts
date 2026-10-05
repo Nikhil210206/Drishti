@@ -7,6 +7,15 @@ describe("tool-call recovery", () => {
     expect(calls).toEqual([{ id: "rec_0", name: "click", args: { id: 9, narration: "" } }]);
   });
 
+  it("recovers calls written one per line, and skips one cut short", () => {
+    const text =
+      '{"name": "type_text", "arguments": {"id": 6, "text": "Chandigarh {CDG}"}}\n{"name": "click", "arguments": {"id": 18}}\n{"name": "click", "argu';
+    expect(recoverToolCalls(text).map((c) => [c.name, c.args])).toEqual([
+      ["type_text", { id: 6, text: "Chandigarh {CDG}" }],
+      ["click", { id: 18 }],
+    ]);
+  });
+
   it("recovers several calls from a JSON array", () => {
     const calls = recoverToolCalls(
       '[{"name":"type_text","arguments":"{\\"id\\":3,\\"text\\":\\"Chennai\\"}"},{"name":"done","args":{"speech":"ok"}}]',
