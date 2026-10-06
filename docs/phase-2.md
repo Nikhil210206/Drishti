@@ -12,7 +12,7 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
    - Relays for Saaras STT and Bulbul TTS (WebSockets; a browser can't send the key header) and for the LLM, Translate and Doc AI (REST).
    - Per-device daily quota (in D1, not KV: see below), a global rate limit with a "busy" reply, no request bodies logged.
 3. **Browser providers** ✅: `packages/providers` without Node APIs (`ws`, `Buffer`, `fs`, `EventEmitter`), talking to the proxy with a device token or, for bring-your-own-key users, to Sarvam over REST from the service worker.
-4. **Side panel**: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
+4. **Side panel** ✅: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
 5. **Onboarding**: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
 6. **Per-site permission by voice** ("Allow Drishti on irctc.co.in?") with optional host permissions.
 7. **Screen-reader output mode** (replies to an aria-live region) and keyboard shortcuts that don't clash with NVDA, JAWS or VoiceOver.
@@ -95,3 +95,43 @@ Details, setup and deploy steps: `docs/proxy.md`.
 - **Doc AI's result is a signed link on Sarvam's Azure storage** (`appsprodaksharpublicsa.blob.core.windows.net`). The extension gets host permission for exactly that host and fetches it directly, so bills never pass through our proxy. If Sarvam moves the storage, the fallback is a streaming route on the proxy.
 
 **Not done yet:** bring-your-own-key speech. A browser can't send the key on a socket (spike 2), so those users need REST speech-to-text per utterance. That's Phase 3 work with the fallback providers.
+
+## 4. Side panel ✅
+
+The extension now works as a product: the panel, the session and the agent all run in Chrome's side panel.
+
+- **One panel, two hosts.** `useDrishti` takes a `PanelTransport`. The dev harness passes a WebSocket transport to its server. The extension passes `localTransport` (`apps/extension/lib/panel-session.ts`), which runs the `VoiceSession` in the panel itself. The protocol is the same, so the React panel is unchanged.
+- **The panel builds the session:**
+  - `ExtensionDriver` on the active tab of the panel's window; it follows the user to another tab and a page to a tab it opens.
+  - The providers through the proxy with the device token.
+  - Phrase translations kept in `chrome.storage.local` (fixed phrases only).
+  - The navigation policy, unchanged.
+- **Microphone:** the first `NotAllowedError` opens the grant tab (`permission.html`, spike 1).
+  - It speaks and shows: choose "Allow while visiting the site".
+  - It does not close itself, since a one-time grant would go with it. It closes when the panel reports the mic is capturing.
+- **Developer setup screen:** until sign-in through the website exists, the panel asks for the proxy address and a device token.
+
+**End to end** (`apps/extension/scripts/e2e.ts`): the built extension in Chromium, a typed command in the panel, the local proxy with a fresh token, Pathik Rail.
+
+| Command | Task | Turns | Steps | Result |
+|---|---|---|---|---|
+| English | ✅ | 8 LLM calls, about 6 s of LLM time | – | the first three Mumbai–Pune trains for tomorrow, correctly |
+| Hindi | ✅ in 9.5 s | – | 7 | the same, in Hindi; no panel errors |
+
+The tab ended on the right results page each time. The replayed eval through the extension is still 40/40.
+
+**Seen, for later:** the spoken replies run long (the Hindi one is about 50 s of speech, against the prompt's limit of three sentences). That needs tuning before the beta.
+
+### Try it in your own Chrome
+
+1. `npm run dev -w @drishti/proxy -- --port 8788`. Local, with the test Turnstile secret in `.dev.vars`.
+2. `npm run practice`: Pathik Rail at http://localhost:5174/.
+3. A device token: `curl -s -X POST localhost:8788/v1/token -d '{"turnstile":"XXXX.DUMMY.TOKEN.XXXX"}'`
+4. `npm run build -w @drishti/extension`. Then in `chrome://extensions`, turn on Developer mode, choose **Load unpacked**, and pick `apps/extension/.output/chrome-mv3`.
+5. Open http://localhost:5174/ and click the Drishti toolbar icon. In the setup form, enter the proxy `http://localhost:8788` and paste the token.
+6. Hold Space to talk. The first time, the mic grant tab opens: choose **Allow while visiting the site**, go back to the panel, and talk.
+
+Worth checking with VoiceOver on:
+
+- whether the panel, the grant tab and the debugging bar are announced and usable;
+- whether the debugging bar steals focus while Drishti clicks (spike 4).

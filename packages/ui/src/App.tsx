@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDrishti, type Step } from "./useDrishti";
+import type { PanelTransport } from "./transport";
 
 const LANGS = [
   ["auto", "Auto-detect", "✦"],
@@ -45,8 +46,16 @@ const TOOL_LABEL: Record<string, string> = {
 
 type Tab = "activity" | "conversation" | "document" | "stats";
 
-export default function App() {
-  const d = useDrishti();
+export interface AppProps {
+  transport: PanelTransport;
+  /** The microphone could not start. */
+  onMicError?: (e: unknown) => void;
+  /** The microphone is capturing. */
+  onMicReady?: () => void;
+}
+
+export default function App({ transport, onMicError, onMicReady }: AppProps) {
+  const d = useDrishti(transport, { onMicError, onMicReady });
   const [text, setText] = useState("");
   const [composeText, setComposeText] = useState("");
   const [tab, setTab] = useState<Tab>("activity");
@@ -138,7 +147,7 @@ export default function App() {
           </div>
         </div>
         <div className="top-right">
-          <StatusDot ok={d.connected} label="Server" />
+          <StatusDot ok={d.connected} label={transport.label} />
           <StatusDot ok={d.status.stt === "open"} label="Saaras" idle={!d.status.stt} />
           <StatusDot ok={d.status.browser === "ready"} label="Browser" />
           <button className="icon-btn" aria-label="Settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((o) => !o)}>

@@ -21,6 +21,8 @@ export default defineConfig({
     // Mozilla Readability, injected on demand for read_page (ExtensionDriver.readable).
     "build:publicAssets": (_wxt, assets) => {
       assets.push({ absoluteSrc: require.resolve("@mozilla/readability/Readability.js"), relativeDest: "readability.js" });
+      // The panel's mic worklet (AudioWorklet modules load by URL).
+      assets.push({ absoluteSrc: require.resolve("@drishti/ui/pcm-capture.js"), relativeDest: "pcm-capture.js" });
     },
   },
 });

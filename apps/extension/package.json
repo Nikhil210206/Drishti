@@ -15,7 +15,9 @@
     "@drishti/core": "*",
     "@mozilla/readability": "^0.6.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "@drishti/ui": "*",
+    "@drishti/providers": "*"
   },
   "devDependencies": {
     "@types/chrome": "^0.3.4",

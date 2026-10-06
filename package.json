@@ -23,7 +23,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "ci": "npm run lint && npm run format:check && npm run typecheck && npm test",
-    "eval:extension": "tsx eval/run.ts --driver=extension"
+    "eval:extension": "tsx eval/run.ts --driver=extension",
+    "practice": "tsx apps/dev-harness/scripts/practice.ts"
   },
   "repository": {
     "type": "git",

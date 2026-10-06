@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Earcons, Mic, Player, fileTo16k } from "./audio";
+import type { PanelTransport } from "./transport";
 
 export interface Step {
   i: number;
@@ -20,8 +21,15 @@ export interface Line {
 
 export type Mode = "ptt" | "handsfree";
 
-export function useDrishti() {
-  const ws = useRef<WebSocket | undefined>(undefined);
+export interface DrishtiOptions {
+  /** The microphone could not start (in the extension: send the user to the grant tab). */
+  onMicError?: (e: unknown) => void;
+  /** The microphone is capturing. */
+  onMicReady?: () => void;
+}
+
+export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }: DrishtiOptions = {}) {
+  const open = useRef(false);
   const player = useRef<Player | undefined>(undefined);
   const mic = useRef<Mic | undefined>(undefined);
   const ear = useRef<Earcons | undefined>(undefined);
@@ -52,9 +60,12 @@ export function useDrishti() {
   const [langLocked, setLangLocked] = useState(false);
   const [audits, setAudits] = useState<{ action: string; target: string; confirmed: boolean }[]>([]);
 
-  const send = useCallback((obj: unknown) => {
-    if (ws.current?.readyState === WebSocket.OPEN) ws.current.send(JSON.stringify(obj));
-  }, []);
+  const send = useCallback(
+    (obj: unknown) => {
+      if (open.current) transport.send(obj);
+    },
+    [transport],
+  );
 
   const addLine = (who: Line["who"], text: string) => setLines((l) => [...l.slice(-30), { who, text, at: Date.now() }]);
 
@@ -65,30 +76,17 @@ export function useDrishti() {
     player.current.onBusy = () => setSpeaking(true);
     player.current.onIdle = () => setSpeaking(false);
 
-    let closed = false;
-    let retry: number | undefined;
-    const connect = () => {
-      const sock = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws`);
-      sock.binaryType = "arraybuffer";
-      ws.current = sock;
-      sock.onopen = () => setConnected(true);
-      sock.onclose = () => {
-        setConnected(false);
-        if (!closed) retry = window.setTimeout(connect, 1000);
-      };
-      sock.onmessage = (ev) => {
-        if (ev.data instanceof ArrayBuffer) return player.current!.push(ev.data);
-        handle(JSON.parse(ev.data));
-      };
-    };
-    connect();
-    return () => {
-      closed = true;
-      clearTimeout(retry);
-      ws.current?.close();
-    };
+    const disconnect = transport.connect({
+      open: (on) => {
+        open.current = on;
+        setConnected(on);
+      },
+      audio: (pcm) => player.current!.push(pcm),
+      event: (m) => handle(m),
+    });
+    return disconnect;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [transport]);
 
   function handle(m: any) {
     switch (m.type) {
@@ -178,13 +176,17 @@ export function useDrishti() {
     m.onChunk = (pcm, lvl) => {
       setLevel(lvl);
       const handsfreeOpen = modeRef.current === "handsfree" && !player.current?.speaking;
-      if ((pttDown.current || tailTimer.current || handsfreeOpen) && ws.current?.readyState === WebSocket.OPEN) {
-        ws.current.send(pcm);
-      }
+      if ((pttDown.current || tailTimer.current || handsfreeOpen) && open.current) transport.sendAudio(pcm);
     };
-    await m.start();
+    try {
+      await m.start();
+    } catch (e) {
+      onMicError?.(e);
+      throw e;
+    }
     mic.current = m;
-  }, []);
+    onMicReady?.();
+  }, [transport, onMicError, onMicReady]);
 
   const pttStart = useCallback(async () => {
     if (pttDown.current) return;
@@ -260,13 +262,13 @@ export function useDrishti() {
       send({ type: "ptt", down: true });
       setListening(true);
       for (let i = 0; i < pcm.length; i += 1600) {
-        ws.current?.send(pcm.slice(i, i + 1600).buffer);
+        transport.sendAudio(pcm.slice(i, i + 1600).buffer);
         await new Promise((r) => setTimeout(r, 100));
       }
       setListening(false);
       send({ type: "ptt", down: false });
     },
-    [send],
+    [send, transport],
   );
 
   return {
