@@ -1,0 +1,156 @@
+import { afterEach, describe, expect, it, vi } from "vitest";
+import worker, { type Env } from "../src/index.js";
+import { mintToken, verifyToken } from "../src/token.js";
+import { istDay } from "../src/quota.js";
+
+const SECRET = "test-secret";
+
+/** D1 stand-in for the one upsert the quota runs. */
+function fakeDb() {
+  const rows = new Map<string, number>();
+  return {
+    rows,
+    prepare: () => ({
+      bind: (device: string, day: string, units: number) => ({
+        first: async () => {
+          const k = `${device}|${day}`;
+          rows.set(k, (rows.get(k) ?? 0) + units);
+          return { units: rows.get(k) };
+        },
+      }),
+    }),
+  };
+}
+
+const limiter = (ok: boolean) => ({ limit: async () => ({ success: ok }) });
+
+function env(over: Partial<Env> = {}): Env {
+  return { SARVAM_API_KEY: "sk-real", TOKEN_SECRET: SECRET, TURNSTILE_SECRET: "ts", DB: fakeDb() as any, ...over };
+}
+
+function upstream(reply: Response | (() => Response) = new Response('{"ok":true}', { headers: { "content-type": "application/json" } })) {
+  const calls: { url: string; init: RequestInit }[] = [];
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (url: string, init: RequestInit) => {
+      calls.push({ url: String(url), init });
+      return typeof reply === "function" ? reply() : reply.clone();
+    }),
+  );
+  return calls;
+}
+
+const chat = (token?: string, extra: Record<string, string> = {}) =>
+  new Request("https://proxy.test/v1/chat/completions", {
+    method: "POST",
+    headers: { "content-type": "application/json", ...(token ? { authorization: `Bearer ${token}` } : {}), ...extra },
+    body: JSON.stringify({ model: "sarvam-105b", messages: [] }),
+  });
+
+afterEach(() => vi.unstubAllGlobals());
+
+describe("device tokens", () => {
+  it("verify only with the secret they were signed with", async () => {
+    const { token, device } = await mintToken(SECRET);
+    expect((await verifyToken(SECRET, token))?.device).toBe(device);
+    expect(await verifyToken("other", token)).toBeUndefined();
+    const [payload, sig] = token.split(".");
+    expect(await verifyToken(SECRET, `${payload}x.${sig}`)).toBeUndefined();
+    expect(await verifyToken(SECRET, "garbage")).toBeUndefined();
+  });
+
+  it("expire after a year", async () => {
+    const t0 = Date.UTC(2026, 9, 5);
+    const { token } = await mintToken(SECRET, t0);
+    expect(await verifyToken(SECRET, token, t0 + 364 * 86400e3)).toBeDefined();
+    expect(await verifyToken(SECRET, token, t0 + 366 * 86400e3)).toBeUndefined();
+  });
+
+  it("are minted only after Turnstile says yes", async () => {
+    upstream(new Response(JSON.stringify({ success: true })));
+    const ok = await worker.fetch(
+      new Request("https://proxy.test/v1/token", { method: "POST", body: JSON.stringify({ turnstile: "t" }) }),
+      env(),
+    );
+    const { token } = (await ok.json()) as { token: string };
+    expect(await verifyToken(SECRET, token)).toBeDefined();
+
+    upstream(new Response(JSON.stringify({ success: false })));
+    const no = await worker.fetch(
+      new Request("https://proxy.test/v1/token", { method: "POST", body: JSON.stringify({ turnstile: "t" }) }),
+      env(),
+    );
+    expect(no.status).toBe(403);
+  });
+});
+
+describe("proxy", () => {
+  it("refuses requests without a valid device token", async () => {
+    upstream();
+    expect((await worker.fetch(chat(), env())).status).toBe(401);
+    expect((await worker.fetch(chat("forged.token"), env())).status).toBe(401);
+  });
+
+  it("forwards an allowed call with the key added, and nothing else of the caller's", async () => {
+    const calls = upstream();
+    const { token } = await mintToken(SECRET);
+    const res = await worker.fetch(chat(token, { cookie: "session=abc", "x-forwarded-for": "1.2.3.4" }), env());
+    expect(res.status).toBe(200);
+    expect(calls[0].url).toBe("https://api.sarvam.ai/v1/chat/completions");
+    const sent = calls[0].init.headers as Record<string, string>;
+    expect(sent).toEqual({ "api-subscription-key": "sk-real", "content-type": "application/json" });
+  });
+
+  it("only knows the endpoints Drishti uses", async () => {
+    upstream();
+    const { token } = await mintToken(SECRET);
+    const get = (p: string) => new Request(`https://proxy.test${p}`, { headers: { authorization: `Bearer ${token}` } });
+    expect((await worker.fetch(get("/v1/models"), env())).status).toBe(404);
+    expect((await worker.fetch(get("/text-to-speech"), env())).status).toBe(404);
+    expect((await worker.fetch(get("/doc-ai/v1/job/abc-123/status"), env())).status).toBe(200);
+    expect((await worker.fetch(get("/doc-ai/v1/job/../../admin/status"), env())).status).toBe(404);
+    expect((await worker.fetch(get("/v1/chat/completions"), env())).status).toBe(405);
+  });
+
+  it("wants a WebSocket on the speech routes", async () => {
+    const { token } = await mintToken(SECRET);
+    const res = await worker.fetch(
+      new Request("https://proxy.test/speech-to-text-realtime/ws", { headers: { "sec-websocket-protocol": `drishti, ${token}` } }),
+      env(),
+    );
+    expect(res.status).toBe(426);
+  });
+
+  it("stops a device at its daily quota", async () => {
+    upstream();
+    const { token } = await mintToken(SECRET);
+    const e = env({ DAILY_UNITS: "2" });
+    expect((await worker.fetch(chat(token), e)).status).toBe(200);
+    expect((await worker.fetch(chat(token), e)).status).toBe(200);
+    const third = await worker.fetch(chat(token), e);
+    expect(third.status).toBe(429);
+    expect(await third.json()).toEqual({ error: "quota" });
+  });
+
+  it("says busy when every user together is at Sarvam's limit", async () => {
+    upstream();
+    const { token } = await mintToken(SECRET);
+    const res = await worker.fetch(chat(token), env({ GLOBAL_LLM: limiter(false) as any }));
+    expect(res.status).toBe(429);
+    expect(await res.json()).toEqual({ error: "busy" });
+    expect(res.headers.get("retry-after")).toBe("5");
+  });
+
+  it("refuses oversized bodies before they go anywhere", async () => {
+    const calls = upstream();
+    const { token } = await mintToken(SECRET);
+    const res = await worker.fetch(chat(token, { "content-length": String(300 * 1024) }), env());
+    expect(res.status).toBe(413);
+    expect(calls).toHaveLength(0);
+  });
+
+  it("counts the day in India time", () => {
+    expect(istDay(Date.UTC(2026, 9, 5, 18, 29))).toBe("2026-10-05");
+    expect(istDay(Date.UTC(2026, 9, 5, 18, 31))).toBe("2026-10-06");
+  });
+});

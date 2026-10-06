@@ -1,0 +1,17 @@
+{
+  "name": "@drishti/proxy",
+  "version": "0.1.0",
+  "description": "Drishti proxy: Cloudflare Worker that holds the Sarvam key, mints device tokens, enforces quotas and relays requests. Stores no page content, audio or transcripts.",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261005.1",
+    "wrangler": "^4.147.0"
+  }
+}

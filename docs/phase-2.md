@@ -7,10 +7,10 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
 ## Work order
 
 1. **`ExtensionDriver` and the eval through the extension** ✅ (below)
-2. **Proxy** (`apps/proxy`, Cloudflare Worker, free plan):
+2. **Proxy** ✅ built and tested locally; deploying it is your step (`docs/proxy.md`). `apps/proxy`, Cloudflare Worker, free plan:
    - Device tokens minted after a Turnstile check.
    - Relays for Saaras STT and Bulbul TTS (WebSockets; a browser can't send the key header) and for the LLM, Translate and Doc AI (REST).
-   - Per-device daily quota in KV, a global rate-limit queue with a spoken "busy", no request bodies logged.
+   - Per-device daily quota (in D1, not KV: see below), a global rate limit with a "busy" reply, no request bodies logged.
 3. **Browser providers**: `packages/providers` without Node APIs (`ws`, `Buffer`, `fs`, `EventEmitter`), talking to the proxy with a device token or, for bring-your-own-key users, to Sarvam over REST from the service worker.
 4. **Side panel**: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
 5. **Onboarding**: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
@@ -35,3 +35,29 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
 **Result:** 40/40 replayed through the extension with trusted input, and 40/40 with synthetic events only, 0 safety incidents. Prompts are byte-identical to the Playwright runs (the one task with drift, `safety-decline-payment`, drifts the same with Playwright).
 
 **Not done yet:** clicks inside cross-origin iframes (the frame offset), and merging snapshots from several frames (spike 3). Pathik Rail and the saved pages don't need them; real sites will.
+
+## 2. Proxy ✅ (local)
+
+Details, setup and deploy steps: `docs/proxy.md`.
+
+- **Paths:** the same as `api.sarvam.ai`, for exactly the endpoints Drishti uses: chat, translate, Doc AI digitise/status/download-url, and the STT and TTS sockets. Anything else is a 404, so providers only swap base URL and credential.
+- **Device tokens:** stateless HMAC tokens (no storage read to check one), minted after Turnstile, 5 a minute per IP, valid a year. Rotating `TOKEN_SECRET` revokes them all.
+- **Sockets:** carry the token as a subprotocol, never in the URL, so it can't land in request logs. Messages pass through unchanged, and a socket closes after 15 minutes.
+- **Limits:**
+  - Per-device daily quota of 400 units, about 40 tasks.
+  - Per-device bursts capped at 60 a minute.
+  - LLM calls capped at 40 a minute for all users together (Sarvam's starter limit), answered with `busy`.
+- **Change from the plan: the quota lives in D1, not KV.** KV's free plan allows 1,000 writes a day, which one write per request would exhaust with a handful of users; D1 allows 100,000.
+- **Privacy:**
+  - Observability is off; nothing reads, stores or logs bodies.
+  - Only `content-type` goes up with the key, so cookies, IPs and the caller's token never reach Sarvam.
+  - Only `content-type` comes back.
+- **Tests:**
+  - 11 unit tests: tokens, routing, auth, quota, busy, size limits, what gets forwarded.
+  - A smoke test against real Sarvam through `wrangler dev`, 7/7: Tamil STT through the relay, TTS first audio at 0.34 s, translate, chat, refusals.
+  - The real D1 counted 5 units per run, as designed.
+
+**Open:**
+
+- Doc AI's download URL points at Sarvam's storage. Whether the extension can fetch it directly, or the proxy must stream it, is settled in step 3.
+- The Turnstile widget needs the website (a later step). Until then, tokens for testing are minted by hand (`apps/proxy/scripts/mint.ts`).
