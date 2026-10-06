@@ -1,10 +1,12 @@
-import "dotenv/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
 import { isLangCode, type LangCode, type Profile, type Reasoning } from "@drishti/core";
 
 /** Repository root (the harness serves fixtures and writes caches relative to it). */
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+// The root .env, wherever the process started (`npm run check -w …` starts in apps/dev-harness).
+dotenv.config({ path: path.join(ROOT, ".env"), quiet: true });
 export const CACHE_DIR = path.join(ROOT, "cache");
 export const FIXTURES = path.join(ROOT, "fixtures");
 

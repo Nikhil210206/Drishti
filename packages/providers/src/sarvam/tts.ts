@@ -1,24 +1,28 @@
-import { EventEmitter } from "node:events";
-import crypto from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
-import WebSocket from "ws";
-import type { LangCode, SpeakOptions, SpeechOut, Utterance } from "@drishti/core";
-import { requireKey, type SarvamAuth } from "./key.js";
+import type { LangCode, SpeakOptions, SpeechOut, SpeechOutEvents, Utterance } from "@drishti/core";
+import { openSocket, type SarvamAuth } from "./key.js";
 import { costMeter } from "./cost.js";
+import { Emitter } from "../emitter.js";
+import { ascii, concat, fromBase64, messageText } from "../bytes.js";
 
 export const TTS_SAMPLE_RATE = 24000;
+const OPEN = 1;
 
 interface VoiceSettings {
   speaker: string;
   pace: number;
 }
 
+/** Stored audio for fixed phrases (a disk folder in Node; packaged audio or IndexedDB in the extension). */
+export interface AudioCache {
+  get(key: string): Promise<Uint8Array | undefined>;
+  set(key: string, pcm: Uint8Array): Promise<void>;
+}
+
 interface TtsConfig extends SarvamAuth {
   model: string;
   speaker: string;
-  /** Disk cache for fixed phrases. Omit to cache nothing. */
-  cacheDir?: string;
+  /** Where fixed phrases are kept. Omit to cache nothing. */
+  cache?: AudioCache;
 }
 
 type CachedUtterance = Utterance & { cache: boolean };
@@ -28,25 +32,20 @@ type CachedUtterance = Utterance & { cache: boolean };
  * and `end` per utterance so the panel can play and cancel them individually.
  * Only utterances spoken with `{ cache: true }` (fixed phrases) are ever written to disk.
  */
-export class TtsEngine extends EventEmitter implements SpeechOut {
+export class TtsEngine extends Emitter<SpeechOutEvents> implements SpeechOut {
   private queue: CachedUtterance[] = [];
   private current?: CachedUtterance;
   private nextId = 1;
   private ws?: WebSocket;
   private wsKey = "";
   private wsReady?: Promise<void>;
-  private pending?: { u: Utterance; chunks: Buffer[]; finish: () => void; timer: NodeJS.Timeout };
-  private pingTimer?: NodeJS.Timeout;
+  private pending?: { u: Utterance; chunks: Uint8Array[]; finish: () => void; timer: ReturnType<typeof setTimeout> };
+  private pingTimer?: ReturnType<typeof setInterval>;
   voice: VoiceSettings;
-  private cacheDir?: string;
 
   constructor(private cfg: TtsConfig) {
     super();
     this.voice = { speaker: cfg.speaker, pace: 1.1 };
-    if (cfg.cacheDir) {
-      this.cacheDir = path.join(cfg.cacheDir, "tts-phrases");
-      fs.mkdirSync(this.cacheDir, { recursive: true });
-    }
   }
 
   speak(text: string, lang: LangCode, opts: SpeakOptions = {}): Utterance {
@@ -93,7 +92,7 @@ export class TtsEngine extends EventEmitter implements SpeechOut {
     try {
       await this.render(u);
     } catch (e) {
-      this.emit("error", e);
+      this.emit("error", e instanceof Error ? e : new Error(String(e)));
     } finally {
       this.emit("end", u);
       u.resolve();
@@ -102,35 +101,29 @@ export class TtsEngine extends EventEmitter implements SpeechOut {
     }
   }
 
-  private cacheFile(u: CachedUtterance) {
-    if (!u.cache || !this.cacheDir) return undefined;
-    const key = crypto
-      .createHash("sha1")
-      .update(`${this.cfg.model}|${u.lang}|${this.voice.speaker}|${this.voice.pace}|${u.text}`)
-      .digest("hex");
-    return path.join(this.cacheDir, `${key}.pcm`);
+  private cacheKey(u: CachedUtterance) {
+    if (!u.cache || !this.cfg.cache) return undefined;
+    return `${this.cfg.model}|${u.lang}|${this.voice.speaker}|${this.voice.pace}|${u.text}`;
   }
 
   private async render(u: CachedUtterance) {
-    const file = this.cacheFile(u);
+    const key = this.cacheKey(u);
     this.emit("start", u);
-    if (file && fs.existsSync(file)) {
-      const pcm = fs.readFileSync(file);
+    const hit = key ? await this.cfg.cache!.get(key).catch(() => undefined) : undefined;
+    if (hit) {
       const step = TTS_SAMPLE_RATE * 2 * 0.5; // half-second chunks
-      for (let i = 0; i < pcm.length && !u.cancelled; i += step) this.emit("audio", u, pcm.subarray(i, i + step), true);
+      for (let i = 0; i < hit.length && !u.cancelled; i += step) this.emit("audio", u, hit.subarray(i, i + step), true);
       return;
     }
-    const chunks = await this.synthesize(u);
-    const pcm = Buffer.concat(chunks);
-    if (file && !u.cancelled && pcm.length) fs.writeFileSync(file, pcm);
+    const pcm = concat(await this.synthesize(u));
+    if (key && !u.cancelled && pcm.length) await this.cfg.cache!.set(key, pcm).catch(() => {});
   }
 
-  private async synthesize(u: Utterance): Promise<Buffer[]> {
-    requireKey(this.cfg);
+  private async synthesize(u: Utterance): Promise<Uint8Array[]> {
     await this.ensureSocket(u.lang);
     costMeter.addTts(u.text.length);
-    return new Promise<Buffer[]>((resolve) => {
-      const chunks: Buffer[] = [];
+    return new Promise<Uint8Array[]>((resolve) => {
+      const chunks: Uint8Array[] = [];
       const finish = () => {
         clearTimeout(timer);
         this.pending = undefined;
@@ -145,17 +138,16 @@ export class TtsEngine extends EventEmitter implements SpeechOut {
 
   private ensureSocket(lang: LangCode): Promise<void> {
     const key = `${lang}|${this.voice.speaker}|${this.voice.pace}`;
-    if (this.ws && this.wsKey === key && this.ws.readyState === WebSocket.OPEN && this.wsReady) return this.wsReady;
-    this.ws?.removeAllListeners();
-    this.ws?.close();
+    if (this.ws && this.wsKey === key && this.ws.readyState === OPEN && this.wsReady) return this.wsReady;
+    const old = this.ws;
+    this.ws = undefined;
+    old?.close();
     clearInterval(this.pingTimer);
     this.wsKey = key;
-    const ws = new WebSocket(`wss://api.sarvam.ai/text-to-speech/ws?model=${this.cfg.model}&send_completion_event=true`, {
-      headers: { "api-subscription-key": this.cfg.apiKey },
-    });
+    const ws = openSocket(this.cfg, `/text-to-speech/ws?model=${this.cfg.model}&send_completion_event=true`);
     this.ws = ws;
     this.wsReady = new Promise<void>((resolve, reject) => {
-      ws.once("open", () => {
+      ws.addEventListener("open", () => {
         ws.send(
           JSON.stringify({
             type: "config",
@@ -171,18 +163,18 @@ export class TtsEngine extends EventEmitter implements SpeechOut {
             },
           }),
         );
-        this.pingTimer = setInterval(() => ws.readyState === WebSocket.OPEN && ws.send(JSON.stringify({ type: "ping" })), 30000);
+        this.pingTimer = setInterval(() => ws.readyState === OPEN && ws.send(JSON.stringify({ type: "ping" })), 30000);
         resolve();
       });
-      ws.once("error", reject);
+      ws.addEventListener("error", () => reject(new Error("TTS socket error")));
     });
-    ws.on("message", (raw) => this.onMessage(raw.toString()));
-    ws.on("close", () => {
+    ws.addEventListener("message", (e) => this.ws === ws && this.onMessage(messageText(e.data)));
+    ws.addEventListener("close", () => {
+      // A replaced socket closing late must not touch the new one's timer or utterance.
+      if (this.ws !== ws) return;
       clearInterval(this.pingTimer);
-      if (this.ws === ws) {
-        this.ws = undefined;
-        this.wsReady = undefined;
-      }
+      this.ws = undefined;
+      this.wsReady = undefined;
       this.pending?.finish();
     });
     return this.wsReady;
@@ -198,7 +190,7 @@ export class TtsEngine extends EventEmitter implements SpeechOut {
     const p = this.pending;
     if (!p) return;
     if (msg.type === "audio" && msg.data?.audio) {
-      const pcm = stripWavHeader(Buffer.from(msg.data.audio, "base64"));
+      const pcm = stripWavHeader(fromBase64(msg.data.audio));
       p.chunks.push(pcm);
       if (!p.u.cancelled) this.emit("audio", p.u, pcm, false);
     } else if (msg.type === "event" && msg.data?.event_type === "final") {
@@ -210,10 +202,10 @@ export class TtsEngine extends EventEmitter implements SpeechOut {
   }
 }
 
-function stripWavHeader(buf: Buffer): Buffer {
-  if (buf.length > 44 && buf.toString("ascii", 0, 4) === "RIFF") {
-    const dataIdx = buf.indexOf("data", 12, "ascii");
-    return dataIdx > 0 ? buf.subarray(dataIdx + 8) : buf.subarray(44);
+function stripWavHeader(buf: Uint8Array): Uint8Array {
+  if (buf.length > 44 && ascii(buf, 0, 4) === "RIFF") {
+    for (let i = 12; i < Math.min(buf.length - 8, 512); i++) if (ascii(buf, i, i + 4) === "data") return buf.subarray(i + 8);
+    return buf.subarray(44);
   }
   return buf;
 }

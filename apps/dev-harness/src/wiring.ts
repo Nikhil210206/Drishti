@@ -1,12 +1,14 @@
 import path from "node:path";
 import { Agent, DEFAULT_ALLOWED_DOMAINS, NavigationPolicy, PhraseBook, type AgentOptions, type BrowserDriver } from "@drishti/core";
 import { SarvamDocReader, SarvamLLM, SarvamTranslator, SttStream, TtsEngine } from "@drishti/providers";
+import { FileAudioCache, nodeSocket } from "@drishti/providers/node";
 import { CACHE_DIR, config } from "./config.js";
 import { FileCache } from "./file-cache.js";
 
 /** The Sarvam-backed providers, built once per process. */
 export function sarvamProviders() {
-  const auth = { apiKey: config.apiKey };
+  const auth = { apiKey: config.apiKey, socket: nodeSocket };
+  const phraseAudio = new FileAudioCache(CACHE_DIR);
   const translator = new SarvamTranslator(auth);
   return {
     llm: new SarvamLLM({ ...auth, model: config.llmModel }),
@@ -14,7 +16,7 @@ export function sarvamProviders() {
     docs: new SarvamDocReader(auth),
     phrases: new PhraseBook(translator, new FileCache(path.join(CACHE_DIR, "phrases.json"))),
     createSpeechIn: () => new SttStream({ ...auth, model: config.sttModel }),
-    createSpeechOut: () => new TtsEngine({ ...auth, model: config.ttsModel, speaker: config.speaker, cacheDir: CACHE_DIR }),
+    createSpeechOut: () => new TtsEngine({ ...auth, model: config.ttsModel, speaker: config.speaker, cache: phraseAudio }),
   };
 }
 

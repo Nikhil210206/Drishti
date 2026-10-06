@@ -6,7 +6,8 @@
   "type": "module",
   "license": "Apache-2.0",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./node": "./src/node.ts"
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json"
@@ -14,7 +15,6 @@
   "dependencies": {
     "@drishti/core": "*",
     "fflate": "^0.8.3",
-    "sarvamai": "^1.1.10",
     "ws": "^8.21.3"
   },
   "devDependencies": {

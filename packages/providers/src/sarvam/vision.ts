@@ -1,17 +1,14 @@
-import crypto from "node:crypto";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 import { unzipSync, strFromU8 } from "fflate";
-import { SarvamAIClient } from "sarvamai";
 import type { DocReader } from "@drishti/core";
-import { requireKey, type SarvamAuth } from "./key.js";
+import { apiUrl, authHeaders, limitError, requireKey, type SarvamAuth } from "./key.js";
 import { costMeter } from "./cost.js";
 
 /**
  * Read a document (PDF / PNG / JPG) with Sarvam Vision (Doc AI "digitise") and return Markdown.
- * Results are kept in memory only, keyed by content hash: documents are bills and letters
- * with personal details, so nothing is written to disk beyond the upload's temp file.
+ * Plain REST, so it runs in the extension through the proxy as well as in Node.
+ *
+ * Results are kept in memory only, keyed by content hash: documents are bills and letters with
+ * personal details, so nothing is ever written to disk.
  */
 export class SarvamDocReader implements DocReader {
   private results = new Map<string, string>();
@@ -22,10 +19,10 @@ export class SarvamDocReader implements DocReader {
     private maxCached = 20,
   ) {}
 
-  read(bytes: Uint8Array, fileName: string, language = "en-IN"): Promise<string> {
-    const hash = crypto.createHash("sha1").update(bytes).digest("hex");
+  async read(bytes: Uint8Array, fileName: string, language = "en-IN"): Promise<string> {
+    const hash = await sha1(bytes);
     const hit = this.results.get(hash);
-    if (hit !== undefined) return Promise.resolve(hit);
+    if (hit !== undefined) return hit;
     const existing = this.inflight.get(hash);
     if (existing) return existing;
     const job = runJob(this.auth, bytes, fileName, language)
@@ -40,44 +37,59 @@ export class SarvamDocReader implements DocReader {
   }
 }
 
-async function runJob(auth: SarvamAuth, bytes: Uint8Array, fileName: string, language: string): Promise<string> {
-  requireKey(auth);
-  const client = new SarvamAIClient({ apiSubscriptionKey: auth.apiKey });
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "drishti-doc-"));
-  const tmp = path.join(dir, path.basename(fileName) || "document.pdf");
-  fs.writeFileSync(tmp, bytes);
-  try {
-    const job = await client.docAi.digitise({
-      file: [fs.createReadStream(tmp)],
-      language,
-      output_format: "md",
-    });
-    const deadline = Date.now() + 120_000;
-    let status = job.status;
-    while (!/^(completed|partially_completed)$/i.test(status)) {
-      if (/^(failed|rejected)$/i.test(status)) throw new Error(`Sarvam Vision job ${status}`);
-      if (Date.now() > deadline) throw new Error("Sarvam Vision job timed out");
-      await new Promise((r) => setTimeout(r, 1500));
-      const s = await client.docAi.getStatus(job.job_id);
-      status = s.status;
-      if (/completed/i.test(status) && (s.usage as any)?.pages) costMeter.addDoc((s.usage as any).pages);
-    }
-    const dl = await client.docAi.getDownloadUrl(job.job_id);
-    const res = await fetch(dl.url, { method: dl.method || "GET", headers: dl.headers });
-    if (!res.ok) throw new Error(`Vision download HTTP ${res.status}`);
-    return extractMarkdown(Buffer.from(await res.arrayBuffer()));
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+async function sha1(bytes: Uint8Array) {
+  const d = new Uint8Array(await crypto.subtle.digest("SHA-1", bytes as Uint8Array<ArrayBuffer>));
+  return Array.from(d, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-function extractMarkdown(buf: Buffer): string {
+const MIME: Record<string, string> = { pdf: "application/pdf", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg" };
+
+async function call(auth: SarvamAuth, path: string, init: RequestInit = {}) {
+  const res = await fetch(apiUrl(auth, path), {
+    ...init,
+    headers: { ...authHeaders(auth), ...(init.headers as Record<string, string> | undefined) },
+  });
+  const limit = await limitError(res);
+  if (limit) throw limit;
+  if (!res.ok) throw new Error(`Sarvam Vision HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  return res.json() as Promise<any>;
+}
+
+async function runJob(auth: SarvamAuth, bytes: Uint8Array, fileName: string, language: string): Promise<string> {
+  requireKey(auth);
+  const name = fileName.split(/[\\/]/).pop() || "document.pdf";
+  const type = MIME[name.split(".").pop()?.toLowerCase() ?? ""] ?? "application/pdf";
+  const form = new FormData();
+  form.append("file", new Blob([bytes as Uint8Array<ArrayBuffer>], { type }), name);
+  form.append("language", language);
+  form.append("output_format", "md");
+  const job = await call(auth, "/doc-ai/v1/job/digitise", { method: "POST", body: form });
+
+  const deadline = Date.now() + 120_000;
+  let status: string = job.status ?? "";
+  while (!/^(completed|partially_completed)$/i.test(status)) {
+    if (/^(failed|rejected)$/i.test(status)) throw new Error(`Sarvam Vision job ${status}`);
+    if (Date.now() > deadline) throw new Error("Sarvam Vision job timed out");
+    await new Promise((r) => setTimeout(r, 1500));
+    const s = await call(auth, `/doc-ai/v1/job/${encodeURIComponent(job.job_id)}/status`);
+    status = s.status ?? "";
+    if (/completed/i.test(status) && s.usage?.pages) costMeter.addDoc(s.usage.pages);
+  }
+
+  // The result sits in Sarvam's storage behind a signed URL: no credential needed to fetch it.
+  const dl = await call(auth, `/doc-ai/v1/job/${encodeURIComponent(job.job_id)}/download-url`);
+  const res = await fetch(dl.url, { method: dl.method || "GET", headers: dl.headers ?? undefined });
+  if (!res.ok) throw new Error(`Vision download HTTP ${res.status}`);
+  return extractMarkdown(new Uint8Array(await res.arrayBuffer()));
+}
+
+function extractMarkdown(buf: Uint8Array): string {
   if (buf[0] === 0x50 && buf[1] === 0x4b) {
-    const files = unzipSync(new Uint8Array(buf));
+    const files = unzipSync(buf);
     const names = Object.keys(files).sort();
     const md = names.filter((n) => /\.(md|markdown)$/i.test(n));
     const pick = md.length ? md : names.filter((n) => /\.(html?|txt|json)$/i.test(n));
     return pick.map((n) => strFromU8(files[n])).join("\n\n");
   }
-  return buf.toString("utf8");
+  return new TextDecoder().decode(buf);
 }

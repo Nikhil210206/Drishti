@@ -11,7 +11,7 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
    - Device tokens minted after a Turnstile check.
    - Relays for Saaras STT and Bulbul TTS (WebSockets; a browser can't send the key header) and for the LLM, Translate and Doc AI (REST).
    - Per-device daily quota (in D1, not KV: see below), a global rate limit with a "busy" reply, no request bodies logged.
-3. **Browser providers**: `packages/providers` without Node APIs (`ws`, `Buffer`, `fs`, `EventEmitter`), talking to the proxy with a device token or, for bring-your-own-key users, to Sarvam over REST from the service worker.
+3. **Browser providers** ✅: `packages/providers` without Node APIs (`ws`, `Buffer`, `fs`, `EventEmitter`), talking to the proxy with a device token or, for bring-your-own-key users, to Sarvam over REST from the service worker.
 4. **Side panel**: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
 5. **Onboarding**: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
 6. **Per-site permission by voice** ("Allow Drishti on irctc.co.in?") with optional host permissions.
@@ -59,5 +59,39 @@ Details, setup and deploy steps: `docs/proxy.md`.
 
 **Open:**
 
-- Doc AI's download URL points at Sarvam's storage. Whether the extension can fetch it directly, or the proxy must stream it, is settled in step 3.
+- ~~Doc AI's download URL points at Sarvam's storage.~~ Settled in step 3: the extension fetches it directly.
 - The Turnstile widget needs the website (a later step). Until then, tokens for testing are minted by hand (`apps/proxy/scripts/mint.ts`).
+
+## 3. Browser providers ✅
+
+`packages/providers` now runs in the extension as well as in Node.
+
+- **Two ways to reach Sarvam, per client:**
+  - `apiKey`: straight to Sarvam (dev harness, eval, bring-your-own-key).
+  - `token` + `baseUrl`: through the proxy (the extension).
+- **Sockets:** opened by a factory. In the browser the device token is the subprotocol. Node keeps the `ws` package with the key in a header (`nodeSocket`).
+- **Node-only code moved out:**
+  - A typed `Emitter` replaces `node:events`.
+  - `Uint8Array` and base64 helpers replace `Buffer`.
+  - Phrase audio is cached behind an `AudioCache` interface: a disk folder in Node (`FileAudioCache`); packaged audio or IndexedDB in the extension later.
+  - Doc AI uses the REST API directly, so the `sarvamai` SDK, temp files and `fs` are gone.
+  - The Node-only pieces live in `@drishti/providers/node`. A test keeps Node APIs out of the main entry, and the browser bundle builds (35 KB).
+- **Proxy refusals become a `LimitError`** (`busy`, `quota`, `slow_down`, `unauthorized`), for the panel to speak:
+  - The LLM waits out `busy` (retry-after 5 s).
+  - It stops at once on `quota`.
+- **Checks:**
+  - **Through the proxy, with the browser code path** (device token, the standard `WebSocket`, no key; `apps/proxy/scripts/providers.ts`), 5/5:
+
+    | Check | Result |
+    |---|---|
+    | Translate | ✅ |
+    | Chat | ✅ |
+    | TTS | first audio at 0.45 s |
+    | STT (Tamil) | final transcript 0.86 s after the audio ended |
+    | Doc AI on a printed one-page bill | the amount read correctly |
+
+  - **Directly, with the Node path** (key in the socket header): the harness check passes for LLM tool calls, TTS, STT and translate.
+  - The replayed eval is still 40/40.
+- **Doc AI's result is a signed link on Sarvam's Azure storage** (`appsprodaksharpublicsa.blob.core.windows.net`). The extension gets host permission for exactly that host and fetches it directly, so bills never pass through our proxy. If Sarvam moves the storage, the fallback is a streaming route on the proxy.
+
+**Not done yet:** bring-your-own-key speech. A browser can't send the key on a socket (spike 2), so those users need REST speech-to-text per utterance. That's Phase 3 work with the fallback providers.

@@ -1,5 +1,5 @@
 import type { TranslateOptions, Translator } from "@drishti/core";
-import { requireKey, type SarvamAuth } from "./key.js";
+import { apiUrl, authHeaders, limitError, requireKey, type SarvamAuth } from "./key.js";
 import { costMeter } from "./cost.js";
 
 export class SarvamTranslator implements Translator {
@@ -29,11 +29,13 @@ async function translate(auth: SarvamAuth, text: string, target: string, opts: T
       model,
     };
     if (model === "mayura:v1") body.mode = opts.mode ?? "modern-colloquial";
-    const res = await fetch("https://api.sarvam.ai/translate", {
+    const res = await fetch(apiUrl(auth, "/translate"), {
       method: "POST",
-      headers: { "api-subscription-key": auth.apiKey, "content-type": "application/json" },
+      headers: { ...authHeaders(auth), "content-type": "application/json" },
       body: JSON.stringify(body),
     });
+    const refused = await limitError(res);
+    if (refused) throw refused;
     if (!res.ok) throw new Error(`Translate HTTP ${res.status}: ${await res.text()}`);
     const data: any = await res.json();
     costMeter.addTranslate(part.length);

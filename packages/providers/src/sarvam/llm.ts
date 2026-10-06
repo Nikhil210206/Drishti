@@ -1,8 +1,6 @@
 import type { ChatOptions, ChatResult, LLM, ToolCall } from "@drishti/core";
-import { requireKey, type SarvamAuth } from "./key.js";
+import { LimitError, apiUrl, authHeaders, limitError, requireKey, type SarvamAuth } from "./key.js";
 import { costMeter } from "./cost.js";
-
-const URL = "https://api.sarvam.ai/v1/chat/completions";
 
 export class SarvamLLM implements LLM {
   constructor(private cfg: SarvamAuth & { model: string }) {}
@@ -35,13 +33,21 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
   let lastErr: unknown;
   for (let attempt = 0; attempt < 4; attempt++) {
     try {
-      const res = await fetch(URL, {
+      const res = await fetch(apiUrl(cfg, "/v1/chat/completions"), {
         method: "POST",
-        headers: { "api-subscription-key": cfg.apiKey, "content-type": "application/json" },
+        headers: { ...authHeaders(cfg), "content-type": "application/json" },
         body: JSON.stringify(body),
         // A live run once hung 15 minutes on one request: give each attempt a deadline, then retry.
         signal: opts.signal ? AbortSignal.any([opts.signal, AbortSignal.timeout(ATTEMPT_MS)]) : AbortSignal.timeout(ATTEMPT_MS),
       });
+      // The proxy's own refusals: wait out "busy", stop at once on the daily quota.
+      const limit = await limitError(res);
+      if (limit) {
+        if (limit.code !== "busy" && limit.code !== "slow_down") throw limit;
+        lastErr = limit;
+        await sleep(Math.max(1, limit.retryAfterS) * 1000);
+        continue;
+      }
       if (res.status === 429 || res.status >= 500) {
         lastErr = new Error(`LLM HTTP ${res.status}: ${await res.text()}`);
         await sleep(600 * 2 ** attempt);
@@ -74,7 +80,7 @@ async function chat(cfg: SarvamAuth & { model: string }, opts: ChatOptions): Pro
             : {}),
       };
     } catch (e: any) {
-      if (opts.signal?.aborted) throw e;
+      if (opts.signal?.aborted || (e instanceof LimitError && e.code !== "busy" && e.code !== "slow_down")) throw e;
       lastErr = e;
       if (attempt < 3) await sleep(600 * 2 ** attempt);
     }

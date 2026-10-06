@@ -11,7 +11,9 @@ export default defineConfig({
     name: "Drishti",
     description: "Voice-first web assistant for blind and low-vision users, in 11 Indian languages.",
     permissions: ["scripting", "debugger", "tabs", "sidePanel", "storage", "webNavigation"],
-    host_permissions: ["http://localhost/*", "http://127.0.0.1/*"],
+    // Localhost: Pathik Rail practice mode and the eval. Sarvam's storage: Doc AI hands back a signed
+    // link there, and fetching it directly keeps bills off our proxy.
+    host_permissions: ["http://localhost/*", "http://127.0.0.1/*", "https://appsprodaksharpublicsa.blob.core.windows.net/*"],
     optional_host_permissions: ["https://*/*", "http://*/*"],
     action: { default_title: "Drishti" },
   },

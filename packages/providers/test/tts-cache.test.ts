@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { TtsEngine } from "../src/index.js";
+import { FileAudioCache } from "../src/node.js";
 
 const dirs: string[] = [];
 afterEach(() => dirs.splice(0).forEach((d) => fs.rmSync(d, { recursive: true, force: true })));
@@ -10,7 +11,7 @@ afterEach(() => dirs.splice(0).forEach((d) => fs.rmSync(d, { recursive: true, fo
 function engine() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "drishti-tts-"));
   dirs.push(dir);
-  const tts = new TtsEngine({ apiKey: "test", model: "bulbul:v3", speaker: "kavya", cacheDir: dir });
+  const tts = new TtsEngine({ apiKey: "test", model: "bulbul:v3", speaker: "kavya", cache: new FileAudioCache(dir) });
   let synthesised = 0;
   // No network: pretend Bulbul returned a little audio.
   (tts as any).synthesize = async () => {

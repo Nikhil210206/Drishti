@@ -1,8 +1,10 @@
-import { EventEmitter } from "node:events";
-import WebSocket from "ws";
-import type { SpeechIn } from "@drishti/core";
-import { requireKey, type SarvamAuth } from "./key.js";
+import type { SpeechIn, SpeechInEvents } from "@drishti/core";
+import { openSocket, type SarvamAuth } from "./key.js";
 import { costMeter } from "./cost.js";
+import { Emitter } from "../emitter.js";
+import { messageText, toBase64 } from "../bytes.js";
+
+const OPEN = 1;
 
 // Domain words that Saaras v4 should bias towards (station names, rail jargon, product names).
 export const DEFAULT_KEYTERMS = [
@@ -33,9 +35,9 @@ export const DEFAULT_KEYTERMS = [
  * One realtime Saaras connection per panel session. Audio arrives as 16 kHz mono
  * linear16 PCM from the browser; transcripts come back with the detected language.
  */
-export class SttStream extends EventEmitter implements SpeechIn {
+export class SttStream extends Emitter<SpeechInEvents> implements SpeechIn {
   private ws?: WebSocket;
-  private pingTimer?: NodeJS.Timeout;
+  private pingTimer?: ReturnType<typeof setInterval>;
   private closedByUs = false;
   private backlog: Uint8Array[] = [];
   private reconnectDelay = 500;
@@ -48,7 +50,6 @@ export class SttStream extends EventEmitter implements SpeechIn {
   }
 
   connect() {
-    requireKey(this.cfg);
     this.closedByUs = false;
     const q = new URLSearchParams({
       language_code: "auto",
@@ -63,21 +64,26 @@ export class SttStream extends EventEmitter implements SpeechIn {
       q.set("keyterms", JSON.stringify(this.keyterms.slice(0, 50)));
     }
     this.emit("status", "connecting");
-    const ws = new WebSocket(`wss://api.sarvam.ai/speech-to-text-realtime/ws?${q}`, {
-      headers: { "api-subscription-key": this.cfg.apiKey },
-    });
+    let ws: WebSocket;
+    try {
+      ws = openSocket(this.cfg, `/speech-to-text-realtime/ws?${q}`);
+    } catch (e) {
+      this.emit("status", "error", String((e as Error)?.message ?? e));
+      return;
+    }
     this.ws = ws;
-    ws.on("open", () => {
+    ws.addEventListener("open", () => {
       this.reconnectDelay = 500;
       this.emit("status", "open");
       for (const chunk of this.backlog.splice(0)) this.sendAudio(chunk);
       this.pingTimer = setInterval(() => this.send({ event: "ping" }), 15000);
     });
-    ws.on("message", (raw) => this.onMessage(raw.toString()));
-    ws.on("error", (err) => this.emit("status", "error", String(err)));
-    ws.on("close", (code, reason) => {
+    ws.addEventListener("message", (e) => this.onMessage(messageText(e.data)));
+    ws.addEventListener("error", () => this.emit("status", "error", "socket error"));
+    ws.addEventListener("close", (e) => {
       clearInterval(this.pingTimer);
-      this.emit("status", "closed", `${code} ${reason}`);
+      if (this.ws !== ws) return;
+      this.emit("status", "closed", `${e.code} ${e.reason}`);
       if (!this.closedByUs) {
         setTimeout(() => this.connect(), this.reconnectDelay);
         this.reconnectDelay = Math.min(this.reconnectDelay * 2, 8000);
@@ -115,17 +121,17 @@ export class SttStream extends EventEmitter implements SpeechIn {
   }
 
   private send(obj: unknown) {
-    if (this.ws?.readyState === WebSocket.OPEN) this.ws.send(JSON.stringify(obj));
+    if (this.ws?.readyState === OPEN) this.ws.send(JSON.stringify(obj));
   }
 
   sendAudio(pcm: Uint8Array) {
-    if (this.ws?.readyState !== WebSocket.OPEN) {
+    if (this.ws?.readyState !== OPEN) {
       // Keep ~2 s while (re)connecting so the start of an utterance isn't lost.
       this.backlog.push(pcm);
       if (this.backlog.length > 20) this.backlog.shift();
       return;
     }
-    this.send({ event: "audio_input", audio: Buffer.from(pcm.buffer, pcm.byteOffset, pcm.byteLength).toString("base64") });
+    this.send({ event: "audio_input", audio: toBase64(pcm) });
   }
 
   /** Force the current utterance to finalise (push-to-talk release). */
