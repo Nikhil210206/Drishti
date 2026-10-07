@@ -8,7 +8,8 @@ import { Agent, DEFAULT_ALLOWED_DOMAINS, NavigationPolicy, PhraseBook, VoiceSess
 import { SarvamDocReader, SarvamLLM, SarvamTranslator, SttStream, TtsEngine, costMeter } from "@drishti/providers";
 import type { PanelHandlers, PanelTransport } from "@drishti/ui";
 import { ExtensionDriver } from "./extension-driver";
-import { StorageCache, saveSettings, type Settings } from "./settings";
+import { GatedDriver, SiteAccess } from "./site-access";
+import { StorageCache, loadSettings, saveSettings, type Settings } from "./settings";
 
 /** The tab the agent works on: the active tab of the browser window this panel belongs to. */
 async function targetTab(): Promise<chrome.tabs.Tab | undefined> {
@@ -39,13 +40,26 @@ export function localTransport(settings: Settings): PanelTransport {
         const auth = { baseUrl: settings.proxyUrl, token: settings.token };
         const translator = new SarvamTranslator(auth);
         const phrases = new PhraseBook(translator, new StorageCache("phrase:"));
-        const policy = new NavigationPolicy(DEFAULT_ALLOWED_DOMAINS);
+        const policy = new NavigationPolicy([...DEFAULT_ALLOWED_DOMAINS, ...(settings.sites ?? [])]);
         const driver = new ExtensionDriver(tab.id);
+        // Ask before working on a site Drishti has no access to yet (lib/site-access.ts).
+        const access = new SiteAccess({
+          contains: (origins) => chrome.permissions.contains({ origins }),
+          request: (origins) => chrome.permissions.request({ origins }),
+          ask: (question) => session!.ask(question, "confirm"),
+          say: (key) => session!.sayPhrase(key),
+          phrase: (key) => phrases.get(key, session!.lang),
+          granted: (site) => {
+            policy.allow(site);
+            void loadSettings().then((s) => saveSettings({ sites: [...new Set([...(s.sites ?? []), site])] }));
+          },
+        });
+        const browser = new GatedDriver(driver, () => access);
         const tts = new TtsEngine({ ...auth, model: "bulbul:v3", speaker: settings.speaker });
         tts.voice.pace = settings.pace;
         const agent = new Agent(
           {
-            browser: driver,
+            browser,
             llm: new SarvamLLM({ ...auth, model: "sarvam-105b" }),
             translator,
             docs: new SarvamDocReader(auth),
@@ -57,7 +71,7 @@ export function localTransport(settings: Settings): PanelTransport {
         session = new VoiceSession(
           {
             agent,
-            browser: driver,
+            browser,
             policy,
             phrases,
             speechOut: tts,
@@ -66,6 +80,7 @@ export function localTransport(settings: Settings): PanelTransport {
               event: (e) => {
                 // "Delete my details" (confirmed by voice): wipe the saved profile from this device.
                 if (e.type === "forget") void saveSettings({ profile: undefined });
+                if (e.type === "task" && e.state === "running") access.newTask();
                 // Keep the voice the user picks in the panel.
                 if (e.type === "voice") void saveSettings({ speaker: String(e.speaker), pace: Number(e.pace) });
                 h.event(e);

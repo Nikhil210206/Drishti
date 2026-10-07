@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Agent, NavigationPolicy, VoiceSession, type SpeechIn } from "../src/index.js";
+import { Agent, NavigationPolicy, UserDeclinedError, VoiceSession, type SpeechIn } from "../src/index.js";
 import { FakeBrowser, FakeSpeechOut, ScriptedLLM, echoTranslator, noDocs, phrases } from "./fakes.js";
 
 const HOME = "http://localhost:5174/";
@@ -87,5 +87,20 @@ describe("VoiceSession 'delete my details'", () => {
     await tick();
     await tick();
     expect(events.some((e) => e.type === "forget")).toBe(false);
+  });
+});
+
+describe("VoiceSession when the user declines what a task needs", () => {
+  it("ends the task without an error or the error phrase", async () => {
+    const { session, browser, speechOut, events } = setup();
+    browser.snapshot = async () => {
+      throw new UserDeclinedError("The user did not allow Drishti on irctc.co.in");
+    };
+    session.onMessage({ type: "text", text: "book a ticket" });
+    await tick();
+    await tick();
+    expect(events.some((e) => e.type === "task" && e.state === "aborted")).toBe(true);
+    expect(events.some((e) => e.type === "error")).toBe(false);
+    expect(speechOut.spoken.map((s) => s.text)).not.toContain("Sorry, something went wrong. Please try again.");
   });
 });

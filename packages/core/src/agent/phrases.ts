@@ -33,6 +33,18 @@ export const PHRASES = {
     "en-IN": "I'm stuck on this page. Tell me what to try next.",
     "hi-IN": "मैं इस पेज पर अटक गई हूँ। बताइए, आगे क्या करूँ?",
   },
+  siteAccess: {
+    "en-IN": "Drishti needs your permission to work on this website. Say yes or press Yes, then choose Allow in Chrome's box.",
+    "hi-IN": "इस वेबसाइट पर काम करने के लिए Drishti को आपकी अनुमति चाहिए। हाँ बोलिए या Yes दबाइए, फिर Chrome के बॉक्स में Allow चुनिए।",
+  },
+  pressYes: {
+    "en-IN": "Chrome needs a key press for this. Please press Enter on the Yes button.",
+    "hi-IN": "इसके लिए Chrome को बटन दबाना ज़रूरी है। कृपया Yes बटन पर Enter दबाइए।",
+  },
+  siteDenied: {
+    "en-IN": "Okay. I won't work on this website.",
+    "hi-IN": "ठीक है। मैं इस वेबसाइट पर काम नहीं करूँगी।",
+  },
   forgetConfirm: {
     "en-IN": "Delete your saved name, age and phone number from this device?",
     "hi-IN": "क्या आपका सेव किया हुआ नाम, उम्र और फ़ोन नंबर इस डिवाइस से मिटा दूँ?",

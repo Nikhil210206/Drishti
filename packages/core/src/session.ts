@@ -8,6 +8,11 @@ import { quickCommand, yesNo } from "./agent/safety.js";
 type Timer = ReturnType<typeof setTimeout>;
 type Waiter = { kind: "question" | "confirm"; resolve: (t: string | null) => void; timer: Timer };
 
+/** The user said no to something the task needed (a site, a permission): stop without an error. */
+export class UserDeclinedError extends Error {
+  override name = "UserDeclined";
+}
+
 export interface SessionDeps {
   agent: Agent;
   browser: BrowserDriver;
@@ -179,6 +184,10 @@ export class VoiceSession implements AgentIO {
       if (r.speech) this.conversation.push(`Drishti: ${r.speech}`);
       this.emit({ type: "task", state: r.outcome, text, ms: Date.now() - t0 });
     } catch (e: any) {
+      if (e?.name === "UserDeclined") {
+        this.emit({ type: "task", state: "aborted", text });
+        return;
+      }
       this.emit({ type: "error", message: e?.message ?? String(e) });
       this.emit({ type: "task", state: "error", text });
       if (!abort.signal.aborted) await this.sayPhrase("error");

@@ -10,4 +10,4 @@ export { pageDates, requestedDate } from "./agent/dates.js";
 export { readbackPassengers } from "./agent/readback.js";
 export { NavigationPolicy, DEFAULT_ALLOWED_DOMAINS, linkTarget } from "./agent/policy.js";
 export { PHRASES, PhraseBook, type PhraseKey } from "./agent/phrases.js";
-export { VoiceSession, type SessionDeps, type SessionOptions } from "./session.js";
+export { VoiceSession, UserDeclinedError, type SessionDeps, type SessionOptions } from "./session.js";

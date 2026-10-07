@@ -13,6 +13,12 @@ export class NavigationPolicy {
     this.domains = domains.map((d) => d.toLowerCase().replace(/^\.+|\.+$/g, ""));
   }
 
+  /** Allow one more domain (and its subdomains): a site the user just gave Drishti access to. */
+  allow(domain: string) {
+    const d = domain.toLowerCase().replace(/^\.+|\.+$/g, "");
+    if (d && !this.domains.includes(d)) this.domains.push(d);
+  }
+
   hostAllowed(hostname: string): boolean {
     const h = hostname.toLowerCase().replace(/\.$/, "");
     return this.domains.some((d) => h === d || h.endsWith(`.${d}`));

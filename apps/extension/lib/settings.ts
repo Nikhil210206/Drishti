@@ -18,6 +18,8 @@ export interface Settings {
   pace: number;
   /** The privacy summary the user agreed to, and when. Nothing goes to Sarvam before this. */
   consent?: { version: string; at: string };
+  /** Sites the user let Drishti work on (Chrome host access granted), e.g. "irctc.co.in". */
+  sites?: string[];
   /** The welcome flow is finished. */
   onboarded?: boolean;
 }

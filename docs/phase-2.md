@@ -14,7 +14,7 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
 3. **Browser providers** ✅: `packages/providers` without Node APIs (`ws`, `Buffer`, `fs`, `EventEmitter`), talking to the proxy with a device token or, for bring-your-own-key users, to Sarvam over REST from the service worker.
 4. **Side panel** ✅: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
 5. **Onboarding** ✅: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
-6. **Per-site permission by voice** ("Allow Drishti on irctc.co.in?") with optional host permissions.
+6. **Per-site permission by voice** ✅ ("Allow Drishti on irctc.co.in?") with optional host permissions.
 7. **Screen-reader output mode** (replies to an aria-live region) and keyboard shortcuts that don't clash with NVDA, JAWS or VoiceOver.
 8. **Exit check**: real Chrome profile, through the deployed proxy.
 
@@ -191,3 +191,57 @@ Worth checking with VoiceOver on:
 4. `npm run build -w @drishti/extension`. Then in `chrome://extensions`, turn on Developer mode, choose **Load unpacked**, and pick `apps/extension/.output/chrome-mv3`.
 5. The welcome tab opens by itself. Follow it.
 
+
+## 6. Per-site permission ✅
+
+**What it does.** Drishti gets host access up front only for localhost (practice site, eval) and Sarvam's Doc AI storage. Every other site is asked about the first time a task needs one of its pages:
+
+> irctc.co.in: Drishti needs your permission to work on this website. Say yes or press Yes, then choose Allow in Chrome's box.
+
+The question uses the panel's usual yes/no card, so it works by voice or keyboard.
+
+**Chrome rules shape it:**
+
+- A site permission can only be requested from a user gesture, and Chrome shows its own Allow / Deny box.
+- Pressing **Yes** (Enter or a click) asks Chrome on the spot: the press is the gesture.
+- A spoken yes works when it comes soon enough after the Space press. If it doesn't, Drishti says "Please press Enter on the Yes button" and asks once more.
+
+**What a yes covers:**
+
+- The grant is for the whole site, both schemes (`*.irctc.co.in`).
+- It is remembered (`settings.sites`) and added to the navigation policy, so the agent can also move around that site.
+- Site names follow a small suffix list: `irctc.co.in`, `uidai.gov.in`, `wikipedia.org`.
+
+**A no** ends the task quietly: "Okay. I won't work on this website.", with no generic error. It holds for that task only; the next request asks again.
+
+**How:**
+
+- `apps/extension/lib/site-access.ts`:
+  - `SiteAccess` checks Chrome's permission for the page's exact host, then asks.
+  - `GatedDriver` wraps `ExtensionDriver` and asks before reading or acting on any page. Navigating, going back and `url()` need no access.
+- In core:
+  - `NavigationPolicy.allow()`.
+  - `UserDeclinedError`, which the session treats as a quiet stop.
+  - The phrases `siteAccess`, `pressYes`, `siteDenied`.
+
+**Tests:**
+
+- 7 unit tests for the gate: site naming, already allowed, yes then Allow, no, a spoken yes too late, Deny in Chrome's box, a refused site never touched.
+- A session test: a declined task ends without the error phrase.
+- **End to end** (`apps/extension/scripts/site-access-e2e.ts`): Pathik Rail served as `http://practice.test:5174` (Chrome maps the name to localhost), a site the extension has no access to. **6/6:**
+
+  | Check | Result |
+  |---|---|
+  | Drishti asks before working there | ✅ |
+  | A no ends politely | ✅ |
+  | The page was never read (0 elements tagged) | ✅ |
+  | Nothing remembered as allowed | ✅ |
+  | A new request asks again | ✅ |
+  | Pressing Yes reaches Chrome as a user gesture: Chrome's own box opened rather than Drishti asking for the button | ✅ |
+
+**Your manual check:** press **Allow** in Chrome's box and make sure the task carries on. Automation can't press Chrome's own dialogs.
+
+**Not done yet:**
+
+- A way to see and remove allowed sites (settings, or by voice: "stop using irctc.co.in").
+- The agent still can't *open* a site that isn't allowed yet. It is blocked, as before; asking first belongs to the Phase 4 domain policy.
