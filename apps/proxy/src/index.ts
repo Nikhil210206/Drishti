@@ -36,6 +36,8 @@ export interface Env {
   /** Token minting, per IP. */
   MINT_LIMIT?: RateLimit;
   DAILY_UNITS?: string;
+  /** Origins of the website whose connect page may mint tokens (comma-separated). */
+  WEBSITE_ORIGINS?: string;
   SARVAM_BASE?: string;
 }
 
@@ -66,7 +68,15 @@ export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
     if (url.pathname === "/health") return new Response("ok");
-    if (url.pathname === "/v1/token" && req.method === "POST") return mint(req, env);
+    if (url.pathname === "/v1/token") {
+      const cors = corsFor(req, env);
+      if (req.method === "OPTIONS") return new Response(null, { status: cors ? 204 : 403, headers: cors });
+      if (req.method === "POST") {
+        const res = await mint(req, env);
+        for (const [k, v] of Object.entries(cors ?? {})) res.headers.set(k, v);
+        return res;
+      }
+    }
 
     const route = ROUTES.find(([re]) => re.test(url.pathname))?.[1];
     if (!route) return json(404, { error: "not_found" });
@@ -92,6 +102,22 @@ export default {
     return ws ? relaySocket(upstream, env) : forward(req, upstream, env);
   },
 };
+
+/** CORS for the website's connect page, and only for it. */
+function corsFor(req: Request, env: Env): Record<string, string> | undefined {
+  const origin = req.headers.get("origin");
+  const allowed = (env.WEBSITE_ORIGINS ?? "")
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean);
+  if (!origin || !allowed.includes(origin)) return undefined;
+  return {
+    "access-control-allow-origin": origin,
+    "access-control-allow-methods": "POST",
+    "access-control-allow-headers": "content-type",
+    vary: "origin",
+  };
+}
 
 function bearer(req: Request) {
   const m = req.headers.get("authorization")?.match(/^Bearer\s+(\S+)$/i);

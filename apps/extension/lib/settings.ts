@@ -13,9 +13,22 @@ export interface Settings {
   /** Pathik Rail practice site. */
   homeUrl: string;
   profile?: Profile;
+  /** Bulbul voice and speaking pace. */
+  speaker: string;
+  pace: number;
+  /** The privacy summary the user agreed to, and when. Nothing goes to Sarvam before this. */
+  consent?: { version: string; at: string };
+  /** The welcome flow is finished. */
+  onboarded?: boolean;
 }
 
-const DEFAULTS: Settings = { proxyUrl: "http://localhost:8788", token: "", homeUrl: "http://localhost:5174/" };
+/** Bump when the privacy summary changes: users see it again. */
+export const CONSENT_VERSION = "2026-10-07";
+
+const DEFAULTS: Settings = { proxyUrl: "http://localhost:8788", token: "", homeUrl: "http://localhost:5174/", speaker: "kavya", pace: 1.1 };
+
+/** Ready to talk to Sarvam: connected, and the user agreed to the current privacy summary. */
+export const ready = (s: Settings) => !!s.token && s.consent?.version === CONSENT_VERSION;
 
 export async function loadSettings(): Promise<Settings> {
   const s = (await chrome.storage.local.get("settings")).settings as Partial<Settings> | undefined;

@@ -2,6 +2,8 @@ import { createRequire } from "node:module";
 import { defineConfig } from "wxt";
 
 const require = createRequire(import.meta.url);
+// Keep in step with lib/website.ts.
+const WEBSITE_ORIGINS = ["http://localhost:5175", "https://drishti.pages.dev"];
 
 // Drishti's MV3 extension. Host access is asked for per site, by voice (Phase 2 onboarding);
 // localhost is granted up front for Pathik Rail practice mode and the eval.
@@ -16,6 +18,8 @@ export default defineConfig({
     host_permissions: ["http://localhost/*", "http://127.0.0.1/*", "https://appsprodaksharpublicsa.blob.core.windows.net/*"],
     optional_host_permissions: ["https://*/*", "http://*/*"],
     action: { default_title: "Drishti" },
+    // Only the website's connect page may talk to the extension, to hand over a device token.
+    externally_connectable: { matches: WEBSITE_ORIGINS.map((o) => `${o}/*`) },
   },
   hooks: {
     // Mozilla Readability, injected on demand for read_page (ExtensionDriver.readable).

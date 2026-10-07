@@ -92,6 +92,11 @@ export class Agent {
     return this.deps.phrases.get(key, lang);
   }
 
+  /** Use (or, with nothing, forget) the saved profile from the next task on. */
+  setProfile(profile?: Profile) {
+    this.opts.profile = profile;
+  }
+
   async run(task: string, io: AgentIO, signal: AbortSignal): Promise<{ outcome: "done" | "stuck" | "aborted"; speech?: string }> {
     const history: string[] = [];
     let lastOutput = "";

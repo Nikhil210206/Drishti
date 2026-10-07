@@ -13,7 +13,7 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
    - Per-device daily quota (in D1, not KV: see below), a global rate limit with a "busy" reply, no request bodies logged.
 3. **Browser providers** ✅: `packages/providers` without Node APIs (`ws`, `Buffer`, `fs`, `EventEmitter`), talking to the proxy with a device token or, for bring-your-own-key users, to Sarvam over REST from the service worker.
 4. **Side panel** ✅: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
-5. **Onboarding**: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
+5. **Onboarding** ✅: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
 6. **Per-site permission by voice** ("Allow Drishti on irctc.co.in?") with optional host permissions.
 7. **Screen-reader output mode** (replies to an aria-live region) and keyboard shortcuts that don't clash with NVDA, JAWS or VoiceOver.
 8. **Exit check**: real Chrome profile, through the deployed proxy.
@@ -124,14 +124,70 @@ The tab ended on the right results page each time. The replayed eval through the
 
 ### Try it in your own Chrome
 
-1. `npm run dev -w @drishti/proxy -- --port 8788`. Local, with the test Turnstile secret in `.dev.vars`.
-2. `npm run practice`: Pathik Rail at http://localhost:5174/.
-3. A device token: `curl -s -X POST localhost:8788/v1/token -d '{"turnstile":"XXXX.DUMMY.TOKEN.XXXX"}'`
-4. `npm run build -w @drishti/extension`. Then in `chrome://extensions`, turn on Developer mode, choose **Load unpacked**, and pick `apps/extension/.output/chrome-mv3`.
-5. Open http://localhost:5174/ and click the Drishti toolbar icon. In the setup form, enter the proxy `http://localhost:8788` and paste the token.
-6. Hold Space to talk. The first time, the mic grant tab opens: choose **Allow while visiting the site**, go back to the panel, and talk.
+Superseded by the welcome flow: see "Try it" under step 5.
 
 Worth checking with VoiceOver on:
 
 - whether the panel, the grant tab and the debugging bar are announced and usable;
 - whether the debugging bar steals focus while Drishti clicks (spike 4).
+
+## 5. Onboarding ✅
+
+**The welcome flow** (`welcome.html`, opened on install; the panel sends you there until setup is done) runs in a tab, because Chrome shows the mic prompt only in a tab (spike 1). Each step moves focus to its heading and speaks its instructions.
+
+1. **Language**: 11 buttons with native names, the prompt spoken in English and Hindi.
+2. **Connect**: opens the website's connect page (below). The page closes itself and the flow moves on when the token arrives.
+3. **Privacy**: three plain points (what goes to Sarvam and why, what stays on the device, what Drishti never does), plus a link to the full page. "I agree" records the version and time. The panel won't start a session without the current version.
+4. **Microphone**: Allow, then hold Test (or Space), speak, release. Drishti says what it heard. Choose "Allow while visiting the site".
+5. **Voice**: speaker and speed, with a sample in the chosen language through Bulbul.
+6. **Details (optional)**: name, age, gender and mobile, kept in `chrome.storage.local`.
+7. **Practice**: opens the side panel and turns the tab into Pathik Rail.
+
+**Language:** English and Hindi are hand-written. The other nine are machine-translated (Mayura) once connected, cached, and marked as such; they need a native-speaker review.
+
+**The website** (`apps/website`, static, for Cloudflare Pages; `npm run website` serves it on port 5175):
+
+- `connect.html`: Turnstile, usually with nothing to do, then the proxy mints a token, which goes straight to the extension that opened the page (`chrome.runtime.sendMessage`).
+- The extension accepts it only from the origins in `externally_connectable`, and only if it looks like a token.
+- The proxy allows CORS on `/v1/token` for those origins only (`WEBSITE_ORIGINS`).
+- Also a landing page and a privacy draft. The privacy draft says plainly that Sarvam processes data under its own terms; checking those terms is listed for the public release.
+
+**"Delete my details" by voice**, in all 11 languages (needs a native-speaker review):
+
+- It is a quick command: a delete word plus a details word, in up to 6 words.
+- It asks for a spoken yes first.
+- Then the agent forgets the profile and the conversation, and the panel wipes the saved profile.
+
+**A real bug found on the way: push-to-talk could lose the last utterance.**
+
+- Saaras ends an utterance after 700 ms of silence, and its `flush` only works with manual endpointing.
+- Releasing push-to-talk just stops the audio, so the server never heard the silence. A user who let go right after their last word got a late transcript, or none.
+- The earlier tests padded silence themselves, so they never hit it.
+- `SttStream.flush()` now sends a second of silence. This fixes the side panel too.
+
+**A second bug:** a stray `mouseleave` (the button's label changing under a resting pointer) ended a Space-key hold. A hold now ends only through the input that started it.
+
+**End to end** (`apps/extension/scripts/onboarding-e2e.ts`): a fresh install in Chromium, Chrome's fake microphone fed from the recorded Tamil clip, the real local website, Turnstile's test key and the local proxy. **9/9:**
+
+| Check | Result |
+|---|---|
+| The flow opens on install | ✅ |
+| Hindi chosen | ✅ |
+| Connected through the website | ✅ |
+| Consent recorded | ✅ |
+| Mic test heard "வணக்கம். நாளை காலை சென்னையிலிருந்து பெங்களூருக்கு…" ("Hello. Tomorrow morning from Chennai to Bengaluru…") | ✅ |
+| Voice saved | ✅ |
+| Details saved on the device | ✅ |
+| Practice site opened | ✅ |
+| "मेरी जानकारी मिटा दो" ("delete my details") in the panel, then yes, removed the profile | ✅ |
+
+**Not tested yet:** the machine-translated path for the other nine languages (about 35 strings, a few rupees the first time per language), and the whole flow with VoiceOver.
+
+### Try it
+
+1. `npm run dev -w @drishti/proxy -- --port 8788`
+2. `npm run website`: the connect page at http://localhost:5175.
+3. `npm run practice`: Pathik Rail at http://localhost:5174.
+4. `npm run build -w @drishti/extension`. Then in `chrome://extensions`, turn on Developer mode, choose **Load unpacked**, and pick `apps/extension/.output/chrome-mv3`.
+5. The welcome tab opens by itself. Follow it.
+

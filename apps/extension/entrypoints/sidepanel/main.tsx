@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "@drishti/ui";
 import "@drishti/ui/styles.css";
 import { localTransport } from "../../lib/panel-session";
-import { loadSettings, saveSettings, type Settings } from "../../lib/settings";
+import { loadSettings, ready, type Settings } from "../../lib/settings";
 
 /**
  * Chrome never shows the mic prompt inside a side panel (spike 1): the first grant happens in an
@@ -22,42 +22,38 @@ function micReady() {
   void chrome.runtime.sendMessage({ type: "drishti-mic-ok" }).catch(() => {});
 }
 
-/** Until sign-in through the website exists: the proxy address and a hand-minted device token. */
-function DevSetup({ initial, onSaved }: { initial: Settings; onSaved: (s: Settings) => void }) {
-  const [proxyUrl, setProxyUrl] = useState(initial.proxyUrl);
-  const [token, setToken] = useState(initial.token);
+/** Not connected, or no agreement to the current privacy summary yet: finish the welcome flow first. */
+function FinishSetup() {
   return (
-    <main className="dev-setup" style={{ padding: 16, fontSize: 16 }}>
-      <h1>Set up Drishti (developer)</h1>
-      <p>Drishti needs its proxy address and a device token. Mint one with apps/proxy/scripts/mint.ts.</p>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          onSaved(await saveSettings({ proxyUrl: proxyUrl.trim(), token: token.trim() }));
-        }}
+    <main style={{ padding: 16, fontSize: 18 }}>
+      <h1>Welcome to Drishti</h1>
+      <p>Drishti needs a minute of setup: your language, connecting, and your microphone.</p>
+      <button
+        autoFocus
+        style={{ fontSize: 18, padding: "10px 16px" }}
+        onClick={() => void chrome.tabs.create({ url: chrome.runtime.getURL("/welcome.html") })}
       >
-        <label style={{ display: "block", marginTop: 12 }}>
-          Proxy address
-          <input value={proxyUrl} onChange={(e) => setProxyUrl(e.target.value)} style={{ display: "block", width: "100%" }} />
-        </label>
-        <label style={{ display: "block", marginTop: 12 }}>
-          Device token
-          <input value={token} onChange={(e) => setToken(e.target.value)} style={{ display: "block", width: "100%" }} />
-        </label>
-        <button type="submit" style={{ marginTop: 16 }} disabled={!proxyUrl.trim() || !token.trim()}>
-          Save and start
-        </button>
-      </form>
+        Set up Drishti
+      </button>
     </main>
   );
 }
 
 function Panel() {
   const [settings, setSettings] = useState<Settings | undefined>();
-  useEffect(() => void loadSettings().then(setSettings), []);
-  const transport = useMemo(() => (settings?.token ? localTransport(settings) : undefined), [settings]);
+  useEffect(() => {
+    void loadSettings().then(setSettings);
+    // Setup finishing in the welcome tab (or "delete my details") changes settings: follow along.
+    const onChange = (changes: Record<string, chrome.storage.StorageChange>) => {
+      const next = changes.settings?.newValue as Settings | undefined;
+      if (next) setSettings((cur) => (cur && ready(cur) === ready(next) && cur.token === next.token ? cur : next));
+    };
+    chrome.storage.local.onChanged.addListener(onChange);
+    return () => chrome.storage.local.onChanged.removeListener(onChange);
+  }, []);
+  const transport = useMemo(() => (settings && ready(settings) ? localTransport(settings) : undefined), [settings]);
   if (!settings) return <p role="status">Starting Drishti…</p>;
-  if (!transport) return <DevSetup initial={settings} onSaved={setSettings} />;
+  if (!transport) return <FinishSetup />;
   return <App transport={transport} onMicError={openMicGrant} onMicReady={micReady} />;
 }
 

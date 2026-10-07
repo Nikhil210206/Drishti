@@ -33,6 +33,14 @@ export const PHRASES = {
     "en-IN": "I'm stuck on this page. Tell me what to try next.",
     "hi-IN": "मैं इस पेज पर अटक गई हूँ। बताइए, आगे क्या करूँ?",
   },
+  forgetConfirm: {
+    "en-IN": "Delete your saved name, age and phone number from this device?",
+    "hi-IN": "क्या आपका सेव किया हुआ नाम, उम्र और फ़ोन नंबर इस डिवाइस से मिटा दूँ?",
+  },
+  forgotten: {
+    "en-IN": "Done. Your saved details are deleted from this device.",
+    "hi-IN": "हो गया। आपकी सेव की हुई जानकारी इस डिवाइस से मिटा दी है।",
+  },
   faster: { "en-IN": "Okay, speaking faster.", "hi-IN": "ठीक है, तेज़ बोलती हूँ।" },
   slower: { "en-IN": "Okay, speaking slower.", "hi-IN": "ठीक है, धीरे बोलती हूँ।" },
 } satisfies Record<string, Partial<Record<LangCode, string>>>;

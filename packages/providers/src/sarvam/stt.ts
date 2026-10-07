@@ -134,8 +134,14 @@ export class SttStream extends Emitter<SpeechInEvents> implements SpeechIn {
     this.send({ event: "audio_input", audio: toBase64(pcm) });
   }
 
-  /** Force the current utterance to finalise (push-to-talk release). */
+  /**
+   * Finish the current utterance (push-to-talk release). Saaras ends an utterance after 700 ms of
+   * silence (VAD); its "flush" only works with manual endpointing. A release just stops the audio,
+   * so the server never hears that silence: send a second of it.
+   */
   flush() {
+    const silence = new Uint8Array(3200); // 100 ms of 16 kHz PCM16
+    for (let i = 0; i < 10; i++) this.sendAudio(silence);
     this.send({ event: "flush" });
   }
 

@@ -8,7 +8,7 @@ import { Agent, DEFAULT_ALLOWED_DOMAINS, NavigationPolicy, PhraseBook, VoiceSess
 import { SarvamDocReader, SarvamLLM, SarvamTranslator, SttStream, TtsEngine, costMeter } from "@drishti/providers";
 import type { PanelHandlers, PanelTransport } from "@drishti/ui";
 import { ExtensionDriver } from "./extension-driver";
-import { StorageCache, type Settings } from "./settings";
+import { StorageCache, saveSettings, type Settings } from "./settings";
 
 /** The tab the agent works on: the active tab of the browser window this panel belongs to. */
 async function targetTab(): Promise<chrome.tabs.Tab | undefined> {
@@ -41,6 +41,8 @@ export function localTransport(settings: Settings): PanelTransport {
         const phrases = new PhraseBook(translator, new StorageCache("phrase:"));
         const policy = new NavigationPolicy(DEFAULT_ALLOWED_DOMAINS);
         const driver = new ExtensionDriver(tab.id);
+        const tts = new TtsEngine({ ...auth, model: "bulbul:v3", speaker: settings.speaker });
+        tts.voice.pace = settings.pace;
         const agent = new Agent(
           {
             browser: driver,
@@ -58,10 +60,16 @@ export function localTransport(settings: Settings): PanelTransport {
             browser: driver,
             policy,
             phrases,
-            speechOut: new TtsEngine({ ...auth, model: "bulbul:v3", speaker: "kavya" }),
+            speechOut: tts,
             createSpeechIn: () => new SttStream({ ...auth, model: "saaras:v4" }),
             sink: {
-              event: (e) => h.event(e),
+              event: (e) => {
+                // "Delete my details" (confirmed by voice): wipe the saved profile from this device.
+                if (e.type === "forget") void saveSettings({ profile: undefined });
+                // Keep the voice the user picks in the panel.
+                if (e.type === "voice") void saveSettings({ speaker: String(e.speaker), pace: Number(e.pace) });
+                h.event(e);
+              },
               // A copy into its own ArrayBuffer: the player keeps what it is given.
               audio: (pcm) => h.audio(pcm.slice().buffer),
             },

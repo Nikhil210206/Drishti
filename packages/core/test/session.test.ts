@@ -65,3 +65,27 @@ describe("VoiceSession quick commands", () => {
     expect(speechOut.voice.pace).toBe(1.35);
   });
 });
+
+describe("VoiceSession 'delete my details'", () => {
+  it("asks first, then forgets the profile and tells the host to wipe its copy", async () => {
+    const { session, speechOut, events } = setup();
+    session.onMessage({ type: "text", text: "delete my details" });
+    await tick();
+    expect(events.some((e) => e.type === "awaiting" && e.kind === "confirm")).toBe(true);
+    session.onMessage({ type: "confirm", answer: "yes" });
+    await tick();
+    await tick();
+    expect(events.some((e) => e.type === "forget")).toBe(true);
+    expect(speechOut.spoken.at(-1)?.text).toBe("Done. Your saved details are deleted from this device.");
+  });
+
+  it("deletes nothing on a no", async () => {
+    const { session, events } = setup();
+    session.onMessage({ type: "text", text: "मेरी जानकारी मिटा दो" });
+    await tick();
+    session.onMessage({ type: "confirm", answer: "no" });
+    await tick();
+    await tick();
+    expect(events.some((e) => e.type === "forget")).toBe(false);
+  });
+});

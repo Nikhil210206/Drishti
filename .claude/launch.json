@@ -18,6 +18,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "-w", "@drishti/proxy", "--", "--port", "8788"],
       "port": 8788
+    },
+    {
+      "name": "website",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "website"],
+      "port": 5175
     }
   ]
 }

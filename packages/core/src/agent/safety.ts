@@ -381,15 +381,81 @@ const REPEAT = ["repeat", "phir se", "dobara", "फिर से", "दोबा
 const FASTER = ["faster", "speed up", "tez", "jaldi bolo", "तेज़", "तेज", "জোরে", "வேகமாக", "వేగంగా", "ವೇಗವಾಗಿ", "വേഗം"];
 const SLOWER = ["slower", "slow down", "dheere", "धीरे", "আস্তে", "மெதுவாக", "నెమ్మదిగా", "ನಿಧಾನವಾಗಿ", "പതുക്കെ"];
 
-export function quickCommand(text: string): "stop" | "repeat" | "faster" | "slower" | null {
+// "Delete my details": a delete word and a details word in one short utterance, in any of the 11
+// languages. It still asks for a yes before anything is deleted. Needs a native-speaker review.
+const DELETE_WORDS = [
+  "delete",
+  "erase",
+  "forget",
+  "remove",
+  "clear",
+  "wipe",
+  "मिटा",
+  "हटा",
+  "डिलीट",
+  "पुसून",
+  "पुसा",
+  "काढून",
+  "அழி",
+  "நீக்கு",
+  "நீக்க",
+  "తొలగించ",
+  "తీసేయ",
+  "ಅಳಿಸ",
+  "ತೆಗೆದು",
+  "മായ്ക്ക",
+  "നീക്ക",
+  "মুছ",
+  "ডিলিট",
+  "કાઢી",
+  "ભૂંસી",
+  "ਮਿਟਾ",
+  "ਹਟਾ",
+  "ଲିଭା",
+  "ହଟା",
+];
+const DETAIL_WORDS = [
+  "details",
+  "data",
+  "information",
+  "info",
+  "profile",
+  "जानकारी",
+  "डेटा",
+  "डाटा",
+  "विवरण",
+  "प्रोफ़ाइल",
+  "माहिती",
+  "தகவல",
+  "விவர",
+  "వివరాలు",
+  "సమాచార",
+  "ಮಾಹಿತಿ",
+  "ವಿವರ",
+  "വിവര",
+  "ഡാറ്റ",
+  "তথ্য",
+  "ডেটা",
+  "માહિતી",
+  "વિગત",
+  "ਜਾਣਕਾਰੀ",
+  "ਡਾਟਾ",
+  "ତଥ୍ୟ",
+  "ବିବରଣୀ",
+];
+
+export function quickCommand(text: string): "stop" | "repeat" | "faster" | "slower" | "forget" | null {
   const t = text
     .toLowerCase()
     .replace(/[.,!?।]/g, "")
     .trim();
-  if (t.split(/\s+/).length > 4) return null; // only short utterances are commands
+  const words = t.split(/\s+/).length;
+  if (words > 6) return null; // only short utterances are commands
   const hit = (list: string[]) =>
     // oxlint-disable-next-line no-control-regex -- ASCII range check, not a control character
     list.some((w) => (/^[\x00-\x7F]+$/.test(w) ? new RegExp(`(^|\\s)${w}(\\s|$)`).test(t) : t.includes(w)));
+  if (hit(DELETE_WORDS) && hit(DETAIL_WORDS)) return "forget";
+  if (words > 4) return null;
   if (hit(STOP)) return "stop";
   if (hit(REPEAT)) return "repeat";
   if (hit(FASTER)) return "faster";

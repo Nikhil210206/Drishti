@@ -1,0 +1,11 @@
+{
+  "name": "@drishti/website",
+  "version": "0.1.0",
+  "description": "Drishti's website (Cloudflare Pages): landing page, privacy policy and the connect page that mints a device token after Turnstile",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "tsx scripts/serve.ts"
+  }
+}

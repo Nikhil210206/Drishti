@@ -76,6 +76,7 @@ Result on 2026-10-05:
 4. Set the secrets:
    - `npx wrangler secret put SARVAM_API_KEY`
    - `npx wrangler secret put TOKEN_SECRET`: a long random string, e.g. from `openssl rand -hex 32`.
+   - In `wrangler.toml`, set `WEBSITE_ORIGINS` to the deployed website's origin. Its connect page mints tokens from the browser, and only listed origins get CORS.
    - `npx wrangler secret put TURNSTILE_SECRET`: the secret of the Turnstile widget for the website, once it exists. Until then, use any random string; minting is then impossible, and you mint test tokens by hand (next step).
 5. `npx wrangler deploy`
 6. To test before the website exists:

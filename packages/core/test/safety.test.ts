@@ -187,6 +187,27 @@ describe("quickCommand", () => {
     expect(quickCommand(text)).toBe(cmd);
   });
 
+  it.each([
+    "delete my details",
+    "please delete my saved details",
+    "forget my data",
+    "मेरी जानकारी मिटा दो",
+    "mera data delete karo",
+    "என் தகவலை அழி",
+    "నా వివరాలు తొలగించు",
+    "ನನ್ನ ಮಾಹಿತಿ ಅಳಿಸು",
+    "আমার তথ্য মুছে দাও",
+    "माझी माहिती पुसून टाका",
+    "મારી માહિતી કાઢી નાખો",
+    "ਮੇਰੀ ਜਾਣਕਾਰੀ ਮਿਟਾਓ",
+    "ମୋ ତଥ୍ୟ ଲିଭାଅ",
+  ])("'%s' → forget", (text) => expect(quickCommand(text)).toBe("forget"));
+
+  it.each(["forget it", "delete", "my details are wrong", "book a ticket and delete nothing from my data please now"])(
+    "'%s' is not forget",
+    (text) => expect(quickCommand(text)).not.toBe("forget"),
+  );
+
   it("ignores long utterances", () => {
     expect(quickCommand("Chennai se Bengaluru kal ka ticket book karo, stop nahi")).toBeNull();
   });

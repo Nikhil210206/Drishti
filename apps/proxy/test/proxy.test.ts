@@ -84,6 +84,37 @@ describe("device tokens", () => {
   });
 });
 
+describe("token minting from the website", () => {
+  const preflight = (origin: string) =>
+    worker.fetch(
+      new Request("https://proxy.test/v1/token", { method: "OPTIONS", headers: { origin } }),
+      env({ WEBSITE_ORIGINS: "https://drishti.example" }),
+    );
+
+  it("allows the website's own origin, and no other", async () => {
+    const ok = await preflight("https://drishti.example");
+    expect(ok.status).toBe(204);
+    expect(ok.headers.get("access-control-allow-origin")).toBe("https://drishti.example");
+    const other = await preflight("https://evil.example");
+    expect(other.status).toBe(403);
+    expect(other.headers.get("access-control-allow-origin")).toBeNull();
+  });
+
+  it("puts the CORS header on a minted token", async () => {
+    upstream(new Response(JSON.stringify({ success: true })));
+    const res = await worker.fetch(
+      new Request("https://proxy.test/v1/token", {
+        method: "POST",
+        headers: { origin: "https://drishti.example" },
+        body: JSON.stringify({ turnstile: "t" }),
+      }),
+      env({ WEBSITE_ORIGINS: "https://drishti.example" }),
+    );
+    expect(res.status).toBe(200);
+    expect(res.headers.get("access-control-allow-origin")).toBe("https://drishti.example");
+  });
+});
+
 describe("proxy", () => {
   it("refuses requests without a valid device token", async () => {
     upstream();

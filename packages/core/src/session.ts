@@ -3,7 +3,7 @@ import type { BrowserDriver, SpeechIn, SpeechOut } from "./types.js";
 import type { Agent, AgentIO } from "./agent/orchestrator.js";
 import type { PhraseBook, PhraseKey } from "./agent/phrases.js";
 import type { NavigationPolicy } from "./agent/policy.js";
-import { quickCommand } from "./agent/safety.js";
+import { quickCommand, yesNo } from "./agent/safety.js";
 
 type Timer = ReturnType<typeof setTimeout>;
 type Waiter = { kind: "question" | "confirm"; resolve: (t: string | null) => void; timer: Timer };
@@ -145,6 +145,7 @@ export class VoiceSession implements AgentIO {
     const cmd = quickCommand(text);
     if (cmd === "stop") return void this.stopAll(true);
     if (cmd === "repeat" && this.lastSpoken) return void this.say(this.lastSpoken);
+    if (cmd === "forget") return void this.forget();
     if (cmd === "faster" || cmd === "slower") {
       this.tts.voice.pace = clamp(this.tts.voice.pace + (cmd === "faster" ? 0.25 : -0.25), 0.6, 2);
       this.emit({ type: "voice", pace: this.tts.voice.pace, speaker: this.tts.voice.speaker });
@@ -200,6 +201,20 @@ export class VoiceSession implements AgentIO {
     }
     this.emit({ type: "task", state: "aborted" });
     if (speak) await this.sayPhrase("stopped");
+  }
+
+  /**
+   * "Delete my details": after a yes, the agent forgets the profile and the conversation, and the
+   * host (which owns storage) is told to wipe its copy. Irreversible, so it is never done on a hunch.
+   */
+  private async forget() {
+    if (this.task) await this.stopAll(false);
+    const answer = await this.ask(await this.deps.phrases.get("forgetConfirm", this.lang), "confirm");
+    if (answer === null || yesNo(answer) !== "yes") return void (await this.sayPhrase("cancelled"));
+    this.deps.agent.setProfile(undefined);
+    this.conversation = [];
+    this.emit({ type: "forget" });
+    await this.sayPhrase("forgotten");
   }
 
   private bargeIn() {

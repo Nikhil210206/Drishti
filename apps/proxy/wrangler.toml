@@ -9,6 +9,8 @@ enabled = false
 
 [vars]
 DAILY_UNITS = "400"
+# The website's connect page mints tokens from the browser. Add the deployed site's origin.
+WEBSITE_ORIGINS = "http://localhost:5175"
 
 # Per-device daily usage. Create with `npx wrangler d1 create drishti-quota`, paste the id here,
 # then `npx wrangler d1 execute drishti-quota --remote --file=schema.sql`.
