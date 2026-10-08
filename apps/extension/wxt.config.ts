@@ -18,6 +18,15 @@ export default defineConfig({
     host_permissions: ["http://localhost/*", "http://127.0.0.1/*", "https://appsprodaksharpublicsa.blob.core.windows.net/*"],
     optional_host_permissions: ["https://*/*", "http://*/*"],
     action: { default_title: "Drishti" },
+    // Global shortcuts: they work from the web page too, and screen readers pass Alt+Shift+letter
+    // through (NVDA, JAWS and VoiceOver use their own modifier keys, and plain letters in browse
+    // mode). Chrome allows four suggested keys; users can change them at chrome://extensions/shortcuts.
+    commands: {
+      talk: { suggested_key: { default: "Alt+Shift+D" }, description: "Open Drishti, or start and stop talking" },
+      stop: { suggested_key: { default: "Alt+Shift+S" }, description: "Stop Drishti" },
+      yes: { suggested_key: { default: "Alt+Shift+Y" }, description: "Answer yes to Drishti's question" },
+      no: { suggested_key: { default: "Alt+Shift+N" }, description: "Answer no to Drishti's question" },
+    },
     // Only the website's connect page may talk to the extension, to hand over a device token.
     externally_connectable: { matches: WEBSITE_ORIGINS.map((o) => `${o}/*`) },
   },

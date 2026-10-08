@@ -15,7 +15,7 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
 4. **Side panel** ✅: the `packages/ui` panel moved into the extension, with the `VoiceSession` and agent running in the panel on `ExtensionDriver`.
 5. **Onboarding** ✅: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
 6. **Per-site permission by voice** ✅ ("Allow Drishti on irctc.co.in?") with optional host permissions.
-7. **Screen-reader output mode** (replies to an aria-live region) and keyboard shortcuts that don't clash with NVDA, JAWS or VoiceOver.
+7. **Screen-reader output mode and global shortcuts** ✅: replies to an aria-live region, and keyboard shortcuts that don't clash with NVDA, JAWS or VoiceOver.
 8. **Exit check**: real Chrome profile, through the deployed proxy.
 
 ## 1. `ExtensionDriver` ✅
@@ -204,7 +204,7 @@ The question uses the panel's usual yes/no card, so it works by voice or keyboar
 
 - A site permission can only be requested from a user gesture, and Chrome shows its own Allow / Deny box.
 - Pressing **Yes** (Enter or a click) asks Chrome on the spot: the press is the gesture.
-- A spoken yes works when it comes soon enough after the Space press. If it doesn't, Drishti says "Please press Enter on the Yes button" and asks once more.
+- A spoken yes works when it comes soon enough after the Space press. If it doesn't, Drishti says "Press Alt Shift Y, or press Enter on the Yes button" and asks once more (the shortcut came in step 7).
 
 **What a yes covers:**
 
@@ -245,3 +245,92 @@ The question uses the panel's usual yes/no card, so it works by voice or keyboar
 
 - A way to see and remove allowed sites (settings, or by voice: "stop using irctc.co.in").
 - The agent still can't *open* a site that isn't allowed yet. It is blocked, as before; asking first belongs to the Phase 4 domain policy.
+
+## 7. Screen-reader output and shortcuts ✅
+
+### Screen-reader output
+
+**What it does.** Settings → **Replies**: *Drishti's voice* (Bulbul, the default) or *My screen reader*. In screen-reader mode:
+
+- Bulbul is never called (free, and nothing spoken to Sarvam).
+- Each reply goes into the panel's one live region, with its language (`lang="hi-IN"`), so NVDA, JAWS or VoiceOver read it in the user's own voice and speed, switching voice by language if they're set to.
+- Replies that come together, such as "Chrome needs a key press…" followed by the question again, are announced together.
+- A confirmation the panel has focus on isn't announced twice: the dialog takes focus and is read with its question.
+
+The welcome flow asks at the voice step ("Who reads Drishti's replies"). After that it stays quiet and lets the screen reader read each step, apart from the voice sample.
+
+**Fewer live regions.** The panel had three: the status line, the live transcript and the reply caption. With Bulbul speaking, a screen reader read them too, over Bulbul, and while the user was talking, into the microphone. Now the announcer is the only one, and it stays empty in voice mode. Errors are `role="alert"`.
+
+**How:**
+
+- Core: `TextSpeech`, a `SpeechOut` that only emits the text.
+  - `VoiceSession` keeps both outputs and switches on `{type: "settings", output}`. It emits `{type: "output", mode}`, and the extension saves it as `settings.output`.
+  - `Emitter` moved from providers to core (the providers re-export it).
+- UI: `useDrishti` keeps the recent replies, and `Announcer` in `App.tsx` reads them out.
+
+### Shortcuts
+
+Screen readers keep plain letters (browse-mode quick keys) and Space for themselves, and their users usually have focus in the web page, not the panel. So the main controls are Chrome extension commands. They work from any page, and screen readers pass Alt+Shift+letter through: NVDA and JAWS use Insert or Caps Lock, and VoiceOver uses Control+Option.
+
+| Keys | What |
+|---|---|
+| Alt+Shift+D | Open Drishti; once open, start listening, and press again to send (stops by itself after 30 s) |
+| Alt+Shift+S | Stop |
+| Alt+Shift+Y | Yes to Drishti's question |
+| Alt+Shift+N | No |
+
+Chrome allows four suggested keys. Users can change them at `chrome://extensions/shortcuts`, and the panel's hints show whatever Chrome has (on a Mac, ⌥⇧D).
+
+Inside the panel, as before: hold Space or `` ` `` to talk, Esc to stop, and Y or N on a confirmation.
+
+**Changes for keyboard and screen-reader users:**
+
+- **Talk button.** It is now a toggle for keyboard and screen-reader presses ("Talk to Drishti", `aria-pressed`). A screen reader's click sends a mouse-down and mouse-up together, which made an empty hold. Mouse, touch and pen still hold to talk.
+- **Confirmations.** The dialog takes focus (`alertdialog` described by its question), not its Yes button, so a stray Enter or Space can't confirm a payment. Focus goes back afterwards.
+- **Held Space.** Space's key repeats are now blocked too. Before, a held Space on a focused button could press it.
+- **Site access.** The Yes shortcut asks Chrome for the site straight from the background, since a shortcut press counts as a user gesture there. The panel says which site it is asking about (`drishti-pending`).
+- **Stopped microphone.** Chrome can hold audio in a page nobody has clicked. If it holds the microphone, the panel says "press any key in the Drishti panel once". In the test, the talk shortcut worked in a fresh, unclicked panel without the autoplay flag.
+
+**How:**
+
+- `apps/extension/lib/commands.ts`: `Commands`, used by the background.
+- The panel subscribes through runtime messages and acts only on its own window's commands.
+- The manifest's `commands` section.
+
+### Tests
+
+- Unit:
+  - 2 session tests: switching modes, and starting in screen-reader mode.
+  - 4 tests for the shortcut handling: open and talk, passing commands on, Yes asking Chrome inside the press, Deny and refusal.
+  - 1 more site-access test: a grant already made by the shortcut.
+- **End to end** (`apps/extension/scripts/screen-reader-e2e.ts`): 18/18, run twice.
+
+  | Check | Result |
+  |---|---|
+  | Hint shows Chrome's key (⌥⇧D) | ✅ |
+  | Reply announced, with `lang="en-IN"`; no Bulbul socket opened | ✅ |
+  | The announcer is the only live region | ✅ |
+  | Talk shortcut starts listening in an unclicked panel, streams to Saaras, and stops on the second press | ✅ |
+  | Confirmation focus on the dialog (not Yes); Yes shortcut confirms; focus returns to the command box | ✅ |
+  | New site: the Yes shortcut reaches Chrome's request from the background; without a real key press Chrome refuses, and Drishti asks for "Alt Shift Y, or Enter on the Yes button"; No shortcut declines | ✅ |
+  | Switching back to Drishti's voice is remembered; Bulbul speaks; live region quiet | ✅ |
+
+- Re-run:
+  - site access 6/6, onboarding 10/10 (with the new choice), and the panel task e2e (Mumbai → Pune, 5 steps, 6.4 s).
+  - `e2e.ts` had not set consent since step 5, and the install's welcome tab became the tab the agent worked on. Both are fixed in the script.
+
+**Bug found and fixed:** `saveSettings` calls made at the same time overwrote each other. Switching the reply mode saved `output` and then `voice` together, and the second wiped the first. Saves in a page now run one at a time.
+
+**Your manual checks** (automation can't drive a real screen reader or Chrome's real key presses):
+
+1. With NVDA (Windows) or VoiceOver (Mac):
+   - set Replies to *My screen reader*;
+   - with focus in a web page, press Alt+Shift+D, speak, press it again;
+   - check the reply is read in your screen reader's voice. Live regions in the side panel are read even when focus is in the page: that is the main thing to confirm.
+2. On a new site, press Alt+Shift+Y at Drishti's question. Chrome's Allow box should open straight away, with no "press a key" step.
+3. With JAWS, if you have it: check Alt+Shift+D, S, Y and N reach Chrome.
+
+**Not done yet:**
+
+- Translations of a changed phrase: the machine-translated `pressYes` cached in other languages stays the old wording ("press Enter on the Yes button", still correct) until the cache is cleared.
+- A page Drishti can't work on (chrome://, an extension page) gives Chrome's technical error instead of "open a website first".

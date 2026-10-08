@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useDrishti, type Step } from "./useDrishti";
+import { useDrishti, type Output, type Step } from "./useDrishti";
 import type { PanelTransport } from "./transport";
 
 const LANGS = [
@@ -46,15 +46,22 @@ const TOOL_LABEL: Record<string, string> = {
 
 type Tab = "activity" | "conversation" | "document" | "stats";
 
+/** Commands from outside the panel: the extension's global shortcuts. */
+export type RemoteCommand = "talk" | "stop" | "yes" | "no";
+
 export interface AppProps {
   transport: PanelTransport;
+  /** Global shortcuts (they work from the web page too); subscribe returns an unsubscribe. */
+  remote?: { subscribe(fn: (c: RemoteCommand) => void): () => void };
+  /** The shortcut keys as Chrome has them, for the hints. */
+  shortcuts?: Partial<Record<RemoteCommand, string>>;
   /** The microphone could not start. */
   onMicError?: (e: unknown) => void;
   /** The microphone is capturing. */
   onMicReady?: () => void;
 }
 
-export default function App({ transport, onMicError, onMicReady }: AppProps) {
+export default function App({ transport, remote, shortcuts = {}, onMicError, onMicReady }: AppProps) {
   const d = useDrishti(transport, { onMicError, onMicReady });
   const [text, setText] = useState("");
   const [composeText, setComposeText] = useState("");
@@ -79,20 +86,25 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
     confirm: "Waiting for your yes / no",
     speaking: "Speaking",
     thinking: "Working on it",
-    idle: d.connected ? "Ready — hold Space to talk" : "Connecting…",
+    idle: d.connected ? `Ready — hold Space${shortcuts.talk ? ` or press ${shortcuts.talk}` : ""} to talk` : "Connecting…",
   }[state];
 
   // Keyboard: hold Space or ` to talk (outside text fields), Esc to stop, Y/N answers a confirmation.
+  // Screen readers keep plain keys for themselves in browse mode, so their users have the global
+  // shortcuts (Alt+Shift+D and friends) instead, which work from the web page too.
   useEffect(() => {
     const typing = (e: KeyboardEvent) => !!(e.target as HTMLElement)?.closest("input,textarea,select");
     const down = (e: KeyboardEvent) => {
       if (e.key === "Escape") return d.stop();
-      if (typing(e) || e.repeat) return;
+      if (typing(e)) return;
       if (e.code === "Backquote" || e.code === "Space") {
+        // Every press, repeats too: a held Space must never also press a focused button (Yes).
         e.preventDefault();
+        if (e.repeat) return;
         setStarted(true);
         void d.pttStart();
       }
+      if (e.repeat) return;
       if (d.awaiting?.kind === "confirm" && (e.key === "y" || e.key === "n")) d.answer(e.key === "y" ? "yes" : "no");
     };
     const up = (e: KeyboardEvent) => (e.code === "Backquote" || e.code === "Space") && !typing(e) && d.pttEnd();
@@ -103,6 +115,33 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
       window.removeEventListener("keyup", up);
     };
   }, [d]);
+
+  // The global shortcuts, from the extension.
+  useEffect(
+    () =>
+      remote?.subscribe((c) => {
+        setStarted(true);
+        if (c === "talk") void d.toggleTalk();
+        else if (c === "stop") d.stop();
+        else if (d.awaiting) d.answer(c);
+      }),
+    [remote, d],
+  );
+
+  // A confirmation takes focus (its question is read with it), but not the Yes button: a stray
+  // Enter or Space must not confirm a payment. Focus goes back where it was afterwards.
+  const dialogRef = useRef<HTMLElement>(null);
+  const confirmQ = d.awaiting?.kind === "confirm" ? d.awaiting.question : null;
+  useEffect(() => {
+    if (!confirmQ || !document.hasFocus()) return;
+    const before = document.activeElement as HTMLElement | null;
+    dialogRef.current?.focus();
+    return () => {
+      // Only if focus was left on the dialog (now gone): not if the user has moved on.
+      const now = document.activeElement;
+      if (before?.isConnected && (!now || now === document.body || dialogRef.current?.contains(now))) before.focus();
+    };
+  }, [confirmQ]);
 
   useEffect(() => {
     if (d.compose) {
@@ -161,12 +200,14 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
       <section className="stage" aria-label="Voice">
         <button
           className="orb"
-          aria-label={d.listening ? "Release to send" : "Hold to talk"}
-          onMouseDown={() => (setStarted(true), void d.pttStart())}
-          onMouseUp={d.pttEnd}
-          onMouseLeave={() => d.listening && d.pttEnd()}
-          onTouchStart={() => (setStarted(true), void d.pttStart())}
-          onTouchEnd={d.pttEnd}
+          aria-label={d.listening ? "Stop listening and send" : "Talk to Drishti"}
+          aria-pressed={d.listening}
+          // Hold with a mouse, finger or pen.
+          onPointerDown={() => (setStarted(true), void d.pttStart())}
+          onPointerUp={d.pttEnd}
+          onPointerLeave={() => d.listening && d.pttEnd()}
+          // A screen reader's or the keyboard's press (no pointer, detail 0) toggles instead.
+          onClick={(e) => e.detail === 0 && (setStarted(true), void d.toggleTalk())}
           style={{ ["--lvl" as string]: Math.min(1, d.level * 2.2).toFixed(2) }}
         >
           <span className="ring r1" />
@@ -176,7 +217,7 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
             <EyeMark big />
           </span>
         </button>
-        <div className="state-label" aria-live="polite">
+        <div className="state-label">
           {stateLabel}
           <span className="lang-pill" title={d.langLocked ? "Language fixed" : "Detected automatically"}>
             {d.lang.native}
@@ -185,13 +226,10 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
         </div>
 
         <div className="captions">
-          <div className="cap-user" aria-live="polite">
-            {d.partial ? <em>{d.partial}</em> : (lastUser?.text ?? "")}
-          </div>
-          <div className="cap-me" aria-live="assertive">
-            {lastMe?.text ?? (started ? "" : "Namaste! Tell me what you want to do on the web.")}
-          </div>
+          <div className="cap-user">{d.partial ? <em>{d.partial}</em> : (lastUser?.text ?? "")}</div>
+          <div className="cap-me">{lastMe?.text ?? (started ? "" : "Namaste! Tell me what you want to do on the web.")}</div>
         </div>
+        <Announcer d={d} />
       </section>
 
       {d.awaiting && (
@@ -199,15 +237,22 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
           className={`card prompt ${d.awaiting.kind}`}
           role="alertdialog"
           aria-label={d.awaiting.kind === "confirm" ? "Confirmation needed" : "Question"}
+          aria-describedby="prompt-q"
+          tabIndex={-1}
+          ref={dialogRef}
         >
-          <div className="prompt-kicker">{d.awaiting.kind === "confirm" ? "🛡️ Your confirmation is needed" : "❓ Drishti is asking"}</div>
-          <div className="prompt-q">{d.awaiting.question}</div>
+          <div className="prompt-kicker" aria-hidden>
+            {d.awaiting.kind === "confirm" ? "🛡️ Your confirmation is needed" : "❓ Drishti is asking"}
+          </div>
+          <div className="prompt-q" id="prompt-q">
+            {d.awaiting.question}
+          </div>
           {d.awaiting.kind === "confirm" ? (
             <div className="prompt-actions">
-              <button className="btn yes" onClick={() => d.answer("yes")}>
+              <button className="btn yes" onClick={() => d.answer("yes")} aria-keyshortcuts={keys("Y", shortcuts.yes)}>
                 Yes, go ahead <kbd>Y</kbd>
               </button>
-              <button className="btn no" onClick={() => d.answer("no")}>
+              <button className="btn no" onClick={() => d.answer("no")} aria-keyshortcuts={keys("N", shortcuts.no)}>
                 No <kbd>N</kbd>
               </button>
             </div>
@@ -276,7 +321,7 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
       </section>
 
       {d.errors.length > 0 && (
-        <button className="toast" onClick={d.dismissError} aria-live="assertive">
+        <button className="toast" onClick={d.dismissError} role="alert">
           ⚠️ {d.errors[d.errors.length - 1]} <span className="muted">(dismiss)</span>
         </button>
       )}
@@ -302,6 +347,11 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
           <span>
             <kbd>Space</kbd> hold to talk
           </span>
+          {shortcuts.talk && (
+            <span>
+              <kbd>{shortcuts.talk}</kbd> talk from any page
+            </span>
+          )}
           <span>
             <kbd>Fn</kbd> Kivi dictation
           </span>
@@ -317,6 +367,47 @@ export default function App({ transport, onMicError, onMicReady }: AppProps) {
 }
 
 // ---------------------------------------------------------------- pieces
+
+const keys = (...k: (string | undefined)[]) => k.filter(Boolean).join(" ") || undefined;
+
+/**
+ * Screen-reader mode: each reply goes into a live region (in its own language, so the screen
+ * reader can switch voice) and NVDA, JAWS or VoiceOver read it. In voice mode Bulbul speaks and
+ * the region stays empty, so the screen reader doesn't talk over it or into the microphone.
+ */
+function Announcer({ d }: { d: ReturnType<typeof useDrishti> }) {
+  const [shown, setShown] = useState<{ text: string; lang: string } | null>(null);
+  const queue = useRef<{ text: string; lang: string }[]>([]);
+  const seen = useRef(new WeakSet<object>());
+  const timer = useRef<number | undefined>(undefined);
+  const awaiting = useRef(d.awaiting);
+  awaiting.current = d.awaiting;
+  useEffect(() => {
+    // Replies can come in quick succession ("Chrome needs a key press…", then the question
+    // again): announce them together, not just the last.
+    const fresh = d.said.filter((x) => !seen.current.has(x));
+    fresh.forEach((x) => seen.current.add(x));
+    if (d.output !== "screenreader" || !fresh.length) return;
+    queue.current.push(...fresh);
+    // Empty first, then the text: a live region only speaks changes, and replies can repeat.
+    setShown(null);
+    clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => {
+      // A confirmation the panel has focus on is read as the dialog takes focus: not twice.
+      const a = awaiting.current;
+      const skip = a?.kind === "confirm" && document.hasFocus() ? a.question : null;
+      const items = queue.current.filter((x) => x.text !== skip);
+      queue.current = [];
+      if (items.length) setShown({ text: items.map((x) => x.text).join(" "), lang: items.at(-1)!.lang });
+    }, 120);
+  }, [d.said, d.output]);
+  useEffect(() => () => clearTimeout(timer.current), []);
+  return (
+    <div className="sr-only" aria-live="polite" aria-atomic="true" lang={shown?.lang}>
+      {shown?.text}
+    </div>
+  );
+}
 
 function Settings({ d, onClose }: { d: ReturnType<typeof useDrishti>; onClose: () => void }) {
   return (
@@ -335,6 +426,13 @@ function Settings({ d, onClose }: { d: ReturnType<typeof useDrishti>; onClose: (
               {native} · {name}
             </option>
           ))}
+        </select>
+      </label>
+      <label className="set-row">
+        <span>Replies</span>
+        <select value={d.output} onChange={(e) => d.setOutput(e.target.value as Output)}>
+          <option value="voice">Drishti's voice</option>
+          <option value="screenreader">My screen reader</option>
         </select>
       </label>
       <label className="set-row">

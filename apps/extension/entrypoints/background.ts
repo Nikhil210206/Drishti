@@ -1,3 +1,4 @@
+import { Commands } from "../lib/commands";
 import { ExtensionDriver, type InputMode } from "../lib/extension-driver";
 import { saveSettings } from "../lib/settings";
 import { WEBSITE_ORIGINS, looksLikeToken } from "../lib/website";
@@ -8,6 +9,27 @@ export default defineBackground(() => {
   // First install: the spoken welcome (language, connect, consent, microphone, voice, practice).
   chrome.runtime.onInstalled.addListener((d) => {
     if (d.reason === "install") void chrome.tabs.create({ url: chrome.runtime.getURL("/welcome.html") });
+  });
+
+  /** Site requests the Yes shortcut made (for the E2E test). */
+  const siteRequests: string[][] = [];
+  // Global shortcuts (lib/commands.ts): to the panel, or straight to Chrome for a site grant.
+  const commands = new Commands({
+    openPanel: (windowId) => void chrome.sidePanel.open({ windowId }).catch(() => {}),
+    request: (origins) => {
+      const r = chrome.permissions.request({ origins });
+      siteRequests.push(origins);
+      r.then(
+        (allowed) => siteRequests.push([`allowed ${allowed}`]),
+        (e) => siteRequests.push([`refused: ${e?.message}`]),
+      );
+      return r;
+    },
+    send: (msg) => void chrome.runtime.sendMessage(msg).catch(() => {}),
+  });
+  chrome.commands.onCommand.addListener((command, tab) => commands.handle(command, tab?.windowId));
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (msg?.type === "drishti-pending") commands.setPending(msg.origins);
   });
 
   // The website's connect page hands over a device token. Chrome only lets the origins in
@@ -31,6 +53,11 @@ export default defineBackground(() => {
       const r = await (d as any)[method](...args);
       return r instanceof Uint8Array ? Array.from(r) : r;
     },
+    /** A shortcut press, as Chrome would deliver it. */
+    command(command: string, windowId?: number) {
+      commands.handle(command, windowId);
+    },
+    siteRequests,
     async release(tabId: number) {
       await drivers.get(tabId)?.dispose();
       drivers.delete(tabId);

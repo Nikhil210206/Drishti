@@ -21,3 +21,6 @@ input[type="range"] { padding: 0; }
 .ok { font-weight: 600; }
 details { margin-top: 32px; color: var(--muted); }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+fieldset { border: 1px solid currentColor; border-radius: 8px; margin: 16px 0; padding: 8px 16px; }
+legend { font-weight: 600; padding: 0 6px; }
+label.choice { display: flex; gap: 10px; align-items: center; margin: 10px 0; }

@@ -8,7 +8,8 @@
  * Chrome grants host access only from a user gesture and shows its own Allow / Deny box, so a
  * spoken yes alone can't finish it: pressing Yes in the panel can (the click is the gesture), and
  * a spoken yes works when it comes soon enough after the Space press. Otherwise Drishti asks for
- * the button. A grant covers the whole site (`*.irctc.co.in`), is remembered, and also lets the
+ * the button. The global Yes shortcut (Alt+Shift+Y) works from anywhere, the web page included:
+ * the background asks Chrome straight from the key press. A grant covers the whole site (`*.irctc.co.in`), is remembered, and also lets the
  * agent move around that site. A no stops the task; the next request asks again.
  */
 import { UserDeclinedError, yesNo, type BrowserDriver, type PhraseKey, type Snapshot } from "@drishti/core";
@@ -49,8 +50,11 @@ export interface SiteAccessDeps {
   contains(origins: string[]): Promise<boolean>;
   /** Ask Chrome for host access (needs a user gesture; throws without one). */
   request(origins: string[]): Promise<boolean>;
-  /** Ask the user a yes/no question in the panel (voice or the Yes/No buttons). */
-  ask(question: string): Promise<string | null>;
+  /**
+   * Ask the user a yes/no question in the panel (voice, the Yes/No buttons, or the Yes shortcut,
+   * which can ask Chrome for these origins itself: a shortcut press is a gesture too).
+   */
+  ask(question: string, origins: string[]): Promise<string | null>;
   say(key: PhraseKey): Promise<void>;
   phrase(key: PhraseKey): Promise<string>;
   /** A site was granted: allow it in the navigation policy and remember it. */
@@ -82,12 +86,18 @@ export class SiteAccess {
     if (this.declined.has(site)) return false;
 
     const question = `${site}: ${await this.deps.phrase("siteAccess")}`;
+    const origins = sitePatterns(site);
     for (let attempt = 0; attempt < 2; attempt++) {
-      const answer = await this.deps.ask(question);
+      const answer = await this.deps.ask(question, origins);
       if (answer === null || yesNo(answer) !== "yes") break;
       try {
+        // Granted already (the Yes shortcut asked Chrome from the background)?
+        if (await this.deps.contains(origins)) {
+          this.deps.granted(site);
+          return true;
+        }
         // Straight after the yes, while the press of Yes (or of Space for a spoken yes) still counts.
-        if (await this.deps.request(sitePatterns(site))) {
+        if (await this.deps.request(origins)) {
           this.deps.granted(site);
           return true;
         }

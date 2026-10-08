@@ -33,6 +33,9 @@ const ctx = await chromium.launchPersistentContext("", {
   args: [`--disable-extensions-except=${EXT}`, `--load-extension=${EXT}`, "--autoplay-policy=no-user-gesture-required"],
 });
 const sw = ctx.serviceWorkers()[0] ?? (await ctx.waitForEvent("serviceworker"));
+// Close the welcome tab a fresh install opens: it would be the tab the agent works on.
+await ctx.waitForEvent("page", { timeout: 3000 }).catch(() => {});
+for (const p of ctx.pages()) if (p.url().includes("welcome.html")) await p.close();
 const site = ctx.pages()[0] ?? (await ctx.newPage());
 await site.goto(home);
 await sw.evaluate((s) => (globalThis as any).chrome.storage.local.set({ settings: s }), {
@@ -40,6 +43,8 @@ await sw.evaluate((s) => (globalThis as any).chrome.storage.local.set({ settings
   token,
   homeUrl: home,
   lang: "en-IN",
+  onboarded: true,
+  consent: { version: "2026-10-07", at: new Date().toISOString() },
 });
 
 // The side panel page on its own (a popup window), like Chrome's panel but drivable by Playwright.
@@ -77,6 +82,11 @@ console.log(
     .join(" | ")
     .slice(0, 700)}`,
 );
+const toast = await panel
+  .locator(".toast")
+  .innerText({ timeout: 500 })
+  .catch(() => "");
+if (toast) errors.push(`shown: ${toast}`);
 if (errors.length) console.log(`⚠️  panel errors:\n${errors.join("\n")}`);
 await ctx.close();
 process.exit(0);

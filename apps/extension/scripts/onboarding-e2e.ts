@@ -1,7 +1,7 @@
 /**
  * The welcome flow end to end, on a fresh install: language → connect (the real website page,
  * Turnstile's always-pass test key, the proxy) → privacy → microphone (Chrome's fake device,
- * fed from a recorded Tamil clip) → voice sample → details → practice. Then, in the side panel,
+ * fed from a recorded Tamil clip) → replies by voice or screen reader → voice sample → details → practice. Then, in the side panel,
  * "मेरी जानकारी मिटा दो" deletes the saved details after a spoken yes. Costs a few paise.
  *
  *   npm run dev -w @drishti/proxy -- --port 8788   (with .dev.vars)
@@ -83,7 +83,11 @@ try {
   await welcome.getByRole("button", { name: "आगे" }).click();
 
   await welcome.getByRole("heading", { name: "Drishti की आवाज़" }).waitFor();
-  await welcome.getByLabel(/आवाज़/).first().selectOption("shubh");
+  await welcome.getByLabel(/मेरा स्क्रीन रीडर/).click();
+  await welcome.waitForTimeout(300);
+  ok("screen-reader replies can be chosen", (await storage()).output === "screenreader");
+  await welcome.getByLabel(/Drishti की अपनी आवाज़/).click();
+  await welcome.getByRole("combobox").selectOption("shubh"); // the voice list
   await welcome.getByRole("button", { name: "नमूना सुनिए" }).click();
   await welcome.waitForTimeout(1500);
   await welcome.getByRole("button", { name: "आगे" }).click();

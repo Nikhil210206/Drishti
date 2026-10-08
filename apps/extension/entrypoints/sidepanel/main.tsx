@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "@drishti/ui";
+import { App, type RemoteCommand } from "@drishti/ui";
 import "@drishti/ui/styles.css";
+import type { CommandMessage } from "../../lib/commands";
 import { localTransport } from "../../lib/panel-session";
 import { loadSettings, ready, type Settings } from "../../lib/settings";
 
@@ -20,6 +21,35 @@ function openMicGrant(e: unknown) {
 function micReady() {
   grantTabOpened = false;
   void chrome.runtime.sendMessage({ type: "drishti-mic-ok" }).catch(() => {});
+}
+
+/**
+ * The global shortcuts, from the background (lib/commands.ts). Only the panel of the window they
+ * were pressed in acts; a panel opened on its own (tests, a detached window) takes them all.
+ */
+const here = chrome.windows.getCurrent();
+const remote = {
+  subscribe(fn: (c: RemoteCommand) => void) {
+    const onMessage = (msg: CommandMessage) => {
+      if (msg?.type !== "drishti-command") return;
+      void here.then((w) => {
+        if (w.type !== "normal" || msg.windowId === undefined || msg.windowId === w.id) fn(msg.command);
+      });
+    };
+    chrome.runtime.onMessage.addListener(onMessage);
+    return () => chrome.runtime.onMessage.removeListener(onMessage);
+  },
+};
+
+/** The keys as Chrome has them now (users can change them at chrome://extensions/shortcuts). */
+function useShortcuts() {
+  const [keys, setKeys] = useState<Partial<Record<RemoteCommand, string>>>({});
+  useEffect(() => {
+    void chrome.commands
+      .getAll()
+      .then((all) => setKeys(Object.fromEntries(all.filter((c) => c.shortcut).map((c) => [c.name, c.shortcut]))));
+  }, []);
+  return keys;
 }
 
 /** Not connected, or no agreement to the current privacy summary yet: finish the welcome flow first. */
@@ -51,10 +81,11 @@ function Panel() {
     chrome.storage.local.onChanged.addListener(onChange);
     return () => chrome.storage.local.onChanged.removeListener(onChange);
   }, []);
+  const shortcuts = useShortcuts();
   const transport = useMemo(() => (settings && ready(settings) ? localTransport(settings) : undefined), [settings]);
   if (!settings) return <p role="status">Starting Drishti…</p>;
   if (!transport) return <FinishSetup />;
-  return <App transport={transport} onMicError={openMicGrant} onMicReady={micReady} />;
+  return <App transport={transport} remote={remote} shortcuts={shortcuts} onMicError={openMicGrant} onMicReady={micReady} />;
 }
 
 createRoot(document.getElementById("root")!).render(<Panel />);

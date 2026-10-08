@@ -38,8 +38,8 @@ export const PHRASES = {
     "hi-IN": "इस वेबसाइट पर काम करने के लिए Drishti को आपकी अनुमति चाहिए। हाँ बोलिए या Yes दबाइए, फिर Chrome के बॉक्स में Allow चुनिए।",
   },
   pressYes: {
-    "en-IN": "Chrome needs a key press for this. Please press Enter on the Yes button.",
-    "hi-IN": "इसके लिए Chrome को बटन दबाना ज़रूरी है। कृपया Yes बटन पर Enter दबाइए।",
+    "en-IN": "Chrome needs a key press for this. Press Alt Shift Y, or press Enter on the Yes button.",
+    "hi-IN": "इसके लिए Chrome को बटन दबाना ज़रूरी है। Alt Shift Y दबाइए, या Yes बटन पर Enter दबाइए।",
   },
   siteDenied: {
     "en-IN": "Okay. I won't work on this website.",

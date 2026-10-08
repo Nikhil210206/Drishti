@@ -20,6 +20,11 @@ export interface Line {
 }
 
 export type Mode = "ptt" | "handsfree";
+/** Replies in Bulbul's voice, or as text for the user's screen reader. */
+export type Output = "voice" | "screenreader";
+
+/** Toggle-to-talk (a shortcut or a screen reader's click) ends by itself after this long. */
+const TOGGLE_LIMIT_MS = 30000;
 
 export interface DrishtiOptions {
   /** The microphone could not start (in the extension: send the user to the grant tab). */
@@ -37,6 +42,7 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
   const modeRef = useRef<Mode>("ptt");
   const tailTimer = useRef<number | undefined>(undefined);
   const thinkTimer = useRef<number | undefined>(undefined);
+  const toggleTimer = useRef<number | undefined>(undefined);
 
   const [connected, setConnected] = useState(false);
   const [status, setStatus] = useState<{ stt?: string; browser?: string }>({});
@@ -58,6 +64,9 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
   const [errors, setErrors] = useState<string[]>([]);
   const [doc, setDoc] = useState<{ name: string; markdown: string } | null>(null);
   const [langLocked, setLangLocked] = useState(false);
+  const [output, setOutputState] = useState<Output>("voice");
+  /** Recent replies, for the screen reader (only given to it in screen-reader mode). */
+  const [said, setSaid] = useState<{ id: number; text: string; lang: string }[]>([]);
   const [audits, setAudits] = useState<{ action: string; target: string; confirmed: boolean }[]>([]);
 
   const send = useCallback(
@@ -88,6 +97,21 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transport]);
 
+  // Any key press or click in the panel lets Chrome start its audio (speech and the microphone),
+  // so talking later from the global shortcut works.
+  useEffect(() => {
+    const wake = () => {
+      void player.current?.resume();
+      void mic.current?.resume();
+    };
+    window.addEventListener("keydown", wake, true);
+    window.addEventListener("pointerdown", wake, true);
+    return () => {
+      window.removeEventListener("keydown", wake, true);
+      window.removeEventListener("pointerdown", wake, true);
+    };
+  }, []);
+
   function handle(m: any) {
     switch (m.type) {
       case "status":
@@ -108,6 +132,10 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
         break;
       case "tts_start":
         addLine("drishti", m.text);
+        setSaid((s) => [...s.slice(-9), { id: m.id, text: m.text, lang: m.lang }]);
+        break;
+      case "output":
+        setOutputState(m.mode === "screenreader" ? "screenreader" : "voice");
         break;
       case "tts_stop":
         player.current?.stop();
@@ -203,6 +231,7 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
   const pttEnd = useCallback(() => {
     if (!pttDown.current) return;
     pttDown.current = false;
+    clearTimeout(toggleTimer.current);
     setListening(false);
     ear.current?.stopListen();
     // Keep streaming briefly so the last syllable isn't cut, then force the final transcript.
@@ -211,6 +240,24 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
       send({ type: "ptt", down: false });
     }, 350);
   }, [send]);
+
+  /** Talk without holding a key: start listening, or send what was said. */
+  const toggleTalk = useCallback(async () => {
+    if (pttDown.current) return pttEnd();
+    try {
+      await pttStart();
+    } catch {
+      return;
+    }
+    if (mic.current?.held) {
+      pttEnd();
+      setErrors((e) => [...e.slice(-3), "Chrome is holding the microphone. Press any key in the Drishti panel once, then try again."]);
+      ear.current?.error();
+      return;
+    }
+    clearTimeout(toggleTimer.current);
+    toggleTimer.current = window.setTimeout(pttEnd, TOGGLE_LIMIT_MS);
+  }, [pttStart, pttEnd]);
 
   const setMode = useCallback(
     async (m: Mode) => {
@@ -243,6 +290,7 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
   const answer = useCallback((a: "yes" | "no") => send({ type: "confirm", answer: a }), [send]);
   const submitCompose = useCallback((text: string) => send({ type: "compose_submit", text }), [send]);
   const settings = useCallback((s: Record<string, unknown>) => send({ type: "settings", ...s }), [send]);
+  const setOutput = useCallback((o: Output) => send({ type: "settings", output: o }), [send]);
   const goHome = useCallback(() => send({ type: "home" }), [send]);
   const greet = useCallback(async () => {
     await player.current?.resume();
@@ -293,8 +341,12 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
     doc,
     audits,
     langLocked,
+    output,
+    said,
     pttStart,
     pttEnd,
+    toggleTalk,
+    setOutput,
     setMode,
     sendText,
     stop,

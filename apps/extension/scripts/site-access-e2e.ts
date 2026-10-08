@@ -97,7 +97,7 @@ try {
   await panel.locator(".btn.yes").click();
   await panel.waitForTimeout(4000);
   const after = await panel.locator(".cap-me").innerText();
-  ok("pressing Yes reaches Chrome as a user gesture", !/press Enter on the Yes button/.test(after), after.slice(0, 90));
+  ok("pressing Yes reaches Chrome as a user gesture", !/needs a key press/.test(after), after.slice(0, 90));
 } finally {
   await ctx.close();
 }

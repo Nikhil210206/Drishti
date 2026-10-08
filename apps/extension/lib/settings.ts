@@ -2,7 +2,7 @@
  * What the extension keeps on the user's device, in chrome.storage.local. Nothing here leaves the
  * device except the device token, which goes to the Drishti proxy.
  */
-import type { Cache, LangCode, Profile } from "@drishti/core";
+import type { Cache, LangCode, OutputMode, Profile } from "@drishti/core";
 
 export interface Settings {
   /** Drishti proxy origin. */
@@ -16,6 +16,8 @@ export interface Settings {
   /** Bulbul voice and speaking pace. */
   speaker: string;
   pace: number;
+  /** Replies in Bulbul's voice (default) or through the user's screen reader. */
+  output?: OutputMode;
   /** The privacy summary the user agreed to, and when. Nothing goes to Sarvam before this. */
   consent?: { version: string; at: string };
   /** Sites the user let Drishti work on (Chrome host access granted), e.g. "irctc.co.in". */
@@ -37,10 +39,17 @@ export async function loadSettings(): Promise<Settings> {
   return { ...DEFAULTS, ...s };
 }
 
-export async function saveSettings(patch: Partial<Settings>): Promise<Settings> {
-  const next = { ...(await loadSettings()), ...patch };
-  await chrome.storage.local.set({ settings: next });
-  return next;
+/** Saves in this page run one at a time: two at once would each overwrite the other's change. */
+let saving: Promise<unknown> = Promise.resolve();
+
+export function saveSettings(patch: Partial<Settings>): Promise<Settings> {
+  const run = saving.then(async () => {
+    const next = { ...(await loadSettings()), ...patch };
+    await chrome.storage.local.set({ settings: next });
+    return next;
+  });
+  saving = run.catch(() => {});
+  return run;
 }
 
 /** Phrase translations (fixed UI phrases, never user content), kept across sessions. */

@@ -50,7 +50,10 @@ function useStrings(lang: LangCode, settings: Settings | undefined) {
   return { t, machine: machine && Object.keys(translated).length > 0 };
 }
 
-/** Speech: Bulbul once connected, the browser's own voices before that. */
+/**
+ * Speech: Bulbul once connected, the browser's own voices before that. Silent once the user
+ * picks their screen reader for replies: it reads each step's focused heading and text instead.
+ */
 function useSpeech(settings: Settings | undefined) {
   const player = useRef<Player | undefined>(undefined);
   const tts = useRef<TtsEngine | undefined>(undefined);
@@ -65,19 +68,25 @@ function useSpeech(settings: Settings | undefined) {
   useEffect(() => {
     if (tts.current && settings) tts.current.voice = { speaker: settings.speaker, pace: settings.pace };
   }, [settings?.speaker, settings?.pace]);
-  return useCallback((text: string, lang: LangCode) => {
-    speechSynthesis.cancel();
-    tts.current?.cancelAll();
-    player.current?.stop();
-    if (tts.current && player.current) {
-      void player.current.resume();
-      tts.current.speak(text, lang);
-      return;
-    }
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang;
-    speechSynthesis.speak(u);
-  }, []);
+  const silent = settings?.output === "screenreader";
+  /** `always`: speak even in screen-reader mode (the voice sample was asked for). */
+  return useCallback(
+    (text: string, lang: LangCode, always = false) => {
+      speechSynthesis.cancel();
+      tts.current?.cancelAll();
+      player.current?.stop();
+      if (silent && !always) return;
+      if (tts.current && player.current) {
+        void player.current.resume();
+        tts.current.speak(text, lang);
+        return;
+      }
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang;
+      speechSynthesis.speak(u);
+    },
+    [silent],
+  );
 }
 
 function Welcome() {
@@ -197,6 +206,20 @@ function Welcome() {
       {step === "voice" && (
         <>
           <p>{t("voiceIntro")}</p>
+          <fieldset>
+            <legend>{t("output")}</legend>
+            {(["voice", "screenreader"] as const).map((o) => (
+              <label key={o} className="choice">
+                <input
+                  type="radio"
+                  name="output"
+                  checked={(settings.output ?? "voice") === o}
+                  onChange={() => void update({ output: o })}
+                />
+                {t(o === "voice" ? "outputVoice" : "outputScreenReader")}
+              </label>
+            ))}
+          </fieldset>
           <label>
             {t("voice")}
             <select value={settings.speaker} onChange={(e) => void update({ speaker: e.target.value })}>
@@ -219,7 +242,7 @@ function Welcome() {
             />
           </label>
           <div className="row">
-            <button onClick={() => speak(t("sample"), lang)}>{t("playSample")}</button>
+            <button onClick={() => speak(t("sample"), lang, true)}>{t("playSample")}</button>
             <button className="primary" onClick={next}>
               {t("next")}
             </button>

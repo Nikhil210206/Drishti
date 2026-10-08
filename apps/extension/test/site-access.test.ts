@@ -71,6 +71,24 @@ describe("SiteAccess", () => {
     ]);
   });
 
+  it("takes a grant the Yes shortcut already got from Chrome, without asking Chrome again", async () => {
+    const granted: string[] = [];
+    const { d, log } = deps(
+      [],
+      async () => {
+        throw new Error("no user gesture in the panel");
+      },
+      granted,
+    );
+    d.ask = async (q, origins) => {
+      log.push(`ask ${q}`);
+      granted.push(origins[0].replace("https://*.", "")); // the background's request, allowed
+      return "yes";
+    };
+    expect(await new SiteAccess(d).ensure(IRCTC)).toBe(true);
+    expect(log).toEqual(["ask irctc.co.in: siteAccess", "granted irctc.co.in"]);
+  });
+
   it("treats Deny in Chrome's box as a no", async () => {
     const { d, log } = deps(["yes"], async () => false);
     expect(await new SiteAccess(d).ensure(IRCTC)).toBe(false);

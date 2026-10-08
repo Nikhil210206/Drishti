@@ -21,6 +21,11 @@ async function targetTab(): Promise<chrome.tabs.Tab | undefined> {
   return tab;
 }
 
+/** Tell the background which site the panel is asking about (null: none), for the Yes shortcut. */
+function pendingSite(origins: string[] | null) {
+  void chrome.runtime.sendMessage({ type: "drishti-pending", origins }).catch(() => {});
+}
+
 export function localTransport(settings: Settings): PanelTransport {
   let session: VoiceSession | undefined;
   return {
@@ -46,7 +51,15 @@ export function localTransport(settings: Settings): PanelTransport {
         const access = new SiteAccess({
           contains: (origins) => chrome.permissions.contains({ origins }),
           request: (origins) => chrome.permissions.request({ origins }),
-          ask: (question) => session!.ask(question, "confirm"),
+          // While asking, the background knows the origins: the Yes shortcut asks Chrome itself.
+          ask: async (question, origins) => {
+            pendingSite(origins);
+            try {
+              return await session!.ask(question, "confirm");
+            } finally {
+              pendingSite(null);
+            }
+          },
           say: (key) => session!.sayPhrase(key),
           phrase: (key) => phrases.get(key, session!.lang),
           granted: (site) => {
@@ -83,13 +96,14 @@ export function localTransport(settings: Settings): PanelTransport {
                 if (e.type === "task" && e.state === "running") access.newTask();
                 // Keep the voice the user picks in the panel.
                 if (e.type === "voice") void saveSettings({ speaker: String(e.speaker), pace: Number(e.pace) });
+                if (e.type === "output") void saveSettings({ output: e.mode === "screenreader" ? "screenreader" : "voice" });
                 h.event(e);
               },
               // A copy into its own ArrayBuffer: the player keeps what it is given.
               audio: (pcm) => h.audio(pcm.slice().buffer),
             },
           },
-          { lang: settings.lang ?? "hi-IN", homeUrl: settings.homeUrl },
+          { lang: settings.lang ?? "hi-IN", homeUrl: settings.homeUrl, output: settings.output },
         );
         // Follow the user to another tab in this window; a page opening a new tab is followed by
         // the driver itself.

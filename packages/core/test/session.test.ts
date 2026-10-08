@@ -104,3 +104,42 @@ describe("VoiceSession when the user declines what a task needs", () => {
     expect(speechOut.spoken.map((s) => s.text)).not.toContain("Sorry, something went wrong. Please try again.");
   });
 });
+
+describe("VoiceSession screen-reader output", () => {
+  it("sends replies as text only, without Bulbul, and switches back on request", async () => {
+    const { session, speechOut, events } = setup();
+    expect(events.find((e) => e.type === "output")?.mode).toBe("voice");
+    session.onMessage({ type: "settings", output: "screenreader" });
+    expect(events.at(-2)).toEqual({ type: "output", mode: "screenreader" });
+    session.say("Two trains found.");
+    expect(speechOut.spoken).toEqual([]);
+    expect(events.some((e) => e.type === "tts_start" && e.text === "Two trains found." && e.lang === "en-IN")).toBe(true);
+    session.onMessage({ type: "settings", output: "voice" });
+    session.say("Back to my voice.");
+    expect(speechOut.spoken.map((s) => s.text)).toEqual(["Back to my voice."]);
+  });
+
+  it("can start in screen-reader mode", async () => {
+    const events: Record<string, any>[] = [];
+    const browser = new FakeBrowser({}, "about:blank");
+    const policy = new NavigationPolicy();
+    const book = phrases();
+    const speechOut = new FakeSpeechOut();
+    const session = new VoiceSession(
+      {
+        agent: new Agent({ browser, llm: new ScriptedLLM([]), translator: echoTranslator, docs: noDocs, phrases: book, policy }),
+        browser,
+        policy,
+        phrases: book,
+        speechOut,
+        createSpeechIn: () => ({}) as SpeechIn,
+        sink: { event: (e) => events.push(e), audio: () => {} },
+      },
+      { lang: "en-IN", homeUrl: HOME, output: "screenreader" },
+    );
+    session.onMessage({ type: "greet" });
+    await tick();
+    expect(speechOut.spoken).toEqual([]);
+    expect(events.filter((e) => e.type === "tts_start").map((e) => e.text)).toEqual(["Hi, I'm Drishti. Tell me what you want to do."]);
+  });
+});

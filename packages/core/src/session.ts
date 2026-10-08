@@ -4,6 +4,7 @@ import type { Agent, AgentIO } from "./agent/orchestrator.js";
 import type { PhraseBook, PhraseKey } from "./agent/phrases.js";
 import type { NavigationPolicy } from "./agent/policy.js";
 import { quickCommand, yesNo } from "./agent/safety.js";
+import { TextSpeech, type OutputMode } from "./text-speech.js";
 
 type Timer = ReturnType<typeof setTimeout>;
 type Waiter = { kind: "question" | "confirm"; resolve: (t: string | null) => void; timer: Timer };
@@ -28,6 +29,8 @@ export interface SessionOptions {
   lang?: LangCode;
   /** Page the panel's home button opens. Must pass the navigation policy. */
   homeUrl: string;
+  /** Replies in Bulbul's voice (default) or as text for the user's screen reader. */
+  output?: OutputMode;
 }
 
 /**
@@ -38,7 +41,10 @@ export class VoiceSession implements AgentIO {
   lang: LangCode;
   private langLocked = false;
   private stt?: SpeechIn;
+  /** Where replies go now: Bulbul (`voiceOut`) or the screen reader (`textOut`). */
   private tts: SpeechOut;
+  private voiceOut: SpeechOut;
+  private textOut = new TextSpeech();
   private task?: { abort: AbortController; text: string };
   private waiter?: Waiter;
   private composeWaiter?: { resolve: (t: string | null) => void; timer: Timer };
@@ -53,11 +59,18 @@ export class VoiceSession implements AgentIO {
     private opts: SessionOptions,
   ) {
     this.lang = opts.lang ?? "hi-IN";
-    this.tts = deps.speechOut;
-    this.wireTts();
+    this.voiceOut = deps.speechOut;
+    this.tts = opts.output === "screenreader" ? this.textOut : this.voiceOut;
+    this.wireTts(this.voiceOut);
+    this.wireTts(this.textOut);
     this.emit({ type: "lang", code: this.lang, name: LANGS[this.lang].name, native: LANGS[this.lang].native });
-    this.emit({ type: "voice", pace: this.tts.voice.pace, speaker: this.tts.voice.speaker });
+    this.emit({ type: "voice", pace: this.voiceOut.voice.pace, speaker: this.voiceOut.voice.speaker });
+    this.emit({ type: "output", mode: this.output });
     void deps.phrases.warm(this.lang);
+  }
+
+  get output(): OutputMode {
+    return this.tts === this.textOut ? "screenreader" : "voice";
   }
 
   // ---------- panel messages ----------
@@ -96,8 +109,8 @@ export class VoiceSession implements AgentIO {
         }
         break;
       case "settings":
-        if (typeof msg.pace === "number") this.tts.voice.pace = clamp(msg.pace, 0.6, 2);
-        if (typeof msg.speaker === "string") this.tts.voice.speaker = msg.speaker;
+        if (typeof msg.pace === "number") this.voiceOut.voice.pace = clamp(msg.pace, 0.6, 2);
+        if (typeof msg.speaker === "string") this.voiceOut.voice.speaker = msg.speaker;
         if (msg.lang === "auto") this.langLocked = false;
         else if (isLangCode(msg.lang)) {
           this.langLocked = false;
@@ -105,7 +118,12 @@ export class VoiceSession implements AgentIO {
           this.langLocked = true;
         }
         if (msg.lang) this.emit({ type: "lang_lock", locked: this.langLocked });
-        this.emit({ type: "voice", pace: this.tts.voice.pace, speaker: this.tts.voice.speaker });
+        if ((msg.output === "voice" || msg.output === "screenreader") && msg.output !== this.output) {
+          this.tts.cancelAll();
+          this.tts = msg.output === "screenreader" ? this.textOut : this.voiceOut;
+          this.emit({ type: "output", mode: this.output });
+        }
+        this.emit({ type: "voice", pace: this.voiceOut.voice.pace, speaker: this.voiceOut.voice.speaker });
         break;
       case "greet":
         void this.sayPhrase("ready");
@@ -125,7 +143,8 @@ export class VoiceSession implements AgentIO {
 
   close() {
     this.stt?.close();
-    this.tts.cancelAll();
+    this.voiceOut.cancelAll();
+    this.textOut.cancelAll();
     this.task?.abort.abort();
   }
 
@@ -152,8 +171,8 @@ export class VoiceSession implements AgentIO {
     if (cmd === "repeat" && this.lastSpoken) return void this.say(this.lastSpoken);
     if (cmd === "forget") return void this.forget();
     if (cmd === "faster" || cmd === "slower") {
-      this.tts.voice.pace = clamp(this.tts.voice.pace + (cmd === "faster" ? 0.25 : -0.25), 0.6, 2);
-      this.emit({ type: "voice", pace: this.tts.voice.pace, speaker: this.tts.voice.speaker });
+      this.voiceOut.voice.pace = clamp(this.voiceOut.voice.pace + (cmd === "faster" ? 0.25 : -0.25), 0.6, 2);
+      this.emit({ type: "voice", pace: this.voiceOut.voice.pace, speaker: this.voiceOut.voice.speaker });
       return void this.sayPhrase(cmd);
     }
     if (this.waiter) return this.resolveWaiter(text);
@@ -239,9 +258,9 @@ export class VoiceSession implements AgentIO {
   }
 
   // ---------- speech out ----------
-  private wireTts() {
-    this.tts.on("start", (u) => this.emit({ type: "tts_start", id: u.id, text: u.text, lang: u.lang }));
-    this.tts.on("audio", (u, pcm) => {
+  private wireTts(out: SpeechOut) {
+    out.on("start", (u) => this.emit({ type: "tts_start", id: u.id, text: u.text, lang: u.lang }));
+    out.on("audio", (u, pcm) => {
       if (u.cancelled) return;
       if (this.firstAudioPending) {
         this.firstAudioPending = false;
@@ -249,9 +268,9 @@ export class VoiceSession implements AgentIO {
       }
       this.deps.sink.audio(pcm);
     });
-    this.tts.on("end", (u) => this.emit({ type: "tts_end", id: u.id }));
-    this.tts.on("cancel", () => this.emit({ type: "tts_stop" }));
-    this.tts.on("error", (e) => this.emit({ type: "error", message: `TTS: ${e.message}` }));
+    out.on("end", (u) => this.emit({ type: "tts_end", id: u.id }));
+    out.on("cancel", () => this.emit({ type: "tts_stop" }));
+    out.on("error", (e) => this.emit({ type: "error", message: `TTS: ${e.message}` }));
   }
 
   // ---------- AgentIO ----------

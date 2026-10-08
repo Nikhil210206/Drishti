@@ -17,6 +17,17 @@ export class Mic {
     this.node = new AudioWorkletNode(this.ctx, "pcm-capture");
     this.node.port.onmessage = (e) => this.onChunk(e.data.pcm, e.data.level);
     src.connect(this.node);
+    // Chrome may hold a new AudioContext until the page gets a key press or click.
+    await this.ctx.resume().catch(() => {});
+  }
+
+  /** Chrome is holding the microphone's audio until the panel gets a key press or click. */
+  get held() {
+    return this.ctx?.state === "suspended";
+  }
+
+  resume() {
+    return this.ctx?.resume();
   }
 
   stop() {

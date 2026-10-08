@@ -56,6 +56,12 @@ export const STRINGS = {
     hi: "आवाज़ और बोलने की रफ़्तार चुनिए, फिर Play sample दबाइए। इन्हें बाद में बदल सकते हैं।",
   },
   voice: { en: "Voice", hi: "आवाज़" },
+  output: { en: "Who reads Drishti's replies", hi: "Drishti के जवाब कौन पढ़े" },
+  outputVoice: { en: "Drishti's own voice", hi: "Drishti की अपनी आवाज़" },
+  outputScreenReader: {
+    en: "My screen reader (NVDA, JAWS or VoiceOver), in its own voice and speed",
+    hi: "मेरा स्क्रीन रीडर (NVDA, JAWS या VoiceOver), उसकी अपनी आवाज़ और रफ़्तार में",
+  },
   speed: { en: "Speed", hi: "रफ़्तार" },
   playSample: { en: "Play sample", hi: "नमूना सुनिए" },
   sample: {
@@ -79,8 +85,8 @@ export const STRINGS = {
   next: { en: "Next", hi: "आगे" },
   practiceTitle: { en: "Try it", hi: "आज़माइए" },
   practiceIntro: {
-    en: "Drishti is ready. Press Start practice: a practice train-booking site opens with Drishti beside it. Hold Space and say, for example, “show trains from Chennai to Bengaluru tomorrow”. Nothing there is real.",
-    hi: "Drishti तैयार है। Start practice दबाइए: अभ्यास के लिए ट्रेन बुकिंग की साइट खुलेगी और साथ में Drishti। Space दबाकर बोलिए, जैसे “कल चेन्नई से बेंगलुरु की ट्रेनें दिखाओ”। वहाँ कुछ भी असली नहीं है।",
+    en: "Drishti is ready. Press Start practice: a practice train-booking site opens with Drishti beside it. Hold Space in Drishti, or from any page press Alt Shift D, and say, for example, “show trains from Chennai to Bengaluru tomorrow”. After Alt Shift D, press it again when you have finished speaking. Alt Shift Y and Alt Shift N answer yes and no, and Alt Shift S stops. Nothing on the practice site is real.",
+    hi: "Drishti तैयार है। Start practice दबाइए: अभ्यास के लिए ट्रेन बुकिंग की साइट खुलेगी और साथ में Drishti। Drishti में Space दबाकर रखिए, या किसी भी पेज से Alt Shift D दबाइए, और बोलिए, जैसे “कल चेन्नई से बेंगलुरु की ट्रेनें दिखाओ”। Alt Shift D के बाद, बोलना पूरा होने पर उसे फिर दबाइए। Alt Shift Y हाँ है, Alt Shift N नहीं, और Alt Shift S रोकता है। अभ्यास की साइट पर कुछ भी असली नहीं है।",
   },
   startPractice: { en: "Start practice", hi: "अभ्यास शुरू कीजिए" },
   machine: { en: "This page was machine-translated from English.", hi: "" },
