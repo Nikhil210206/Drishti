@@ -8,6 +8,11 @@
  */
 export const DEV_PROXY = "http://localhost:8788";
 export const DEV_WEBSITE = "http://localhost:5175";
+/** Pathik Rail from the dev harness (`npm run practice`), with the server the eval checks bookings on. */
+export const DEV_PRACTICE = "http://localhost:5174/";
+
+/** The practice site: the website's copy (apps/website/scripts/build.ts), or the dev harness's locally. */
+export const practiceUrl = (website: string) => (website === DEV_WEBSITE ? DEV_PRACTICE : `${website}/practice/`);
 
 /** The origin of an http(s) address ("https://x.workers.dev/" → "https://x.workers.dev"). */
 export function originOf(url: string): string {

@@ -76,9 +76,22 @@ export function pageDates(text: string): string[] {
  * exactly one date and the page text shows exactly one.
  */
 export function dateMismatch(userTexts: string[], shown: string, now: Date): string {
+  return mismatch(userTexts, pageDates(shown), now);
+}
+
+/**
+ * The same for a results page, from its address ("#/results?…&date=2026-10-29"): a live run
+ * searched 29 Oct for "tomorrow" and answered "tomorrow, 29 October". Only when the address
+ * carries exactly one date, so an article's own date never counts.
+ */
+export function urlDateMismatch(userTexts: string[], url: string, now: Date): string {
+  return mismatch(userTexts, url.match(/\b\d{4}-\d{2}-\d{2}\b/g) ?? [], now);
+}
+
+function mismatch(userTexts: string[], shown: string[], now: Date): string {
   const want = requestedDate(userTexts, now);
   if (!want) return "";
-  const dates = new Set(pageDates(shown));
+  const dates = new Set(shown);
   if (dates.size !== 1) return "";
   const [got] = dates;
   if (got === key(want)) return "";

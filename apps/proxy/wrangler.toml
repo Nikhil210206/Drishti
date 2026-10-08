@@ -9,15 +9,15 @@ enabled = false
 
 [vars]
 DAILY_UNITS = "400"
-# The website's connect page mints tokens from the browser. Add the deployed site's origin.
-WEBSITE_ORIGINS = "http://localhost:5175"
+# The website's connect page mints tokens from the browser: the only origin that gets CORS.
+# Local development overrides it in .dev.vars (WEBSITE_ORIGINS=http://localhost:5175).
+WEBSITE_ORIGINS = "https://drishti-voice.pages.dev"
 
-# Per-device daily usage. Create with `npx wrangler d1 create drishti-quota`, paste the id here,
-# then `npx wrangler d1 execute drishti-quota --remote --file=schema.sql`.
+# Per-device daily usage (created 2026-10-08, APAC). Schema: `npx wrangler d1 execute drishti-quota --remote --file=schema.sql`.
 [[d1_databases]]
 binding = "DB"
 database_name = "drishti-quota"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "9292c758-e6c2-43a6-87d0-9b684bc589dc"
 
 # Sarvam's starter plan allows 40 LLM calls a minute, shared by every user.
 [[ratelimits]]

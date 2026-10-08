@@ -2,6 +2,8 @@
  * End-to-end check of a running proxy against real Sarvam (costs a few paise):
  *   npx wrangler dev --port 8788   (in apps/proxy, with .dev.vars)
  *   npx tsx apps/proxy/scripts/smoke.ts [http://localhost:8788] [path/to/24k-mono.wav]
+ * The deployed proxy only mints after a real Turnstile check, so give it a token minted by hand:
+ *   TOKEN=$(npx tsx apps/proxy/scripts/mint.ts) npx tsx apps/proxy/scripts/smoke.ts https://drishti-proxy.<subdomain>.workers.dev
  * Uses Node's built-in WebSocket, the same API the extension uses in the browser.
  */
 import fs from "node:fs";
@@ -14,10 +16,12 @@ const wsBase = base.replace(/^http/, "ws");
 const t = () => performance.now();
 const ok = (name: string, pass: boolean, detail = "") => console.log(`${pass ? "✅" : "❌"} ${name}${detail ? ` — ${detail}` : ""}`);
 
-// 1. Device token (the always-pass Turnstile test secret accepts this dummy response).
+// 1. Device token: the one given, or minted (the always-pass Turnstile test secret accepts this
+// dummy response; a deployed proxy with the real secret must refuse it).
 const minted = await fetch(`${base}/v1/token`, { method: "POST", body: JSON.stringify({ turnstile: "XXXX.DUMMY.TOKEN.XXXX" }) });
-const { token } = (await minted.json()) as { token: string };
-ok("mint token", !!token, `HTTP ${minted.status}`);
+const token = process.env.TOKEN ?? ((await minted.json()) as { token?: string }).token;
+if (process.env.TOKEN) ok("refuses to mint without a real Turnstile check", minted.status === 403, `HTTP ${minted.status}`);
+else ok("mint token", !!token, `HTTP ${minted.status}`);
 const auth = { authorization: `Bearer ${token}`, "content-type": "application/json" };
 
 // 2. No token: refused.
@@ -55,7 +59,11 @@ await new Promise<void>((resolve) => {
   const ws = new WebSocket(`${wsBase}/text-to-speech/ws?model=bulbul:v3&send_completion_event=true`, ["drishti", token]);
   let bytes = 0;
   let first = 0;
+  let finished = false;
+  // Once: closing a socket that failed fires its error event again.
   const done = (pass: boolean, why: string) => {
+    if (finished) return;
+    finished = true;
     ok("tts relay", pass, why);
     ws.close();
     resolve();
@@ -106,7 +114,10 @@ if (fs.existsSync(wav)) {
     });
     const ws = new WebSocket(`${wsBase}/speech-to-text-realtime/ws?${q}`, ["drishti", token]);
     let sentAt = 0;
+    let finished = false;
     const done = (pass: boolean, why: string) => {
+      if (finished) return;
+      finished = true;
       ok("stt relay", pass, why);
       ws.close();
       resolve();

@@ -3,7 +3,8 @@
  * device except the device token, which goes to the Drishti proxy.
  */
 import type { Cache, LangCode, OutputMode, Profile } from "@drishti/core";
-import { DEV_PROXY, originOf } from "./endpoints";
+import { DEV_PROXY, originOf, practiceUrl } from "./endpoints";
+import { WEBSITE } from "./website";
 
 export interface Settings {
   /** Drishti proxy origin. */
@@ -34,7 +35,7 @@ const DEFAULTS: Settings = {
   // This build's proxy (WXT_PROXY, lib/endpoints.ts); the manifest gives the extension host access to it.
   proxyUrl: originOf(import.meta.env.WXT_PROXY || DEV_PROXY),
   token: "",
-  homeUrl: "http://localhost:5174/",
+  homeUrl: practiceUrl(WEBSITE),
   speaker: "kavya",
   pace: 1.1,
 };

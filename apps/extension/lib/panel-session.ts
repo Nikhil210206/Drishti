@@ -10,6 +10,7 @@ import type { PanelHandlers, PanelTransport } from "@drishti/ui";
 import { ExtensionDriver } from "./extension-driver";
 import { GatedDriver, SiteAccess } from "./site-access";
 import { StorageCache, loadSettings, saveSettings, type Settings } from "./settings";
+import { WEBSITE } from "./website";
 
 /** The tab the agent works on: the active tab of the browser window this panel belongs to. */
 async function targetTab(): Promise<chrome.tabs.Tab | undefined> {
@@ -45,7 +46,8 @@ export function localTransport(settings: Settings): PanelTransport {
         const auth = { baseUrl: settings.proxyUrl, token: settings.token };
         const translator = new SarvamTranslator(auth);
         const phrases = new PhraseBook(translator, new StorageCache("phrase:"));
-        const policy = new NavigationPolicy([...DEFAULT_ALLOWED_DOMAINS, ...(settings.sites ?? [])]);
+        // Drishti's own website too (exactly that host): its practice site.
+        const policy = new NavigationPolicy([...DEFAULT_ALLOWED_DOMAINS, new URL(WEBSITE).hostname, ...(settings.sites ?? [])]);
         const driver = new ExtensionDriver(tab.id);
         // Ask before working on a site Drishti has no access to yet (lib/site-access.ts).
         const access = new SiteAccess({

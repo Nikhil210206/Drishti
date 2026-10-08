@@ -6,6 +6,9 @@
   "type": "module",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "tsx scripts/serve.ts"
+    "dev": "tsx scripts/serve.ts",
+    "build": "tsx scripts/build.ts",
+    "build:release": "DRISHTI_PROXY=https://drishti-proxy.nikhil-drishti.workers.dev TURNSTILE_SITEKEY=0x4AAAAAAFRdfJ8F1p9vk7bZ tsx scripts/build.ts",
+    "deploy": "npm run build:release && wrangler pages deploy dist --project-name drishti-voice --branch main"
   }
 }

@@ -1,2 +1,4 @@
 .dev.vars
 .wrangler/
+# The deployed TOKEN_SECRET, for minting test tokens by hand (scripts/mint.ts)
+.token-secret

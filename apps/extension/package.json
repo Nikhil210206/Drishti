@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "wxt",
     "build": "wxt build",
+    "build:release": "wxt build --mode release",
     "zip": "wxt zip",
     "typecheck": "wxt prepare && tsc -p tsconfig.json"
   },

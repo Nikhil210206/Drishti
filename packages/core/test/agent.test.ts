@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Agent, NavigationPolicy } from "../src/index.js";
-import { batchStop } from "../src/agent/orchestrator.js";
+import { batchStop, namesAmount } from "../src/agent/orchestrator.js";
 import { FakeBrowser, RecordingIO, ScriptedLLM, echoTranslator, element, noDocs, page, phrases } from "./fakes.js";
 
 const HOME = "http://localhost:5174/#/";
@@ -31,6 +31,27 @@ describe("Agent safety gate", () => {
     await run(agentFor(browser, llm), io);
     expect(browser.log).toContain("click 7");
     expect(io.audits()).toEqual([expect.objectContaining({ action: "click", confirmed: true })]);
+  });
+
+  it("leads with the control's own words when the model's question misses the amount", async () => {
+    // A live run asked "Do you want to go back?" before PAY ₹220, and the scripted user said yes.
+    const browser = new FakeBrowser({ [PAY]: payPage }, PAY);
+    const llm = new ScriptedLLM([[{ name: "click", args: { id: 7, narration: "", confirmation_question: "Do you want to go back?" } }]]);
+    const io = new RecordingIO(["nahi"]);
+    await run(agentFor(browser, llm), io);
+    expect(io.asked[0].q).toMatch(/^PAY ₹845\. Should I go ahead\?/);
+    expect(io.asked[0].q).not.toContain("go back");
+    expect(browser.log).not.toContain("click 7");
+  });
+
+  it("knows when a question names the amount, in any Indian script", () => {
+    expect(namesAmount("Do you want to go back?", "PAY ₹220", "")).toBe(false);
+    expect(namesAmount("₹২২০ দিয়ে টিকিট বুক করব?", "PAY ₹220", "")).toBe(true);
+    expect(namesAmount("₹200 দিয়ে book করব কি?", "book ticket (SL ₹200 66)", "")).toBe(true);
+    expect(namesAmount("Pay 1,240 rupees?", "PROCEED TO PAY", "Total ₹1,240")).toBe(true);
+    expect(namesAmount("Continue?", "PROCEED TO PAY", "Total ₹1,240")).toBe(false);
+    expect(namesAmount("Pay ₹2200?", "PAY ₹220", "")).toBe(false); // another number
+    expect(namesAmount("Submit the complaint?", "SUBMIT", "Category Cleanliness")).toBe(true); // nothing priced
   });
 
   it("asks again on an unclear answer and treats silence as no", async () => {
@@ -165,6 +186,24 @@ describe("Agent tool guards", () => {
     await run(agentFor(browser, llm), io);
     expect(io.asked).toHaveLength(1);
     expect(browser.log).not.toContain("click 5");
+  });
+
+  it("sends an answer about another day's results back once, then lets it through", async () => {
+    const results = "http://localhost:5174/#/results?from=CSMT&to=PUNE&date=2026-10-29&cls=ALL&quota=GN";
+    const browser = new FakeBrowser({}, results);
+    const llm = new ScriptedLLM([
+      [{ name: "done", args: { speech: "Here are tomorrow's trains, 29 October." } }],
+      [{ name: "done", args: { speech: "There are trains on 29 October only." } }],
+    ]);
+    const io = new RecordingIO();
+    const agent = new Agent(
+      { browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases(), policy: new NavigationPolicy() },
+      { now: () => new Date("2026-10-05T09:30:00+05:30") },
+    );
+    const r = await run(agent, io, "What trains are there from Mumbai to Pune tomorrow?");
+    expect(lastHistory(llm, 1)).toContain("REFUSED: the user asked for tomorrow (Tue, 6 Oct), but this is for Thu, 29 Oct");
+    expect(io.said).toEqual(["There are trains on 29 October only."]);
+    expect(r.outcome).toBe("done");
   });
 
   it("refuses the same action twice on an unchanged page", async () => {

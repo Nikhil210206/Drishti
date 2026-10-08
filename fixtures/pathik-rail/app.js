@@ -26,6 +26,21 @@ const saveForm = () => sessionStorage.setItem("pr_form", JSON.stringify(form));
 let draft = JSON.parse(sessionStorage.getItem("pr_draft") || "null");
 const saveDraft = () => sessionStorage.setItem("pr_draft", JSON.stringify(draft));
 
+// Bookings and complaints go to the dev server (apps/dev-harness/src/mock-api.ts), where the eval
+// checks them. The practice copy on Drishti's website has no server: there they stay in this tab,
+// numbered the same way.
+async function api(kind, body) {
+  try {
+    const res = await fetch(`api/${kind}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    if (res.ok) return await res.json();
+  } catch {}
+  const saved = JSON.parse(sessionStorage.getItem(`pr_api_${kind}`) || "[]");
+  const id = kind === "bookings" ? { pnr: String(4123456700 + saved.length) } : { id: `CMP${1000 + saved.length}` };
+  const rec = { ...body, ...id, createdAt: new Date().toISOString() };
+  sessionStorage.setItem(`pr_api_${kind}`, JSON.stringify([...saved, rec]));
+  return rec;
+}
+
 function route() {
   const [path, qs] = (location.hash.slice(1) || "/").split("?");
   const q = new URLSearchParams(qs || "");
@@ -375,12 +390,7 @@ function payPage() {
   app.querySelectorAll(".pay-opts .radio").forEach((r) => (r.onclick = () => app.querySelectorAll(".pay-opts .radio").forEach((x) => x.classList.toggle("on", x === r))));
   $("#payBtn").onclick = async () => {
     $("#payBtn").textContent = "Processing…";
-    const res = await fetch("/api/bookings", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ train: t.name, trainNo: t.no, from: draft.from, to: draft.to, date: draft.date, cls: c.code, quota: draft.quota, passengers: draft.passengers, total }),
-    });
-    const b = await res.json();
+    const b = await api("bookings", { train: t.name, trainNo: t.no, from: draft.from, to: draft.to, date: draft.date, cls: c.code, quota: draft.quota, passengers: draft.passengers, total });
     sessionStorage.setItem("pr_last", JSON.stringify(b));
     draft = null;
     sessionStorage.removeItem("pr_draft");
@@ -435,8 +445,7 @@ function helpPage() {
     const text = $("#cText").value.trim();
     if (!cat) return ($("#cErr").textContent = "Please select a category.");
     if (text.length < 10) return ($("#cErr").textContent = "Please describe your issue (at least 10 characters).");
-    const res = await fetch("/api/complaints", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ category: cat, text, pnr: $("#cPnr").value }) });
-    const r = await res.json();
+    const r = await api("complaints", { category: cat, text, pnr: $("#cPnr").value });
     $("#cErr").textContent = "";
     $("#cDone").innerHTML = `<div class="success-msg">Complaint registered. Reference number ${r.id}. We will respond within 48 hours.</div>`;
   };
@@ -456,7 +465,7 @@ function docsPage() {
       <div class="sec-title">My Documents</div>
       <div class="muted">Bills and letters shared with your Pathik account.</div>
       <div class="doc-list">
-        ${docs.map(([f, label]) => `<a class="doc" href="/docs/${f}" target="_blank"><span class="doc-ic"></span>${label}</a>`).join("")}
+        ${docs.map(([f, label]) => `<a class="doc" href="docs/${f}" target="_blank"><span class="doc-ic"></span>${label}</a>`).join("")}
       </div>
     </div>
   </div>`;

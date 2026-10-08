@@ -74,31 +74,58 @@ On 2026-10-08 the forged socket check became "closed with `4401 unauthorized`", 
 
 ## Deploy (your Cloudflare account)
 
-**Never deploy with the test Turnstile secret:** anyone could mint tokens and spend your credits.
+**Deployed on 2026-10-08:**
 
-1. `cd apps/proxy`
-2. `npx wrangler d1 create drishti-quota`, then paste the printed `database_id` into `wrangler.toml`.
-3. `npx wrangler d1 execute drishti-quota --remote --file=schema.sql`
-4. Set the secrets:
-   - `npx wrangler secret put SARVAM_API_KEY`
-   - `npx wrangler secret put TOKEN_SECRET`: a long random string, e.g. from `openssl rand -hex 32`.
-   - In `wrangler.toml`, set `WEBSITE_ORIGINS` to the deployed website's origin. Its connect page mints tokens from the browser, and only listed origins get CORS.
-   - `npx wrangler secret put TURNSTILE_SECRET`: the secret of the Turnstile widget for the website, once it exists. Until then, use any random string; minting is then impossible, and you mint test tokens by hand (next step).
-5. `npx wrangler deploy`
-6. To test before the website exists:
-   - `TOKEN_SECRET=… npx tsx apps/proxy/scripts/mint.ts` prints a token.
-   - Treat it like a password: it spends your credits until you rotate `TOKEN_SECRET`.
+| Piece | Where |
+|---|---|
+| Proxy | `https://drishti-proxy.nikhil-drishti.workers.dev` |
+| Quota database | D1 `drishti-quota`, APAC |
+| Website | `https://drishti-voice.pages.dev`: connect, privacy, and `practice/` (Pathik Rail) |
+| Turnstile | widget `drishti-connect`, managed mode, site key `0x4AAAAAAFRdfJ8F1p9vk7bZ` (public) |
 
-7. Build the extension against the deployed proxy and website:
+**Never deploy with the test Turnstile secret:** anyone could mint tokens and spend your credits. The proxy answers `503 not_configured` until `SARVAM_API_KEY` and a `TOKEN_SECRET` of 32+ characters are set.
+
+### Steps, as done (run in `apps/proxy` unless noted)
+
+1. Create the database and apply the schema:
+   - `npx wrangler d1 create drishti-quota`, then put the printed `database_id` in `wrangler.toml`.
+   - `npx wrangler d1 execute drishti-quota --remote --file=schema.sql`
+   - Run the same with `--local`: a new id means a new local database.
+2. `wrangler.toml`: `WEBSITE_ORIGINS` is the deployed website, the only origin that gets CORS for minting. `.dev.vars` sets `WEBSITE_ORIGINS=http://localhost:5175` for local development.
+3. Deploy the Worker: `npx wrangler deploy`.
+4. Create the Turnstile widget:
 
    ```bash
-   WXT_PROXY=https://drishti-proxy.<subdomain>.workers.dev WXT_WEBSITE=https://<project>.pages.dev npm run build -w @drishti/extension
+   npx wrangler turnstile widget create drishti-connect --domain <project>.pages.dev --mode managed
    ```
 
-   - The proxy's origin goes into the manifest's host permissions. The extension's requests to it then skip CORS, which the proxy answers only for the website's connect page.
+   The site key is public: it goes into the website build. The secret goes only to the Worker (next step).
+5. Set the three secrets. Each command pipes its value, so it never shows on screen:
+
+   ```bash
+   grep '^SARVAM_API_KEY=' .dev.vars | cut -d= -f2- | tr -d '"\n' | npx wrangler secret put SARVAM_API_KEY
+   openssl rand -hex 32 | tr -d '\n' | tee .token-secret | npx wrangler secret put TOKEN_SECRET
+   npx wrangler turnstile widget get <site key> --json | python3 -c "import json,sys; print(json.load(sys.stdin)['secret'], end='')" | npx wrangler secret put TURNSTILE_SECRET
+   ```
+
+   - **Strip the quotes:** `.dev.vars` keeps the Sarvam key in quotes. `wrangler dev` removes them, but a pipe doesn't, and a quoted key fails at Sarvam with "Invalid or missing authentication credentials".
+   - **`.token-secret`** (gitignored) lets `scripts/mint.ts` mint test tokens for the deployed proxy.
+6. The website (from the repo root): `npm run deploy -w @drishti/website`.
+   - This builds `dist/` with the proxy address and site key (`scripts/build.ts` refuses the test key for a deployed proxy) and uploads it to Pages.
+   - The project was created once with `npx wrangler pages project create <project> --production-branch main --force`. This wrangler sends Pages commands to Cloudflare's newer Workers hosting, which failed and deployed nothing; `--force` makes a classic Pages project, at `<project>.pages.dev`.
+   - Pages drops `.html` (`/connect.html` → 308 → `/connect`) and keeps the query string, so the connect link still works.
+7. The extension: `npm run build:release -w @drishti/extension` builds `.output/chrome-mv3-release` from `apps/extension/.env.release` (`WXT_PROXY`, `WXT_WEBSITE`).
+   - The proxy and the website go into the manifest's host permissions: requests to the proxy skip CORS, and the practice site needs no question.
    - Only that website may hand the extension a token (`externally_connectable`).
-   - Without the variables you get the local servers (`localhost:8788`, `localhost:5175`), which a store build must never ship.
-   - The website's `public/config.js` needs the same proxy address and its Turnstile site key.
+   - A release build has no localhost access.
+   - A plain `npm run build` stays local (`localhost:8788`, `localhost:5175`, practice at `localhost:5174`).
+8. Check it:
+
+   ```bash
+   TOKEN=$(npx tsx apps/proxy/scripts/mint.ts) npx tsx apps/proxy/scripts/smoke.ts https://drishti-proxy.nikhil-drishti.workers.dev cache/spike-ta.wav
+   ```
+
+   Treat a minted token like a password: it spends your credits until you rotate `TOKEN_SECRET`.
 
 Rotating `TOKEN_SECRET` revokes every token. Devices then mint new ones through Turnstile.
 

@@ -69,6 +69,9 @@ export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
     if (url.pathname === "/health") return new Response("ok");
+    // Fail closed until the secrets are set (wrangler secret put): never mint or check tokens with
+    // a missing or weak secret.
+    if (!env.SARVAM_API_KEY || (env.TOKEN_SECRET ?? "").length < 32) return json(503, { error: "not_configured" });
     if (url.pathname === "/v1/token") {
       const cors = corsFor(req, env);
       if (req.method === "OPTIONS") return new Response(null, { status: cors ? 204 : 403, headers: cors });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dateMismatch, requestedDate } from "../src/agent/dates.js";
+import { dateMismatch, requestedDate, urlDateMismatch } from "../src/agent/dates.js";
 
 // The eval's frozen clock: Mon 5 Oct 2026, 09:30 IST.
 const NOW = new Date("2026-10-05T09:30:00+05:30");
@@ -46,5 +46,22 @@ describe("dateMismatch", () => {
     expect(dateMismatch(["Mumbai to Pune"], "Date Wed, 7 Oct, 2026", NOW)).toBe("");
     expect(dateMismatch(["kal"], "Tue, 6 Oct, 2026 or Wed, 7 Oct, 2026", NOW)).toBe("");
     expect(dateMismatch(["kal"], "PAY ₹180", NOW)).toBe("");
+  });
+});
+
+describe("urlDateMismatch", () => {
+  const results = (d: string) => `http://localhost:5174/#/results?from=CSMT&to=PUNE&date=${d}&cls=ALL&quota=GN`;
+
+  it("catches results for another day than asked (a live run answered 'tomorrow, 29 October')", () => {
+    expect(urlDateMismatch(["trains from Mumbai to Pune tomorrow"], results("2026-10-29"), NOW)).toBe(
+      "the user asked for tomorrow (Tue, 6 Oct), but this is for Thu, 29 Oct",
+    );
+  });
+
+  it("lets the right day through, and pages whose address doesn't carry exactly one date", () => {
+    expect(urlDateMismatch(["trains from Mumbai to Pune tomorrow"], results("2026-10-06"), NOW)).toBe("");
+    expect(urlDateMismatch(["trains from Mumbai to Pune"], results("2026-10-29"), NOW)).toBe("");
+    expect(urlDateMismatch(["today's news"], "https://news.example/2026/10/01/rains-in-chennai", NOW)).toBe("");
+    expect(urlDateMismatch(["trains tomorrow"], "https://rail.example/?from=2026-10-06&to=2026-10-09", NOW)).toBe("");
   });
 });

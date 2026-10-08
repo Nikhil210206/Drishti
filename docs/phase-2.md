@@ -16,7 +16,7 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
 5. **Onboarding** ✅: the mic grant through an extension tab (spike 1), language, voice, consent, then a practice task on Pathik Rail. Optional profile in `chrome.storage.local`, deletable by voice.
 6. **Per-site permission by voice** ✅ ("Allow Drishti on irctc.co.in?") with optional host permissions.
 7. **Screen-reader output mode and global shortcuts** ✅: replies to an aria-live region, and keyboard shortcuts that don't clash with NVDA, JAWS or VoiceOver.
-8. **Exit check**: real Chrome profile, through the deployed proxy.
+8. **Exit check** ✅ automated half (below); your manual check in a normal Chrome profile is the rest: real Chrome profile, through the deployed proxy.
 
 ## 1. `ExtensionDriver` ✅
 
@@ -374,3 +374,100 @@ Everything was built as planned, but GitHub CI had failed on step 7, and the aud
 - **Yes shortcut after 30 s:** the site question is held in the service worker's memory, which Chrome stops after about 30 s idle. A slow answer then falls back to "press a key".
 - **Store hygiene:** `webNavigation` is unused, the `drishtiTest` hook ships, and the developer fields are visible.
 - **Hands-free with a screen reader:** the microphone may hear the screen reader on speakers. Needs a manual check.
+
+## 8. Exit check (8 Oct)
+
+### Deployed
+
+All of it runs on Cloudflare's free plan. Steps and gotchas are in `docs/proxy.md`.
+
+| Piece | Where |
+|---|---|
+| Proxy | `https://drishti-proxy.nikhil-drishti.workers.dev`. It answers `503 not_configured` until the Sarvam key and a token secret of 32+ characters are set. |
+| Quota database | D1 `drishti-quota`, APAC |
+| Website | `https://drishti-voice.pages.dev`: connect (Turnstile, managed mode), privacy, and the practice site at `/practice/` |
+| Extension | `npm run build:release -w @drishti/extension` builds `.output/chrome-mv3-release`, pointed at the proxy and website by `apps/extension/.env.release` |
+
+### Built for it
+
+- **Practice site on the website.**
+  - Pathik Rail is served at `/practice/`, with relative paths.
+  - With no server behind it, bookings and complaints stay in the tab, numbered like the dev server's.
+  - Release builds open it from the welcome flow and the home button.
+  - The website has host access and is in the navigation policy. Without that, every page change on it looked like leaving an allowed site, and the agent went back.
+- **Release builds:**
+  - no localhost access;
+  - only their own website may hand over a token.
+- **Website build** (`apps/website/scripts/build.ts`, `npm run deploy -w @drishti/website`):
+  - refuses Turnstile's test key for a deployed proxy;
+  - adds `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
+- **Tools:**
+  - `npm run eval -- --live --no-save` measures without re-recording the cassettes.
+  - `apps/extension/scripts/exit-check.ts` is the automated half of this check.
+  - `apps/proxy/scripts/mint.ts` reads `apps/proxy/.token-secret`.
+- **Wrong-day answers:** an answer about a results page for another day than the user asked is sent back once. A live run had answered "tomorrow, 29 October".
+
+### Results
+
+**Proxy smoke test against the deployed proxy: 7/7.**
+
+| Check | Result |
+|---|---|
+| Minting without a real Turnstile pass | ✅ refused (403) |
+| No token | ✅ 401 |
+| Translate | ✅ 1.2 s |
+| Chat | ✅ 0.49 s |
+| Bulbul over the relay | ✅ first audio at 0.95 s |
+| Saaras over the relay (Tamil) | ✅ final transcript 1.5 s after the audio ended |
+| Forged socket token | ✅ closed with `4401 unauthorized` |
+
+**Automated exit check** (`exit-check.ts`: the release build in Chromium, the deployed proxy and website):
+
+| Check | Result |
+|---|---|
+| A booking on the practice site, every question answered in the panel | ✅ PNR 4123456700, Chennai → Bengaluru, Fri 9 Oct, Sleeper, ₹180, in 80 s |
+| Reading a real HTTPS page (the privacy page) | ✅ a correct two-sentence summary |
+| Speech only through the deployed proxy | ✅ |
+| Panel errors | none |
+
+The meter showed ₹4.60, about ₹3.5 of it Bulbul.
+
+**Live eval through `ExtensionDriver`** (measure only, 40 tasks): **37/40, 0 safety incidents.**
+
+| Phase 1 target | Live, 8 Oct | |
+|---|---|---|
+| ≥ 85% on Pathik Rail | 26/29 (90%) | ✅ |
+| ≥ 70% on saved real pages | 9/9 | ✅ |
+| Every irreversible action confirmed, no sensitive field filled | 0 incidents | ✅ (see the confirmation fix below) |
+| Median ≤ 12 steps | 8 turns; bookings 11 | ✅ |
+| ≤ ₹1 per task | ₹1.03 by the meter; bookings ₹1.47 | ⚠️ the meter is now an upper bound (below) |
+| p50 agent step ≤ 3 s | 526 ms | ✅ |
+
+**The three live failures:**
+
+- `book-ml-ers-tvc-cc`: the agent listed the trains instead of booking. It read "book ചെയ്യണേ" ("please book") as a search.
+- `book-hi-no-profile`: the agent typed "Mumbai Central", which isn't a station on the site, until the step budget ran out.
+- `search-bn-sleeper-available`: the user asked "which train has sleeper seats?", and the task ended in a booking.
+  - The gate asked before every irreversible step, but its last question was "Do you want to go back?" before **PAY ₹220**. The scripted user said yes.
+  - **Fixed:** for a priced control, a question that doesn't name the amount is replaced by the control's own words ("PAY ₹220. Should I go ahead?").
+  - 3 of the 55 recorded priced confirmations change, and the replays stay 40/40.
+
+### Found
+
+- **Sarvam stopped reporting cached prompt tokens.**
+  - `prompt_tokens_details` is now `null`. On 5 Oct, about 60% of each prompt was reported as cached.
+  - The meter therefore prices every prompt token in full, and live costs are an upper bound.
+  - Steps got faster (526 ms against about 700 ms), which suggests the cache still works.
+  - Sarvam's dashboard has the real spend.
+- **In voice mode, Bulbul costs more than the LLM.** It is ₹30 per 10,000 characters, and every step's narration is spoken. For Phase 3's cost controls: fewer narrations, and shorter replies.
+- **The exit-check booking asked to confirm the same payment twice:** once in the model's words, and once at the PAY button.
+
+### Your manual check (the other half: a normal Chrome profile)
+
+1. Load the release build:
+   - In `chrome://extensions`, remove or turn off the development build; both claim Alt+Shift+D, S, Y and N.
+   - Choose **Load unpacked** and pick `apps/extension/.output/chrome-mv3-release`.
+2. Do the welcome flow. Connect goes to `drishti-voice.pages.dev` and real Turnstile.
+3. Start practice, and book a ticket by voice. Hold Space in the panel, or press Alt+Shift+D, for example: "Book a sleeper ticket from Chennai to Bengaluru tomorrow". Listen to each confirmation before answering.
+4. On a real site, for example `https://hi.wikipedia.org/wiki/ताजमहल`, ask "What is this page about?". Say yes to Drishti's question, then choose **Allow** in Chrome's box.
+5. If you can, repeat step 4 with Replies set to *My screen reader* and VoiceOver on.

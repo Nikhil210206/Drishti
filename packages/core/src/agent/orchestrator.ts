@@ -7,7 +7,7 @@ import { NavigationPolicy, linkTarget } from "./policy.js";
 import { duplicatePassenger, looksComplete, readback } from "./readback.js";
 import { saidBy } from "./match.js";
 import { classMismatch, quotaMismatch } from "./classes.js";
-import { dateMismatch } from "./dates.js";
+import { dateMismatch, urlDateMismatch } from "./dates.js";
 import { refusalPhrase, type PhraseBook, type PhraseKey } from "./phrases.js";
 
 /** Everything the agent needs from the outside world (voice session, or the eval harness). */
@@ -67,6 +67,8 @@ export class Agent {
   private optionOf = new Map<string, { toggle: string; name: string }>();
   /** The page as it was when a dialog opened over it. */
   private underDialog: Snapshot | undefined;
+  /** An answer for the wrong day was already sent back once this task. */
+  private dateRefused = false;
   /** The user said to leave it: only done is allowed from here. */
   private gaveUp = false;
   /** Sensitive fields handed to the user to type. */
@@ -111,6 +113,7 @@ export class Agent {
     this.chosenVia = new Map();
     this.optionOf = new Map();
     this.underDialog = undefined;
+    this.dateRefused = false;
     this.gaveUp = false;
     this.handedOver = new Set();
     const p = this.opts.profile;
@@ -389,7 +392,14 @@ export class Agent {
             };
           }
           if (confirmNeeded) {
-            const question = a.confirmation_question || `${el?.name ?? ""}. ${await this.phrase("confirmGeneric", io.lang)}`;
+            // The user answers what they hear first, so for a priced control the model's question must
+            // name the amount: a live run asked "Do you want to go back?" before PAY ₹220, and got a yes.
+            // Otherwise the control's own words lead ("PAY ₹220. Should I go ahead?").
+            const modelQuestion = String(a.confirmation_question ?? "");
+            const question =
+              modelQuestion && namesAmount(modelQuestion, el?.name ?? "", facts)
+                ? modelQuestion
+                : `${el?.name ?? ""}. ${await this.phrase("confirmGeneric", io.lang)}`;
             const ok = await this.confirm(
               io,
               facts ? `${question} ${await this.phrase("pageShows", io.lang)} ${facts}.` : question,
@@ -666,6 +676,16 @@ export class Agent {
           return await this.composeWithKivi(a, el, io, emit, describe());
         case "done": {
           const speech = String(a.speech ?? "");
+          // Results for another day than the user asked for: send the answer back once to fix the date.
+          const wrongDay = this.dateRefused ? "" : urlDateMismatch(this.userTexts, snap.url, this.opts.now?.() ?? new Date());
+          if (wrongDay) {
+            this.dateRefused = true;
+            emit({ status: "blocked", result: wrongDay });
+            return {
+              line: `${describe()} → REFUSED: ${wrongDay}. Set the date on the search form and search again; if that day has nothing, tell the user so.`,
+              failed: true,
+            };
+          }
           io.say(speech);
           emit({ status: "ok", result: speech });
           return { line: "done", terminal: true, speech };
@@ -914,6 +934,22 @@ export class Agent {
     io.emit({ type: "audit", action: "navigate", target: hostOf(now), reason: "site not allowed", confirmed: false });
     return `BLOCKED: that opened ${hostOf(now)}, which Drishti may not open, so I went back`;
   }
+}
+
+/** Rupee amounts in a text ("PAY ₹1,240" → "1240"). */
+const amounts = (text: string) => [...text.matchAll(/₹\s?(\d[\d,]*)/g)].map((m) => m[1].replace(/,/g, ""));
+/** Indian-script digits as ASCII: every Indic block's zero sits at …6 (०, ০, ੦, ૦, ୦, ௦, ౦, ೦, ൦). */
+const asciiDigits = (s: string) => s.replace(/[०-९০-৯੦-੯૦-૯୦-୯௦-௯౦-౯೦-೯൦-൯]/g, (d) => String((d.charCodeAt(0) - 6) & 0xf));
+
+/**
+ * Whether a confirmation question names the amount a priced control is about: the control's own
+ * (PAY ₹220), else the page readback's. True when neither shows one.
+ */
+export function namesAmount(question: string, control: string, facts: string): boolean {
+  const want = amounts(control).length ? amounts(control) : amounts(facts);
+  if (!want.length) return true;
+  const q = asciiDigits(question).replace(/(\d)[,\s](?=\d)/g, "$1");
+  return want.some((n) => new RegExp(`(^|\\D)${n}(\\D|$)`).test(q));
 }
 
 const sameOrigin = (a: string, b: string) => {

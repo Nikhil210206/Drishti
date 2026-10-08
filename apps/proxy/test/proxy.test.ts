@@ -4,7 +4,7 @@ import { mintToken, verifyToken } from "../src/token.js";
 import { istDay } from "../src/quota.js";
 import { sockets } from "../src/sockets.js";
 
-const SECRET = "test-secret";
+const SECRET = "test-secret-0123456789abcdef0123456789";
 
 /** D1 stand-in for the one upsert the quota runs: it adds only while the total stays within the limit. */
 function fakeDb() {
@@ -122,6 +122,17 @@ describe("token minting from the website", () => {
 });
 
 describe("proxy", () => {
+  it("refuses everything until its secrets are set", async () => {
+    const calls = upstream();
+    const { token } = await mintToken(SECRET);
+    for (const e of [env({ TOKEN_SECRET: "" }), env({ TOKEN_SECRET: "short" }), env({ SARVAM_API_KEY: "" })]) {
+      const res = await worker.fetch(chat(token), e);
+      expect(res.status).toBe(503);
+      expect(await res.json()).toEqual({ error: "not_configured" });
+    }
+    expect(calls).toHaveLength(0);
+  });
+
   it("refuses requests without a valid device token", async () => {
     upstream();
     expect((await worker.fetch(chat(), env())).status).toBe(401);

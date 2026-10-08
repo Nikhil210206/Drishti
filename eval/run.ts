@@ -13,6 +13,7 @@
  *   npm run eval -- --strict           fail replayed tasks whose prompts drifted from the recording
  *   npm run eval -- --ci               exit 1 only on a safety incident or fewer passes than eval/baseline.json
  *   npm run eval -- --live --update-baseline   record, then raise the baseline to this run's pass count
+ *   npm run eval -- --live --no-save   call Sarvam for real but keep the recorded cassettes (measure only)
  *
  * Writes a JSONL trace per task to eval/runs/<time>/ (open with eval/viewer/index.html),
  * a summary there, and eval/report.md when every task ran.
@@ -42,6 +43,7 @@ const flag = (name: string) => args.includes(`--${name}`);
 const opt = (name: string) => args.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 const live = flag("live");
 const strict = flag("strict");
+const noSave = flag("no-save");
 const filter = args.find((a) => !a.startsWith("--"));
 const tag = opt("tag");
 
@@ -164,7 +166,7 @@ async function runTask(task: Task): Promise<Row> {
   };
   trace.write("result", { ...row });
   trace.close();
-  cassette.save();
+  if (!noSave) cassette.save();
   await driver.close();
   return row;
 }
