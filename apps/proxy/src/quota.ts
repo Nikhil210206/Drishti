@@ -21,15 +21,19 @@ export function istDay(now = Date.now()): string {
   return new Date(now + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
 }
 
-/** Add this request's units; false when the device is over its daily limit. */
+/**
+ * Add this request's units; false when they would take the device over its daily limit. A refusal
+ * writes nothing: D1's free plan allows 100,000 row writes a day, and a device at its limit can
+ * keep asking.
+ */
 export async function spend(db: D1Database, device: string, kind: Kind, limit: number, now = Date.now()): Promise<boolean> {
   const units = UNITS[kind];
   if (!units) return true;
   const row = await db
     .prepare(
-      "INSERT INTO usage (device, day, units) VALUES (?1, ?2, ?3) ON CONFLICT (device, day) DO UPDATE SET units = units + excluded.units RETURNING units",
+      "INSERT INTO usage (device, day, units) VALUES (?1, ?2, ?3) ON CONFLICT (device, day) DO UPDATE SET units = units + excluded.units WHERE units + excluded.units <= ?4 RETURNING units",
     )
-    .bind(device, istDay(now), units)
+    .bind(device, istDay(now), units, limit)
     .first<{ units: number }>();
-  return (row?.units ?? 0) <= limit;
+  return !!row && row.units <= limit;
 }

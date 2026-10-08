@@ -29,6 +29,19 @@ export const PHRASES = {
     "hi-IN": "डॉक्यूमेंट पढ़ रही हूँ, लगभग पंद्रह सेकंड लगेंगे।",
   },
   error: { "en-IN": "Sorry, something went wrong. Please try again.", "hi-IN": "माफ़ कीजिए, कुछ गड़बड़ हो गई। फिर से कोशिश कीजिए।" },
+  // The Drishti proxy's refusals (busy or slow_down, quota, unauthorized): "try again" is wrong advice for those.
+  busy: {
+    "en-IN": "Many people are using Drishti right now. Please try again in a minute.",
+    "hi-IN": "अभी बहुत लोग Drishti इस्तेमाल कर रहे हैं। एक मिनट बाद फिर कोशिश कीजिए।",
+  },
+  limit: {
+    "en-IN": "You have used today's limit. I can help again tomorrow.",
+    "hi-IN": "आज की सीमा पूरी हो गई है। मैं कल फिर से मदद कर पाऊँगी।",
+  },
+  reconnect: {
+    "en-IN": "Drishti is not connected. Please open Drishti's setup and connect again.",
+    "hi-IN": "Drishti जुड़ा हुआ नहीं है। कृपया Drishti का सेटअप खोलकर फिर से जोड़िए।",
+  },
   stuck: {
     "en-IN": "I'm stuck on this page. Tell me what to try next.",
     "hi-IN": "मैं इस पेज पर अटक गई हूँ। बताइए, आगे क्या करूँ?",
@@ -58,6 +71,20 @@ export const PHRASES = {
 } satisfies Record<string, Partial<Record<LangCode, string>>>;
 
 export type PhraseKey = keyof typeof PHRASES;
+
+/**
+ * What to say when the Drishti proxy says no: its error code ("busy", "slow_down", "quota",
+ * "unauthorized"), or an error carrying one (the providers' LimitError, recognised by name so
+ * core needn't depend on them). Undefined for anything else.
+ */
+export function refusalPhrase(why: unknown): PhraseKey | undefined {
+  const e = why as { name?: string; code?: unknown } | undefined;
+  const code = typeof why === "string" ? why : e?.name === "LimitError" ? e.code : undefined;
+  if (code === "busy" || code === "slow_down") return "busy";
+  if (code === "quota") return "limit";
+  if (code === "unauthorized") return "reconnect";
+  return undefined;
+}
 
 /** Fixed phrases in any language: hand-checked tables first, then cached machine translation. */
 export class PhraseBook {

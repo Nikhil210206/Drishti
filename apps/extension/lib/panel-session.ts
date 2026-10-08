@@ -108,7 +108,7 @@ export function localTransport(settings: Settings): PanelTransport {
         // Follow the user to another tab in this window; a page opening a new tab is followed by
         // the driver itself.
         const onActivated = (info: { tabId: number; windowId: number }) => {
-          if (info.windowId === tab.windowId) driver.tabId = info.tabId;
+          if (info.windowId === tab.windowId) driver.follow(info.tabId);
         };
         chrome.tabs.onActivated.addListener(onActivated);
         const offCost = costMeter.onChange((inr) => h.event({ type: "cost", inr }));

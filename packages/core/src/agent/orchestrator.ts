@@ -8,7 +8,7 @@ import { duplicatePassenger, looksComplete, readback } from "./readback.js";
 import { saidBy } from "./match.js";
 import { classMismatch, quotaMismatch } from "./classes.js";
 import { dateMismatch } from "./dates.js";
-import type { PhraseBook, PhraseKey } from "./phrases.js";
+import { refusalPhrase, type PhraseBook, type PhraseKey } from "./phrases.js";
 
 /** Everything the agent needs from the outside world (voice session, or the eval harness). */
 export interface AgentIO {
@@ -177,7 +177,7 @@ export class Agent {
         io.emit({ type: "thinking", on: false });
         if (signal.aborted) return { outcome: "aborted" };
         io.emit({ type: "error", message: `LLM: ${e?.message ?? e}` });
-        await io.sayPhrase("error");
+        await io.sayPhrase(refusalPhrase(e) ?? "error");
         return { outcome: "stuck" };
       }
       io.emit({ type: "thinking", on: false });

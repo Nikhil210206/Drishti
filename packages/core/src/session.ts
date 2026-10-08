@@ -1,7 +1,7 @@
 import { LANGS, isLangCode, langFromScript, toSpeakable, type LangCode } from "./lang.js";
 import type { BrowserDriver, SpeechIn, SpeechOut } from "./types.js";
 import type { Agent, AgentIO } from "./agent/orchestrator.js";
-import type { PhraseBook, PhraseKey } from "./agent/phrases.js";
+import { refusalPhrase, type PhraseBook, type PhraseKey } from "./agent/phrases.js";
 import type { NavigationPolicy } from "./agent/policy.js";
 import { quickCommand, yesNo } from "./agent/safety.js";
 import { TextSpeech, type OutputMode } from "./text-speech.js";
@@ -53,6 +53,8 @@ export class VoiceSession implements AgentIO {
   private lastSpoken = "";
   private lastFinalAt = 0;
   private firstAudioPending = false;
+  /** When Drishti last said why the proxy refused the microphone (talking retries it). */
+  private refusalSaidAt = 0;
 
   constructor(
     private deps: SessionDeps,
@@ -152,7 +154,16 @@ export class VoiceSession implements AgentIO {
   private startStt() {
     const stt = this.deps.createSpeechIn();
     this.stt = stt;
-    stt.on("status", (s, detail) => this.emit({ type: "status", stt: s, detail }));
+    stt.on("status", (s, detail) => {
+      this.emit({ type: "status", stt: s, detail });
+      // The proxy turned the microphone away: say why (busy, today's limit, not connected), at
+      // most every half minute, since each new bit of talking tries again.
+      const why = s === "refused" ? refusalPhrase(detail) : undefined;
+      if (why && Date.now() - this.refusalSaidAt > 30_000) {
+        this.refusalSaidAt = Date.now();
+        void this.sayPhrase(why);
+      }
+    });
     stt.on("partial", (text, lang) => this.emit({ type: "partial", text, lang }));
     stt.on("speechStart", () => this.emit({ type: "vad", speaking: true }));
     stt.on("speechEnd", () => this.emit({ type: "vad", speaking: false }));

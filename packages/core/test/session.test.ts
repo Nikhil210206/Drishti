@@ -1,10 +1,19 @@
-import { describe, expect, it } from "vitest";
-import { Agent, NavigationPolicy, UserDeclinedError, VoiceSession, type SpeechIn } from "../src/index.js";
+import { describe, expect, it, vi } from "vitest";
+import {
+  Agent,
+  Emitter,
+  NavigationPolicy,
+  UserDeclinedError,
+  VoiceSession,
+  type LLM,
+  type SpeechIn,
+  type SpeechInEvents,
+} from "../src/index.js";
 import { FakeBrowser, FakeSpeechOut, ScriptedLLM, echoTranslator, noDocs, phrases } from "./fakes.js";
 
 const HOME = "http://localhost:5174/";
 
-function setup() {
+function setup({ llm = new ScriptedLLM([]) as LLM, speechIn = () => ({}) as SpeechIn } = {}) {
   const browser = new FakeBrowser({}, "about:blank");
   const policy = new NavigationPolicy();
   const book = phrases();
@@ -12,17 +21,28 @@ function setup() {
   const events: Record<string, any>[] = [];
   const session = new VoiceSession(
     {
-      agent: new Agent({ browser, llm: new ScriptedLLM([]), translator: echoTranslator, docs: noDocs, phrases: book, policy }),
+      agent: new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: book, policy }),
       browser,
       policy,
       phrases: book,
       speechOut,
-      createSpeechIn: () => ({}) as SpeechIn,
+      createSpeechIn: speechIn,
       sink: { event: (e) => events.push(e), audio: () => {} },
     },
     { lang: "en-IN", homeUrl: HOME },
   );
   return { session, browser, speechOut, events };
+}
+
+/** Speech in that does nothing until the test makes the proxy refuse it. */
+class FakeSpeechIn extends Emitter<SpeechInEvents> implements SpeechIn {
+  connect() {}
+  sendAudio() {}
+  flush() {}
+  close() {}
+  refuse(why: string) {
+    this.emit("status", "refused", why);
+  }
 }
 
 const tick = () => new Promise((r) => setTimeout(r, 0));
@@ -102,6 +122,38 @@ describe("VoiceSession when the user declines what a task needs", () => {
     expect(events.some((e) => e.type === "task" && e.state === "aborted")).toBe(true);
     expect(events.some((e) => e.type === "error")).toBe(false);
     expect(speechOut.spoken.map((s) => s.text)).not.toContain("Sorry, something went wrong. Please try again.");
+  });
+});
+
+describe("VoiceSession when the Drishti proxy says no", () => {
+  /** An LLM behind a proxy that refuses, the way the providers' LimitError does. */
+  const refusing = (code: string): LLM => ({
+    chat: async () => {
+      throw Object.assign(new Error(`Drishti proxy: ${code}`), { name: "LimitError", code });
+    },
+  });
+
+  it("says what the refusal means instead of 'try again'", async () => {
+    for (const [code, said] of [
+      ["quota", "You have used today's limit. I can help again tomorrow."],
+      ["busy", "Many people are using Drishti right now. Please try again in a minute."],
+      ["unauthorized", "Drishti is not connected. Please open Drishti's setup and connect again."],
+    ]) {
+      const { session, speechOut } = setup({ llm: refusing(code) });
+      session.onMessage({ type: "text", text: "book a ticket" });
+      await vi.waitFor(() => expect(speechOut.spoken.at(-1)?.text).toBe(said));
+    }
+  });
+
+  it("says why the microphone was turned away, once while the user keeps trying", async () => {
+    const stt = new FakeSpeechIn();
+    const { session, speechOut } = setup({ speechIn: () => stt });
+    session.onAudio(new Uint8Array(3200));
+    stt.refuse("quota");
+    stt.refuse("quota");
+    await vi.waitFor(() => expect(speechOut.spoken).toHaveLength(1));
+    await tick();
+    expect(speechOut.spoken.map((s) => s.text)).toEqual(["You have used today's limit. I can help again tomorrow."]);
   });
 });
 

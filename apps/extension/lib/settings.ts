@@ -3,6 +3,7 @@
  * device except the device token, which goes to the Drishti proxy.
  */
 import type { Cache, LangCode, OutputMode, Profile } from "@drishti/core";
+import { DEV_PROXY, originOf } from "./endpoints";
 
 export interface Settings {
   /** Drishti proxy origin. */
@@ -29,7 +30,14 @@ export interface Settings {
 /** Bump when the privacy summary changes: users see it again. */
 export const CONSENT_VERSION = "2026-10-07";
 
-const DEFAULTS: Settings = { proxyUrl: "http://localhost:8788", token: "", homeUrl: "http://localhost:5174/", speaker: "kavya", pace: 1.1 };
+const DEFAULTS: Settings = {
+  // This build's proxy (WXT_PROXY, lib/endpoints.ts); the manifest gives the extension host access to it.
+  proxyUrl: originOf(import.meta.env.WXT_PROXY || DEV_PROXY),
+  token: "",
+  homeUrl: "http://localhost:5174/",
+  speaker: "kavya",
+  pace: 1.1,
+};
 
 /** Ready to talk to Sarvam: connected, and the user agreed to the current privacy summary. */
 export const ready = (s: Settings) => !!s.token && s.consent?.version === CONSENT_VERSION;

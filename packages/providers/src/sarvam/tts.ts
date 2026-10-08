@@ -39,8 +39,16 @@ export class TtsEngine extends Emitter<SpeechOutEvents> implements SpeechOut {
   private ws?: WebSocket;
   private wsKey = "";
   private wsReady?: Promise<void>;
-  private pending?: { u: Utterance; chunks: Uint8Array[]; finish: () => void; timer: ReturnType<typeof setTimeout> };
+  private pending?: {
+    u: Utterance;
+    chunks: Uint8Array[];
+    finish: () => void;
+    fail: (e: Error) => void;
+    timer: ReturnType<typeof setTimeout>;
+  };
   private pingTimer?: ReturnType<typeof setInterval>;
+  /** Why the proxy refused the last socket ("quota", "unauthorized"…), until one opens for real. */
+  private refusal?: string;
   voice: VoiceSettings;
 
   constructor(private cfg: TtsConfig) {
@@ -121,18 +129,22 @@ export class TtsEngine extends Emitter<SpeechOutEvents> implements SpeechOut {
 
   private async synthesize(u: Utterance): Promise<Uint8Array[]> {
     await this.ensureSocket(u.lang);
+    const ws = this.ws;
+    // Refused as soon as it opened (the proxy closes a refused socket with its reason).
+    if (!ws) throw new Error(this.refusal ?? "TTS socket closed");
     costMeter.addTts(u.text.length);
-    return new Promise<Uint8Array[]>((resolve) => {
+    return new Promise<Uint8Array[]>((resolve, reject) => {
       const chunks: Uint8Array[] = [];
-      const finish = () => {
+      const done = () => {
         clearTimeout(timer);
         this.pending = undefined;
-        resolve(chunks);
       };
+      const finish = () => (done(), resolve(chunks));
+      const fail = (e: Error) => (done(), reject(e));
       const timer = setTimeout(finish, 20000);
-      this.pending = { u, chunks, finish, timer };
-      this.ws!.send(JSON.stringify({ type: "text", data: { text: u.text } }));
-      this.ws!.send(JSON.stringify({ type: "flush" }));
+      this.pending = { u, chunks, finish, fail, timer };
+      ws.send(JSON.stringify({ type: "text", data: { text: u.text } }));
+      ws.send(JSON.stringify({ type: "flush" }));
     });
   }
 
@@ -168,14 +180,22 @@ export class TtsEngine extends Emitter<SpeechOutEvents> implements SpeechOut {
       });
       ws.addEventListener("error", () => reject(new Error("TTS socket error")));
     });
-    ws.addEventListener("message", (e) => this.ws === ws && this.onMessage(messageText(e.data)));
-    ws.addEventListener("close", () => {
+    ws.addEventListener("message", (e) => {
+      if (this.ws !== ws) return;
+      this.refusal = undefined; // Bulbul answered: not a refused socket
+      this.onMessage(messageText(e.data));
+    });
+    ws.addEventListener("close", (e) => {
       // A replaced socket closing late must not touch the new one's timer or utterance.
       if (this.ws !== ws) return;
       clearInterval(this.pingTimer);
       this.ws = undefined;
       this.wsReady = undefined;
-      this.pending?.finish();
+      // The proxy refused it (4xxx, with the reason): an error, so the reply isn't just silent.
+      if (e.code >= 4000) {
+        this.refusal = e.reason || "refused";
+        this.pending?.fail(new Error(this.refusal));
+      } else this.pending?.finish();
     });
     return this.wsReady;
   }

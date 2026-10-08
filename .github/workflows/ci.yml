@@ -38,6 +38,10 @@ jobs:
         run: npm run build -w @drishti/extension
       - name: Agent eval through the extension's ExtensionDriver (replayed, no API calls)
         run: npm run eval:extension -- --ci
+      # What users get when the debugger can't attach (they dismissed Chrome's debugging bar,
+      # DevTools is open): synthetic events only.
+      - name: Agent eval through the extension, synthetic input only (replayed, no API calls)
+        run: npm run eval:extension -- --ci --input=synthetic
       - name: Upload eval traces
         if: always()
         uses: actions/upload-artifact@v4

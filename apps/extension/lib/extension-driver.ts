@@ -46,21 +46,33 @@ const KEYS: Record<string, { code: string; keyCode: number; text?: string }> = {
 const MODIFIERS: Record<string, number> = { Alt: 1, Control: 2, Ctrl: 2, Meta: 4, Cmd: 4, Shift: 8 };
 
 export class ExtensionDriver implements BrowserDriver {
-  private attached = false;
+  private tab: number;
+  /** The tab the debugger is attached to: not always `tab`, which follows the user. */
+  private attachedTo?: number;
   /** The user cancelled the debugging bar: respect it for the rest of the session. */
   private debuggerRefused = false;
   private idleTimer?: ReturnType<typeof setTimeout>;
   private input: InputMode;
   private idleDetachMs: number;
 
-  constructor(
-    public tabId: number,
-    opts: ExtensionDriverOptions = {},
-  ) {
+  constructor(tabId: number, opts: ExtensionDriverOptions = {}) {
+    this.tab = tabId;
     this.input = opts.input ?? "debugger";
     this.idleDetachMs = opts.idleDetachMs ?? 10_000;
     chrome.tabs.onCreated.addListener(this.onTabCreated);
     chrome.debugger.onDetach.addListener(this.onDetach);
+  }
+
+  /** The tab Drishti works on. */
+  get tabId() {
+    return this.tab;
+  }
+
+  /** Work on another tab from now on (the user switched to it, or the page opened it). */
+  follow(tabId: number) {
+    if (tabId === this.tab) return;
+    void this.detach();
+    this.tab = tabId;
   }
 
   /** Stop listening and let go of the tab. */
@@ -73,14 +85,12 @@ export class ExtensionDriver implements BrowserDriver {
   // A site that opens a new tab (a "print ticket" link, a payment page): follow it, as a sighted
   // user's attention would.
   private onTabCreated = (tab: chrome.tabs.Tab) => {
-    if (tab.openerTabId !== this.tabId || tab.id === undefined) return;
-    void this.detach();
-    this.tabId = tab.id;
+    if (tab.openerTabId === this.tab && tab.id !== undefined) this.follow(tab.id);
   };
 
   private onDetach = (source: chrome.debugger.Debuggee, reason: string) => {
-    if (source.tabId !== this.tabId) return;
-    this.attached = false;
+    if (source.tabId !== this.attachedTo) return;
+    this.attachedTo = undefined;
     if (reason === "canceled_by_user") this.debuggerRefused = true;
   };
 
@@ -157,7 +167,14 @@ export class ExtensionDriver implements BrowserDriver {
   }
 
   async goBack() {
-    await chrome.tabs.goBack(this.tabId).catch(() => {});
+    // The page's own history.back(). chrome.tabs.goBack is the back button, which skips pages that
+    // were left without a user gesture (Chrome's history intervention): after synthetic clicks,
+    // that went back two or more pages at a time. Once, not through run(), which retries.
+    const done = await chrome.scripting.executeScript({ target: { tabId: this.tabId }, func: () => history.back() }).then(
+      () => true,
+      () => false,
+    );
+    if (!done) await chrome.tabs.goBack(this.tabId).catch(() => {}); // a page scripts can't run in
     await this.afterAction();
   }
 
@@ -230,28 +247,32 @@ export class ExtensionDriver implements BrowserDriver {
 
   private async attach(): Promise<boolean> {
     if (this.input === "synthetic" || this.debuggerRefused) return false;
+    if (this.attachedTo !== this.tab) {
+      await this.detach(); // still on a tab the user has left
+      const tabId = this.tab;
+      try {
+        await chrome.debugger.attach({ tabId }, "1.3");
+        this.attachedTo = tabId;
+      } catch {
+        // chrome:// pages, the Web Store, or DevTools already attached.
+        return false;
+      }
+    }
     clearTimeout(this.idleTimer);
     this.idleTimer = setTimeout(() => void this.detach(), this.idleDetachMs);
-    if (this.attached) return true;
-    try {
-      await chrome.debugger.attach({ tabId: this.tabId }, "1.3");
-      this.attached = true;
-      return true;
-    } catch {
-      // chrome:// pages, the Web Store, or DevTools already attached.
-      return false;
-    }
+    return true;
   }
 
   private async detach() {
     clearTimeout(this.idleTimer);
-    if (!this.attached) return;
-    this.attached = false;
-    await chrome.debugger.detach({ tabId: this.tabId }).catch(() => {});
+    const tabId = this.attachedTo;
+    if (tabId === undefined) return;
+    this.attachedTo = undefined;
+    await chrome.debugger.detach({ tabId }).catch(() => {});
   }
 
   private cdp(method: string, params: Record<string, unknown> = {}) {
-    return chrome.debugger.sendCommand({ tabId: this.tabId }, method, params);
+    return chrome.debugger.sendCommand({ tabId: this.attachedTo ?? this.tab }, method, params);
   }
 
   private async mouseClick(x: number, y: number) {

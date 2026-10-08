@@ -144,9 +144,11 @@ if (fs.existsSync(wav)) {
   });
 } else console.log(`(no ${wav}: skipped STT)`);
 
-// 7. A socket with a forged token: refused.
+// 7. A socket with a forged token: refused, with a reason the browser can read (4401).
 await new Promise<void>((resolve) => {
   const ws = new WebSocket(`${wsBase}/text-to-speech/ws`, ["drishti", "forged.token"]);
-  ws.onopen = () => (ok("refuses a forged socket token", false), ws.close(), resolve());
-  ws.onerror = () => (ok("refuses a forged socket token", true), resolve());
+  ws.onclose = (e) => (
+    ok("refuses a forged socket token", e.code === 4401 && e.reason === "unauthorized", `${e.code} ${e.reason}`),
+    resolve()
+  );
 });

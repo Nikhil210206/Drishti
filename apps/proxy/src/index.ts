@@ -23,6 +23,7 @@
  */
 import { mintToken, verifyToken } from "./token.js";
 import { spend, type Kind } from "./quota.js";
+import { refuseSocket, sockets } from "./sockets.js";
 
 export interface Env {
   SARVAM_API_KEY: string;
@@ -84,19 +85,21 @@ export default {
 
     const ws = route.ws ? req.headers.get("Upgrade")?.toLowerCase() === "websocket" : false;
     if (route.ws && !ws) return json(426, { error: "expected_websocket" });
+    // A browser never learns why a socket's handshake failed, so a speech socket is refused by
+    // accepting it and closing it at once with 4000 + the status, and the error as the reason.
+    const refuse = (status: number, error: string, retryAfter: string) =>
+      ws ? refuseSocket(4000 + status, error) : json(status, { error }, retryAfter ? { "retry-after": retryAfter } : {});
     const token = ws ? subprotocolToken(req) : bearer(req);
     const id = await verifyToken(env.TOKEN_SECRET, token);
-    if (!id) return json(401, { error: "unauthorized" });
+    if (!id) return refuse(401, "unauthorized", "");
 
     const size = Number(req.headers.get("content-length") ?? 0);
     if (route.maxBytes && size > route.maxBytes) return json(413, { error: "too_large" });
 
-    if (env.DEVICE_LIMIT && !(await env.DEVICE_LIMIT.limit({ key: id.device })).success)
-      return json(429, { error: "slow_down" }, { "retry-after": "10" });
+    if (env.DEVICE_LIMIT && !(await env.DEVICE_LIMIT.limit({ key: id.device })).success) return refuse(429, "slow_down", "10");
     if (route.kind === "chat" && env.GLOBAL_LLM && !(await env.GLOBAL_LLM.limit({ key: "global" })).success)
-      return json(429, { error: "busy" }, { "retry-after": "5" });
-    if (!(await spend(env.DB, id.device, route.kind, Number(env.DAILY_UNITS ?? 400))))
-      return json(429, { error: "quota" }, { "retry-after": "3600" });
+      return refuse(429, "busy", "5");
+    if (!(await spend(env.DB, id.device, route.kind, Number(env.DAILY_UNITS ?? 400)))) return refuse(429, "quota", "3600");
 
     const upstream = `${env.SARVAM_BASE ?? "https://api.sarvam.ai"}${url.pathname}${url.search}`;
     return ws ? relaySocket(upstream, env) : forward(req, upstream, env);
@@ -195,6 +198,5 @@ async function relaySocket(upstreamUrl: string, env: Env): Promise<Response> {
   server.addEventListener("error", () => closeBoth(1011, "client error"));
   upstream.addEventListener("error", () => closeBoth(1011, "upstream error"));
 
-  // The browser offered "drishti, <token>": accept the first, so the token is never echoed back.
-  return new Response(null, { status: 101, webSocket: client, headers: { "Sec-WebSocket-Protocol": "drishti" } });
+  return sockets.upgrade(client);
 }

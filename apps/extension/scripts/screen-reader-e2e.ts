@@ -3,7 +3,8 @@
  *
  * - replies go to the panel's one live region (in their language) and Bulbul is never called;
  * - nothing else in the panel is a live region (no chatter over Bulbul or into the microphone);
- * - a confirmation takes focus on the dialog, not on its Yes button;
+ * - a confirmation takes focus on the dialog, not on its Yes button, unless the user is in the
+ *   command box: then it is announced, and a "y" typed there doesn't answer it;
  * - the shortcuts (delivered as Chrome would, through the background) talk, answer and stop;
  * - the Yes shortcut on "may Drishti work on this site?" reaches the background's request;
  * - switching back to Drishti's voice is remembered.
@@ -144,10 +145,30 @@ try {
     .catch(() => {});
   ok("talk shortcut again stops listening", (await orb.getAttribute("aria-pressed")) === "false");
 
-  // 4. A confirmation: focus on the dialog (its question read with it), not on Yes; Y shortcut answers.
+  // 4. A confirmation while the user is in the command box: focus stays there (a "y" they type
+  // must not answer it) and the question is announced. The No shortcut declines.
   await p2.bringToFront();
-  await p2.getByLabel("Command for Drishti").fill("delete my details");
-  await p2.getByLabel("Command for Drishti").press("Enter");
+  const box = p2.getByLabel("Command for Drishti");
+  const inBox = () => p2.evaluate(() => document.activeElement?.getAttribute("aria-label") === "Command for Drishti");
+  await box.fill("delete my details");
+  await box.press("Enter");
+  await p2.getByRole("alertdialog").waitFor({ timeout: 10000 });
+  const asked = await waitAnnounced(/Delete your saved/);
+  ok("a confirmation leaves focus in the command box and is announced", await inBox(), asked);
+  await p2.keyboard.type("my train");
+  await p2.waitForTimeout(1000);
+  ok(
+    "typing in the box doesn't answer it",
+    (await p2.getByRole("alertdialog").isVisible()) && !!(await settings()).profile,
+    `box: ${await box.inputValue()}`,
+  );
+  await command("no");
+  await waitAnnounced(/not done it/);
+  await box.fill("");
+
+  // …anywhere else it takes focus on the dialog (its question read with it), not on Yes; the Yes shortcut answers.
+  await box.fill("delete my details");
+  await p2.getByLabel("Send").click();
   await p2.getByRole("alertdialog").waitFor({ timeout: 10000 });
   await p2.waitForTimeout(300);
   const focus = await p2.evaluate(() => ({
@@ -159,10 +180,7 @@ try {
   await command("yes");
   const forgotten = await waitAnnounced(/deleted/);
   ok("Yes shortcut answers the confirmation", !(await settings()).profile, forgotten);
-  ok(
-    "focus returns to the command box",
-    await p2.evaluate(() => document.activeElement?.getAttribute("aria-label") === "Command for Drishti"),
-  );
+  ok("focus returns to the command box", await inBox());
 
   // 5. A new site. The Yes shortcut asks Chrome for it from the background, inside the key press.
   // A real press is a gesture; this test's isn't, so Chrome refuses and the panel's own fallback
@@ -172,8 +190,8 @@ try {
   await p2.getByLabel("Command for Drishti").fill("What is on this page?");
   await p2.getByLabel("Command for Drishti").press("Enter");
   await p2.getByRole("alertdialog").waitFor({ timeout: 15000 });
-  const q = await p2.evaluate(() => document.activeElement?.getAttribute("role"));
-  ok("site question takes focus on its dialog", q === "alertdialog");
+  const siteQ = await waitAnnounced(/needs your permission/);
+  ok("site question is announced, focus left in the command box", await inBox(), siteQ.slice(0, 80));
   await p2.waitForTimeout(5500);
   await command("yes");
   const press = await waitAnnounced(/key press/);

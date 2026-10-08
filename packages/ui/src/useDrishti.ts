@@ -26,6 +26,15 @@ export type Output = "voice" | "screenreader";
 /** Toggle-to-talk (a shortcut or a screen reader's click) ends by itself after this long. */
 const TOGGLE_LIMIT_MS = 30000;
 
+/** Speak with the browser's own voice (free, on the device), queued after any reply it is saying; null stops it. */
+function speakLocally(reply: { text: string; lang: string } | null) {
+  if (typeof speechSynthesis === "undefined") return;
+  if (!reply) return speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(reply.text);
+  u.lang = reply.lang;
+  speechSynthesis.speak(u);
+}
+
 export interface DrishtiOptions {
   /** The microphone could not start (in the extension: send the user to the grant tab). */
   onMicError?: (e: unknown) => void;
@@ -43,6 +52,9 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
   const tailTimer = useRef<number | undefined>(undefined);
   const thinkTimer = useRef<number | undefined>(undefined);
   const toggleTimer = useRef<number | undefined>(undefined);
+  /** The reply Bulbul is on, and where replies go: for the browser-voice fallback. */
+  const lastReply = useRef<{ text: string; lang: string } | null>(null);
+  const outputRef = useRef<Output>("voice");
 
   const [connected, setConnected] = useState(false);
   const [status, setStatus] = useState<{ stt?: string; browser?: string }>({});
@@ -133,12 +145,15 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
       case "tts_start":
         addLine("drishti", m.text);
         setSaid((s) => [...s.slice(-9), { id: m.id, text: m.text, lang: m.lang }]);
+        lastReply.current = { text: m.text, lang: m.lang };
         break;
       case "output":
-        setOutputState(m.mode === "screenreader" ? "screenreader" : "voice");
+        outputRef.current = m.mode === "screenreader" ? "screenreader" : "voice";
+        setOutputState(outputRef.current);
         break;
       case "tts_stop":
         player.current?.stop();
+        speakLocally(null);
         break;
       case "thinking":
         setThinking(m.on);
@@ -192,6 +207,12 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
       case "error":
         setErrors((e) => [...e.slice(-3), m.message]);
         ear.current?.error();
+        // Bulbul couldn't say this reply (the proxy refused it: today's limit, say; or the network
+        // dropped): the browser's own voice reads it rather than nothing.
+        if (String(m.message).startsWith("TTS:") && outputRef.current === "voice" && lastReply.current) {
+          speakLocally(lastReply.current);
+          lastReply.current = null;
+        }
         break;
     }
   }
@@ -223,6 +244,7 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
     clearTimeout(tailTimer.current);
     tailTimer.current = undefined;
     player.current?.stop();
+    speakLocally(null);
     send({ type: "ptt", down: true });
     ear.current?.listen();
     setListening(true);
@@ -276,6 +298,7 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
     (text: string, source: "typed" | "kivi" = "typed") => {
       void player.current?.resume();
       player.current?.stop();
+      speakLocally(null);
       send({ type: "stop_speech" });
       send({ type: "text", text, source });
     },
@@ -284,6 +307,7 @@ export function useDrishti(transport: PanelTransport, { onMicError, onMicReady }
 
   const stop = useCallback(() => {
     player.current?.stop();
+    speakLocally(null);
     send({ type: "stop" });
   }, [send]);
 

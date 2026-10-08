@@ -127,7 +127,8 @@ export interface SpeechInEvents {
   final: (text: string, lang?: string, confidence?: number) => void;
   speechStart: () => void;
   speechEnd: () => void;
-  status: (s: "connecting" | "open" | "closed" | "error", detail?: string) => void;
+  /** "refused": the Drishti proxy said no, and `detail` says why ("quota", "unauthorized", "slow_down"). */
+  status: (s: "connecting" | "open" | "closed" | "error" | "refused", detail?: string) => void;
 }
 
 /** Streaming speech-to-text for one session. Audio is 16 kHz mono PCM16. */

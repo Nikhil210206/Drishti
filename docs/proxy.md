@@ -13,11 +13,11 @@ It stores no page content, audio or transcripts and logs nothing.
 | Path | What | Quota units |
 |---|---|---|
 | `POST /v1/token` | Turnstile response → device token (5 a minute per IP) | – |
-| `POST /v1/chat/completions` | LLM; also capped at 40 a minute for all users together ("busy" above that) | 1 |
+| `POST /v1/chat/completions` | LLM; also capped at 40 a minute for all users together ("busy" above that), counted per Cloudflare location | 1 |
 | `POST /translate` | Mayura / Sarvam-Translate | 1 |
 | `POST /doc-ai/v1/job/digitise` | Doc AI job (up to 10 MB) | 10 |
 | `GET /doc-ai/v1/job/:id/status`, `/download-url` | Doc AI polling | 0 |
-| `WS /speech-to-text-realtime/ws` | Saaras realtime STT (closed after 15 min; the client reconnects) | 2 |
+| `WS /speech-to-text-realtime/ws` | Saaras realtime STT (closed after 15 min; the client reconnects when the user next talks) | 2 |
 | `WS /text-to-speech/ws` | Bulbul streaming TTS | 1 |
 
 The paths are Sarvam's own, so a provider only swaps its base URL and credential. Anything else is a 404.
@@ -37,9 +37,13 @@ The paths are Sarvam's own, so a provider only swaps its base URL and credential
 | 426 | `expected_websocket` |
 | 429 | `busy` (retry after 5 s); `slow_down` (one device bursting); `quota` (daily limit, 400 units ≈ 40 tasks) |
 
-The panel speaks a "busy" or "limit reached" phrase for these.
+**Sockets** can't show a browser an HTTP status: a failed handshake only says "closed". So a refused speech socket is accepted and closed at once with `4000 + status` and the error as the reason: `4401 unauthorized`, `4429 slow_down` or `4429 quota`.
 
-**Why D1, not KV, for the quota:** KV's free plan allows 1,000 writes a day, which one write per request would use up with a handful of users. D1 allows 100,000, the same as the Workers request cap.
+**What the user hears:** the panel says what each refusal means. `busy` and `slow_down`: try again in a minute. `quota`: today's limit is used, back tomorrow. `unauthorized`: set up Drishti again. If Bulbul is refused as well (it shares the quota), the panel reads the reply in the browser's own voice.
+
+**The LLM cap is per location.** Cloudflare counts rate limits per data centre, so with users in several cities the real total can pass 40 a minute. Sarvam then answers 429 itself, and the LLM client retries with backoff.
+
+**Why D1, not KV, for the quota:** KV's free plan allows 1,000 writes a day, which one write per request would use up with a handful of users. D1 allows 100,000, the same as the Workers request cap. A refused request writes nothing, so a device at its limit can't use them up by retrying.
 
 ## Local
 
@@ -66,6 +70,8 @@ Result on 2026-10-05:
 | STT over the relay (Tamil) | ✅ final transcript 1.2 s after the audio ended, including the VAD pause |
 | Refuse a forged socket token | ✅ |
 
+On 2026-10-08 the forged socket check became "closed with `4401 unauthorized`", since refused sockets now close with a reason.
+
 ## Deploy (your Cloudflare account)
 
 **Never deploy with the test Turnstile secret:** anyone could mint tokens and spend your credits.
@@ -82,6 +88,17 @@ Result on 2026-10-05:
 6. To test before the website exists:
    - `TOKEN_SECRET=… npx tsx apps/proxy/scripts/mint.ts` prints a token.
    - Treat it like a password: it spends your credits until you rotate `TOKEN_SECRET`.
+
+7. Build the extension against the deployed proxy and website:
+
+   ```bash
+   WXT_PROXY=https://drishti-proxy.<subdomain>.workers.dev WXT_WEBSITE=https://<project>.pages.dev npm run build -w @drishti/extension
+   ```
+
+   - The proxy's origin goes into the manifest's host permissions. The extension's requests to it then skip CORS, which the proxy answers only for the website's connect page.
+   - Only that website may hand the extension a token (`externally_connectable`).
+   - Without the variables you get the local servers (`localhost:8788`, `localhost:5175`), which a store build must never ship.
+   - The website's `public/config.js` needs the same proxy address and its Turnstile site key.
 
 Rotating `TOKEN_SECRET` revokes every token. Devices then mint new ones through Turnstile.
 

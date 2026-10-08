@@ -40,7 +40,9 @@ export class SttStream extends Emitter<SpeechInEvents> implements SpeechIn {
   private pingTimer?: ReturnType<typeof setInterval>;
   private closedByUs = false;
   private backlog: Uint8Array[] = [];
-  private reconnectDelay = 500;
+  /** Connections in a row that failed or were refused, and when the next one may be tried. */
+  private failures = 0;
+  private retryAt = 0;
 
   constructor(
     private cfg: SarvamAuth & { model: string },
@@ -68,12 +70,14 @@ export class SttStream extends Emitter<SpeechInEvents> implements SpeechIn {
     try {
       ws = openSocket(this.cfg, `/speech-to-text-realtime/ws?${q}`);
     } catch (e) {
+      this.failed();
       this.emit("status", "error", String((e as Error)?.message ?? e));
       return;
     }
     this.ws = ws;
+    let opened = false;
     ws.addEventListener("open", () => {
-      this.reconnectDelay = 500;
+      opened = true;
       this.emit("status", "open");
       for (const chunk of this.backlog.splice(0)) this.sendAudio(chunk);
       this.pingTimer = setInterval(() => this.send({ event: "ping" }), 15000);
@@ -83,12 +87,21 @@ export class SttStream extends Emitter<SpeechInEvents> implements SpeechIn {
     ws.addEventListener("close", (e) => {
       clearInterval(this.pingTimer);
       if (this.ws !== ws) return;
-      this.emit("status", "closed", `${e.code} ${e.reason}`);
-      if (!this.closedByUs) {
-        setTimeout(() => this.connect(), this.reconnectDelay);
-        this.reconnectDelay = Math.min(this.reconnectDelay * 2, 8000);
-      }
+      this.ws = undefined;
+      // The proxy refuses with a 4xxx code and says why: a browser never sees a failed handshake's status.
+      const refused = e.code >= 4000;
+      this.emit("status", refused ? "refused" : "closed", refused ? e.reason : `${e.code} ${e.reason}`);
+      if (refused || !opened) this.failed();
+      else this.failures = 0;
+      // No reconnecting from here: the next audio does it (sendAudio). An idle socket only costs
+      // quota (the proxy closes it after 15 minutes anyway), and a refused one was retried forever.
     });
+  }
+
+  /** Back off before the next try: 1 s, 2 s, 4 s… up to 30 s. */
+  private failed() {
+    this.failures++;
+    this.retryAt = Date.now() + Math.min(30_000, 500 * 2 ** this.failures);
   }
 
   private onMessage(raw: string) {
@@ -129,6 +142,9 @@ export class SttStream extends Emitter<SpeechInEvents> implements SpeechIn {
       // Keep ~2 s while (re)connecting so the start of an utterance isn't lost.
       this.backlog.push(pcm);
       if (this.backlog.length > 20) this.backlog.shift();
+      // Not connected (closed, refused or never opened): audio is what reconnects, so a socket is
+      // only tried while someone is talking, and after a pause when the last tries failed.
+      if (!this.ws && !this.closedByUs && Date.now() >= this.retryAt) this.connect();
       return;
     }
     this.send({ event: "audio_input", audio: toBase64(pcm) });

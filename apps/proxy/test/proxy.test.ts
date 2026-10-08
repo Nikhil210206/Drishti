@@ -2,24 +2,30 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import worker, { type Env } from "../src/index.js";
 import { mintToken, verifyToken } from "../src/token.js";
 import { istDay } from "../src/quota.js";
+import { sockets } from "../src/sockets.js";
 
 const SECRET = "test-secret";
 
-/** D1 stand-in for the one upsert the quota runs. */
+/** D1 stand-in for the one upsert the quota runs: it adds only while the total stays within the limit. */
 function fakeDb() {
   const rows = new Map<string, number>();
-  return {
+  const db = {
     rows,
+    writes: 0,
     prepare: () => ({
-      bind: (device: string, day: string, units: number) => ({
+      bind: (device: string, day: string, units: number, limit: number) => ({
         first: async () => {
           const k = `${device}|${day}`;
-          rows.set(k, (rows.get(k) ?? 0) + units);
+          const had = rows.get(k);
+          if (had !== undefined && had + units > limit) return null; // DO UPDATE … WHERE: nothing written
+          rows.set(k, (had ?? 0) + units);
+          db.writes++;
           return { units: rows.get(k) };
         },
       }),
     }),
   };
+  return db;
 }
 
 const limiter = (ok: boolean) => ({ limit: async () => ({ success: ok }) });
@@ -161,6 +167,46 @@ describe("proxy", () => {
     const third = await worker.fetch(chat(token), e);
     expect(third.status).toBe(429);
     expect(await third.json()).toEqual({ error: "quota" });
+  });
+
+  it("writes nothing for a device that keeps asking past its quota", async () => {
+    upstream();
+    const { token } = await mintToken(SECRET);
+    const db = fakeDb();
+    const e = env({ DAILY_UNITS: "2", DB: db as any });
+    for (let i = 0; i < 10; i++) await worker.fetch(chat(token), e);
+    expect(db.writes).toBe(2);
+    expect([...db.rows.values()]).toEqual([2]);
+  });
+
+  it("refuses a speech socket by closing it with a code and reason the browser can read", async () => {
+    // Node can't make a 101 response or a WebSocketPair: stand-ins that record the close.
+    const closed: [number, string][] = [];
+    vi.stubGlobal(
+      "WebSocketPair",
+      class {
+        0 = {};
+        1 = { accept() {}, close: (code: number, reason: string) => void closed.push([code, reason]) };
+      },
+    );
+    const upgrade = vi.spyOn(sockets, "upgrade").mockImplementation(() => new Response(null, { status: 204 }));
+    const calls = upstream();
+    const socket = (token: string) =>
+      new Request("https://proxy.test/speech-to-text-realtime/ws", {
+        headers: { upgrade: "websocket", "sec-websocket-protocol": `drishti, ${token}` },
+      });
+
+    await worker.fetch(socket("forged.token"), env());
+    const { token } = await mintToken(SECRET);
+    await worker.fetch(socket(token), env({ DAILY_UNITS: "1" })); // a speech socket costs 2 units
+    await worker.fetch(socket(token), env({ DEVICE_LIMIT: limiter(false) as any }));
+    expect(closed).toEqual([
+      [4401, "unauthorized"],
+      [4429, "quota"],
+      [4429, "slow_down"],
+    ]);
+    expect(upgrade).toHaveBeenCalledTimes(3);
+    expect(calls).toHaveLength(0); // nothing reached Sarvam
   });
 
   it("says busy when every user together is at Sarvam's limit", async () => {

@@ -34,6 +34,8 @@ Started 2026-10-05, about five weeks ahead of schedule. The roadmap is in `~/.cl
 
 **Result:** 40/40 replayed through the extension with trusted input, and 40/40 with synthetic events only, 0 safety incidents. Prompts are byte-identical to the Playwright runs (the one task with drift, `safety-decline-payment`, drifts the same with Playwright).
 
+**Corrected on 8 Oct:** a fresh synthetic-events run was 39/40, every time. Going back skipped pages the agent had reached by synthetic clicks (see "Audit and fixes" below). Fixed, and the synthetic run is now in CI.
+
 **Not done yet:** clicks inside cross-origin iframes (the frame offset), and merging snapshots from several frames (spike 3). Pathik Rail and the saved pages don't need them; real sites will.
 
 ## 2. Proxy ✅ (local)
@@ -76,7 +78,7 @@ Details, setup and deploy steps: `docs/proxy.md`.
   - Phrase audio is cached behind an `AudioCache` interface: a disk folder in Node (`FileAudioCache`); packaged audio or IndexedDB in the extension later.
   - Doc AI uses the REST API directly, so the `sarvamai` SDK, temp files and `fs` are gone.
   - The Node-only pieces live in `@drishti/providers/node`. A test keeps Node APIs out of the main entry, and the browser bundle builds (35 KB).
-- **Proxy refusals become a `LimitError`** (`busy`, `quota`, `slow_down`, `unauthorized`), for the panel to speak:
+- **Proxy refusals become a `LimitError`** (`busy`, `quota`, `slow_down`, `unauthorized`), for the panel to speak (spoken since 8 Oct, see "Audit and fixes"):
   - The LLM waits out `busy` (retry-after 5 s).
   - It stops at once on `quota`.
 - **Checks:**
@@ -286,7 +288,7 @@ Inside the panel, as before: hold Space or `` ` `` to talk, Esc to stop, and Y o
 **Changes for keyboard and screen-reader users:**
 
 - **Talk button.** It is now a toggle for keyboard and screen-reader presses ("Talk to Drishti", `aria-pressed`). A screen reader's click sends a mouse-down and mouse-up together, which made an empty hold. Mouse, touch and pen still hold to talk.
-- **Confirmations.** The dialog takes focus (`alertdialog` described by its question), not its Yes button, so a stray Enter or Space can't confirm a payment. Focus goes back afterwards.
+- **Confirmations.** The dialog takes focus (`alertdialog` described by its question), not its Yes button, so a stray Enter or Space can't confirm a payment. Focus goes back afterwards. Since 8 Oct it doesn't take focus from a text field, and Y or N only answer on the dialog itself (see "Audit and fixes").
 - **Held Space.** Space's key repeats are now blocked too. Before, a held Space on a focused button could press it.
 - **Site access.** The Yes shortcut asks Chrome for the site straight from the background, since a shortcut press counts as a user gesture there. The panel says which site it is asking about (`drishti-pending`).
 - **Stopped microphone.** Chrome can hold audio in a page nobody has clicked. If it holds the microphone, the panel says "press any key in the Drishti panel once". In the test, the talk shortcut worked in a fresh, unclicked panel without the autoplay flag.
@@ -334,3 +336,41 @@ Inside the panel, as before: hold Space or `` ` `` to talk, Esc to stop, and Y o
 
 - Translations of a changed phrase: the machine-translated `pressYes` cached in other languages stays the old wording ("press Enter on the Yes button", still correct) until the cache is cleared.
 - A page Drishti can't work on (chrome://, an extension page) gives Chrome's technical error instead of "open a website first".
+
+## Audit and fixes (8 Oct)
+
+Before step 8, steps 1–7 were checked against the plan:
+
+- CI, both replayed evals, a fresh synthetic-input eval, and the 4 panel e2e scripts through the local proxy.
+- Targeted experiments for anything the tests don't reach.
+
+Everything was built as planned, but GitHub CI had failed on step 7, and the audit found the bugs below.
+
+### Fixed
+
+| Problem | Evidence | Fix |
+|---|---|---|
+| **CI red on step 7**: oxlint `react(refs)`, a ref written during render in the announcer. Typecheck, tests and evals never ran in CI for step 7. | GitHub run of `bdf0d32` failed at Lint | The ref is updated in an effect |
+| **A stray "y" confirmed.** A confirmation took focus even from the command box, and a bare `y` answered it. | Typing "my train" after "delete my details" deleted the profile | No focus from a text field: the question is announced, and typed "yes" plus Enter still answers. Y and N answer only on the dialog. |
+| **Switching tabs broke trusted input.** The panel changed the driver's tab without detaching the debugger. | With Chrome mocked: every click and type on the new tab failed for 10 s, and the old tab stayed attached even after `dispose()` | The driver tracks the tab it is attached to; `follow()` moves it. Unit test. |
+| **Going back skipped pages with synthetic input.** `chrome.tabs.goBack` acts like the back button, which skips pages left without a user gesture (Chrome's history intervention), and synthetic clicks carry none. | Synthetic eval 39/40 every run; `tabs.goBack` jumped two entries where `history.back()` went one | `history.back()` in the page, with `tabs.goBack` as the fallback. Synthetic eval in CI. |
+| **A deployed proxy was unreachable.** Host access covered only localhost, and the proxy doesn't answer CORS. | "Failed to fetch" from the panel and the worker once the proxy wasn't localhost | `WXT_PROXY` sets the proxy and its host permission at build time (`lib/endpoints.ts`) |
+| **`drishti.pages.dev` was trusted, but it is someone else's site** (live, "Woof World"). | `externally_connectable` and the token handover | `WXT_WEBSITE` sets the one trusted website. The default is local only. |
+| **STT retried forever when refused**: every 8 s after the user stopped, about 10,800 requests a day per open panel. A device over quota also wrote a D1 row per try. | 9 tries in 43 s, still going | Reconnects only while there is audio, with a backoff. The proxy closes a refused socket with a reason (`4401`, `4429`), and a refusal writes nothing to D1. |
+| **"Busy" and "quota" were never spoken**: the agent said "Please try again" even when the day's quota was used. | Code; `docs/proxy.md` claimed otherwise | New phrases `busy`, `limit` and `reconnect`, for LLM and microphone refusals. If Bulbul is refused too, the panel reads the reply in the browser's voice. |
+
+**Checked after the fixes:**
+
+- A refused microphone gets 3 tries, all while the user talks, then "Drishti is not connected…".
+- With the quota at 0, the panel said the limit phrase in the browser voice.
+- That device's D1 row stayed at its first write.
+
+### Not changed, for later
+
+- **Practice site:** "Start practice" and "Reset website" open `localhost:5174`. Pathik Rail needs the dev server's `/api`, so real users need it hosted.
+- **Doc AI cost:** a job costs 10 units but is billed per page, so tighten it before tokens are public. The size check also trusts `Content-Length`, which a chunked upload can leave out.
+- **Odia tags:** replies are tagged `od-IN`, which screen readers don't know (`or` is the standard code).
+- **"Delete my details" too eager:** "clear the data" or "remove those details" aborts the running task before asking.
+- **Yes shortcut after 30 s:** the site question is held in the service worker's memory, which Chrome stops after about 30 s idle. A slow answer then falls back to "press a key".
+- **Store hygiene:** `webNavigation` is unused, the `drishtiTest` hook ships, and the developer fields are visible.
+- **Hands-free with a screen reader:** the microphone may hear the screen reader on speakers. Needs a manual check.

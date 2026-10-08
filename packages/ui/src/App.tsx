@@ -46,6 +46,9 @@ const TOOL_LABEL: Record<string, string> = {
 
 type Tab = "activity" | "conversation" | "document" | "stats";
 
+/** Where typed keys are text, not commands. */
+const TEXT_FIELDS = "input,textarea,select";
+
 /** Commands from outside the panel: the extension's global shortcuts. */
 export type RemoteCommand = "talk" | "stop" | "yes" | "no";
 
@@ -71,6 +74,7 @@ export default function App({ transport, remote, shortcuts = {}, onMicError, onM
   const kiviTimer = useRef<number | undefined>(undefined);
   const composeRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
 
   const state = d.listening
     ? "listening"
@@ -89,11 +93,11 @@ export default function App({ transport, remote, shortcuts = {}, onMicError, onM
     idle: d.connected ? `Ready — hold Space${shortcuts.talk ? ` or press ${shortcuts.talk}` : ""} to talk` : "Connecting…",
   }[state];
 
-  // Keyboard: hold Space or ` to talk (outside text fields), Esc to stop, Y/N answers a confirmation.
-  // Screen readers keep plain keys for themselves in browse mode, so their users have the global
-  // shortcuts (Alt+Shift+D and friends) instead, which work from the web page too.
+  // Keyboard: hold Space or ` to talk (outside text fields), Esc to stop, Y/N answers a confirmation
+  // that has focus. Screen readers keep plain keys for themselves in browse mode, so their users
+  // have the global shortcuts (Alt+Shift+D and friends) instead, which work from the web page too.
   useEffect(() => {
-    const typing = (e: KeyboardEvent) => !!(e.target as HTMLElement)?.closest("input,textarea,select");
+    const typing = (e: KeyboardEvent) => !!(e.target as HTMLElement)?.closest(TEXT_FIELDS);
     const down = (e: KeyboardEvent) => {
       if (e.key === "Escape") return d.stop();
       if (typing(e)) return;
@@ -105,7 +109,9 @@ export default function App({ transport, remote, shortcuts = {}, onMicError, onM
         void d.pttStart();
       }
       if (e.repeat) return;
-      if (d.awaiting?.kind === "confirm" && (e.key === "y" || e.key === "n")) d.answer(e.key === "y" ? "yes" : "no");
+      // Only on the confirmation itself: a "y" that lands anywhere else is a typo, not a yes.
+      const onDialog = dialogRef.current?.contains(e.target as Node);
+      if (d.awaiting?.kind === "confirm" && onDialog && (e.key === "y" || e.key === "n")) d.answer(e.key === "y" ? "yes" : "no");
     };
     const up = (e: KeyboardEvent) => (e.code === "Backquote" || e.code === "Space") && !typing(e) && d.pttEnd();
     window.addEventListener("keydown", down);
@@ -129,17 +135,24 @@ export default function App({ transport, remote, shortcuts = {}, onMicError, onM
   );
 
   // A confirmation takes focus (its question is read with it), but not the Yes button: a stray
-  // Enter or Space must not confirm a payment. Focus goes back where it was afterwards.
-  const dialogRef = useRef<HTMLElement>(null);
+  // Enter or Space must not confirm a payment. Nor does it take focus from a text field: the user
+  // may be mid-word, and their next "y" would land on it. There it is announced (or spoken)
+  // instead. Focus goes back where it was afterwards.
   const confirmQ = d.awaiting?.kind === "confirm" ? d.awaiting.question : null;
   useEffect(() => {
     if (!confirmQ || !document.hasFocus()) return;
     const before = document.activeElement as HTMLElement | null;
-    dialogRef.current?.focus();
+    if (before?.closest(TEXT_FIELDS)) return;
+    const dialog = dialogRef.current;
+    const input = inputRef.current;
+    dialog?.focus();
     return () => {
       // Only if focus was left on the dialog (now gone): not if the user has moved on.
       const now = document.activeElement;
-      if (before?.isConnected && (!now || now === document.body || dialogRef.current?.contains(now))) before.focus();
+      if (now && now !== document.body && !dialog?.contains(now)) return;
+      // Back where it was, or to the command box if that can't take it (Send is disabled once the box is empty).
+      if (before?.isConnected && before !== document.body && !(before as HTMLButtonElement).disabled) before.focus();
+      else input?.focus();
     };
   }, [confirmQ]);
 
@@ -187,7 +200,8 @@ export default function App({ transport, remote, shortcuts = {}, onMicError, onM
         </div>
         <div className="top-right">
           <StatusDot ok={d.connected} label={transport.label} />
-          <StatusDot ok={d.status.stt === "open"} label="Saaras" idle={!d.status.stt} />
+          {/* Closed is idle: the microphone's socket reopens when the user next talks. */}
+          <StatusDot ok={d.status.stt === "open"} label="Saaras" idle={!d.status.stt || d.status.stt === "closed"} />
           <StatusDot ok={d.status.browser === "ready"} label="Browser" />
           <button className="icon-btn" aria-label="Settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((o) => !o)}>
             <GearIcon />
@@ -381,7 +395,9 @@ function Announcer({ d }: { d: ReturnType<typeof useDrishti> }) {
   const seen = useRef(new WeakSet<object>());
   const timer = useRef<number | undefined>(undefined);
   const awaiting = useRef(d.awaiting);
-  awaiting.current = d.awaiting;
+  useEffect(() => {
+    awaiting.current = d.awaiting;
+  }, [d.awaiting]);
   useEffect(() => {
     // Replies can come in quick succession ("Chrome needs a key press…", then the question
     // again): announce them together, not just the last.
@@ -393,9 +409,11 @@ function Announcer({ d }: { d: ReturnType<typeof useDrishti> }) {
     setShown(null);
     clearTimeout(timer.current);
     timer.current = window.setTimeout(() => {
-      // A confirmation the panel has focus on is read as the dialog takes focus: not twice.
+      // A confirmation that took focus is read with the dialog: not twice. One that didn't (the
+      // user is in a text field, or in the web page) is announced here.
       const a = awaiting.current;
-      const skip = a?.kind === "confirm" && document.hasFocus() ? a.question : null;
+      const onDialog = !!document.activeElement?.closest('[role="alertdialog"]');
+      const skip = a?.kind === "confirm" && onDialog ? a.question : null;
       const items = queue.current.filter((x) => x.text !== skip);
       queue.current = [];
       if (items.length) setShown({ text: items.map((x) => x.text).join(" "), lang: items.at(-1)!.lang });
