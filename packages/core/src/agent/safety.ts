@@ -41,6 +41,8 @@ const PAYMENT_CONTEXT = /\b(pay|payment|payable|total|checkout|order)\b|भु�
 export interface ConfirmContext {
   /** Text of the page the element is on (snapshot text). */
   pageText?: string;
+  /** The element's id in that text, to see whether it sits in a results row. */
+  id?: string | number;
 }
 
 // Controls that pick or enter a value rather than act. A model-invented confirmation on these
@@ -68,6 +70,8 @@ export interface Gate {
   /** Clearly harmless (search, filters, picking a value): a confirmation the model asks for is ignored. */
   safe: boolean;
   reason: string;
+  /** One of several priced options (a train's "book ticket ₹160"): no question, but still checked against what the user asked. */
+  choice?: boolean;
 }
 
 export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmContext = {}): Gate {
@@ -75,6 +79,10 @@ export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmConte
   const label = `${el.name}`.replace(/\s+/g, " ").trim();
   // Irreversible words anywhere in the name win over everything else.
   if (IRREVERSIBLE.some((re) => re.test(label))) return { required: true, safe: false, reason: `"${label}" looks irreversible` };
+  // One of several priced options in a list ("book ticket (SL ₹160)" on every train of a results
+  // page) chooses a train; nothing is paid until the payment step, which asks with the total. Asking
+  // here too made one booking three questions. "Pay", "buy now" and the like never reach this line.
+  if (MONEY.test(label) && choiceInList(label, ctx)) return { required: false, safe: true, reason: "", choice: true };
   if (MONEY.test(label) && /pay|book|confirm|proceed|buy|order/i.test(label))
     return { required: true, safe: false, reason: `"${label}" moves money` };
   if (SAFE.some((re) => re.test(label))) return { required: false, safe: true, reason: "" };
@@ -89,6 +97,22 @@ export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmConte
     return { required: true, safe: false, reason: "unlabelled form submit" };
   }
   return { required: false, safe: VALUE_ROLES.has(el.role), reason: "" };
+}
+
+/**
+ * A priced "book", "select" or "choose" control that picks one of a list: it sits in a results row
+ * (the page model's "ROW:" lines), or at least three priced controls start with the same words.
+ * Never "buy", "order", "pay" or "subscribe": a one-click shop may charge on those.
+ */
+function choiceInList(label: string, ctx: ConfirmContext): boolean {
+  if (!/^(book|select|choose|view|check)\b/i.test(label)) return false;
+  const page = ctx.pageText ?? "";
+  if (ctx.id !== undefined && page.split("\n").some((l) => l.startsWith("ROW:") && l.includes(`[${ctx.id}] `))) return true;
+  const lead = label
+    .split(/[(₹]/)[0]
+    .trim()
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return (page.match(new RegExp(`"${lead}[^"\\n]{0,40}₹`, "gi")) ?? []).length >= 3;
 }
 
 const SENSITIVE =

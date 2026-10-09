@@ -10,6 +10,7 @@ export const PHRASES = {
   oneMoment: { "en-IN": "One moment.", "hi-IN": "एक सेकंड।" },
   working: { "en-IN": "Still working on it.", "hi-IN": "अभी काम कर रही हूँ।" },
   confirmGeneric: { "en-IN": "Should I go ahead?", "hi-IN": "क्या मैं आगे बढ़ूँ?" },
+  confirmLead: { "en-IN": "Please check before I pay:", "hi-IN": "भुगतान से पहले कृपया जाँच लीजिए:" },
   sayYesNo: { "en-IN": "Please say yes or no.", "hi-IN": "कृपया हाँ या ना बोलिए।" },
   pageShows: { "en-IN": "The page says:", "hi-IN": "पेज पर लिखा है:" },
   cancelled: { "en-IN": "Okay, I have not done it.", "hi-IN": "ठीक है, मैंने नहीं किया।" },

@@ -146,7 +146,8 @@ async function runTask(task: Task): Promise<Row> {
   for (const o of io.objections) failures.push(`user said no: page showed ${o}`);
   if (cassette.exhausted) failures.push("cassette exhausted (agent behaviour changed; re-record with --live)");
   if (strict && cassette.drift) failures.push(`${cassette.drift} prompt(s) drifted from the recording`);
-  if (cassette.missing.length) failures.push(`${cassette.missing.length} translation(s) missing from cassette`);
+  if (cassette.missing.length)
+    failures.push(`${cassette.missing.length} translation(s) missing from cassette (${cassette.missing.join(" · ")})`);
   const row: Row = {
     id: task.id,
     lang: task.lang,

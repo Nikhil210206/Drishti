@@ -217,3 +217,40 @@ describe("quickCommand", () => {
     expect(quickCommand("bastar district")).toBeNull();
   });
 });
+
+describe("needsConfirmation: choosing from a priced list", () => {
+  const list = [
+    '[61] clickable "book ticket (SL ₹160 11)"',
+    '[62] clickable "book ticket (3A ₹380 4)"',
+    '[63] clickable "book ticket (SL ₹175 20)"',
+  ].join("\n");
+  const button = (name: string) => el(name, { role: "clickable" });
+
+  it("lets a train be chosen from a results list without a question", () => {
+    expect(needsConfirmation(button("book ticket (SL ₹160 11)"), { pageText: list })).toEqual({
+      required: false,
+      safe: true,
+      reason: "",
+      choice: true,
+    });
+  });
+
+  it("also when it is the only train left, in its results row", () => {
+    const row = 'ROW: Sahyadri Intercity Express · (12981) · 2S ₹90 [56] clickable "book ticket (2S ₹90 14)"';
+    expect(needsConfirmation(button("book ticket (2S ₹90 14)"), { pageText: row, id: 56 }).choice).toBe(true);
+    // A "buy" in a product row may charge at once (one-click shops): always asked.
+    const shop = 'ROW: Steel bottle 1 L · ₹349 [12] clickable "Buy ₹349"';
+    expect(needsConfirmation(button("Buy ₹349"), { pageText: shop, id: 12 }).required).toBe(true);
+  });
+
+  it("still asks for a lone priced button, and for pay or buy now even in a list", () => {
+    expect(needsConfirmation(button("book ticket (SL ₹160 11)"), { pageText: '[61] clickable "book ticket (SL ₹160 11)"' }).required).toBe(
+      true,
+    );
+    expect(needsConfirmation(button("Get it ₹99"), { pageText: '[9] clickable "Get it ₹99"' }).required).toBe(true);
+    const pays = ['"Pay ₹100"', '"Pay ₹200"', '"Pay ₹300"'].join("\n");
+    expect(needsConfirmation(button("Pay ₹100"), { pageText: pays }).required).toBe(true);
+    const buys = ['"Buy now ₹100"', '"Buy now ₹200"', '"Buy now ₹300"'].join("\n");
+    expect(needsConfirmation(button("Buy now ₹100"), { pageText: buys }).required).toBe(true);
+  });
+});

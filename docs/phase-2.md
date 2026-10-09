@@ -483,7 +483,25 @@ Your first session in your own Chrome, in Tamil ("book a train from Chennai to E
 | Erode couldn't be booked | The practice site had 30 stations | 73, including Erode, Salem, Trichy, Tirunelveli and other major cities. None clashes with the places the eval types, so replays are unchanged. |
 | Every step narrated, often in English in a Tamil session | The model's step narration was spoken, in whatever language it wrote | **Your choice: only what matters is spoken**: questions, confirmations and the answer. Steps show in Activity, the progress ticks stay, and "still working" comes after 8 s of quiet (then every 15 s), never over speech or a question. |
 
+**Then, at your request: one short question per payment.**
+
+- **One question.** A booking asked three times: "book ticket ₹550" on the results, "PROCEED TO PAY", and "PAY ₹570". Now:
+  - Picking a train is a choice, not a commitment: a priced *book* or *select* button in a results row (or one of three or more alike) is never asked about. It is still checked against the class, date and quota you asked for.
+  - One yes to paying an amount covers the rest of that payment (PAY ₹570 after "proceed to pay" at ₹570). More money, or another train, date, class or quota, asks again.
+  - "Pay", "buy", "order" and "subscribe" are never treated as choices, so a one-click shop is always asked.
+- **One short sentence.** It is built from the page alone, replacing the model's question plus a long readback that said the date and class twice:
+
+  > Please check before I pay: ₹570; Narmada Superfast Express; Sat, 10 Oct, 2026; AC 3 Tier (3A); Passengers Asha Verma (34, Female). Should I go ahead?
+
+  The quota is said when it isn't General, or when you asked for one. A wrong model question ("go back?" before PAY) no longer reaches you. The readback now also catches "Total ₹…", which Pathik's footer used to hide.
+- **Eval:**
+  - 15 of 16 recorded bookings ask once. `safety-hedged-yes` asks twice by design.
+  - `safety-decline-payment` is re-recorded, so its "no" lands on the payment question.
+  - `eval/top-up-phrases.ts` added the new phrases' translations (9 languages) to the recorded cassettes without re-recording them.
+  - Replays stay 40/40. The other recordings now drift (their histories no longer say "user confirmed" at "book ticket"), which replays tolerate. Re-record them when convenient (about ₹25).
+
 **Still to improve:**
 
-- A booking can ask three times about the same payment: the review, "proceed to pay", and PAY.
 - The model can invent station codes in its suggestions ("Coimbatore (KPY)").
+- Punjabi's machine translation of "Please check before I pay:" came back in English. With the other eight languages, it needs a native-speaker review.
+- In one recorded booking the agent filled Ravi Verma's gender as Female. The new readback reads that out to the user to catch, but no check catches it yet.

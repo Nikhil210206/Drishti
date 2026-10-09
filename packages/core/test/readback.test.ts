@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { duplicatePassenger, looksComplete, readback, readbackPassengers } from "../src/agent/readback.js";
+import { duplicatePassenger, looksComplete, readback, readbackPassengers, spokenFacts } from "../src/agent/readback.js";
 import { element, page } from "./fakes.js";
 
 const REVIEW = [
@@ -71,5 +71,30 @@ describe("passengers in a readback", () => {
   it("flags the same person twice, not two different people", () => {
     expect(duplicatePassenger(facts)).toBe("the same passenger is listed twice (Asha Verma (34, Female))");
     expect(duplicatePassenger("Passengers Asha Verma (34, Female), Ravi Verma (36, Male)")).toBe("");
+  });
+});
+
+describe("spokenFacts", () => {
+  const review =
+    "Passengers Asha Verma (34, Female); Train Narmada Superfast Express (22605); Date Sat, 10 Oct, 2026; Class AC 3 Tier (3A); Total ₹570; Sat, 10 Oct, 2026 · 3A · General Review";
+
+  it("says the amount first, each detail once, and leaves out a General quota", () => {
+    expect(spokenFacts(review)).toEqual({
+      amount: 570,
+      train: "Narmada Superfast Express",
+      date: "Sat, 10 Oct, 2026",
+      cls: "3A",
+      quota: "General",
+      text: "₹570; Narmada Superfast Express; Sat, 10 Oct, 2026; AC 3 Tier (3A); Passengers Asha Verma (34, Female)",
+    });
+  });
+
+  it("says the quota when it isn't General, or when the user asked for one", () => {
+    expect(spokenFacts("PAY ₹180; Tue, 6 Oct, 2026 · SL · Tatkal Payment").text).toBe("₹180; Tue, 6 Oct, 2026; SL; Tatkal quota");
+    expect(spokenFacts(review, { quotaAsked: true }).text).toContain("General quota");
+  });
+
+  it("has no amount for a readback without one", () => {
+    expect(spokenFacts("Category Cleanliness").amount).toBeUndefined();
   });
 });

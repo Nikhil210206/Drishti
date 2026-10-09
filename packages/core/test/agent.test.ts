@@ -34,14 +34,13 @@ describe("Agent safety gate", () => {
     expect(io.audits()).toEqual([expect.objectContaining({ action: "click", confirmed: true })]);
   });
 
-  it("leads with the control's own words when the model's question misses the amount", async () => {
+  it("says a payment from the page, not the model's question", async () => {
     // A live run asked "Do you want to go back?" before PAY ₹220, and the scripted user said yes.
     const browser = new FakeBrowser({ [PAY]: payPage }, PAY);
     const llm = new ScriptedLLM([[{ name: "click", args: { id: 7, narration: "", confirmation_question: "Do you want to go back?" } }]]);
     const io = new RecordingIO(["nahi"]);
     await run(agentFor(browser, llm), io);
-    expect(io.asked[0].q).toMatch(/^PAY ₹845\. Should I go ahead\?/);
-    expect(io.asked[0].q).not.toContain("go back");
+    expect(io.asked[0].q).toBe("Please check before I pay: ₹845. Should I go ahead?");
     expect(browser.log).not.toContain("click 7");
   });
 
@@ -331,9 +330,10 @@ describe("Agent: confirmation readback", () => {
     ]);
     const io = new RecordingIO(["no"]);
     await run(agentFor(browser, llm), io);
-    expect(io.asked[0].q).toContain("Pay 490 rupees for 12 October?");
-    expect(io.asked[0].q).toContain("The page says:");
-    expect(io.asked[0].q).toContain("Date Tue, 6 Oct, 2026");
+    // A payment is said from the page alone, once: the model's wrong date never reaches the user.
+    expect(io.asked[0].q).toBe(
+      "Please check before I pay: ₹490; Pearl City Vande Bharat Express; Tue, 6 Oct, 2026; Chair Car (CC). Should I go ahead?",
+    );
   });
 });
 
@@ -1179,5 +1179,67 @@ describe("Agent: when it can't finish", () => {
       new AbortController().signal,
     );
     expect(io.phrasesSaid.at(-1)).toBe("stuck");
+  });
+});
+
+describe("Agent: one question per payment", () => {
+  const RESULTS = "http://localhost:5174/#/results";
+  const REVIEW = "http://localhost:5174/#/review";
+  const PAYP = "http://localhost:5174/#/pay";
+  const results = page(
+    RESULTS,
+    {
+      "61": element("book ticket (SL ₹160 11)"),
+      "62": element("book ticket (3A ₹380 4)"),
+      "63": element("book ticket (SL ₹175 20)"),
+    },
+    [
+      'ROW: Chennai–Bengaluru Express · (12657) [61] clickable "book ticket (SL ₹160 11)" [62] clickable "book ticket (3A ₹380 4)"',
+      'ROW: Brindavan Express · (12639) [63] clickable "book ticket (SL ₹175 20)"',
+    ].join("\n"),
+  );
+  const review = (total: number) =>
+    page(
+      REVIEW,
+      { "56": element("PROCEED TO PAY") },
+      [
+        `- Chennai–Bengaluru Express (12657) · MAS 22:30 → SBC 04:40 · Tue, 6 Oct, 2026 · SL · General Review your journey Train Chennai–Bengaluru Express (12657) From Chennai Central (MAS) at 22:30 To`,
+        `- Bengaluru (SBC) at 04:40 Date Tue, 6 Oct, 2026 Class Sleeper (SL) Passengers Asha Verma (34, Female) Ticket fare × 1 ₹160 Convenience fee ₹20 Total ₹${total}`,
+        '[56] clickable "PROCEED TO PAY"',
+        "- Pathik Rail is a fictional demo website.",
+      ].join("\n"),
+    );
+  const pay = (amount: number) =>
+    page(
+      PAYP,
+      { "67": element(`PAY ₹${amount}`) },
+      [`- Tue, 6 Oct, 2026 · SL · General Payment`, `[67] clickable "PAY ₹${amount}"`].join("\n"),
+    );
+  const flow = (payAmount: number) =>
+    new FakeBrowser({ [RESULTS]: results, [REVIEW]: review(180), [PAYP]: pay(payAmount) }, RESULTS, { "61": REVIEW, "56": PAYP });
+  // A fresh list each time: ScriptedLLM uses its steps up.
+  const clicks = () => [61, 56, 67].map((id) => [{ name: "click", args: { id, narration: "" } }]);
+
+  it("asks once, with the total, at the payment step: not for the train chosen, nor again at PAY", async () => {
+    const browser = flow(180);
+    const io = new RecordingIO(["haan"]);
+    await run(agentFor(browser, new ScriptedLLM(clicks())), io, "Book a sleeper ticket from Chennai to Bengaluru");
+    expect(io.asked.map((a) => a.q)).toEqual([
+      "Please check before I pay: ₹180; Chennai–Bengaluru Express; Tue, 6 Oct, 2026; Sleeper (SL); Passengers Asha Verma (34, Female). Should I go ahead?",
+    ]);
+    expect(browser.log).toEqual(["click 61", "click 56", "click 67"]);
+    expect(io.audits().map((a) => [a.target, a.confirmed])).toEqual([
+      ["PROCEED TO PAY", true],
+      ["PAY ₹180", true],
+    ]);
+  });
+
+  it("asks again when the payment grows past what the user agreed to", async () => {
+    const browser = flow(200);
+    const io = new RecordingIO(["haan", "nahi"]);
+    await run(agentFor(browser, new ScriptedLLM(clicks())), io, "Book a sleeper ticket from Chennai to Bengaluru");
+    expect(io.asked).toHaveLength(2);
+    expect(io.asked[1].q).toContain("₹200");
+    expect(browser.log).not.toContain("click 67");
   });
 });

@@ -4,9 +4,9 @@ import { TOOLS } from "./tools.js";
 import { stepMessage, stuckPrompt, systemPrompt } from "./prompts.js";
 import { needsConfirmation, isSensitiveField, givesUp, yesNo } from "./safety.js";
 import { NavigationPolicy, linkTarget } from "./policy.js";
-import { duplicatePassenger, looksComplete, readback } from "./readback.js";
+import { duplicatePassenger, looksComplete, readback, spokenFacts, type SpokenFacts } from "./readback.js";
 import { saidBy } from "./match.js";
-import { classMismatch, quotaMismatch } from "./classes.js";
+import { classMismatch, quotaMismatch, requestedQuotas } from "./classes.js";
 import { dateMismatch, urlDateMismatch } from "./dates.js";
 import { refusalPhrase, type PhraseBook, type PhraseKey } from "./phrases.js";
 
@@ -69,6 +69,8 @@ export class Agent {
   private underDialog: Snapshot | undefined;
   /** An answer for the wrong day was already sent back once this task. */
   private dateRefused = false;
+  /** The payment the user said yes to this task: what later steps of it may carry on under. */
+  private consent?: SpokenFacts;
   /** The user said to leave it: only done is allowed from here. */
   private gaveUp = false;
   /** Sensitive fields handed to the user to type. */
@@ -116,6 +118,7 @@ export class Agent {
     this.optionOf = new Map();
     this.underDialog = undefined;
     this.dateRefused = false;
+    this.consent = undefined;
     this.gaveUp = false;
     this.handedOver = new Set();
     this.misses = new Map();
@@ -383,18 +386,21 @@ export class Agent {
               failed: true,
             };
           }
-          const gate = needsConfirmation(el, { pageText: snap.text });
+          const gate = needsConfirmation(el, { pageText: snap.text, id: a.id });
           // The model may add a confirmation, except on clearly harmless controls; it can never remove one.
           const confirmNeeded = gate.required || (!!a.confirmation_question && !gate.safe);
           // The model's question can be wrong; the readback is what the page itself says.
-          const facts = confirmNeeded ? readback(snap, a.id, el) : "";
+          // A train chosen from a list isn't asked about, but is still checked: the wrong class, quota or
+          // date is caught here, before the passengers are filled in.
+          const checked = confirmNeeded || !!gate.choice;
+          const facts = checked ? readback(snap, a.id, el) : "";
           // Never book what the user did not ask for: another class, quota or date (cheaper, seats left,
           // or an id slip), or the same person twice.
           const mismatch =
             el && !looksLikeDropdown(snap, a.id, el)
               ? classMismatch(this.userTexts, el.name) ||
                 classMismatch(this.userTexts, facts) ||
-                (confirmNeeded &&
+                (checked &&
                   (quotaMismatch(this.userTexts, facts) ||
                     // Results pages state the quota once in their header ("· General quota · 9 trains found").
                     quotaMismatch(this.userTexts, pageLines(snap)))) ||
@@ -419,20 +425,40 @@ export class Agent {
             };
           }
           if (confirmNeeded) {
-            // The user answers what they hear first, so for a priced control the model's question must
-            // name the amount: a live run asked "Do you want to go back?" before PAY ₹220, and got a yes.
-            // Otherwise the control's own words lead ("PAY ₹220. Should I go ahead?").
-            const modelQuestion = String(a.confirmation_question ?? "");
-            const question =
-              modelQuestion && namesAmount(modelQuestion, el?.name ?? "", facts)
-                ? modelQuestion
-                : `${el?.name ?? ""}. ${await this.phrase("confirmGeneric", io.lang)}`;
-            const ok = await this.confirm(
-              io,
-              facts ? `${question} ${await this.phrase("pageShows", io.lang)} ${facts}.` : question,
-              el?.name ?? "",
-            );
-            io.emit({ type: "audit", action: "click", target: el?.name, reason: gate.reason || "model asked", facts, confirmed: ok });
+            // A payment is said as one short line from the page: the amount, train, date, class,
+            // passengers ("Please check before I pay: ₹570; Narmada Superfast Express; Sat, 10 Oct, 2026; AC 3
+            // Tier (3A); Passengers Asha Verma (34, Female). Should I go ahead?").
+            const spoken = facts ? spokenFacts(facts, { quotaAsked: requestedQuotas(this.userTexts).size > 0 }) : undefined;
+            // A yes to paying an amount covers the rest of the same payment ("PROCEED TO PAY", then
+            // "PAY ₹570"): one booking used to ask three times. More money or another trip asks again.
+            const covered = spoken?.amount !== undefined && this.consent && withinConsent(this.consent, spoken);
+            let ok = true;
+            if (!covered) {
+              let question: string;
+              if (spoken?.amount !== undefined) {
+                question = `${await this.phrase("confirmLead", io.lang)} ${spoken.text}. ${await this.phrase("confirmGeneric", io.lang)}`;
+              } else {
+                // The user answers what they hear first, so for a priced control the model's question
+                // must name the amount: a live run asked "Do you want to go back?" before PAY ₹220, and
+                // got a yes. Otherwise the control's own words lead ("PAY ₹220. Should I go ahead?").
+                const modelQuestion = String(a.confirmation_question ?? "");
+                const lead =
+                  modelQuestion && namesAmount(modelQuestion, el?.name ?? "", facts)
+                    ? modelQuestion
+                    : `${el?.name ?? ""}. ${await this.phrase("confirmGeneric", io.lang)}`;
+                question = facts ? `${lead} ${await this.phrase("pageShows", io.lang)} ${facts}.` : lead;
+              }
+              ok = await this.confirm(io, question, el?.name ?? "");
+              if (ok && spoken?.amount !== undefined) this.consent = spoken;
+            }
+            io.emit({
+              type: "audit",
+              action: "click",
+              target: el?.name,
+              reason: covered ? "already confirmed for this payment" : gate.reason || "model asked",
+              facts,
+              confirmed: ok,
+            });
             if (!ok) {
               emit({ status: "declined", result: "user said no" });
               await io.sayPhrase("cancelled");
@@ -967,6 +993,15 @@ export class Agent {
     io.emit({ type: "audit", action: "navigate", target: hostOf(now), reason: "site not allowed", confirmed: false });
     return `BLOCKED: that opened ${hostOf(now)}, which Drishti may not open, so I went back`;
   }
+}
+
+/**
+ * A later step of a payment the user already agreed to: no more money, and the same trip wherever
+ * both steps show it (train, date, class, quota).
+ */
+function withinConsent(consent: SpokenFacts, now: SpokenFacts): boolean {
+  if (consent.amount === undefined || now.amount === undefined || now.amount > consent.amount) return false;
+  return (["train", "date", "cls", "quota"] as const).every((k) => !consent[k] || !now[k] || consent[k] === now[k]);
 }
 
 /** Rupee amounts in a text ("PAY ₹1,240" → "1240"). */

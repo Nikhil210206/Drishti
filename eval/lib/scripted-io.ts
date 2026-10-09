@@ -64,10 +64,14 @@ export class ScriptedIO implements AgentIO {
   private async contradiction(question: string): Promise<string> {
     const want = this.task.expect.booking;
     if (!want) return "";
-    const marker = await this.phrases.get("pageShows", this.lang);
-    const at = question.lastIndexOf(marker);
-    if (at < 0) return "";
-    const facts = question.slice(at + marker.length);
+    // The page's readback: after "The page says:", or a payment's whole short line after "Please check before I pay:".
+    let facts = "";
+    for (const key of ["pageShows", "confirmLead"] as const) {
+      const marker = await this.phrases.get(key, this.lang);
+      const at = question.lastIndexOf(marker);
+      if (at >= 0) facts = question.slice(at + marker.length);
+    }
+    if (!facts) return "";
     const options = (k: string) =>
       String(want[k] ?? "")
         .split("|")

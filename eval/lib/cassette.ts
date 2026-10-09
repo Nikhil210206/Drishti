@@ -24,7 +24,8 @@ interface CassetteFile {
   docs: Record<string, string>;
 }
 
-const sha = (v: unknown) =>
+/** The content hash cassettes key translations and documents by (eval/top-up-phrases.ts uses it too). */
+export const sha = (v: unknown) =>
   crypto
     .createHash("sha1")
     .update(typeof v === "string" ? v : JSON.stringify(v))
