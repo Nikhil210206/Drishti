@@ -471,3 +471,19 @@ The meter showed ₹4.60, about ₹3.5 of it Bulbul.
 3. Start practice, and book a ticket by voice. Hold Space in the panel, or press Alt+Shift+D, for example: "Book a sleeper ticket from Chennai to Bengaluru tomorrow". Listen to each confirmation before answering.
 4. On a real site, for example `https://hi.wikipedia.org/wiki/ताजमहल`, ask "What is this page about?". Say yes to Drishti's question, then choose **Allow** in Chrome's box.
 5. If you can, repeat step 4 with Replies set to *My screen reader* and VoiceOver on.
+
+## First hands-on test (9 Oct)
+
+Your first session in your own Chrome, in Tamil ("book a train from Chennai to Erode tomorrow"), found problems the automated checks couldn't. `eval/repro.ts` replays a command live with a trace (`npx tsx eval/repro.ts ta-IN "<command>"`, a rupee or two), and it reproduced each problem.
+
+| What happened | Why | Now |
+|---|---|---|
+| "I'm stuck on this page, tell me what to try next", with no reason | The practice site had no Erode. The agent tried spellings for about 17 turns, then said a fixed phrase. A blind user can't look to find out why. | When it gives up, it says what stopped it and what you can say next, in your language (one extra LLM call, with the fixed phrase as fallback). After two empty station searches it is told to ask you. Live: for Pollachi it asked "this site doesn't have Pollachi; tell me a nearby station". |
+| "Erode" heard as "Ernakulam" | Every session biased Saaras towards 13 practice-site station names, on every site | The bias list holds only Drishti's own words (Tatkal, Sleeper, PNR…) |
+| Erode couldn't be booked | The practice site had 30 stations | 73, including Erode, Salem, Trichy, Tirunelveli and other major cities. None clashes with the places the eval types, so replays are unchanged. |
+| Every step narrated, often in English in a Tamil session | The model's step narration was spoken, in whatever language it wrote | **Your choice: only what matters is spoken**: questions, confirmations and the answer. Steps show in Activity, the progress ticks stay, and "still working" comes after 8 s of quiet (then every 15 s), never over speech or a question. |
+
+**Still to improve:**
+
+- A booking can ask three times about the same payment: the review, "proceed to pay", and PAY.
+- The model can invent station codes in its suggestions ("Coimbatore (KPY)").

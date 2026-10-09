@@ -1,7 +1,7 @@
 import { guessDocLanguage, type LangCode } from "../lang.js";
 import type { BrowserDriver, DocReader, ElementInfo, LLM, Profile, Reasoning, Snapshot, ToolCall, Translator } from "../types.js";
 import { TOOLS } from "./tools.js";
-import { systemPrompt, stepMessage } from "./prompts.js";
+import { stepMessage, stuckPrompt, systemPrompt } from "./prompts.js";
 import { needsConfirmation, isSensitiveField, givesUp, yesNo } from "./safety.js";
 import { NavigationPolicy, linkTarget } from "./policy.js";
 import { duplicatePassenger, looksComplete, readback } from "./readback.js";
@@ -73,6 +73,8 @@ export class Agent {
   private gaveUp = false;
   /** Sensitive fields handed to the user to type. */
   private handedOver = new Set<string>();
+  /** Typings that found no suggestion at all, per field, this task. */
+  private misses = new Map<string, number>();
   /** Everything the user actually said or dictated this task: the only text allowed into free-text fields. */
   private userTexts: string[] = [];
   /** What the user dictated or answered, as opposed to the request itself. */
@@ -116,6 +118,7 @@ export class Agent {
     this.dateRefused = false;
     this.gaveUp = false;
     this.handedOver = new Set();
+    this.misses = new Map();
     const p = this.opts.profile;
     this.userWords = [];
     this.userTexts = [task, ...io.recent(), ...(p ? [p.name, p.age, p.gender, p.mobile].filter((v): v is string => !!v) : [])];
@@ -211,7 +214,7 @@ export class Agent {
         if (r.failed) failures++;
         else failures = 0;
         if (failures >= 4) {
-          await io.sayPhrase("stuck");
+          await this.explainStop(task, history, io, signal);
           return { outcome: "stuck" };
         }
         if (k === calls.length - 1) break;
@@ -241,8 +244,30 @@ export class Agent {
         cur = after!;
       }
     }
-    await io.sayPhrase("stuck");
+    await this.explainStop(task, history, io, signal);
     return { outcome: "stuck" };
+  }
+
+  /**
+   * Giving up: say why, in the user's language, and what they could say next, instead of a fixed
+   * "I'm stuck, tell me what to try". A live run said only that after ten tries at a station the
+   * site doesn't have, leaving a blind user nothing to go on. The fixed phrase is the fallback.
+   */
+  private async explainStop(task: string, history: string[], io: AgentIO, signal: AbortSignal) {
+    try {
+      const r = await this.deps.llm.chat({
+        messages: [
+          { role: "system", content: stuckPrompt(io.lang) },
+          { role: "user", content: `The user asked: ${task}\n\nWhat happened, step by step:\n${history.slice(-12).join("\n")}` },
+        ],
+        reasoning: "none",
+        maxTokens: 200,
+        signal,
+      });
+      const speech = r.content.replace(/\[\d+\]/g, "").trim();
+      if (speech) return io.say(speech);
+    } catch {}
+    if (!signal.aborted) await io.sayPhrase("stuck");
   }
 
   private async execute(
@@ -261,8 +286,10 @@ export class Agent {
     const ev: StepEvent = { i: ++this.stepCounter, tool: call.name, target, narration: a.narration, status: "running" };
     const t0 = Date.now();
     const emit = (patch: Partial<StepEvent>) => io.emit({ type: "step", step: { ...ev, ...patch, ms: Date.now() - t0 } });
+    // The narration is shown with the step, not spoken: spoken, every step was slow to sit through,
+    // often in English for users of other languages, and most of a task's speech cost. The session
+    // says "still working" during long silences instead.
     emit({});
-    if (a.narration && typeof a.narration === "string") io.say(a.narration);
 
     // A trace carried on filling a complaint after the user said "नहीं, रहने दो" (no, leave it).
     if (this.gaveUp && call.name !== "done") {
@@ -462,7 +489,7 @@ export class Agent {
               : more && isStationBox(el)
                 ? String(a.text ?? "")
                 : "";
-          if (pick && !a.submit) return await this.pickSuggestion(pick, snap, emit, describe());
+          if (pick && !a.submit) return await this.pickSuggestion(pick, snap, emit, describe(), String(a.id));
           const { summary, appeared } = await this.changes(snap, true);
           emit({ status: "ok", result: summary || undefined });
           if (summary) return { line: `${describe()} → ok ⇒ ${summary}` };
@@ -804,7 +831,7 @@ export class Agent {
    * Autocomplete in one call: after typing, wait for suggestions and click the one closest to
    * what the model asked for, so the rest of a form can follow in the same turn.
    */
-  private async pickSuggestion(want: string, snap: Snapshot, emit: (p: Partial<StepEvent>) => void, line: string) {
+  private async pickSuggestion(want: string, snap: Snapshot, emit: (p: Partial<StepEvent>) => void, line: string, field: string) {
     let shown: [string, ElementInfo][] = [];
     for (let wait = 0; wait < 3 && !shown.length; wait++) {
       if (wait) await new Promise((r) => setTimeout(r, 300 * wait));
@@ -818,10 +845,16 @@ export class Agent {
         .map(([i, e]) => `[${i}] "${e.name}"`)
         .join(", ");
       emit({ status: "failed", result: `no suggestion like "${want}"` });
-      return {
-        line: `${line} → typed, but ${list ? `no suggestion is like "${want}". Suggestions: ${list}. Click the right one` : "no suggestions appeared. Try the official name, a shorter word or the station code"}.`,
-        failed: true,
-      };
+      // Nothing at all, twice for the same box: the site doesn't know the place. A live run tried
+      // spellings of "Erode" for ten turns on a site without it, then gave up without saying why.
+      const misses = list ? 0 : (this.misses.get(field) ?? 0) + 1;
+      this.misses.set(field, misses);
+      const hint = list
+        ? `no suggestion is like "${want}". Suggestions: ${list}. Click the right one`
+        : misses >= 2
+          ? `no suggestions appeared again. This site most likely has no "${want}". Stop trying other spellings: ask_user, telling them in their language that the site doesn't list it, and offer to use another place they name`
+          : "no suggestions appeared. Try once more with a shorter word or the station code";
+      return { line: `${line} → typed, but ${hint}.`, failed: true };
     }
     await this.browser.click(pick[0]);
     const others = shown

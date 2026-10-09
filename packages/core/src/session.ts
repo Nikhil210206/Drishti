@@ -55,6 +55,9 @@ export class VoiceSession implements AgentIO {
   private firstAudioPending = false;
   /** When Drishti last said why the proxy refused the microphone (talking retries it). */
   private refusalSaidAt = 0;
+  /** When Drishti last finished saying something, for the "still working" reminder. */
+  private quietSince = 0;
+  private workingTimer?: ReturnType<typeof setInterval>;
 
   constructor(
     private deps: SessionDeps,
@@ -144,6 +147,7 @@ export class VoiceSession implements AgentIO {
   }
 
   close() {
+    clearInterval(this.workingTimer);
     this.stt?.close();
     this.voiceOut.cancelAll();
     this.textOut.cancelAll();
@@ -206,6 +210,8 @@ export class VoiceSession implements AgentIO {
   private async runTask(text: string) {
     const abort = new AbortController();
     this.task = { abort, text };
+    this.quietSince = Date.now();
+    this.remindWhileWorking(abort);
     this.interjections = [];
     this.emit({ type: "task", state: "running", text });
     const t0 = Date.now();
@@ -222,6 +228,7 @@ export class VoiceSession implements AgentIO {
       this.emit({ type: "task", state: "error", text });
       if (!abort.signal.aborted) await this.sayPhrase("error");
     } finally {
+      clearInterval(this.workingTimer);
       if (this.task?.abort === abort) this.task = undefined;
       this.conversation = this.conversation.slice(-8);
     }
@@ -279,12 +286,36 @@ export class VoiceSession implements AgentIO {
       }
       this.deps.sink.audio(pcm);
     });
-    out.on("end", (u) => this.emit({ type: "tts_end", id: u.id }));
+    out.on("end", (u) => {
+      this.quietSince = Date.now();
+      this.emit({ type: "tts_end", id: u.id });
+    });
     out.on("cancel", () => this.emit({ type: "tts_stop" }));
     out.on("error", (e) => this.emit({ type: "error", message: `TTS: ${e.message}` }));
   }
 
   // ---------- AgentIO ----------
+  /**
+   * Steps aren't narrated any more, so a long task would be silent apart from the progress ticks:
+   * after 8 s of quiet say "still working", then again after every 15 s. Never over speech, or while
+   * a question waits for the user's answer.
+   */
+  private remindWhileWorking(abort: AbortController) {
+    clearInterval(this.workingTimer);
+    let reminded = 0;
+    this.workingTimer = setInterval(() => {
+      if (this.task?.abort !== abort) return clearInterval(this.workingTimer);
+      if (this.waiter || this.composeWaiter || this.tts.busy) return;
+      if (Date.now() - this.quietSince < (reminded ? 15_000 : 8_000)) return;
+      reminded++;
+      this.quietSince = Date.now();
+      // Not through sayPhrase: "repeat" should still give the last real reply.
+      void this.deps.phrases
+        .get("working", this.lang)
+        .then((t) => this.task?.abort === abort && this.tts.speak(t, this.lang, { cache: true }));
+    }, 1000);
+  }
+
   say(text: string) {
     if (!text?.trim()) return;
     this.lastSpoken = text;

@@ -6,30 +6,10 @@ import { messageText, toBase64 } from "../bytes.js";
 
 const OPEN = 1;
 
-// Domain words that Saaras v4 should bias towards (station names, rail jargon, product names).
-export const DEFAULT_KEYTERMS = [
-  "Drishti",
-  "Pathik Rail",
-  "Kivi",
-  "Tatkal",
-  "Sleeper",
-  "AC 3 tier",
-  "AC 2 tier",
-  "PNR",
-  "Chennai Central",
-  "Bengaluru",
-  "Howrah",
-  "Mumbai",
-  "New Delhi",
-  "Secunderabad",
-  "Pune",
-  "Coimbatore",
-  "Madurai",
-  "Ernakulam",
-  "Thiruvananthapuram",
-  "Mysuru",
-  "Vijayawada",
-];
+// Words Saaras v4 should bias towards: Drishti's own vocabulary only. Place names are left out: a
+// fixed list of the practice site's stations biased every place name on every site (likely why a
+// Tamil user's "Erode" came out as "Ernakulam").
+export const DEFAULT_KEYTERMS = ["Drishti", "Pathik Rail", "Kivi", "Tatkal", "Sleeper", "AC 3 tier", "AC 2 tier", "PNR", "OTP"];
 
 /**
  * One realtime Saaras connection per panel session. Audio arrives as 16 kHz mono

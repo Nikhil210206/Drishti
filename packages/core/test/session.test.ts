@@ -157,6 +157,47 @@ describe("VoiceSession when the Drishti proxy says no", () => {
   });
 });
 
+describe("VoiceSession during a long task", () => {
+  /** An LLM that thinks until the test lets it answer. */
+  function slowLLM() {
+    let answer!: () => void;
+    const llm: LLM = {
+      chat: () =>
+        new Promise((resolve) => {
+          answer = () => resolve({ content: "", toolCalls: [{ id: "c0", name: "done", args: { speech: "Two trains found." } }], ms: 1 });
+        }),
+    };
+    return { llm, answer: () => answer() };
+  }
+
+  it("says 'still working' after 8 s of quiet, then every 15 s, and not after the task", async () => {
+    vi.useFakeTimers();
+    try {
+      const slow = slowLLM();
+      const { session, speechOut } = setup({ llm: slow.llm });
+      session.onMessage({ type: "text", text: "trains from Chennai to Erode tomorrow" });
+      const working = () => speechOut.spoken.filter((s) => s.text === "Still working on it.").length;
+      await vi.advanceTimersByTimeAsync(7_000);
+      expect(working()).toBe(0);
+      await vi.advanceTimersByTimeAsync(2_000);
+      expect(working()).toBe(1);
+      await vi.advanceTimersByTimeAsync(10_000);
+      expect(working()).toBe(1);
+      await vi.advanceTimersByTimeAsync(6_000);
+      expect(working()).toBe(2);
+      slow.answer();
+      await vi.advanceTimersByTimeAsync(60_000);
+      expect(working()).toBe(2);
+      expect(speechOut.spoken.at(-1)?.text).toBe("Two trains found.");
+      // "Repeat" gives the answer, not the reminder.
+      session.onMessage({ type: "text", text: "repeat" });
+      expect(speechOut.spoken.at(-1)?.text).toBe("Two trains found.");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});
+
 describe("VoiceSession screen-reader output", () => {
   it("sends replies as text only, without Bulbul, and switches back on request", async () => {
     const { session, speechOut, events } = setup();

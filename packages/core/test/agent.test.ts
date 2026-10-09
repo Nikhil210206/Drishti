@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { Agent, NavigationPolicy } from "../src/index.js";
 import { batchStop, namesAmount } from "../src/agent/orchestrator.js";
 import { FakeBrowser, RecordingIO, ScriptedLLM, echoTranslator, element, noDocs, page, phrases } from "./fakes.js";
+import type { ChatOptions, ChatResult, LLM } from "../src/index.js";
 
 const HOME = "http://localhost:5174/#/";
 const PAY = "http://localhost:5174/#/pay";
@@ -1116,5 +1117,67 @@ describe("Agent: knowing when to stop", () => {
     await run(agentFor(browser, llm), new RecordingIO(["nahi", "nahi"]));
     expect(browser.log).toEqual([]);
     expect(String(llm.calls[2].messages[1].content)).toContain("USER DECLINED again. Stop: call done now");
+  });
+});
+
+describe("Agent: when it can't finish", () => {
+  const form = () => page(HOME, { "8": element("TO", { role: "textbox", tag: "input" }), "18": element("SEARCH TRAINS") });
+  /** Types a station the site doesn't have, again and again; answers the explanation request in words. */
+  function looping(): LLM & { calls: ChatOptions[] } {
+    const calls: ChatOptions[] = [];
+    return {
+      calls,
+      async chat(opts: ChatOptions): Promise<ChatResult> {
+        calls.push(opts);
+        if (!opts.tools)
+          return { content: "Erode is not on this website's station list. Should I try Coimbatore instead?", toolCalls: [], ms: 1 };
+        // Other spellings each time, as the live run did (an exact repeat is refused by the loop guard).
+        const text = ["Erode", "Erode Jn", "Erode Junction", "ED", "Erode"][(calls.length - 1) % 5];
+        const type = { name: "type_text", args: { id: 8, text, pick_suggestion: text, narration: "" } };
+        return { content: "", toolCalls: [{ id: "c0", ...type }], ms: 1 };
+      },
+    };
+  }
+
+  it("says what stopped it, in words, instead of a fixed 'I'm stuck'", async () => {
+    const browser = new FakeBrowser({ [HOME]: form() }, HOME);
+    const llm = looping();
+    const io = new RecordingIO();
+    const r = await new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() }, { maxSteps: 6 }).run(
+      "Book a ticket from Chennai to Erode tomorrow",
+      io,
+      new AbortController().signal,
+    );
+    expect(r.outcome).toBe("stuck");
+    expect(io.said.at(-1)).toBe("Erode is not on this website's station list. Should I try Coimbatore instead?");
+    expect(io.phrasesSaid).not.toContain("stuck");
+    // The explanation request saw what happened, without tools.
+    expect(String(llm.calls.at(-1)?.messages[1].content)).toContain("Erode");
+  });
+
+  it("tells the model the site has no such place after two empty searches", async () => {
+    const browser = new FakeBrowser({ [HOME]: form() }, HOME);
+    const llm = looping();
+    await new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() }, { maxSteps: 3 }).run(
+      "Book a ticket from Chennai to Erode tomorrow",
+      new RecordingIO(),
+      new AbortController().signal,
+    );
+    const history = String(llm.calls[2].messages[1].content);
+    expect(history).toContain("Try once more with a shorter word");
+    expect(history).toContain('This site most likely has no "Erode Jn". Stop trying other spellings: ask_user');
+  });
+
+  it("falls back to the fixed phrase when the explanation fails", async () => {
+    const browser = new FakeBrowser({ [HOME]: form() }, HOME);
+    const inner = looping();
+    const llm: LLM = { chat: (o) => (o.tools ? inner.chat(o) : Promise.reject(new Error("network"))) };
+    const io = new RecordingIO();
+    await new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() }, { maxSteps: 6 }).run(
+      "Book a ticket to Erode",
+      io,
+      new AbortController().signal,
+    );
+    expect(io.phrasesSaid.at(-1)).toBe("stuck");
   });
 });

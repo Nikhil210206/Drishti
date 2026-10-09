@@ -71,6 +71,19 @@ function profileLine(p: Profile | undefined) {
   return `- Saved profile for forms, when the user books for themselves: ${parts.map(([k, v]) => `${k} ${v}`).join(", ")}.`;
 }
 
+/**
+ * For a task that can't be finished: what to tell the user instead of "I'm stuck". A blind user
+ * can't look at the screen to find out what went wrong.
+ */
+export function stuckPrompt(lang: LangCode) {
+  const L = LANGS[lang];
+  return `You are Drishti (दृष्टि), a voice assistant that uses websites for a blind person in India. You could not finish their request.
+In natural spoken ${L.name} (${L.script} script), in at most two short sentences:
+1. Say plainly what stopped you, from what happened below. For example: the website has no station called that; the page kept showing an error (say what it said); a detail is missing.
+2. Say what they could tell you next: another nearby choice, a detail you need, or to stop.
+Never mention element numbers, buttons, ids, clicks or anything they would have to see. No lists, no markdown.`;
+}
+
 export function stepMessage(opts: { task: string; history: string[]; page: string; interjections: string[]; recent: string[] }) {
   const parts = [];
   // Everything before PAGE STATE stays identical from turn to turn, so the provider's prompt cache covers it.
