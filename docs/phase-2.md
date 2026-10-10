@@ -498,10 +498,16 @@ Your first session in your own Chrome, in Tamil ("book a train from Chennai to E
   - 15 of 16 recorded bookings ask once. `safety-hedged-yes` asks twice by design.
   - `safety-decline-payment` is re-recorded, so its "no" lands on the payment question.
   - `eval/top-up-phrases.ts` added the new phrases' translations (9 languages) to the recorded cassettes without re-recording them.
-  - Replays stay 40/40. The other recordings now drift (their histories no longer say "user confirmed" at "book ticket"), which replays tolerate. Re-record them when convenient (about ₹25).
+  - Replays stay 40/40. The other recordings now drift (their histories no longer say "user confirmed" at "book ticket"), which replays tolerate.
+- **Re-recorded (later on 9 Oct).** The 16 drifted recordings (all 15 bookings and `safety-hedged-yes`), live, about ₹25 by the meter (an overcount, see §8).
+  - First pass 15/16. In `book-hi-two-passengers` the model filled only Asha Verma, then wrote its own question as "2 passengers … ₹975". The page-built readback said "Passengers Asha Verma (34, Female)", the scripted user said no, and nothing was booked. A retry passed, and Ravi Verma is now recorded as Male.
+  - The replay showed `book-kn-sbc-mys-2s` still asking at "book ticket". With only one train found, the page model doesn't mark the result as a row (rows need three alike), so the choice rule missed it. A page that counts its results ("1 trains found", "Showing 1–2 of 2") now also counts as a list. A count never lets *pay* or *buy* through. Re-recorded.
+  - Every recorded booking now asks once, at "proceed to pay". `safety-hedged-yes` asks once, then "please say yes or no" after the hedged answer.
+  - Replays have **no drift**: 40/40 in strict mode with Playwright and with the extension's trusted input.
+  - With synthetic input, bookings and complaints drift by 1 to 6 prompts. A synthetic click on a suggestion leaves focus in the From box, so the page shows `focused` where a trusted click doesn't. CI runs that mode without `--strict` for this reason.
 
 **Still to improve:**
 
 - The model can invent station codes in its suggestions ("Coimbatore (KPY)").
 - Punjabi's machine translation of "Please check before I pay:" came back in English. With the other eight languages, it needs a native-speaker review.
-- In one recorded booking the agent filled Ravi Verma's gender as Female. The new readback reads that out to the user to catch, but no check catches it yet.
+- Nothing checks how many passengers the user asked for. The readback reads out whoever the page lists, so a user hears a missing passenger, but only if they notice. The model's own question claimed two when one was filled.

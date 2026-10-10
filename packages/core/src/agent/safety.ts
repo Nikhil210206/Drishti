@@ -101,13 +101,18 @@ export function needsConfirmation(el: ElementInfo | undefined, ctx: ConfirmConte
 
 /**
  * A priced "book", "select" or "choose" control that picks one of a list: it sits in a results row
- * (the page model's "ROW:" lines), or at least three priced controls start with the same words.
+ * (the page model's "ROW:" lines), the page counts its results ("1 trains found": one or two results
+ * are never "ROW:" lines), or at least three priced controls start with the same words.
  * Never "buy", "order", "pay" or "subscribe": a one-click shop may charge on those.
  */
+const RESULT_COUNT =
+  /\b\d+\s+(?:results?|trains?|flights?|buses|options)\s+(?:found|available)\b|\bshowing\s+\d+(?:\s*[–-]\s*\d+)?\s+of\s+\d+/i;
+
 function choiceInList(label: string, ctx: ConfirmContext): boolean {
   if (!/^(book|select|choose|view|check)\b/i.test(label)) return false;
   const page = ctx.pageText ?? "";
   if (ctx.id !== undefined && page.split("\n").some((l) => l.startsWith("ROW:") && l.includes(`[${ctx.id}] `))) return true;
+  if (page.split("\n").some((l) => l.startsWith("- ") && RESULT_COUNT.test(l))) return true;
   const lead = label
     .split(/[(₹]/)[0]
     .trim()

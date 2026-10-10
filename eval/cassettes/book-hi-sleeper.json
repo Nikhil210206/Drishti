@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-hi-sleeper",
- "recordedAt": "2026-10-05T08:07:51.029Z",
+ "recordedAt": "2026-10-09T17:10:48.276Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,306 +10,318 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_333d711425084ddda87ef4a9",
+      "id": "chatcmpl-tool-b0fe0f6b27b883a0",
       "name": "type_text",
       "args": {
        "id": 6,
-       "text": "Chennai",
-       "pick_suggestion": "Chennai Central",
-       "narration": "FROM में चेन्नई डाल रहा हूँ"
+       "text": "Chennai Central",
+       "narration": "FROM में Chennai Central डाल रहा हूँ"
       }
      }
     ],
-    "ms": 1873,
+    "ms": 929,
     "usage": {
-     "completion_tokens": 64,
-     "prompt_tokens": 4161,
-     "total_tokens": 4225,
-     "completion_tokens_details": null,
+     "completion_tokens": 39,
+     "prompt_tokens": 4019,
+     "total_tokens": 4058,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
      "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "0aa441ec8500ff1e",
+   "hash": "0c39852e1411b3a1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_76002c6ce1ba493897716305",
+      "id": "chatcmpl-tool-a4556592479b8e88",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Chennai Central select kar raha hoon"
+      }
+     }
+    ],
+    "ms": 459,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4069,
+     "total_tokens": 4097,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "78e6ef46d2c37fc2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-8d49603752e8f270",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bengaluru",
-       "narration": "Bengaluru enter kar raha hoon"
+       "pick_suggestion": "Bengaluru",
+       "narration": "Typing Bengaluru"
       }
      }
     ],
-    "ms": 495,
+    "ms": 667,
     "usage": {
-     "completion_tokens": 31,
-     "prompt_tokens": 4206,
-     "total_tokens": 4237,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4074,
+     "total_tokens": 4120,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "df4e26a5699c1bd2",
+   "hash": "ae54623a6358e125",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_09c41ae0afe744acaa577cad",
-      "name": "click",
-      "args": {
-       "id": 21,
-       "narration": "Select Bengaluru station"
-      }
-     }
-    ],
-    "ms": 466,
-    "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 4291,
-     "total_tokens": 4338,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "582662d668ae5a54",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_31e6adcc03f9406890e93d25",
+      "id": "chatcmpl-tool-b65ca6f40679288e",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains",
-       "confirmation_question": ""
+       "narration": "Search trains button"
       }
      }
     ],
-    "ms": 594,
+    "ms": 460,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4283,
-     "total_tokens": 4331,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4130,
+     "total_tokens": 4155,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "eb1bd1868649b9b8",
+   "hash": "6747f216676d3f41",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_f9797aff59ff476ca69a02cd",
+      "id": "chatcmpl-tool-befc7082f9e0cdbe",
       "name": "click",
       "args": {
-       "id": 24,
-       "narration": "स्लीपर क्लास बुक कर रहा हूँ",
-       "confirmation_question": "कल चेन्नई सेंट्रल से बेंगलुरु SBC, स्लीपर क्लास, 1 टिकट, ₹160, क्या मैं बुक कर दूँ?"
+       "id": 23,
+       "narration": "Sleeper class book करना है"
       }
      }
     ],
-    "ms": 796,
+    "ms": 850,
     "usage": {
-     "completion_tokens": 82,
-     "prompt_tokens": 5682,
-     "total_tokens": 5764,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 29,
+     "prompt_tokens": 5529,
+     "total_tokens": 5558,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3904
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "9163e29564139caf",
+   "hash": "f5d63ee0700a57ab",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e2119c3570584b3db0537ad2",
+      "id": "chatcmpl-tool-9641b930d8f8cb1b",
       "name": "type_text",
       "args": {
-       "id": 48,
+       "id": 47,
        "text": "Asha Verma",
        "narration": "Name डाल रही हूँ"
       }
      },
      {
-      "id": "call_77acf805881d433da56fdc85",
+      "id": "chatcmpl-tool-bb71794cce4dab28",
       "name": "type_text",
       "args": {
-       "id": 49,
+       "id": 48,
        "text": "34",
        "narration": "Age डाल रही हूँ"
       }
      },
      {
-      "id": "call_71168e1f8d5446c88d2b72fa",
+      "id": "chatcmpl-tool-84742c9aed8358de",
       "name": "click",
       "args": {
-       "id": 51,
-       "narration": "Female चुन रही हूँ"
+       "id": 50,
+       "narration": "Female select कर रही हूँ"
       }
      },
      {
-      "id": "call_d51967110a194fec83c63b77",
-      "name": "click",
-      "args": {
-       "id": 55,
-       "narration": "Mobile नंबर डाल रही हूँ"
-      }
-     },
-     {
-      "id": "call_8ff9b77d80c047d8b8efa65c",
+      "id": "chatcmpl-tool-9c02022e869cb467",
       "name": "type_text",
       "args": {
-       "id": 55,
+       "id": 54,
        "text": "9000000001",
-       "narration": "Mobile नंबर डाल रही हूँ"
+       "narration": "Mobile number डाल रही हूँ"
       }
      }
     ],
-    "ms": 1759,
+    "ms": 1177,
     "usage": {
-     "completion_tokens": 248,
-     "prompt_tokens": 4354,
-     "total_tokens": 4602,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 148,
+     "prompt_tokens": 4197,
+     "total_tokens": 4345,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3968
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "dfdb594fcc7a430b",
+   "hash": "347561104e368e09",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_a2a0ef817975405b85ba052f",
+      "id": "chatcmpl-tool-8f8e98b27bc5f874",
+      "name": "click",
+      "args": {
+       "id": 55,
+       "narration": "Continue button click करना"
+      }
+     }
+    ],
+    "ms": 417,
+    "usage": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4306,
+     "total_tokens": 4332,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "d3a3099f9346d7f2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b9f1d985438fe6f8",
       "name": "click",
       "args": {
        "id": 56,
-       "narration": "Continue करना",
-       "confirmation_question": ""
+       "narration": "Proceed to payment page",
+       "confirmation_question": "क्या मैं ₹180 की payment के लिए आगे बढ़ूं?"
       }
      }
     ],
-    "ms": 475,
+    "ms": 883,
     "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4482,
-     "total_tokens": 4530,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4259,
+     "total_tokens": 4308,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3968
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "83b22573c902266f",
+   "hash": "cff45f76dd1a93a6",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d55b633af26149afb0876960",
+      "id": "chatcmpl-tool-b15aa084bf037a92",
       "name": "click",
       "args": {
-       "id": 57,
-       "narration": "Proceed to payment",
-       "confirmation_question": "कल चेन्नई सेंट्रल से बेंगलुरु SBC की स्लीपर क्लास में एक टिकट बुक करें, कुल ₹180 का पेमेंट करें — क्या सही है?"
-      }
-     }
-    ],
-    "ms": 865,
-    "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 4435,
-     "total_tokens": 4514,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "9155337aad55f51f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d878b94d8f7c4b4f8c8ff7b6",
-      "name": "click",
-      "args": {
-       "id": 61,
+       "id": 60,
        "narration": "Pay 180 rupees",
-       "confirmation_question": "Confirm payment of 180 rupees for Sleeper class ticket Chennai Central to Bengaluru SBC on 6 Oct? (This is a demo, no real money moves.)"
+       "confirmation_question": "क्या आप ₹180 का payment करना चाहते हैं?"
       }
      }
     ],
-    "ms": 625,
+    "ms": 704,
     "usage": {
-     "completion_tokens": 87,
-     "prompt_tokens": 4424,
-     "total_tokens": 4511,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 49,
+     "prompt_tokens": 4248,
+     "total_tokens": 4297,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4096
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "ebf941e9f0417a42",
+   "hash": "0f58f6427b08f259",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c0ac86bc57134d59a5564c1a",
+      "id": "chatcmpl-tool-9c775881c62152d2",
       "name": "done",
       "args": {
-       "speech": "आपकी बुकिंग कन्फर्म हो गई है। PNR 4123456700 है, चेन्नई से बेंगलुरु Express 12147, Sleeper class, सीट 12, S4। ₹180 का पेमेंट हो गया है। कल 6 अक्टूबर, 2026 की यात्रा के लिए तैयार हैं।"
+       "speech": "आपकी टिकट बुक हो गई है। PNR 4123456700 है, चेन्नई–बेंगलुरु Express 12147 में। स्लीपर क्लास, सीट 12, S4। Amount ₹180 pay हो गया है।"
       }
      }
     ],
-    "ms": 1233,
+    "ms": 1044,
     "usage": {
-     "completion_tokens": 101,
-     "prompt_tokens": 4458,
-     "total_tokens": 4559,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 73,
+     "prompt_tokens": 4282,
+     "total_tokens": 4355,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }

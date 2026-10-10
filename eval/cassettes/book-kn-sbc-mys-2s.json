@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-kn-sbc-mys-2s",
- "recordedAt": "2026-10-05T08:09:16.631Z",
+ "recordedAt": "2026-10-09T17:23:05.030Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,473 +10,368 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_12cf629a6a4745cea5c2b555",
+      "id": "chatcmpl-tool-b36e61cd9024875c",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Bengaluru",
-       "narration": "ಬೆಂಗಳೂರು station enter ಮಾಡ್ತಿದ್ದೀನಿ"
+       "pick_suggestion": "Bengaluru",
+       "narration": "Bengaluru ಅಂತ type ಮಾಡ್ತಿದ್ದೀನಿ"
       }
      },
      {
-      "id": "call_90a5fe3a21ed4705a567d106",
+      "id": "chatcmpl-tool-90239ea2691e9338",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Mysuru",
-       "narration": "ಮೈಸೂರು station enter ಮಾಡ್ತಿದ್ದೀನಿ"
+       "pick_suggestion": "Mysuru",
+       "narration": "Mysuru ಅಂತ type ಮಾಡ್ತಿದ್ದೀನಿ"
       }
      },
      {
-      "id": "call_984ea4c6d85f42f68399b6e5",
+      "id": "chatcmpl-tool-ab9dff8d1f5d0265",
       "name": "click",
       "args": {
-       "id": 9,
-       "narration": "ನಾಳೆ date select ಮಾಡ್ತಿದ್ದೀನಿ"
-      }
-     },
-     {
-      "id": "call_92498dcbc9364f8992924637",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Tomorrow select ಮಾಡ್ತಿದ್ದೀನಿ"
+       "id": 18,
+       "narration": "Search button ಕ್ಲಿಕ್ ಮಾಡ್ತಿದ್ದೀನಿ"
       }
      }
     ],
-    "ms": 1370,
+    "ms": 2339,
     "usage": {
-     "completion_tokens": 209,
-     "prompt_tokens": 4161,
-     "total_tokens": 4370,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 137,
+     "prompt_tokens": 4019,
+     "total_tokens": 4156,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "0cac0b1cf2bc7374",
+   "hash": "a3d084a4f70793fb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d6ef5f87e506429ebd91c5bd",
+      "id": "chatcmpl-tool-83efe564686b9af4",
+      "name": "click",
+      "args": {
+       "id": 33,
+       "narration": "Book 2A ticket Bengaluru Mysuru"
+      }
+     }
+    ],
+    "ms": 385,
+    "usage": {
+     "completion_tokens": 30,
+     "prompt_tokens": 4960,
+     "total_tokens": 4990,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "309507b78820273c",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-8544f0e0019bf935",
+      "name": "click",
+      "args": {
+       "id": 22,
+       "narration": "Modify search click"
+      }
+     }
+    ],
+    "ms": 371,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 5050,
+     "total_tokens": 5075,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "c6b8a32c7fa8b3bf",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-a00f06d40524396a",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "Second Sitting",
+       "narration": "Selecting Second Sitting class"
+      }
+     }
+    ],
+    "ms": 590,
+    "usage": {
+     "completion_tokens": 37,
+     "prompt_tokens": 4275,
+     "total_tokens": 4312,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "aee167fb2c1c0c6f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-9c157e602e7e7363",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button click ಮಾಡ್ತಿದ್ದೀನಿ"
+      }
+     }
+    ],
+    "ms": 359,
+    "usage": {
+     "completion_tokens": 32,
+     "prompt_tokens": 4313,
+     "total_tokens": 4345,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "afccae882b51a7e5",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-81971809c72c749f",
       "name": "click",
       "args": {
        "id": 26,
-       "narration": "ನಾಳೆ ದಿನಾಂಕ ಆಯ್ಕೆ",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 479,
-    "usage": {
-     "completion_tokens": 28,
-     "prompt_tokens": 4444,
-     "total_tokens": 4472,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "ab1c28e690d7b314",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_e196e06d92af41ed901d8a32",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search for trains"
-      }
-     }
-    ],
-    "ms": 347,
-    "usage": {
-     "completion_tokens": 22,
-     "prompt_tokens": 4373,
-     "total_tokens": 4395,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "2d0c2c825d5c4a44",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_8d95f1ac7cb745dd87509bad",
-      "name": "click",
-      "args": {
-       "id": 61,
-       "narration": "Book 2S ticket",
-       "confirmation_question": "ನಾಳೆ ಬೆಂಗಳೂರು SBC ಇಂದ ಮೈಸೂರು MYS ಗೆ 6 Oct 2026 ರಂದು second sitting class ನಲ್ಲಿ ಒಂದು ticket book ಮಾಡಬೇಕೇ? ಬೆಲೆ 90 rupees."
-      }
-     },
-     {
-      "id": "call_26ac034dac9845ccadc7d673",
-      "name": "click",
-      "args": {
-       "id": 52,
-       "narration": "Modify search"
-      }
-     }
-    ],
-    "ms": 1114,
-    "usage": {
-     "completion_tokens": 139,
-     "prompt_tokens": 5222,
-     "total_tokens": 5361,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "67c4d859240dfd1a",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_799f807132d44891917ddad8",
-      "name": "click",
-      "args": {
-       "id": 52,
-       "narration": "Modify search button click ಮಾಡಿ"
-      }
-     }
-    ],
-    "ms": 502,
-    "usage": {
-     "completion_tokens": 24,
-     "prompt_tokens": 5336,
-     "total_tokens": 5360,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "4213da155305e571",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_05395d112d8b470aa6a2d1c6",
-      "name": "click",
-      "args": {
-       "id": 13,
-       "narration": "selecting Second Sitting class"
-      }
-     },
-     {
-      "id": "call_48dd65e9a47a40e7aab50309",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "searching trains"
-      }
-     }
-    ],
-    "ms": 844,
-    "usage": {
-     "completion_tokens": 81,
-     "prompt_tokens": 4561,
-     "total_tokens": 4642,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "3508183b2c885abb",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_25b5b93ba85d41a0b1b7c020",
-      "name": "click",
-      "args": {
-       "id": 70,
-       "narration": "Second Sitting class ಆಯ್ಕೆ ಮಾಡುತ್ತೇನೆ"
-      }
-     }
-    ],
-    "ms": 517,
-    "usage": {
-     "completion_tokens": 45,
-     "prompt_tokens": 4778,
-     "total_tokens": 4823,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "1277518129494abd",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_2e8f611a165f47bc94f47d1a",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains for Second Sitting"
-      }
-     },
-     {
-      "id": "call_7f45c824c4f34ed6bbd93aa4",
-      "name": "click",
-      "args": {
-       "id": 9,
-       "narration": "Select tomorrow's date"
-      }
-     },
-     {
-      "id": "call_01289f3bf60f4b1dbf01627c",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Select Tomorrow"
-      }
-     },
-     {
-      "id": "call_42d4bc84e01649e8a64047eb",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains"
-      }
-     }
-    ],
-    "ms": 1034,
-    "usage": {
-     "completion_tokens": 145,
-     "prompt_tokens": 4723,
-     "total_tokens": 4868,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "dc10971f3cfb9295",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_fe6bceed01a7478fa87c4cab",
-      "name": "click",
-      "args": {
-       "id": 56,
        "narration": "Book Second Sitting ticket",
-       "confirmation_question": "ನಾಳೆ ಬೆಂಗಳೂರಿನಿಂದ ಮೈಸೂರಿಗೆ Second Sitting (2S) class ನಲ್ಲಿ ಒಬ್ಬರಿಗೆ 90 rupees ticket book ಮಾಡಬೇಕೇ?"
+       "confirmation_question": "ನಾಳೆ ಬೆಂಗಳೂರು SBC ಇಂದ ಮೈಸೂರು MYS ಗೆ Second Sitting 2S ಕ್ಲಾಸ್ ನಲ್ಲಿ ಒಬ್ಬರಿಗೆ 90 ರೂಪಾಯಿ ticket book ಮಾಡ್ಲಾ?"
       }
      }
     ],
-    "ms": 779,
+    "ms": 656,
     "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 4784,
-     "total_tokens": 4863,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 70,
+     "prompt_tokens": 4318,
+     "total_tokens": 4388,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "6a3302089a79294e",
+   "hash": "29f7f69fc2399e37",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_fe86bfe755e14a3f9b64b40b",
-      "name": "click",
+      "id": "chatcmpl-tool-9ed40db9e6ae0cf6",
+      "name": "fill_form",
       "args": {
-       "id": 74,
-       "narration": "Select Male",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_147f4803b489426484e82569",
-      "name": "type_text",
-      "args": {
-       "id": 72,
-       "text": "Asha Verma",
-       "narration": "Enter name Asha Verma"
-      }
-     },
-     {
-      "id": "call_7bcd98177199467a80403124",
-      "name": "type_text",
-      "args": {
-       "id": 73,
-       "text": "34",
-       "narration": "Enter age 34"
-      }
-     },
-     {
-      "id": "call_ce408bca657e4af691c27123",
-      "name": "click",
-      "args": {
-       "id": 79,
-       "narration": "Enter mobile number",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_262c1309dece440f842297dc",
-      "name": "type_text",
-      "args": {
-       "id": 79,
-       "text": "9000000001",
-       "narration": "Enter mobile 9000000001"
-      }
-     },
-     {
-      "id": "call_7b2aa9dc79b940f6a3e80364",
-      "name": "click",
-      "args": {
-       "id": 80,
-       "narration": "Continue to payment",
-       "confirmation_question": ""
+       "fields": [
+        {
+         "id": 42,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 43,
+         "value": "34"
+        },
+        {
+         "id": 45,
+         "value": "Female"
+        },
+        {
+         "id": 47,
+         "value": "No preference"
+        },
+        {
+         "id": 49,
+         "value": "9000000001"
+        }
+       ],
+       "narration": "Passenger details fill ಮಾಡ್ತಿದ್ದೀನಿ"
       }
      }
     ],
-    "ms": 1347,
+    "ms": 973,
     "usage": {
-     "completion_tokens": 224,
-     "prompt_tokens": 4850,
-     "total_tokens": 5074,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 111,
+     "prompt_tokens": 4379,
+     "total_tokens": 4490,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3968
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "ef5d7a357c9bfb2d",
+   "hash": "ca75f872856d8deb",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
+      "id": "chatcmpl-tool-bfbb0e9b782c8a86",
       "name": "click",
       "args": {
-       "id": 81,
-       "narration": "Proceed to pay",
-       "confirmation_question": "Confirm booking for Sahyadri Intercity Express 12981, Bengaluru to Mysuru, 6 Oct 2026, Second Sitting, 1 passenger Asha Verma, total ₹110?"
+       "id": 50,
+       "narration": "Passenger details continue ಮಾಡ್ತಿದ್ದೀನಿ"
       }
      }
     ],
-    "ms": 1017,
+    "ms": 429,
     "usage": {
-     "completion_tokens": 96,
-     "prompt_tokens": 4938,
-     "total_tokens": 5034,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4483,
+     "total_tokens": 4514,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4032
-     }
-    },
-    "raw": "[{\n  \"name\": \"click\",\n  \"parameters\": {\n    \"id\": 81,\n    \"narration\": \"Proceed to pay\",\n    \"confirmation_question\": \"Confirm booking for Sahyadri Intercity Express 12981, Bengaluru to Mysuru, 6 Oct 2026, Second Sitting, 1 passenger Asha Verma, total ₹110?\"\n  }\n}"
-   }
-  },
-  {
-   "hash": "ac7a1df98e533f0f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_f18fdbdfc4f14774a1e94a26",
-      "name": "click",
-      "args": {
-       "id": 85,
-       "narration": "₹110 pay ಮಾಡಿ",
-       "confirmation_question": "₹110 pay ಮಾಡೋಕೆ confirm ಆ?"
-      }
-     }
-    ],
-    "ms": 501,
-    "usage": {
-     "completion_tokens": 63,
-     "prompt_tokens": 4924,
-     "total_tokens": 4987,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4352
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "8639d766cbbc598a",
+   "hash": "f4799a1dc264bb92",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d7b77d0dfb3a4f28a3b3a222",
+      "id": "chatcmpl-tool-8969f835e3af0046",
+      "name": "click",
+      "args": {
+       "id": 51,
+       "narration": "Proceed to pay button click ಮಾಡ್ತಿದ್ದೀನಿ",
+       "confirmation_question": "ಹೌದುನಾ? ನಿಮ್ಮ ticket fare 90 ರೂಪಾಯಿ ಮತ್ತು convenience fee 20 ರೂಪಾಯಿ ಸೇರಿ total 110 ರೂಪಾಯಿ pay ಮಾಡ್ತಿದ್ದೀರಾ, ಸರಿನಾ?"
+      }
+     }
+    ],
+    "ms": 809,
+    "usage": {
+     "completion_tokens": 76,
+     "prompt_tokens": 4439,
+     "total_tokens": 4515,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "0b2be26514d35032",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-8c5d5d1875a90a9b",
+      "name": "click",
+      "args": {
+       "id": 55,
+       "narration": "Pay ₹110 via UPI",
+       "confirmation_question": "Confirm payment of ₹110 for 2S ticket from Bengaluru to Mysuru on 6 Oct?"
+      }
+     }
+    ],
+    "ms": 608,
+    "usage": {
+     "completion_tokens": 60,
+     "prompt_tokens": 4425,
+     "total_tokens": 4485,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "11bb094993b3aae2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-95c68d1419654786",
       "name": "done",
       "args": {
-       "speech": "ನಿಮ್ಮ ಬೆಂಗಳೂರು-ಮೈಸೂರು second sitting ticket ಬುಕ್ ಆಗಿದೆ. PNR 4123456700, Sahyadri Intercity Express (12981), 6 Oct 2026, seat 12, D5. ₹110 pay ಆಗಿದೆ."
+       "speech": "ನಿಮ್ಮ ticket book ಆಗಿದೆ. PNR 4123456700. Sahyadri Intercity Express (12981), Bengaluru ಇಂದ Mysore ಗೆ, ನಾಳೆ 6 October 2026. Second Sitting (2S), D5 coach, seat 12. Paid ₹110."
       }
      }
     ],
-    "ms": 787,
+    "ms": 1116,
     "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 4958,
-     "total_tokens": 5053,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 82,
+     "prompt_tokens": 4459,
+     "total_tokens": 4541,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }
  ],
  "translate": {
-  "0231b0d67cc87935": "Page ಹೇಳುತ್ತೆ:",
   "3e0543d785dca553": "Pay ಮಾಡೋ ಮೊದಲು ದಯವಿಟ್ಟು check ಮಾಡಿ:",
-  "399da7c786414015": "ನಾನು ಮುಂದುವರಿಯಬೇಕಾ?"
+  "399da7c786414015": "ನಾನು ಮುಂದುವರಿಯಬೇಕಾ?",
+  "0231b0d67cc87935": "Page ಹೇಳುತ್ತೆ:"
  },
  "docs": {}
 }

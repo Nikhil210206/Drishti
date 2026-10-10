@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-hi-no-profile",
- "recordedAt": "2026-10-05T08:12:50.137Z",
+ "recordedAt": "2026-10-09T17:15:08.832Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,377 +10,536 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7247236c614f4466a9885d95",
+      "id": "chatcmpl-tool-92f071299d5dfd44",
+      "name": "navigate",
+      "args": {
+       "url": "http://localhost:5174/",
+       "narration": "Pathik Rail website खोल रहा हूँ"
+      }
+     }
+    ],
+    "ms": 380,
+    "usage": {
+     "completion_tokens": 36,
+     "prompt_tokens": 3995,
+     "total_tokens": 4031,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "1ec8de96a59440cd",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b0fd1632549d20bf",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Mumbai",
-       "narration": "FROM में Mumbai डाल रहा हूँ"
+       "narration": "Enter Mumbai in FROM"
       }
      },
      {
-      "id": "call_e1e41e33465848418a63303e",
+      "id": "chatcmpl-tool-b43dabe0a69f7017",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Pune",
-       "narration": "TO में Pune डाल रहा हूँ"
+       "narration": "Enter Pune in TO"
       }
+     }
+    ],
+    "ms": 455,
+    "usage": {
+     "completion_tokens": 70,
+     "prompt_tokens": 4007,
+     "total_tokens": 4077,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "e75578adf77312ab",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_94cbd9539c0d41b3acc42827",
+      "id": "chatcmpl-tool-8dbc83ef46451b8a",
       "name": "click",
       "args": {
-       "id": 9,
-       "narration": "कल की तारीख चुन रहा हूँ",
-       "confirmation_question": ""
+       "id": 21,
+       "narration": "Choose Pune Junction"
       }
      }
     ],
-    "ms": 938,
+    "ms": 291,
     "usage": {
-     "completion_tokens": 85,
-     "prompt_tokens": 4137,
-     "total_tokens": 4222,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4116,
+     "total_tokens": 4141,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3712
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "ee0005ce9126024d",
+   "hash": "734923db6869eff2",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0afbc7e3f67e49c2a2d80ad1",
-      "name": "click",
+      "id": "chatcmpl-tool-a0fbb7a64556e45c",
+      "name": "type_text",
       "args": {
-       "id": 26,
-       "narration": "कल की तारीख चुनें"
+       "id": 8,
+       "text": "Pune Junction (PUNE)",
+       "narration": "Selecting Pune Junction station"
       }
      }
     ],
-    "ms": 641,
+    "ms": 412,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4392,
-     "total_tokens": 4434,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 40,
+     "prompt_tokens": 4123,
+     "total_tokens": 4163,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3712
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "61419d6dfd051fb6",
+   "hash": "236bc9d6ac72dd7a",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7729cf67d0e744f68339cb35",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "AC Chair Car",
-       "narration": "AC Chair Car चुनना है"
-      }
-     }
-    ],
-    "ms": 544,
-    "usage": {
-     "completion_tokens": 33,
-     "prompt_tokens": 4320,
-     "total_tokens": 4353,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3904
-     }
-    }
-   }
-  },
-  {
-   "hash": "78afe996b0080829",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0c300ca53ea744f8878f7582",
+      "id": "chatcmpl-tool-814e3ed3b60de949",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains",
-       "confirmation_question": ""
+       "narration": "SEARCH TRAINS बटन पर click कर रहा हूँ"
       }
      }
     ],
-    "ms": 596,
+    "ms": 539,
     "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4359,
-     "total_tokens": 4409,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 31,
+     "prompt_tokens": 4166,
+     "total_tokens": 4197,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3968
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "04a2ee13f8c00894",
+   "hash": "9ccbd8a9b9b8019f",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9db2ac544b914414b723209e",
+      "id": "chatcmpl-tool-b7bb26c14f5ffe51",
       "name": "click",
       "args": {
-       "id": 60,
-       "narration": "Vande Bharat book करें",
-       "confirmation_question": "Vande Bharat Express, Mumbai CSMT से Pune Junction, 6 October, AC Chair Car, 1 passenger, 310 rupees. Book करें?"
+       "id": 30,
+       "narration": "CC class book ticket",
+       "confirmation_question": "क्या मैं कल 12496 Vande Bharat Express, Mumbai CSMT से Pune Junction, Chair Car (CC) ₹310 book करूँ?"
       }
      }
     ],
-    "ms": 1048,
+    "ms": 638,
     "usage": {
-     "completion_tokens": 90,
-     "prompt_tokens": 4725,
-     "total_tokens": 4815,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 69,
+     "prompt_tokens": 5898,
+     "total_tokens": 5967,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3712
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "5d921b39718d44b9",
+   "hash": "3e22e9926b1df0cd",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_38378afb0eee4f14a52088dc",
+      "id": "chatcmpl-tool-83228f00bc1f057b",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 53,
+         "value": "Passenger Name"
+        },
+        {
+         "id": 54,
+         "value": "30"
+        },
+        {
+         "id": 55,
+         "value": "Male"
+        },
+        {
+         "id": 56,
+         "value": "Female"
+        },
+        {
+         "id": 57,
+         "value": "Transgender"
+        },
+        {
+         "id": 58,
+         "value": "No preference"
+        },
+        {
+         "id": 59,
+         "value": "+ Add passenger"
+        },
+        {
+         "id": 60,
+         "value": "9876543210"
+        }
+       ],
+       "narration": "Passenger details भर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 796,
+    "usage": {
+     "completion_tokens": 147,
+     "prompt_tokens": 4237,
+     "total_tokens": 4384,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "3c24b3090fdff2b3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b01e22e64fc8152b",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 53,
+         "value": "Amit Sharma"
+        },
+        {
+         "id": 54,
+         "value": "30"
+        },
+        {
+         "id": 55,
+         "value": "Male"
+        },
+        {
+         "id": 59,
+         "value": "+ Add passenger"
+        },
+        {
+         "id": 53,
+         "value": "Priya Sharma"
+        },
+        {
+         "id": 54,
+         "value": "28"
+        },
+        {
+         "id": 56,
+         "value": "Female"
+        }
+       ],
+       "narration": "Passenger details fill kar raha hoon"
+      }
+     }
+    ],
+    "ms": 1664,
+    "usage": {
+     "completion_tokens": 127,
+     "prompt_tokens": 4291,
+     "total_tokens": 4418,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "cdc7a29c62dbce18",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b3363410fce8852e",
+      "name": "fill_form",
+      "args": {
+       "fields": [
+        {
+         "id": 53,
+         "value": "Ramesh"
+        },
+        {
+         "id": 54,
+         "value": "35"
+        },
+        {
+         "id": 55,
+         "value": "Male"
+        }
+       ],
+       "narration": "Passenger 1 की details भर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 577,
+    "usage": {
+     "completion_tokens": 73,
+     "prompt_tokens": 4339,
+     "total_tokens": 4412,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "3714cffc8b20bd9d",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-840354e1ba48cbfd",
       "name": "ask_user",
       "args": {
-       "question": "Passenger 1 का नाम, age, gender, mobile number, और berth preference क्या है?"
+       "question": "Passenger की details चाहिए। Passenger 1 का नाम, उम्र, gender और mobile number बताइए।"
       }
      }
     ],
-    "ms": 428,
+    "ms": 310,
     "usage": {
-     "completion_tokens": 37,
-     "prompt_tokens": 4430,
-     "total_tokens": 4467,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 33,
+     "prompt_tokens": 4433,
+     "total_tokens": 4466,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "4d3fa6b877d6b80f",
+   "hash": "9f6c20f249627c78",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_2e4104ebde1945a883207431",
+      "id": "chatcmpl-tool-8eeb8821dbaf57ea",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 65,
+         "id": 53,
          "value": "Asha Verma"
         },
         {
-         "id": 66,
+         "id": 54,
          "value": "34"
         },
         {
-         "id": 68,
+         "id": 56,
          "value": "Female"
         },
         {
-         "id": 72,
+         "id": 60,
          "value": "9000000001"
         }
        ],
-       "narration": "यात्री की details भरना"
+       "narration": "यात्री 1 की details भर रहा हूँ"
       }
      }
     ],
-    "ms": 1123,
+    "ms": 714,
     "usage": {
-     "completion_tokens": 151,
-     "prompt_tokens": 4491,
-     "total_tokens": 4642,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 97,
+     "prompt_tokens": 4495,
+     "total_tokens": 4592,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4096
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "018c2dae54b6c302",
+   "hash": "192a5d7da7b97bb7",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1f518c021e604ac1bdc88e46",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 65,
-         "value": "Asha Verma"
-        },
-        {
-         "id": 66,
-         "value": "34"
-        },
-        {
-         "id": 68,
-         "value": "Female"
-        },
-        {
-         "id": 72,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Passenger details भर रहे हैं"
-      }
-     }
-    ],
-    "ms": 1634,
-    "usage": {
-     "completion_tokens": 149,
-     "prompt_tokens": 4587,
-     "total_tokens": 4736,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3712
-     }
-    }
-   }
-  },
-  {
-   "hash": "625e14c22c4bde5c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_a97090fe919741249066f027",
+      "id": "chatcmpl-tool-9ed49e9e7e6c4aae",
       "name": "click",
       "args": {
-       "id": 73,
-       "narration": "Passenger details continue करें"
+       "id": 61,
+       "narration": "यात्री की details continue करना"
       }
      }
     ],
-    "ms": 435,
+    "ms": 986,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4632,
-     "total_tokens": 4674,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4569,
+     "total_tokens": 4597,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4096
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "54241f6a47d4d879",
+   "hash": "935ee1697c654ca2",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_94208ee994394e6eb5a34eb9",
+      "id": "chatcmpl-tool-ad3d646773126b94",
       "name": "click",
       "args": {
-       "id": 74,
-       "narration": "Proceed to pay",
+       "id": 62,
+       "narration": "Proceed to pay click कर रहा हूँ",
        "confirmation_question": "क्या आप ₹330 का payment करना चाहते हैं?"
       }
      }
     ],
-    "ms": 524,
+    "ms": 396,
     "usage": {
-     "completion_tokens": 61,
-     "prompt_tokens": 4589,
-     "total_tokens": 4650,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 50,
+     "prompt_tokens": 4526,
+     "total_tokens": 4576,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4224
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "c3f28b3e01623494",
+   "hash": "c0096ea9a6569fdd",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_68a37bb0d9de4a5da63dda68",
+      "id": "chatcmpl-tool-8cd95f7b116f4730",
       "name": "click",
       "args": {
-       "id": 78,
-       "narration": "Pay 330 rupees",
-       "confirmation_question": "क्या आप 330 रुपये का payment करना चाहते हैं?"
+       "id": 66,
+       "narration": "UPI payment कर रहा हूँ",
+       "confirmation_question": "₹330 का UPI payment confirm करें?"
       }
      }
     ],
-    "ms": 769,
+    "ms": 421,
     "usage": {
-     "completion_tokens": 65,
-     "prompt_tokens": 4574,
-     "total_tokens": 4639,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4511,
+     "total_tokens": 4557,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3968
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "55fea3a5c8e30a06",
+   "hash": "fd6d557a5c0fdbac",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6cb005dc86af4c25805d4c99",
+      "id": "chatcmpl-tool-b6c50b42d97b3651",
       "name": "done",
       "args": {
-       "speech": "आपकी मुंबई से पुणे की AC Chair Car टिकट बुक हो गई है। PNR 4123456700 है, यात्री आशा वर्मा, सीट C3, seat 12। ₹330 का payment हो गया है। कल की यात्रा के लिए शुभकामनाएँ।"
+       "speech": "आपकी टिकट बुक हो गई है। PNR 4123456700 है, Vande Bharat Express, CSMT से Pune, CC, seat 12, Asha Verma। Amount ₹330 pay हो गया है।"
       }
      }
     ],
-    "ms": 999,
+    "ms": 437,
     "usage": {
-     "completion_tokens": 88,
-     "prompt_tokens": 4608,
-     "total_tokens": 4696,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 65,
+     "prompt_tokens": 4545,
+     "total_tokens": 4610,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3712
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }

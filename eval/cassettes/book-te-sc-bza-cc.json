@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-te-sc-bza-cc",
- "recordedAt": "2026-10-05T08:20:11.474Z",
+ "recordedAt": "2026-10-09T17:11:42.830Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,152 +10,124 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_bdb9b4f965c3497aacceb917",
+      "id": "chatcmpl-tool-a97eadeed84bc623",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Secunderabad",
        "pick_suggestion": "Secunderabad",
-       "narration": "From station Secunderabad"
+       "narration": "Typing Secunderabad as FROM station"
       }
      },
      {
-      "id": "call_565562f85b4449c9890a0830",
+      "id": "chatcmpl-tool-8b538127bc4c1722",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Vijayawada",
        "pick_suggestion": "Vijayawada",
-       "narration": "To station Vijayawada"
+       "narration": "Typing Vijayawada as TO station"
       }
      },
      {
-      "id": "call_d1b71c69606740c7aa935157",
+      "id": "chatcmpl-tool-893cd2b88757bc2b",
       "name": "click",
+      "args": {
+       "id": 11,
+       "narration": "Clicking Tomorrow date"
+      }
+     },
+     {
+      "id": "chatcmpl-tool-9c37b12f5bde00e2",
+      "name": "select_option",
       "args": {
        "id": 13,
-       "narration": "Open class dropdown"
+       "option": "CC",
+       "narration": "Selecting Chair Car class"
       }
+     }
+    ],
+    "ms": 1391,
+    "usage": {
+     "completion_tokens": 168,
+     "prompt_tokens": 4018,
+     "total_tokens": 4186,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "f239c415b9f91951",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_b1775fc6432644acbdd71488",
-      "name": "click",
-      "args": {
-       "id": 17,
-       "narration": "Select Ladies quota"
-      }
-     },
-     {
-      "id": "call_7b59b85aa8cc4966be361c12",
+      "id": "chatcmpl-tool-a45f77cabf92f091",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains"
+       "narration": "Search trains button click"
       }
      }
     ],
-    "ms": 2055,
+    "ms": 457,
     "usage": {
-     "completion_tokens": 250,
-     "prompt_tokens": 4160,
-     "total_tokens": 4410,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4151,
+     "total_tokens": 4177,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "be5f2f5722649da1",
+   "hash": "d9671dc1730352d5",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_057204fce61b4603bdd2a696",
+      "id": "chatcmpl-tool-942e5d4137c025c2",
       "name": "click",
       "args": {
-       "id": 27,
-       "narration": "AC Chair Car select చేస్తున్నాను"
+       "id": 29,
+       "narration": "Book AC Chair Car ticket",
+       "confirmation_question": "Secunderabad నుండి Vijayawada కి 22714 Hyderabad–Vijayawada Double Decker Express లో రేపు 9:05 AM కి AC Chair Car (CC) ₹350, 53 seats ఉన్నాయి. Book చేయమంటారా?"
       }
      }
     ],
-    "ms": 573,
+    "ms": 820,
     "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 4469,
-     "total_tokens": 4519,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 90,
+     "prompt_tokens": 4420,
+     "total_tokens": 4510,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "892e7fecf4fb95e1",
+   "hash": "5661d983823c897d",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_f9104cdd81464adf83dbed72",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains"
-      }
-     }
-    ],
-    "ms": 493,
-    "usage": {
-     "completion_tokens": 46,
-     "prompt_tokens": 4414,
-     "total_tokens": 4460,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "9f8785ba3bf4e96c",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_bd387f251417421bacfa0338",
-      "name": "click",
-      "args": {
-       "id": 32,
-       "narration": "Lalbagh Intercity Express book",
-       "confirmation_question": "Lalbagh Intercity Express, 12:15, Secunderabad to Vijayawada, Chair Car ₹310, 1 passenger. Confirm?"
-      }
-     }
-    ],
-    "ms": 690,
-    "usage": {
-     "completion_tokens": 96,
-     "prompt_tokens": 4683,
-     "total_tokens": 4779,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "f804353042e54a4d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "rec_0",
+      "id": "chatcmpl-tool-a0ea4a87607c99c9",
       "name": "fill_form",
       "args": {
        "fields": [
@@ -172,6 +144,10 @@
          "value": "Female"
         },
         {
+         "id": 39,
+         "value": "+ Add passenger"
+        },
+        {
          "id": 40,
          "value": "9000000001"
         }
@@ -180,135 +156,331 @@
       }
      }
     ],
-    "ms": 795,
+    "ms": 913,
     "usage": {
-     "completion_tokens": 119,
-     "prompt_tokens": 4480,
-     "total_tokens": 4599,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 107,
+     "prompt_tokens": 4215,
+     "total_tokens": 4322,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4032
-     }
-    },
-    "raw": "[{\n  \"name\": \"fill_form\",\n  \"parameters\": {\n    \"fields\": [\n      {\"id\": 33, \"value\": \"Asha Verma\"},\n      {\"id\": 34, \"value\": \"34\"},\n      {\"id\": 35, \"value\": \"Female\"},\n      {\"id\": 40, \"value\": \"9000000001\"}\n    ],\n    \"narration\": \"Passenger details fill చేస్తున్నాను\"\n  }\n}"
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
    }
   },
   {
-   "hash": "ffa91a6b3e19a0a5",
+   "hash": "cbaf3b31778706a5",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_66de19b4399345a3b2829d42",
+      "id": "chatcmpl-tool-bb3c36a262eb031c",
       "name": "click",
       "args": {
        "id": 41,
-       "narration": "Passenger details continue"
+       "narration": "Continue button click చేస్తాను"
       }
      }
     ],
-    "ms": 449,
+    "ms": 381,
     "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4576,
-     "total_tokens": 4617,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 27,
+     "prompt_tokens": 4445,
+     "total_tokens": 4472,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "91ffe3a0aa5742e1",
+   "hash": "f098457af24678dc",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_23c8453fdb7f4919b8036bbd",
-      "name": "click",
+      "id": "chatcmpl-tool-8eaadbfbf48c46b5",
+      "name": "fill_form",
       "args": {
-       "id": 42,
-       "narration": "Proceed to payment",
-       "confirmation_question": "Lalbagh Intercity Express, Secunderabad to Vijayawada, AC Chair Car, 6 October 2026, 1 passenger, total ₹330. Proceed to pay?"
+       "fields": [
+        {
+         "id": 42,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 43,
+         "value": "34"
+        },
+        {
+         "id": 45,
+         "value": "Female"
+        }
+       ],
+       "narration": "Passenger 2 details fill చేస్తున్నాను"
       }
      }
     ],
-    "ms": 669,
+    "ms": 655,
     "usage": {
-     "completion_tokens": 92,
-     "prompt_tokens": 4533,
-     "total_tokens": 4625,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 73,
+     "prompt_tokens": 4502,
+     "total_tokens": 4575,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "bbb4deb0fddd0d15",
+   "hash": "df72f66d42a4dcde",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d87515a5b5fe4ae294dbacc1",
+      "id": "chatcmpl-tool-a4d296a7bc3c67bd",
       "name": "click",
       "args": {
-       "id": 46,
-       "narration": "₹330 pay చేస్తాను",
-       "confirmation_question": "₹330 pay చేయడానికి confirm చేస్తారా?"
+       "id": 41,
+       "narration": "Passenger details complete చేసి continue చేస్తున్నాను"
       }
      }
     ],
-    "ms": 496,
+    "ms": 873,
+    "usage": {
+     "completion_tokens": 29,
+     "prompt_tokens": 4550,
+     "total_tokens": 4579,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "1a4206801db142b6",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-aab63cd24d22d5d0",
+      "name": "click",
+      "args": {
+       "id": 49,
+       "narration": "Proceed to pay button నొక్కడం",
+       "confirmation_question": "రేపు Secunderabad నుండి Vijayawada కి AC Chair Car లో 2 tickets ₹720 pay చేయాలా?"
+      }
+     }
+    ],
+    "ms": 635,
     "usage": {
      "completion_tokens": 63,
-     "prompt_tokens": 4516,
-     "total_tokens": 4579,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "prompt_tokens": 4365,
+     "total_tokens": 4428,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4096
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "263afa32b537e1a4",
+   "hash": "8da3d9de93e38b7f",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "rec_0",
-      "name": "done",
+      "id": "chatcmpl-tool-956d42f6ff130d7e",
+      "name": "click",
       "args": {
-       "speech": "మీ ticket booking పూర్తయింది. PNR 4123456700. Lalbagh Intercity Express (20407), Secunderabad నుండి Vijayawada-కి, రేపు 6 October, AC Chair Car, seat 12, పేరు Asha Verma. Paid amount ₹330. Pathik Rail demo website కాబట్టి ఇది real booking కాదు."
+       "id": 50,
+       "narration": "Edit passengers-ని click చేస్తున్నాను"
       }
      }
     ],
-    "ms": 1008,
+    "ms": 585,
     "usage": {
-     "completion_tokens": 109,
-     "prompt_tokens": 4550,
-     "total_tokens": 4659,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 29,
+     "prompt_tokens": 4421,
+     "total_tokens": 4450,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "23404e3a4b03a27f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-95683ea968869f17",
+      "name": "click",
+      "args": {
+       "id": 48,
+       "narration": "Remove duplicate passenger"
+      }
      }
-    },
-    "raw": "[{\n  \"name\": \"done\",\n  \"parameters\": {\n    \"speech\": \"మీ ticket booking పూర్తయింది. PNR 4123456700. Lalbagh Intercity Express (20407), Secunderabad నుండి Vijayawada-కి, రేపు 6 October, AC Chair Car, seat 12, పేరు Asha Verma. Paid amount ₹330. Pathik Rail demo website కాబట్టి ఇది real booking కాదు.\"\n  }\n}"
+    ],
+    "ms": 331,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4629,
+     "total_tokens": 4654,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "744c874d788b65aa",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-911a392feb006767",
+      "name": "click",
+      "args": {
+       "id": 41,
+       "narration": "Passenger details save చేయడం"
+      }
+     }
+    ],
+    "ms": 461,
+    "usage": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4509,
+     "total_tokens": 4535,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "9613ca87fc6fbc3f",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b0f82f95e0427e2e",
+      "name": "click",
+      "args": {
+       "id": 49,
+       "narration": "Proceeding to payment",
+       "confirmation_question": "Secunderabad నుండి Vijayawada-కి, 6 Oct 2026, AC Chair Car, 1 passenger, total 370 rupees. Book చేయమంటారా?"
+      }
+     }
+    ],
+    "ms": 565,
+    "usage": {
+     "completion_tokens": 74,
+     "prompt_tokens": 4472,
+     "total_tokens": 4546,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "30c7b0b62dd94769",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-9255f8818f4c478e",
+      "name": "click",
+      "args": {
+       "id": 53,
+       "narration": "Confirm payment",
+       "confirmation_question": "Pay ₹370 for AC Chair Car ticket? Confirm?"
+      }
+     }
+    ],
+    "ms": 353,
+    "usage": {
+     "completion_tokens": 46,
+     "prompt_tokens": 4452,
+     "total_tokens": 4498,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "a0b7cbd7cb9d7858",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-805fcd873d7bc3dd",
+      "name": "done",
+      "args": {
+       "speech": "మీ AC Chair Car ticket book అయిపోయింది. PNR 4123456700. Hyderabad–Vijayawada Double Decker Express లో C3 seat 12. ₹370 pay చేశారు."
+      }
+     }
+    ],
+    "ms": 512,
+    "usage": {
+     "completion_tokens": 59,
+     "prompt_tokens": 4486,
+     "total_tokens": 4545,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
    }
   }
  ],
  "translate": {
-  "7b21831babf8d6fd": "ఆ page-లో ఇలా ఉంది:",
   "f6b7e7715c08c52d": "Pay చేసే ముందు check చేసుకోండి please:",
-  "ccfa5dfde0e89cdc": "నేను continue చేయాలా?"
+  "ccfa5dfde0e89cdc": "నేను continue చేయాలా?",
+  "7b21831babf8d6fd": "ఆ page-లో ఇలా ఉంది:"
  },
  "docs": {}
 }

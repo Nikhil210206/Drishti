@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-ml-ers-tvc-cc",
- "recordedAt": "2026-10-05T08:20:29.585Z",
+ "recordedAt": "2026-10-09T17:12:09.233Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,105 +10,193 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_f27c9063673f484e8ce55016",
+      "id": "chatcmpl-tool-aeeba26f686020e7",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Ernakulam",
-       "narration": "From station type Ernakulam"
+       "pick_suggestion": "Ernakulam",
+       "narration": "From station Ernakulam"
       }
      },
      {
-      "id": "call_ddf953c51b9c43ef865f1c0b",
+      "id": "chatcmpl-tool-babe7e36c9108b7b",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Thiruvananthapuram",
-       "narration": "To station type Thiruvananthapuram"
+       "pick_suggestion": "Thiruvananthapuram",
+       "narration": "To station Thiruvananthapuram"
       }
      },
      {
-      "id": "call_ecda8105329d429ebd10fd82",
+      "id": "chatcmpl-tool-8b165948d37644b3",
       "name": "click",
       "args": {
        "id": 11,
        "narration": "Select tomorrow's date"
       }
+     }
+    ],
+    "ms": 1200,
+    "usage": {
+     "completion_tokens": 133,
+     "prompt_tokens": 4026,
+     "total_tokens": 4159,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "64ad941c220bf625",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_37b2026b88254476a7960c1c",
+      "id": "chatcmpl-tool-aa836348c9d6b873",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "Ernakulam",
+       "pick_suggestion": "Ernakulam Junction ERS Kochi",
+       "narration": "Ernakulam select ചെയ്യുന്നു"
+      }
+     }
+    ],
+    "ms": 485,
+    "usage": {
+     "completion_tokens": 54,
+     "prompt_tokens": 4133,
+     "total_tokens": 4187,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "3ad2a76b90dfde4b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-aa32a4f2160e1efb",
+      "name": "select_option",
+      "args": {
+       "id": 13,
+       "option": "CC",
+       "narration": "Select Chair Car class"
+      }
+     }
+    ],
+    "ms": 555,
+    "usage": {
+     "completion_tokens": 36,
+     "prompt_tokens": 4173,
+     "total_tokens": 4209,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "902a0e8de71c23b8",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b258e71276277d82",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains"
+       "narration": "Search trains button click ചെയ്യുന്നു"
       }
      }
     ],
-    "ms": 1290,
+    "ms": 392,
     "usage": {
-     "completion_tokens": 196,
-     "prompt_tokens": 4168,
-     "total_tokens": 4364,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 27,
+     "prompt_tokens": 4210,
+     "total_tokens": 4237,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "23d0e820e7e4be60",
+   "hash": "ac37371452e61274",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e6590df61622413a9fc28254",
+      "id": "chatcmpl-tool-8e52c15311f664c2",
       "name": "click",
       "args": {
-       "id": 31,
-       "narration": "CC seat ഉള്ള Sahyadri Double Decker book ചെയ്യാം",
-       "confirmation_question": "നാളെ Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക് Sahyadri Double Decker-ൽ CC class-ൽ ₹310-ന് 33 seats ഉണ്ട്. ഇത് book ചെയ്യട്ടേ?"
+       "id": 29,
+       "narration": "Charminar Shatabdi book ചെയ്യുന്നു",
+       "confirmation_question": "Charminar Shatabdi Express, നാളെ Ernakulam Junction-ൽ നിന്ന് Thiruvananthapuram Central-ലേക്ക്, AC Chair Car, 4 seats, ₹310 - ഇത് book ചെയ്യട്ടേ?"
       }
      }
     ],
-    "ms": 662,
+    "ms": 645,
     "usage": {
-     "completion_tokens": 79,
-     "prompt_tokens": 5761,
-     "total_tokens": 5840,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 84,
+     "prompt_tokens": 4659,
+     "total_tokens": 4743,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "6332e63559eb3911",
+   "hash": "7932e27e1be09b2c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9fb654acb00341a9b75a2329",
+      "id": "chatcmpl-tool-b85515a45201afe8",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 46,
+         "id": 35,
          "value": "Asha Verma"
         },
         {
-         "id": 47,
+         "id": 36,
          "value": "34"
         },
         {
-         "id": 48,
+         "id": 37,
          "value": "Female"
         },
         {
-         "id": 53,
+         "id": 42,
          "value": "9000000001"
         }
        ],
@@ -116,133 +204,143 @@
       }
      }
     ],
-    "ms": 950,
+    "ms": 718,
     "usage": {
-     "completion_tokens": 148,
-     "prompt_tokens": 4330,
-     "total_tokens": 4478,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 92,
+     "prompt_tokens": 4271,
+     "total_tokens": 4363,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "dd5b6a33c874652c",
+   "hash": "6af9ccad07098123",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_97f93a716b6b4490bb48de26",
+      "id": "chatcmpl-tool-b3a765383a36479b",
       "name": "click",
       "args": {
-       "id": 54,
-       "narration": "തുടരുക"
+       "id": 43,
+       "narration": "Continue button click ചെയ്യുന്നു"
       }
      }
     ],
-    "ms": 398,
+    "ms": 387,
     "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4426,
-     "total_tokens": 4467,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4367,
+     "total_tokens": 4393,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "78491ea75e887a29",
+   "hash": "bdd2fce75100f596",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_8c7b1e1a3c0f4e74ba4aa3ed",
+      "id": "chatcmpl-tool-83b6c94044d0fda6",
       "name": "click",
       "args": {
-       "id": 55,
-       "narration": "PROCEED TO PAY ബട്ടൺ ക്ലിക്ക് ചെയ്യുന്നു",
-       "confirmation_question": "Asha Verma-ക്ക് Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക് നാളെ AC Chair Car-ൽ 1 ടിക്കറ്റിന് ₹330 രൂപ നൽകണോ? അതെ അല്ലെങ്കിൽ അല്ല എന്ന് പറയുക."
+       "id": 44,
+       "narration": "Proceed to pay button click ചെയ്യുന്നു",
+       "confirmation_question": "നാളെ Ernakulam-ൽ നിന്ന് Thiruvananthapuram-ലേക്ക് AC Chair Car-ൽ Asha Verma-ക്ക് 330 rupees-ന് ticket book ചെയ്യട്ടെ?"
       }
      }
     ],
-    "ms": 803,
+    "ms": 487,
     "usage": {
-     "completion_tokens": 106,
-     "prompt_tokens": 4385,
-     "total_tokens": 4491,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 74,
+     "prompt_tokens": 4327,
+     "total_tokens": 4401,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "0cc58bca0b8c6ae4",
+   "hash": "1ef117f6de6acdfc",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_20ecc097719a4b00a2ded2e5",
+      "id": "chatcmpl-tool-96a2c13a7651b59b",
       "name": "click",
       "args": {
-       "id": 59,
-       "narration": "330 രൂപ pay ചെയ്യുന്നു",
-       "confirmation_question": "330 രൂപ pay ചെയ്യാൻ തയ്യാറാണോ?"
+       "id": 48,
+       "narration": "Pay ₹330 UPI വഴി",
+       "confirmation_question": "₹330 രൂപയുടെ UPI payment confirm ചെയ്യണോ?"
       }
      }
     ],
-    "ms": 544,
+    "ms": 515,
     "usage": {
-     "completion_tokens": 63,
-     "prompt_tokens": 4366,
-     "total_tokens": 4429,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 50,
+     "prompt_tokens": 4308,
+     "total_tokens": 4358,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "c3bcadbddd1623ae",
+   "hash": "b619a8ab29bba001",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_217f5364dd6c4c5e9f8c6c82",
+      "id": "chatcmpl-tool-afc89bb0d9494a71",
       "name": "done",
       "args": {
-       "speech": "നിങ്ങളുടെ booking confirm ആയിട്ടുണ്ട്. PNR 4123456700 ആണ്. Sahyadri Double Decker Express (12068), ERS-ൽ നിന്ന് TVC-ലേക്ക്, നാളെ 6 Oct, CC class-ൽ seat 12. ₹330 അടച്ചിട്ടുണ്ട്."
+       "speech": "നിങ്ങളുടെ AC Chair Car ticket successfully book ചെയ്തു. PNR 4123456700 ആണ്. Charminar Shatabdi Express-ൽ C3 seat 12-ൽ നാളെ യാത്ര ചെയ്യാം. ₹330 payment complete ആയി."
       }
      }
     ],
-    "ms": 813,
+    "ms": 1163,
     "usage": {
-     "completion_tokens": 100,
-     "prompt_tokens": 4399,
-     "total_tokens": 4499,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 67,
+     "prompt_tokens": 4342,
+     "total_tokens": 4409,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3904
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }
  ],
  "translate": {
-  "6354fb0d6a0739c1": "Page-ൽ ഇങ്ങനെയാണ് പറയുന്നത്:",
   "9565919447353604": "Pay ചെയ്യുന്നതിന് മുൻപ് ഒന്ന് check ചെയ്തേക്കണേ:",
-  "16c3f0393e8faf9c": "ഞാൻ continue ചെയ്യട്ടെ?"
+  "16c3f0393e8faf9c": "ഞാൻ continue ചെയ്യട്ടെ?",
+  "6354fb0d6a0739c1": "Page-ൽ ഇങ്ങനെയാണ് പറയുന്നത്:"
  },
  "docs": {}
 }

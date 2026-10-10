@@ -243,6 +243,22 @@ describe("needsConfirmation: choosing from a priced list", () => {
     expect(needsConfirmation(button("Buy ₹349"), { pageText: shop, id: 12 }).required).toBe(true);
   });
 
+  it("also on a results page with one or two trains, which the page model doesn't mark as rows", () => {
+    // Pathik's results for SBC → MYS in 2S, as the page model showed them.
+    const one = [
+      "- KSR Bengaluru (SBC) Mysuru Junction (MYS) Tue, 6 Oct, 2026 · General quota · 1 trains found",
+      '[52] clickable "Modify search"',
+      "- Sahyadri Intercity Express (12981) 14:25 SBC 2h 35m 17:00 MYS 2S ₹90",
+      '[56] clickable "book ticket (2S ₹90 14)" (inferred)',
+    ].join("\n");
+    expect(needsConfirmation(button("book ticket (2S ₹90 14)"), { pageText: one, id: 56 }).choice).toBe(true);
+    expect(
+      needsConfirmation(button("Select ₹4,210"), { pageText: '- Showing 1-2 of 2 flights\n[8] clickable "Select ₹4,210"' }).choice,
+    ).toBe(true);
+    // A count alone never lets "buy" or "pay" through.
+    expect(needsConfirmation(button("Buy ₹349"), { pageText: '- 12 results found\n[12] clickable "Buy ₹349"' }).required).toBe(true);
+  });
+
   it("still asks for a lone priced button, and for pay or buy now even in a list", () => {
     expect(needsConfirmation(button("book ticket (SL ₹160 11)"), { pageText: '[61] clickable "book ticket (SL ₹160 11)"' }).required).toBe(
       true,

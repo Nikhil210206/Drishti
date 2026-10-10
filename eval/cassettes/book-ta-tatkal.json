@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-ta-tatkal",
- "recordedAt": "2026-10-05T08:12:23.910Z",
+ "recordedAt": "2026-10-09T17:14:47.933Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,289 +10,221 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e00957dcf40849d9be4551bb",
+      "id": "chatcmpl-tool-8dccccd42111f377",
       "name": "type_text",
       "args": {
        "id": 6,
-       "text": "Chennai",
-       "narration": "From station set to Chennai Central"
+       "text": "Chennai Central",
+       "pick_suggestion": "Chennai Central",
+       "narration": "From-ஆ சென்னை சென்ட்ரல்"
       }
      },
      {
-      "id": "call_556af277e44f48c7ab08a6bd",
+      "id": "chatcmpl-tool-842982f415e0d5fe",
       "name": "type_text",
       "args": {
        "id": 8,
-       "text": "Madurai",
-       "narration": "To station set to Madurai"
+       "text": "Madurai Jn",
+       "pick_suggestion": "Madurai Jn",
+       "narration": "To-க்கு மதுரை ஜங்ஷன்"
       }
      },
      {
-      "id": "call_29c6ca800d7c4228833474ed",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "Select tomorrow's date"
-      }
-     }
-    ],
-    "ms": 858,
-    "usage": {
-     "completion_tokens": 81,
-     "prompt_tokens": 4163,
-     "total_tokens": 4244,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "71e88378458f17e9",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_eada6ce640304f3c955d19db",
-      "name": "click",
-      "args": {
-       "id": 13,
-       "narration": "கிளிக் செய்",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_f9d5641f97404bbc85388eab",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "தேடு",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1625,
-    "usage": {
-     "completion_tokens": 97,
-     "prompt_tokens": 4252,
-     "total_tokens": 4349,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "0c571b3cd7529c53",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_d7aee91bbe614523be9dcc60",
-      "name": "click",
-      "args": {
-       "id": 23,
-       "narration": "Sleeper class-அ select பண்றேன்",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_e46a19a782f14e799332b152",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "SEARCH TRAINS-அ click பண்றேன்",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 680,
-    "usage": {
-     "completion_tokens": 67,
-     "prompt_tokens": 4469,
-     "total_tokens": 4536,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "4d8fc7ad521204dd",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_b3270bdbe36d4e71b3e9e39e",
-      "name": "click",
-      "args": {
-       "id": 30,
-       "narration": "Ganga Superfast Express book பண்றேன்",
-       "confirmation_question": "Chennai Central-ல இருந்து Madurai Junction-க்கு, நாளை 6 October 2026, Sleeper class-ல, 1 passenger-க்கு ₹265-க்கு Ganga Superfast Express book பண்ணட்டுமா?"
-      }
-     }
-    ],
-    "ms": 1143,
-    "usage": {
-     "completion_tokens": 103,
-     "prompt_tokens": 4689,
-     "total_tokens": 4792,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "007f330143fb46cd",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_79d6b3ec6edc4e6eaaa5ae3a",
-      "name": "click",
-      "args": {
-       "id": 29,
-       "narration": "go back to search",
-       "confirmation_question": ""
-      }
-     },
-     {
-      "id": "call_f32934551ffd45e79ff0fcc9",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "select All Classes",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 553,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4771,
-     "total_tokens": 4824,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3904
-     }
-    }
-   }
-  },
-  {
-   "hash": "9c44704c210f3c57",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4e053920c0bf4be0b3d6b0ad",
+      "id": "chatcmpl-tool-8dd8ecaa841b30f1",
       "name": "click",
       "args": {
        "id": 15,
-       "narration": "Tatkal quota-வை select பண்ணுங்க"
+       "narration": "தட்கல் குவோட்டாவை தேர்ந்தெடுத்தேன்"
       }
-     }
-    ],
-    "ms": 361,
-    "usage": {
-     "completion_tokens": 38,
-     "prompt_tokens": 4594,
-     "total_tokens": 4632,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4160
-     }
-    }
-   }
-  },
-  {
-   "hash": "a6ea5d8a58352f1d",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_8e8a3e5283aa4fd6ad896ded",
+      "id": "chatcmpl-tool-b8b8323c5bdfc7a0",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "SEARCH TRAINS"
+       "narration": "தேடல் பட்டனை அழுத்துகிறேன்"
       }
      }
     ],
-    "ms": 383,
+    "ms": 2265,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4608,
-     "total_tokens": 4652,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 166,
+     "prompt_tokens": 4021,
+     "total_tokens": 4187,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4224
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "9e938cb458446b15",
+   "hash": "df43f5d13a91a3e1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_4f151d94645c4104a2f73767",
+      "id": "chatcmpl-tool-87037e09eb65162d",
+      "name": "type_text",
+      "args": {
+       "id": 8,
+       "text": "MDU",
+       "narration": "Typing Madurai station code"
+      }
+     },
+     {
+      "id": "chatcmpl-tool-8b6ac01c3a5a4a46",
+      "name": "type_text",
+      "args": {
+       "id": 6,
+       "text": "MAS",
+       "pick_suggestion": "Chennai Central MAS Chennai",
+       "narration": "Setting Chennai Central as origin"
+      }
+     },
+     {
+      "id": "chatcmpl-tool-9f82cd168bc0bb9f",
       "name": "click",
       "args": {
-       "id": 30,
-       "narration": "கிளிக் பண்றேன்"
+       "id": 18,
+       "narration": "Clicking search trains"
       }
      }
     ],
-    "ms": 473,
+    "ms": 933,
     "usage": {
-     "completion_tokens": 26,
-     "prompt_tokens": 4884,
-     "total_tokens": 4910,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 113,
+     "prompt_tokens": 4142,
+     "total_tokens": 4255,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "73f35cd44fe29186",
+   "hash": "4b0a2a630a3ddd68",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1873af46430543c985990f36",
+      "id": "chatcmpl-tool-afb1e9c72b8aa8d6",
+      "name": "click",
+      "args": {
+       "id": 15,
+       "narration": "Tatkal quota select பண்றேன்",
+       "confirmation_question": ""
+      }
+     }
+    ],
+    "ms": 337,
+    "usage": {
+     "completion_tokens": 39,
+     "prompt_tokens": 4211,
+     "total_tokens": 4250,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "471005135e58e8db",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-a947ffd85c85a51f",
+      "name": "click",
+      "args": {
+       "id": 18,
+       "narration": "Search trains button click"
+      }
+     }
+    ],
+    "ms": 336,
+    "usage": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4225,
+     "total_tokens": 4251,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "e0ac1369fd93ab59",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-a41a0bd85f31cda9",
+      "name": "click",
+      "args": {
+       "id": 23,
+       "narration": "கிளிக் பண்றேன், புக் பண்ணலாம்"
+      }
+     }
+    ],
+    "ms": 412,
+    "usage": {
+     "completion_tokens": 34,
+     "prompt_tokens": 5481,
+     "total_tokens": 5515,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "2eab537b71c57ea2",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b56e96f42743242c",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 34,
+         "id": 42,
          "value": "Asha Verma"
         },
         {
-         "id": 35,
+         "id": 43,
          "value": "34"
         },
         {
-         "id": 37,
+         "id": 46,
          "value": "Female"
         },
         {
-         "id": 41,
+         "id": 47,
+         "value": "No preference"
+        },
+        {
+         "id": 49,
          "value": "9000000001"
         }
        ],
@@ -300,133 +232,143 @@
       }
      }
     ],
-    "ms": 1415,
+    "ms": 628,
     "usage": {
-     "completion_tokens": 147,
-     "prompt_tokens": 4677,
-     "total_tokens": 4824,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 105,
+     "prompt_tokens": 4293,
+     "total_tokens": 4398,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4096
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "b4c35b42ea35c759",
+   "hash": "a28e7e210ae23362",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_85cb8cec80b14460bac84e3c",
+      "id": "chatcmpl-tool-8b87f62f1dd15d5d",
       "name": "click",
       "args": {
-       "id": 42,
-       "narration": "Continue to next step"
+       "id": 50,
+       "narration": "Continue button click பண்றேன்"
       }
      }
     ],
-    "ms": 646,
+    "ms": 425,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4774,
-     "total_tokens": 4816,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 29,
+     "prompt_tokens": 4397,
+     "total_tokens": 4426,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "9e675e621a8588da",
+   "hash": "7b8c880a90af02fa",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_37fb1bdc5b0641eebea807a7",
+      "id": "chatcmpl-tool-a6a68a9efd6ff637",
       "name": "click",
       "args": {
-       "id": 43,
-       "narration": "Proceed to pay",
-       "confirmation_question": "Confirm booking for Ganga Superfast Express 11261, Chennai Central to Madurai Junction, tomorrow 6 Oct, Sleeper class, 1 passenger Asha Verma, total ₹285?"
+       "id": 51,
+       "narration": "Proceed to payment",
+       "confirmation_question": "நாளைக்கு சென்னையிலிருந்து மதுரைக்கு, ஸ்லீப்பர் கிளாஸில், ஒரு டிக்கெட், ₹285 - இதை பே பண்ணலாமா?"
       }
      }
     ],
-    "ms": 1018,
+    "ms": 469,
     "usage": {
-     "completion_tokens": 93,
-     "prompt_tokens": 4726,
-     "total_tokens": 4819,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 64,
+     "prompt_tokens": 4348,
+     "total_tokens": 4412,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "f569c64c203fa40e",
+   "hash": "c0e05e75b8251686",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_98e36ca91e984ed18a17fc15",
+      "id": "chatcmpl-tool-9dd4748e65756247",
       "name": "click",
       "args": {
-       "id": 47,
-       "narration": "₹285 pay பண்ணுங்க",
-       "confirmation_question": "₹285 pay பண்ணட்டுமா?"
+       "id": 55,
+       "narration": "Pay 285 rupees",
+       "confirmation_question": "உங்களுடைய ஸ்லீப்பர் டிக்கெட் புக் பண்ண ₹285 pay பண்ணட்டுமா?"
       }
      }
     ],
-    "ms": 854,
+    "ms": 847,
     "usage": {
-     "completion_tokens": 63,
-     "prompt_tokens": 4716,
-     "total_tokens": 4779,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 57,
+     "prompt_tokens": 4337,
+     "total_tokens": 4394,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4032
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "46e794508b4ffd97",
+   "hash": "0092144575cb4276",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1cde6d45389946a29991b61d",
+      "id": "chatcmpl-tool-b92befe7025f02d1",
       "name": "done",
       "args": {
-       "speech": "உங்கள் Tatkal Sleeper டிக்கெட் புக் ஆகிவிட்டது. PNR நம்பர் 4123456700. கங்கை சூப்பர்ஃபாஸ்ட் எக்ஸ்பிரஸ், செவ்வாய்க்கிழமை 6 October, S4 சீட் 12. ₹285 கட்டணம் செலுத்திவிட்டது."
+       "speech": "உங்கள் தட்கல் ஸ்லீப்பர் டிக்கெட் புக் ஆகிவிட்டது. PNR நம்பர் 4123456700. கங்கை சூப்பர்ஃபாஸ்ட் எக்ஸ்பிரஸ்ல சென்னையிலிருந்து மதுரைக்கு நாளைக்கு போறீங்க. அமௌன்ட் 285 ரூபாய் கட்டியாச்சு."
       }
      }
     ],
-    "ms": 1245,
+    "ms": 624,
     "usage": {
-     "completion_tokens": 95,
-     "prompt_tokens": 4749,
-     "total_tokens": 4844,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 79,
+     "prompt_tokens": 4370,
+     "total_tokens": 4449,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4288
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }
  ],
  "translate": {
+  "e125987645e2a95d": "நான் pay பண்றதுக்கு முன்னாடி ஒரு தடவ check பண்ணி பாருங்க:",
   "872d8cbb3b0f2c28": "நான் continue பண்ணட்டுமா?",
-  "06d5f51c23d1c42f": "அந்த page-ல இப்படி போட்டுருக்கு:",
-  "e125987645e2a95d": "நான் pay பண்றதுக்கு முன்னாடி ஒரு தடவ check பண்ணி பாருங்க:"
+  "06d5f51c23d1c42f": "அந்த page-ல இப்படி போட்டுருக்கு:"
  },
  "docs": {}
 }

@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-en-fixed-date",
- "recordedAt": "2026-10-05T08:21:03.353Z",
+ "recordedAt": "2026-10-09T17:14:27.942Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,520 +10,483 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_11d06997028d4ad9926e6393",
+      "id": "chatcmpl-tool-904fade08f57e502",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Nagpur",
-       "narration": "Typing Nagpur as FROM station"
+       "narration": "Entering Nagpur as FROM station"
       }
+     }
+    ],
+    "ms": 358,
+    "usage": {
+     "completion_tokens": 37,
+     "prompt_tokens": 4016,
+     "total_tokens": 4053,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "8e67937fe640c5fd",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_756873678acb4f3a94319b1a",
+      "id": "chatcmpl-tool-8defdbe4a71aa7f3",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Selecting Nagpur station"
+      }
+     }
+    ],
+    "ms": 513,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4070,
+     "total_tokens": 4095,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "0a4a292e58799d8b",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-90568146499d5aca",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bhopal",
-       "narration": "Typing Bhopal as TO station"
+       "narration": "Typing Bhopal as destination"
       }
+     }
+    ],
+    "ms": 331,
+    "usage": {
+     "completion_tokens": 38,
+     "prompt_tokens": 4077,
+     "total_tokens": 4115,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "8a19ed99555be693",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_ae1549d196ed41889cec7dd9",
+      "id": "chatcmpl-tool-bba92415bb5a12fd",
+      "name": "click",
+      "args": {
+       "id": 20,
+       "narration": "Selecting Bhopal Junction"
+      }
+     }
+    ],
+    "ms": 418,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4140,
+     "total_tokens": 4165,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "8d4b42e4622d9139",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-badf95a5daf6469b",
+      "name": "type_text",
+      "args": {
+       "id": 9,
+       "text": "12 Oct 2026",
+       "narration": "Selecting date 12 October"
+      }
+     }
+    ],
+    "ms": 490,
+    "usage": {
+     "completion_tokens": 44,
+     "prompt_tokens": 4147,
+     "total_tokens": 4191,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "b187a52c2e426c42",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-85ffde6321e9971c",
+      "name": "click",
+      "args": {
+       "id": 9,
+       "narration": "Click date field"
+      }
+     }
+    ],
+    "ms": 706,
+    "usage": {
+     "completion_tokens": 24,
+     "prompt_tokens": 4215,
+     "total_tokens": 4239,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "0f48735060580204",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-8681e95b4e62bc41",
+      "name": "click",
+      "args": {
+       "id": 31,
+       "narration": "Choose 12 October"
+      }
+     }
+    ],
+    "ms": 295,
+    "usage": {
+     "completion_tokens": 27,
+     "prompt_tokens": 4387,
+     "total_tokens": 4414,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "0a59b269d93b73d1",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-b4b1e63e9a68db0a",
       "name": "click",
       "args": {
        "id": 13,
        "narration": "Opening class dropdown"
       }
+     }
+    ],
+    "ms": 432,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4339,
+     "total_tokens": 4364,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
-     {
-      "id": "call_8adf71847ff1407d8c696870",
-      "name": "select_option",
-      "args": {
-       "id": 13,
-       "option": "AC Chair Car",
-       "narration": "Selecting AC Chair Car class"
-      }
-     },
-     {
-      "id": "call_c517a08f5911429382b290d3",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Searching trains"
-      }
-     }
-    ],
-    "ms": 1794,
-    "usage": {
-     "completion_tokens": 241,
-     "prompt_tokens": 4158,
-     "total_tokens": 4399,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "feb57cccd4777f8c",
+   "hash": "c86dcbb645ce877b",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0424c57b0a8f4811b906716a",
+      "id": "chatcmpl-tool-96ac8d85b819cd53",
       "name": "click",
       "args": {
-       "id": 27,
-       "narration": "Select AC Chair Car"
-      }
-     }
-    ],
-    "ms": 567,
-    "usage": {
-     "completion_tokens": 43,
-     "prompt_tokens": 4456,
-     "total_tokens": 4499,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "9afa305b6a7772a9",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_9a43d2371a7d4d0babdda436",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains now",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 508,
-    "usage": {
-     "completion_tokens": 49,
-     "prompt_tokens": 4401,
-     "total_tokens": 4450,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "85619e05b98ea09f",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_485ec7a069ef4cf192ccdd9a",
-      "name": "click",
-      "args": {
-       "id": 29,
-       "narration": "Book chair car ticket"
-      }
-     }
-    ],
-    "ms": 525,
-    "usage": {
-     "completion_tokens": 48,
-     "prompt_tokens": 4852,
-     "total_tokens": 4900,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "7cec870685927552",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_cc32649d36af4a3dbabe4878",
-      "name": "go_back",
-      "args": {
-       "narration": "Go back to search"
-      }
-     }
-    ],
-    "ms": 390,
-    "usage": {
-     "completion_tokens": 36,
-     "prompt_tokens": 4941,
-     "total_tokens": 4977,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4096
-     }
-    }
-   }
-  },
-  {
-   "hash": "2b79d648ace81a0d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_043ede98b1d5451e9cc5a348",
-      "name": "click",
-      "args": {
-       "id": 9,
-       "narration": "Open the date picker"
-      }
-     },
-     {
-      "id": "call_2a16bc14ea6a41fcbf9ccc8c",
-      "name": "click",
-      "args": {
-       "id": 12,
-       "narration": "Select the day after tomorrow"
-      }
-     }
-    ],
-    "ms": 532,
-    "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4556,
-     "total_tokens": 4600,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "1270f9e78afa5a09",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_3ed1fa6d37be446bbd285733",
-      "name": "click",
-      "args": {
-       "id": 45,
-       "narration": "Select 12th October"
-      }
-     },
-     {
-      "id": "call_5e077e47ba9e4193bb24a8b5",
-      "name": "click",
-      "args": {
-       "id": 37,
-       "narration": "Close the calendar"
-      }
-     },
-     {
-      "id": "call_21ccdd7152d04823afe2169e",
-      "name": "click",
-      "args": {
-       "id": 18,
-       "narration": "Search trains"
-      }
-     },
-     {
-      "id": "call_88b4e3fe8ba1439699624539",
-      "name": "click",
-      "args": {
-       "id": 27,
-       "narration": "Select AC Chair Car"
-      }
-     }
-    ],
-    "ms": 945,
-    "usage": {
-     "completion_tokens": 147,
-     "prompt_tokens": 4753,
-     "total_tokens": 4900,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "5e88a4db1eb1f9d3",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_52b74265a1224da3836c1da6",
-      "name": "click",
-      "args": {
-       "id": 27,
+       "id": 57,
        "narration": "Select AC Chair Car class"
       }
      }
     ],
-    "ms": 478,
+    "ms": 301,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4747,
-     "total_tokens": 4791,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 27,
+     "prompt_tokens": 4526,
+     "total_tokens": 4553,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4032
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "68393dd56c7abeb5",
+   "hash": "989f5398b1c26431",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c060d5bed2ff4d44a760937e",
-      "name": "click",
-      "args": {
-       "id": 13,
-       "narration": "Choose AC Chair Car class"
-      }
-     },
-     {
-      "id": "call_a2d81ea54df940e3a4bf68b1",
+      "id": "chatcmpl-tool-9f50a684bcfa96eb",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search trains"
+       "narration": "Search for trains"
       }
      }
     ],
-    "ms": 408,
+    "ms": 287,
     "usage": {
-     "completion_tokens": 44,
-     "prompt_tokens": 4790,
-     "total_tokens": 4834,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4471,
+     "total_tokens": 4496,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4160
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "7aaf1998e934fc08",
+   "hash": "70bf98b4c8425da1",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_8a5db3e6df9540d8b5bfd9e7",
+      "id": "chatcmpl-tool-947af3ae729f7185",
       "name": "click",
       "args": {
-       "id": 68,
-       "narration": "Book Nilgiri Shatabdi with 3 seats"
+       "id": 62,
+       "narration": "Booking Nilgiri Shatabdi CC",
+       "confirmation_question": "Book Nilgiri Shatabdi Express, AC Chair Car, 1 passenger, 435 rupees from Nagpur to Bhopal on 12 Oct?"
       }
      }
     ],
-    "ms": 473,
+    "ms": 564,
     "usage": {
-     "completion_tokens": 51,
-     "prompt_tokens": 5298,
-     "total_tokens": 5349,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 71,
+     "prompt_tokens": 4921,
+     "total_tokens": 4992,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4288
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "013b73f4277507e7",
+   "hash": "749ba2518080f979",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_9c9f90c5eafa42168cb2183f",
-      "name": "type_text",
-      "args": {
-       "id": 71,
-       "text": "Asha Verma",
-       "narration": "Enter passenger name"
-      }
-     }
-    ],
-    "ms": 559,
-    "usage": {
-     "completion_tokens": 53,
-     "prompt_tokens": 4918,
-     "total_tokens": 4971,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3776
-     }
-    }
-   }
-  },
-  {
-   "hash": "7fe72492e56db313",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_4ad03da2fa7449bc8447a745",
+      "id": "chatcmpl-tool-bce9b4268d230949",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 72,
+         "id": 65,
+         "value": "Asha Verma"
+        },
+        {
+         "id": 66,
          "value": "34"
         },
         {
-         "id": 74,
+         "id": 68,
          "value": "Female"
         },
         {
-         "id": 78,
+         "id": 72,
          "value": "9000000001"
         }
        ],
-       "narration": "Filling age, gender and mobile"
+       "narration": "Filling passenger details from saved profile"
       }
      }
     ],
-    "ms": 892,
+    "ms": 620,
     "usage": {
-     "completion_tokens": 125,
-     "prompt_tokens": 4945,
-     "total_tokens": 5070,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 94,
+     "prompt_tokens": 4537,
+     "total_tokens": 4631,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4416
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "217a78e7e086c055",
+   "hash": "0d6cfa7fbc70b2ec",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_40534d6beba24c15863c5a5c",
+      "id": "chatcmpl-tool-87e2f61f8f3b3353",
       "name": "click",
       "args": {
-       "id": 79,
-       "narration": "Continuing to next step",
-       "confirmation_question": ""
+       "id": 73,
+       "narration": "Proceed to payment"
       }
      }
     ],
-    "ms": 519,
+    "ms": 747,
     "usage": {
-     "completion_tokens": 50,
-     "prompt_tokens": 5026,
-     "total_tokens": 5076,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4634,
+     "total_tokens": 4659,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4544
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "ee4d06ad08fbce7d",
+   "hash": "e1145b1b1e0af505",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_387069804a3c43f399deebb9",
+      "id": "chatcmpl-tool-a50061cf6ffefc48",
       "name": "click",
       "args": {
-       "id": 80,
+       "id": 74,
        "narration": "Proceed to payment",
-       "confirmation_question": "Book AC Chair Car from Nagpur to Bhopal on 12 October for Asha Verma, total ₹455. Confirm?"
+       "confirmation_question": "Book AC Chair Car ticket for Nilgiri Shatabdi Express from Nagpur to Bhopal on 12 October 2026 for Asha Verma at ₹455 total?"
       }
      }
     ],
-    "ms": 631,
+    "ms": 888,
     "usage": {
-     "completion_tokens": 76,
-     "prompt_tokens": 4983,
-     "total_tokens": 5059,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 71,
+     "prompt_tokens": 4591,
+     "total_tokens": 4662,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4544
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "adfb431f80af6be4",
+   "hash": "b549e270bc884c33",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7129efb75d724c64a58582cc",
+      "id": "chatcmpl-tool-988a44c76a74a5e2",
       "name": "click",
       "args": {
-       "id": 84,
-       "narration": "Pay 455 rupees",
-       "confirmation_question": "Pay 455 rupees for AC Chair Car ticket from Nagpur to Bhopal on 12 October for Asha Verma?"
+       "id": 78,
+       "narration": "Pay ₹455",
+       "confirmation_question": "Confirm payment of ₹455 for AC Chair Car from Nagpur to Bhopal on 12 October 2026?"
       }
      }
     ],
-    "ms": 689,
+    "ms": 429,
     "usage": {
-     "completion_tokens": 76,
-     "prompt_tokens": 4968,
-     "total_tokens": 5044,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 62,
+     "prompt_tokens": 4576,
+     "total_tokens": 4638,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3968
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "bbfa8e0b20b28a2a",
+   "hash": "2712948f49d25989",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_c08935db88c1455396f8ed85",
+      "id": "chatcmpl-tool-862d3971ee6ccea2",
       "name": "done",
       "args": {
-       "speech": "Your booking is confirmed. PNR 4123456700 for Nilgiri Shatabdi Express on 12 October from Nagpur to Bhopal in AC Chair Car, seat 12, name Asha Verma. Amount paid: 455 rupees."
+       "speech": "Your booking is confirmed! PNR 4123456700 for the Nilgiri Shatabdi Express from Nagpur to Bhopal on 12 October in AC Chair Car, seat C3, seat 12, amount paid ₹455."
       }
      }
     ],
-    "ms": 715,
+    "ms": 514,
     "usage": {
-     "completion_tokens": 85,
-     "prompt_tokens": 5002,
-     "total_tokens": 5087,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 69,
+     "prompt_tokens": 4610,
+     "total_tokens": 4679,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4352
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }

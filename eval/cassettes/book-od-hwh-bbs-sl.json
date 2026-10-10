@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-od-hwh-bbs-sl",
- "recordedAt": "2026-10-05T08:10:35.941Z",
+ "recordedAt": "2026-10-09T17:13:22.335Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,184 +10,174 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_50ea8d47bbd04f0dbf01acd1",
+      "id": "chatcmpl-tool-9cc5f46fa094a44e",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Howrah",
-       "narration": "From station ଲେଖିବା"
+       "narration": "Howrah station type କରୁଛି"
       }
+     }
+    ],
+    "ms": 437,
+    "usage": {
+     "completion_tokens": 37,
+     "prompt_tokens": 4017,
+     "total_tokens": 4054,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "fb5c7dfe88d3bb2f",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_509fc5a5aa7b4ae4b3ae74e1",
+      "id": "chatcmpl-tool-b2d669543cf3b77b",
+      "name": "click",
+      "args": {
+       "id": 19,
+       "narration": "Howrah Junction select କରୁଛି"
+      }
+     }
+    ],
+    "ms": 340,
+    "usage": {
+     "completion_tokens": 27,
+     "prompt_tokens": 4071,
+     "total_tokens": 4098,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "43ed057573a951e9",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-897c7b031d9290dd",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Bhubaneswar",
-       "narration": "To station ଲେଖିବା"
+       "pick_suggestion": "Bhubaneswar",
+       "narration": "Typing Bhubaneswar in TO"
       }
      },
      {
-      "id": "call_f040ecc6d4e14fd8949fa158",
-      "name": "click",
-      "args": {
-       "id": 11,
-       "narration": "କାଲି ତାରିଖ ବାଛିବା"
-      }
-     },
-     {
-      "id": "call_3db678488f7641e0bbc436a6",
-      "name": "click",
+      "id": "chatcmpl-tool-8d40782d6b328fc1",
+      "name": "select_option",
       "args": {
        "id": 13,
-       "narration": "Sleeper class ବାଛିବା"
+       "option": "Sleeper",
+       "narration": "Selecting Sleeper class"
       }
      },
      {
-      "id": "call_f6b505ce9ae440de85a3b7b5",
+      "id": "chatcmpl-tool-bb06259b4b3bf383",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "Search button ଦବାଇବା"
+       "narration": "Clicking SEARCH TRAINS"
       }
      }
     ],
-    "ms": 1419,
+    "ms": 976,
     "usage": {
-     "completion_tokens": 232,
-     "prompt_tokens": 4159,
-     "total_tokens": 4391,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 115,
+     "prompt_tokens": 4078,
+     "total_tokens": 4193,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "dd58d52c9d5577f7",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_ea67e4e6ed2549a5a451f01b",
-      "name": "click",
-      "args": {
-       "id": 22,
-       "narration": "Sleeper class ବାଛନ୍ତୁ"
-      }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "76b9c5d5b483649a",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_680fbf13e48f4db199cc9c67",
+      "id": "chatcmpl-tool-961a07d833839113",
       "name": "click",
       "args": {
-       "id": 18,
-       "narration": "Search trains କରନ୍ତୁ"
+       "id": 33,
+       "narration": "Sleeper book button click କରୁଚି",
+       "confirmation_question": "Howrah ରୁ Bhubaneswar ପାଇଁ Sleeper ticket book କରିବି, 210 rupees fare, 27 seats available, 20894 train, କାଲି 6 October?"
       }
      }
     ],
-    "ms": 922,
+    "ms": 1618,
     "usage": {
-     "completion_tokens": 94,
-     "prompt_tokens": 4454,
-     "total_tokens": 4548,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 77,
+     "prompt_tokens": 4711,
+     "total_tokens": 4788,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "bfbcf007a06390e6",
+   "hash": "d490be74a872e79c",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_6bcfc29197f541c3a3c622aa",
-      "name": "read_page",
+      "id": "chatcmpl-tool-95ed91d4fd0cc02b",
+      "name": "type_text",
       "args": {
-       "mode": "summary",
-       "narration": "Read train results"
+       "id": 36,
+       "text": "Asha Verma",
+       "narration": "Name fill କରୁଛି"
       }
      }
     ],
-    "ms": 357,
+    "ms": 385,
     "usage": {
-     "completion_tokens": 23,
-     "prompt_tokens": 4952,
-     "total_tokens": 4975,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 37,
+     "prompt_tokens": 4222,
+     "total_tokens": 4259,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "a06de0704531d964",
+   "hash": "603cb6dedbcf8e52",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_abc8e3d1d91f434185e96daf",
-      "name": "ask_user",
-      "args": {
-       "question": "କାଲି Howrah-ରୁ Bhubaneswar-କୁ sleeper-ରେ 7ଟା train ଅଛି। କେଉଁଟା book କରିବି? 1) Kolkata–Bhubaneswar Express (22921) 2) Narmada Sampark Kranti (11588) 3) Kolkata–Bhubaneswar Mail (20354) 4) Kolkata–Bhubaneswar Express (11287) 5) Kolkata–Bhubaneswar Mail (20894) 6) Sampark Kranti (22098) 7) Sampark Kranti (12270). କୋଉଟା book କରିବି?"
-      }
-     }
-    ],
-    "ms": 1389,
-    "usage": {
-     "completion_tokens": 165,
-     "prompt_tokens": 5362,
-     "total_tokens": 5527,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4096
-     }
-    }
-   }
-  },
-  {
-   "hash": "b31fdc97e52df694",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_62b678f7d72349b6a4825b77",
-      "name": "click",
-      "args": {
-       "id": 29,
-       "narration": "ପ୍ରଥମ train book କରୁଛି",
-       "confirmation_question": "କାଲି Howrah-ରୁ Bhubaneswar-କୁ Sleeper class-ରେ Kolkata–Bhubaneswar Express (22921) book କରିବି? ₹200। Confirm କରିବେ?"
-      }
-     }
-    ],
-    "ms": 831,
-    "usage": {
-     "completion_tokens": 93,
-     "prompt_tokens": 5120,
-     "total_tokens": 5213,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4096
-     }
-    }
-   }
-  },
-  {
-   "hash": "eb79413bcfb78b1d",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_823bae3522584ba0b86b677c",
+      "id": "chatcmpl-tool-963f1324d7aaca12",
       "name": "fill_form",
       "args": {
        "fields": [
@@ -200,7 +190,7 @@
          "value": "34"
         },
         {
-         "id": 40,
+         "id": 38,
          "value": "Female"
         },
         {
@@ -212,133 +202,143 @@
       }
      }
     ],
-    "ms": 1000,
+    "ms": 798,
     "usage": {
-     "completion_tokens": 116,
-     "prompt_tokens": 4635,
-     "total_tokens": 4751,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 92,
+     "prompt_tokens": 4248,
+     "total_tokens": 4340,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "839ec2e4c80e3cbc",
+   "hash": "1571c9c45d36b5a7",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7a2335397af94a63aed08faa",
+      "id": "chatcmpl-tool-b08e37280f3b87a2",
       "name": "click",
       "args": {
        "id": 44,
-       "narration": "Passenger details continue କରନ୍ତୁ"
+       "narration": "Passenger details continue"
       }
      }
     ],
-    "ms": 440,
+    "ms": 364,
     "usage": {
-     "completion_tokens": 42,
-     "prompt_tokens": 4732,
-     "total_tokens": 4774,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4334,
+     "total_tokens": 4359,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4224
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "8b8dc2865341c554",
+   "hash": "8cd1aa0a64bd6e25",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_d62d2c38c6ed421a8a1f5ea0",
+      "id": "chatcmpl-tool-a62fae46af1c09a7",
       "name": "click",
       "args": {
        "id": 45,
-       "narration": "Pay କରିବାକୁ click କରୁଛି",
-       "confirmation_question": "Ticket fare ₹200, convenience fee ₹20, total ₹220. ଏହି booking confirm କରିବି କି?"
+       "narration": "Proceed to pay click କରୁଛି",
+       "confirmation_question": "କାଲି Howrah-ରୁ Bhubaneswar-କୁ sleeper ticket book କରିବା ପାଇଁ ₹230 pay କରିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
       }
      }
     ],
-    "ms": 655,
+    "ms": 654,
     "usage": {
-     "completion_tokens": 75,
-     "prompt_tokens": 4686,
-     "total_tokens": 4761,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 57,
+     "prompt_tokens": 4291,
+     "total_tokens": 4348,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4352
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "22a57733f4ff69a5",
+   "hash": "a2ec8b5d03027690",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_0d91947340b0421ca5c9c148",
+      "id": "chatcmpl-tool-ac73237f360ddb49",
       "name": "click",
       "args": {
        "id": 49,
-       "narration": "₹220 pay କରନ୍ତୁ",
-       "confirmation_question": "₹220 pay କରି Kolkata–Bhubaneswar Express 22921 sleeper ticket book କରିବି କି?"
+       "narration": "Pay 230 rupees",
+       "confirmation_question": "ଆପଣ 230 ଟଙ୍କା pay କରିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
       }
      }
     ],
-    "ms": 918,
+    "ms": 512,
     "usage": {
-     "completion_tokens": 76,
-     "prompt_tokens": 4674,
-     "total_tokens": 4750,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 47,
+     "prompt_tokens": 4275,
+     "total_tokens": 4322,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "94e5c84ce92b2e8f",
+   "hash": "c8e5877f772d1060",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_1cb79fae9c1e4146b6b2e986",
+      "id": "chatcmpl-tool-97e7c0f1c12f29b1",
       "name": "done",
       "args": {
-       "speech": "ଆପଣଙ୍କ ticket booking ହୋଇଯାଇଛି। PNR ନମ୍ବର 4123456700। Train ହେଉଛି Kolkata–Bhubaneswar Express (22921), Howrah-ରୁ Bhubaneswar, Tuesday 6 Oct, Sleeper class, seat S4, seat 12। Total amount ₹220 pay ହୋଇଛି। ଆଉ କିଛି ଦରକାର କି?"
+       "speech": "ଆପଣଙ୍କ booking confirm ହୋଇଯାଇଛି! PNR ନମ୍ବର ହେଉଛି 4123456700। Kolkata–Bhubaneswar Mail (20894) ଟ୍ରେନ୍‌ରେ Howrah ରୁ Bhubaneswar ପାଇଁ Sleeper class ରେ ଆପଣଙ୍କ ticket book ହୋଇଯାଇଛି, seat ନମ୍ବର 12। ମୋଟ 230 ଟଙ୍କା payment ହୋଇଛି।"
       }
      }
     ],
-    "ms": 1460,
+    "ms": 724,
     "usage": {
-     "completion_tokens": 99,
-     "prompt_tokens": 4708,
-     "total_tokens": 4807,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 78,
+     "prompt_tokens": 4309,
+     "total_tokens": 4387,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 2112
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }
  ],
  "translate": {
-  "9f37aaf5de88fe24": "Page-ଟି କହୁଛି:",
   "991ae5536cbf60bb": "Pay କରିବା ପୂର୍ବରୁ please check କରିନିଅନ୍ତୁ:",
-  "6e216c1ab60f153d": "ମୁଁ ଆଗେଇ ଯିବା ଉଚିତ କି?"
+  "6e216c1ab60f153d": "ମୁଁ ଆଗେଇ ଯିବା ଉଚିତ କି?",
+  "9f37aaf5de88fe24": "Page-ଟି କହୁଛି:"
  },
  "docs": {}
 }

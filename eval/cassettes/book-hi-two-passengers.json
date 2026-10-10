@@ -1,7 +1,7 @@
 {
  "version": 1,
  "task": "book-hi-two-passengers",
- "recordedAt": "2026-10-05T08:11:18.780Z",
+ "recordedAt": "2026-10-09T17:16:16.986Z",
  "model": "sarvam-105b",
  "llm": [
   {
@@ -10,456 +10,417 @@
     "content": "",
     "toolCalls": [
      {
-      "id": "call_e686da1ce6ca47bfa121d1c8",
+      "id": "chatcmpl-tool-87f9f72291566e1f",
       "name": "type_text",
       "args": {
        "id": 6,
        "text": "Delhi",
-       "narration": "FROM में Delhi टाइप कर रहा हूँ"
+       "pick_suggestion": "Delhi",
+       "narration": "From में Delhi टाइप कर रहा हूँ"
       }
-     }
-    ],
-    "ms": 596,
-    "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 4180,
-     "total_tokens": 4236,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "6471dff5e1d46d0e",
-   "response": {
-    "content": "",
-    "toolCalls": [
+     },
      {
-      "id": "call_6cfd2e3586a2471a93a8dd6f",
-      "name": "click",
-      "args": {
-       "id": 19,
-       "narration": "New Delhi select कर रहा हूँ"
-      }
-     }
-    ],
-    "ms": 347,
-    "usage": {
-     "completion_tokens": 25,
-     "prompt_tokens": 4230,
-     "total_tokens": 4255,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 3840
-     }
-    }
-   }
-  },
-  {
-   "hash": "5234a81db317db0b",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_801e3294f6e64245adcfda7b",
+      "id": "chatcmpl-tool-96fd102532e12caf",
       "name": "type_text",
       "args": {
        "id": 8,
        "text": "Varanasi",
-       "narration": "वाराणसी दर्ज कर रहा हूँ"
+       "pick_suggestion": "Varanasi",
+       "narration": "To में Varanasi टाइप कर रहा हूँ"
       }
      }
     ],
-    "ms": 458,
+    "ms": 1233,
     "usage": {
-     "completion_tokens": 56,
-     "prompt_tokens": 4237,
-     "total_tokens": 4293,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 100,
+     "prompt_tokens": 4038,
+     "total_tokens": 4138,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "44d4cb5023be4f1d",
+   "hash": "5b035efd880698c2",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_31e685cab8a24614802dfb20",
+      "id": "chatcmpl-tool-9ea88cfad962cb2e",
       "name": "click",
       "args": {
-       "id": 20,
-       "narration": "Click Varanasi Junction station"
+       "id": 9,
+       "narration": "Select tomorrow's date"
       }
      }
     ],
-    "ms": 1209,
+    "ms": 348,
     "usage": {
-     "completion_tokens": 23,
-     "prompt_tokens": 4300,
-     "total_tokens": 4323,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4113,
+     "total_tokens": 4139,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "c74e3b9c8acd1a04",
+   "hash": "46e6e2bc052d647f",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_593a841e701d44ee8360e0d8",
-      "name": "select_option",
+      "id": "chatcmpl-tool-b288b50d135ec7a3",
+      "name": "click",
+      "args": {
+       "id": 25,
+       "narration": "6 October select कर रहा हूँ"
+      }
+     }
+    ],
+    "ms": 382,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4286,
+     "total_tokens": 4314,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "073db268502675e3",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-9d82cedf2a78a20d",
+      "name": "click",
       "args": {
        "id": 13,
-       "option": "AC 3 tier",
-       "narration": "AC 3 tier चुनें"
+       "narration": "AC 3 tier select करो"
       }
+     }
+    ],
+    "ms": 373,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4215,
+     "total_tokens": 4243,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
      },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "98b84bb1895567c9",
+   "response": {
+    "content": "",
+    "toolCalls": [
      {
-      "id": "call_85409e3c70a64d3a8136e162",
+      "id": "chatcmpl-tool-9c71a87edd9ad9a4",
+      "name": "click",
+      "args": {
+       "id": 53,
+       "narration": "AC 3 Tier चुनना"
+      }
+     }
+    ],
+    "ms": 378,
+    "usage": {
+     "completion_tokens": 28,
+     "prompt_tokens": 4402,
+     "total_tokens": 4430,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "5a818e81093cb151",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-877dcfed3559ec3a",
       "name": "click",
       "args": {
        "id": 18,
-       "narration": "SEARCH TRAINS पर क्लिक करें"
+       "narration": "Search trains button"
       }
      }
     ],
-    "ms": 1458,
+    "ms": 366,
     "usage": {
-     "completion_tokens": 101,
-     "prompt_tokens": 4307,
-     "total_tokens": 4408,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4353,
+     "total_tokens": 4378,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3840
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "212f297f878893b6",
+   "hash": "f95b07efe3c62212",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_7e11e0bd4cb54cea97f2758a",
+      "id": "chatcmpl-tool-8cfe4265bc8b8595",
       "name": "click",
       "args": {
-       "id": 34,
-       "narration": "Book Delhi–Varanasi Superfast Express",
-       "confirmation_question": "क्या आप Delhi–Varanasi Superfast Express, 6 अक्टूबर, AC 3 tier, 2 टिकट (₹1105 प्रति टिकट) बुक करना चाहते हैं?"
+       "id": 64,
+       "narration": "Delhi–Varanasi Superfast book कर रहा हूँ",
+       "confirmation_question": "क्या आप 6 अक्टूबर 2026 के लिए Delhi से Varanasi AC 3 tier में दो टिकट (Asha Verma और Ravi Verma) ₹2210 में book करना चाहते हैं?"
       }
      }
     ],
-    "ms": 929,
+    "ms": 741,
     "usage": {
-     "completion_tokens": 92,
-     "prompt_tokens": 4848,
-     "total_tokens": 4940,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 83,
+     "prompt_tokens": 4850,
+     "total_tokens": 4933,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3904
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "bb45a62ddb7d43ba",
-   "response": {
-    "content": "",
-    "toolCalls": [],
-    "ms": 4073,
-    "usage": {
-     "completion_tokens": 600,
-     "prompt_tokens": 4424,
-     "total_tokens": 5024,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "0ddc74448d595295",
+   "hash": "dea15dbafebfaa12",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_04638772a8f940d1854747f9",
+      "id": "chatcmpl-tool-98876facc2aaa7bc",
+      "name": "click",
+      "args": {
+       "id": 71,
+       "narration": "Add second passenger"
+      }
+     }
+    ],
+    "ms": 342,
+    "usage": {
+     "completion_tokens": 25,
+     "prompt_tokens": 4422,
+     "total_tokens": 4447,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
+    }
+   }
+  },
+  {
+   "hash": "39774edbe70f9511",
+   "response": {
+    "content": "",
+    "toolCalls": [
+     {
+      "id": "chatcmpl-tool-8d154a81bf083e63",
       "name": "fill_form",
       "args": {
        "fields": [
         {
-         "id": 35,
+         "id": 65,
          "value": "Asha Verma"
         },
         {
-         "id": 36,
+         "id": 66,
          "value": "34"
         },
         {
-         "id": 38,
+         "id": 68,
          "value": "Female"
-        }
-       ],
-       "narration": "पहला passenger भर रहा हूँ"
-      }
-     },
-     {
-      "id": "call_d86411eafddb4f8a9561fe98",
-      "name": "click",
-      "args": {
-       "id": 41,
-       "narration": "+ Add passenger",
-       "confirmation_question": ""
-      }
-     }
-    ],
-    "ms": 1544,
-    "usage": {
-     "completion_tokens": 117,
-     "prompt_tokens": 4445,
-     "total_tokens": 4562,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4416
-     }
-    }
-   }
-  },
-  {
-   "hash": "54233057f0647004",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_16383ee7b346461aa7a51b08",
-      "name": "type_text",
-      "args": {
-       "id": 44,
-       "text": "Ravi Verma",
-       "narration": "पति का नाम भर रहा हूँ"
-      }
-     },
-     {
-      "id": "call_67e34fd12c834e48af010fe8",
-      "name": "type_text",
-      "args": {
-       "id": 45,
-       "text": "36",
-       "narration": "पति की उम्र भर रहा हूँ"
-      }
-     },
-     {
-      "id": "call_d2c5b631d9da43339f8e9d24",
-      "name": "click",
-      "args": {
-       "id": 47,
-       "narration": "पति का gender चुन रहा हूँ"
-      }
-     }
-    ],
-    "ms": 1296,
-    "usage": {
-     "completion_tokens": 154,
-     "prompt_tokens": 4644,
-     "total_tokens": 4798,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 4032
-     }
-    }
-   }
-  },
-  {
-   "hash": "16082b34160bcc42",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_0e4e19f0891b4063921da731",
-      "name": "fill_form",
-      "args": {
-       "fields": [
+        },
         {
-         "id": 42,
+         "id": 74,
+         "value": "Ravi Verma"
+        },
+        {
+         "id": 75,
+         "value": "36"
+        },
+        {
+         "id": 77,
+         "value": "Male"
+        },
+        {
+         "id": 72,
          "value": "9000000001"
         }
        ],
-       "narration": "Mobile number भर रहा हूँ"
+       "narration": "Passenger details fill kar raha hoon"
       }
      }
     ],
-    "ms": 661,
+    "ms": 760,
     "usage": {
-     "completion_tokens": 77,
-     "prompt_tokens": 4711,
-     "total_tokens": 4788,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 136,
+     "prompt_tokens": 4583,
+     "total_tokens": 4719,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4032
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "fb4232fdb20f6675",
+   "hash": "e58c144230b10687",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_64e5853f91f34693a709d2e1",
-      "name": "fill_form",
-      "args": {
-       "fields": [
-        {
-         "id": 42,
-         "value": "9000000001"
-        }
-       ],
-       "narration": "Mobile number enter kar raha hoon"
-      }
-     }
-    ],
-    "ms": 709,
-    "usage": {
-     "completion_tokens": 78,
-     "prompt_tokens": 4768,
-     "total_tokens": 4846,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
-      "audio_tokens": null,
-      "cached_tokens": 2112
-     }
-    }
-   }
-  },
-  {
-   "hash": "11567eda554b29ad",
-   "response": {
-    "content": "",
-    "toolCalls": [
-     {
-      "id": "call_09923c3d07d84b0bb2d0ecd4",
+      "id": "chatcmpl-tool-9840a09561790b45",
       "name": "click",
       "args": {
-       "id": 43,
-       "narration": "Passenger details continue"
+       "id": 73,
+       "narration": "Passenger details submit करना"
       }
      }
     ],
-    "ms": 431,
+    "ms": 584,
     "usage": {
-     "completion_tokens": 41,
-     "prompt_tokens": 4804,
-     "total_tokens": 4845,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 26,
+     "prompt_tokens": 4709,
+     "total_tokens": 4735,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4224
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "8c0c9d51c3a10651",
+   "hash": "698228b558df5518",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_457d5f9eb9c04794a87f56b6",
+      "id": "chatcmpl-tool-820ae6391bae3a19",
       "name": "click",
       "args": {
-       "id": 51,
-       "narration": "Proceed to payment",
+       "id": 81,
+       "narration": "Proceed to payment page",
        "confirmation_question": "क्या आप ₹2230 में 2 AC 3 tier टिकट बुक करना चाहते हैं?"
       }
      }
     ],
-    "ms": 529,
+    "ms": 441,
     "usage": {
-     "completion_tokens": 69,
-     "prompt_tokens": 4643,
-     "total_tokens": 4712,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 55,
+     "prompt_tokens": 4548,
+     "total_tokens": 4603,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "6a0b908470545160",
+   "hash": "3966cb589aa15e16",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_ef68ae3f3dc94acca0af02da",
+      "id": "chatcmpl-tool-91a5152c35c991b6",
       "name": "click",
       "args": {
-       "id": 55,
-       "narration": "₹2230 का payment करें",
-       "confirmation_question": "क्या आप ₹2230 का payment करना चाहती हैं?"
+       "id": 85,
+       "narration": "Pay 2230 rupees",
+       "confirmation_question": "क्या आप 2230 रुपये का payment करना चाहते हैं?"
       }
      }
     ],
-    "ms": 515,
+    "ms": 791,
     "usage": {
-     "completion_tokens": 67,
-     "prompt_tokens": 4614,
-     "total_tokens": 4681,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 52,
+     "prompt_tokens": 4519,
+     "total_tokens": 4571,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 4224
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   },
   {
-   "hash": "ff535a15cceffda3",
+   "hash": "4670054eb38a1e12",
    "response": {
     "content": "",
     "toolCalls": [
      {
-      "id": "call_bb10053161ec44d1996da2d0",
+      "id": "chatcmpl-tool-b3fe83a75e9c1e58",
       "name": "done",
       "args": {
-       "speech": "आपकी बुकिंग कन्फर्म हो गई है। PNR 4123456700 है। 6 अक्टूबर को दिल्ली से वाराणसी के लिए AC 3 tier में दो टिकट बुक हुए हैं — आपके लिए सीट B2 12 और रवि वर्मा के लिए B2 15। कुल ₹2230 पे किए गए हैं।"
+       "speech": "आपकी booking confirm हो गई है। PNR number 4123456700 है। Delhi से Varanasi Superfast Express (16617) में AC 3 tier के दो ticket book हुए हैं — आपकी seat B2 12 और आपके पति Ravi Verma की seat B2 15। Total payment ₹2230 हुआ है।"
       }
      }
     ],
-    "ms": 898,
+    "ms": 968,
     "usage": {
-     "completion_tokens": 107,
-     "prompt_tokens": 4658,
-     "total_tokens": 4765,
-     "completion_tokens_details": null,
-     "prompt_tokens_details": {
+     "completion_tokens": 91,
+     "prompt_tokens": 4563,
+     "total_tokens": 4654,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "cached_tokens": 3776
-     }
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": null
     }
    }
   }
