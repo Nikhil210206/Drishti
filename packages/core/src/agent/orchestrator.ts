@@ -8,6 +8,7 @@ import { duplicatePassenger, looksComplete, readback, spokenFacts, type SpokenFa
 import { saidBy } from "./match.js";
 import { classMismatch, quotaMismatch, requestedQuotas } from "./classes.js";
 import { dateMismatch, urlDateMismatch } from "./dates.js";
+import { passengerMismatch } from "./passengers.js";
 import { refusalPhrase, type PhraseBook, type PhraseKey } from "./phrases.js";
 
 /** Everything the agent needs from the outside world (voice session, or the eval harness). */
@@ -57,6 +58,8 @@ export class Agent {
   private stepCounter = 0;
   private lastTool = "";
   private tried = new Set<string>();
+  /** Clicks refused for not matching the request: not done, so allowed again once the user has answered. */
+  private refused = new Set<string>();
   private declines = 0;
   private composeRejections = 0;
   /** Custom dropdowns already set this task: id → the option chosen. */
@@ -81,6 +84,10 @@ export class Agent {
   private userTexts: string[] = [];
   /** What the user dictated or answered, as opposed to the request itself. */
   private userWords: string[] = [];
+  /** The request and what the user said since, this task only: where a passenger count is read from. */
+  private said: string[] = [];
+  /** How much the user had said when a payment was refused over the passenger count. */
+  private countRefusedAt?: number;
   private browser: BrowserDriver;
   private policy: NavigationPolicy;
   private opts: Required<Omit<AgentOptions, "profile" | "now">> & Pick<AgentOptions, "profile" | "now">;
@@ -111,6 +118,7 @@ export class Agent {
     let lastBatch: number[] = [];
     // Loop guard: the same action on the same unchanged page never helps a second time.
     this.tried = new Set<string>();
+    this.refused = new Set<string>();
     this.declines = 0;
     this.composeRejections = 0;
     this.chosen = new Map();
@@ -124,6 +132,8 @@ export class Agent {
     this.misses = new Map();
     const p = this.opts.profile;
     this.userWords = [];
+    this.said = [task];
+    this.countRefusedAt = undefined;
     this.userTexts = [task, ...io.recent(), ...(p ? [p.name, p.age, p.gender, p.mobile].filter((v): v is string => !!v) : [])];
     let unchanged = 0;
 
@@ -140,6 +150,7 @@ export class Agent {
       const page = formatPage(snap);
       const interjections = io.takeInterjections();
       this.userTexts.push(...interjections);
+      this.said.push(...interjections);
       let content = stepMessage({
         task,
         history,
@@ -346,8 +357,9 @@ export class Agent {
           line: `${describe()} → not needed: [${a.id}] already holds this.${alert}${next ? ` Next: click [${next[0]}] "${next[1].name}".` : ""}`,
         };
       }
+      let key = "";
       if (REPEATABLE.has(call.name)) {
-        const key = `${pageKey}|${call.name}|${a.id ?? ""}|${a.text ?? ""}|${a.option ?? ""}|${a.key ?? ""}|${a.url ?? ""}|${JSON.stringify(a.fields ?? "")}`;
+        key = `${pageKey}|${call.name}|${a.id ?? ""}|${a.text ?? ""}|${a.option ?? ""}|${a.key ?? ""}|${a.url ?? ""}|${JSON.stringify(a.fields ?? "")}`;
         if (this.tried.has(key)) {
           emit({ status: "failed", result: "repeated" });
           const ids = Array.isArray(a.fields) ? a.fields.map((f: any) => Number(f?.id)).filter((n: number) => n >= 0) : [];
@@ -394,6 +406,10 @@ export class Agent {
           // date is caught here, before the passengers are filled in.
           const checked = confirmNeeded || !!gate.choice;
           const facts = checked ? readback(snap, a.id, el) : "";
+          // Fewer or more passengers than the user asked for: the model once filled in one of two, then
+          // asked to pay for "2 passengers". Once refused, whatever the user says next settles it.
+          const answered = this.countRefusedAt !== undefined && this.said.length > this.countRefusedAt;
+          const count = passengerMismatch(answered ? this.said.slice(this.countRefusedAt) : this.said, facts);
           // Never book what the user did not ask for: another class, quota or date (cheaper, seats left,
           // or an id slip), or the same person twice.
           const mismatch =
@@ -405,7 +421,8 @@ export class Agent {
                     // Results pages state the quota once in their header ("· General quota · 9 trains found").
                     quotaMismatch(this.userTexts, pageLines(snap)))) ||
                 dateMismatch(this.userTexts, facts, this.opts.now?.() ?? new Date()) ||
-                duplicatePassenger(facts)
+                duplicatePassenger(facts) ||
+                count
               : "";
           // Asking "Submit complaint?" about an empty complaint wastes the user's answer and a turn.
           const empty = confirmNeeded ? emptyFreeText(snap, a.id) : undefined;
@@ -417,10 +434,12 @@ export class Agent {
             };
           }
           if (mismatch) {
+            if (mismatch === count) this.countRefusedAt ??= this.said.length;
+            if (key) this.refused.add(key);
             emit({ status: "blocked", result: "not what the user asked for" });
             io.emit({ type: "audit", action: "click", target: el?.name, reason: mismatch, confirmed: false });
             return {
-              line: `${describe()} → REFUSED: ${mismatch}. ${/passenger/.test(mismatch) ? "Fix the passenger rows first" : "Class, quota and date are chosen on the search form: go back to it (or use Modify search), set them and search again"}; if it is not available, ask_user whether something else is fine.`,
+              line: `${describe()} → REFUSED: ${mismatch}. ${mismatch === count ? "Go back to the passenger details (Edit passengers) and add or remove passengers to match what the user asked" : /passenger/.test(mismatch) ? "Fix the passenger rows first" : "Class, quota and date are chosen on the search form: go back to it (or use Modify search), set them and search again"}; if it is not available, ask_user whether something else is fine.`,
               failed: true,
             };
           }
@@ -711,7 +730,12 @@ export class Agent {
         }
         case "ask_user": {
           const answer = await io.ask(String(a.question ?? ""), "question");
-          if (answer) (this.userTexts.push(answer), this.userWords.push(answer));
+          if (answer) (this.userTexts.push(answer), this.userWords.push(answer), this.said.push(answer));
+          // "Sleeper is fine", "just the one then": the click refused before may now be right.
+          if (answer) {
+            for (const k of this.refused) this.tried.delete(k);
+            this.refused.clear();
+          }
           if (answer === null) {
             if (!signal.aborted) await io.sayPhrase("noAnswer");
             return { line: "ask_user → no answer", terminal: true };

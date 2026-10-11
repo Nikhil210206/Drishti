@@ -758,6 +758,17 @@ describe("Agent: wrong class", () => {
     expect(io.asked).toEqual([]);
     expect(String(llm.calls[1].messages[1].content)).toContain("but this books Sleeper (SL)");
   });
+
+  it("lets the refused click be tried again once the user says the other class is fine", async () => {
+    const browser = new FakeBrowser({ [RESULTS]: results }, RESULTS);
+    const book = () => [{ name: "click", args: { id: 31, narration: "", confirmation_question: "Book SL for ₹145?" } }];
+    const llm = new ScriptedLLM([book(), [{ name: "ask_user", args: { question: "Second sitting is full. Is Sleeper fine?" } }], book()]);
+    const io = new RecordingIO(["Sleeper is fine", "haan"]);
+    await run(agentFor(browser, llm), io, "ನಾಳೆ ಮೈಸೂರಿಗೆ second sitting ticket book ಮಾಡಿ");
+    // It used to be refused as "you already did exactly this", though the first click never happened.
+    expect(io.asked.map((a) => a.kind)).toEqual(["question", "confirm"]);
+    expect(browser.log).toEqual(["click 31"]);
+  });
 });
 
 describe("Agent: filled forms", () => {
@@ -1241,5 +1252,74 @@ describe("Agent: one question per payment", () => {
     expect(io.asked).toHaveLength(2);
     expect(io.asked[1].q).toContain("₹200");
     expect(browser.log).not.toContain("click 67");
+  });
+});
+
+describe("Agent: passenger count", () => {
+  const REVIEW = "http://localhost:5174/#/review";
+  const PAYP = "http://localhost:5174/#/pay";
+  const TWO = "कल दिल्ली से वाराणसी के लिए AC 3 tier में दो टिकट बुक करो, एक मेरे लिए और एक मेरे पति रवि वर्मा के लिए";
+  const review = (people: string, total: number) =>
+    page(
+      REVIEW,
+      { "74": element("PROCEED TO PAY"), "75": element("Edit passengers") },
+      [
+        "- Delhi–Varanasi Express (22923) · NDLS 08:10 → BSB 21:15 · Tue, 6 Oct, 2026 · 3A · General Review your journey Train Delhi–Varanasi Express (22923) From New Delhi (NDLS) at 08:10 To",
+        `- Varanasi Junction (BSB) at 21:15 Date Tue, 6 Oct, 2026 Class AC 3 Tier (3A) Passengers ${people} Ticket fare ₹955 Convenience fee ₹20 Total ₹${total}`,
+        '[74] clickable "PROCEED TO PAY"',
+        '[75] clickable "Edit passengers"',
+      ].join("\n"),
+    );
+  const one = () => new FakeBrowser({ [REVIEW]: review("Asha Verma (34, Female)", 975), [PAYP]: page(PAYP, {}) }, REVIEW, { "74": PAYP });
+  const pay = () => [{ name: "click", args: { id: 74, narration: "", confirmation_question: "2 passengers के लिए ₹975 pay करूँ?" } }];
+  const opts = { now: () => new Date("2026-10-05T09:30:00+05:30") };
+  const agent = (browser: FakeBrowser, llm: ScriptedLLM) =>
+    new Agent({ browser, llm, translator: echoTranslator, docs: noDocs, phrases: phrases() }, opts);
+
+  it("refuses to pay for one passenger when the user asked for two tickets, without asking", async () => {
+    const browser = one();
+    const llm = new ScriptedLLM([pay()]);
+    const io = new RecordingIO(["haan"]);
+    await run(agent(browser, llm), io, TWO);
+    expect(browser.log).toEqual([]);
+    expect(io.asked).toEqual([]);
+    expect(String(llm.calls[1].messages[1].content)).toContain(
+      "REFUSED: the user asked for 2 passengers, but the page lists 1 (Asha Verma (34, Female)). Go back to the passenger details",
+    );
+    expect(io.audits().map((a) => [a.target, a.confirmed])).toEqual([["PROCEED TO PAY", false]]);
+  });
+
+  it("asks as usual when the page lists both", async () => {
+    const browser = new FakeBrowser(
+      { [REVIEW]: review("Asha Verma (34, Female), Ravi Verma (36, Male)", 1930), [PAYP]: page(PAYP, {}) },
+      REVIEW,
+      { "74": PAYP },
+    );
+    const io = new RecordingIO(["haan"]);
+    await run(agent(browser, new ScriptedLLM([pay()])), io, TWO);
+    expect(io.asked.map((a) => a.q)).toEqual([
+      "Please check before I pay: ₹1930; Delhi–Varanasi Express; Tue, 6 Oct, 2026; AC 3 Tier (3A); Passengers Asha Verma (34, Female), Ravi Verma (36, Male). Should I go ahead?",
+    ]);
+    expect(browser.log).toEqual(["click 74"]);
+  });
+
+  it("lets the user settle it: one is fine after all, or two it is", async () => {
+    const ask = [{ name: "ask_user", args: { question: "Only one passenger is filled in. Is one ticket fine?" } }];
+    // "Fine, just do the one": no count in the answer, so the question about paying goes ahead.
+    let browser = one();
+    let io = new RecordingIO(["ठीक है, एक ही कर दो", "haan"]);
+    await run(agent(browser, new ScriptedLLM([pay(), ask, pay()])), io, TWO);
+    expect(io.asked.map((a) => a.kind)).toEqual(["question", "confirm"]);
+    expect(io.asked[1].q).toContain("Passengers Asha Verma (34, Female). Should I go ahead?");
+    expect(browser.log).toEqual(["click 74"]);
+
+    // "No, I need two tickets": still refused.
+    browser = one();
+    io = new RecordingIO(["नहीं, दो टिकट चाहिए", "haan"]);
+    const llm = new ScriptedLLM([pay(), ask, pay()]);
+    await run(agent(browser, llm), io, TWO);
+    expect(io.asked.map((a) => a.kind)).toEqual(["question"]);
+    expect(browser.log).toEqual([]);
+    expect(String(llm.calls[3].messages[1].content)).toContain("REFUSED: the user asked for 2 passengers, but the page lists 1");
   });
 });

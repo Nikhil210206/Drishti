@@ -506,8 +506,23 @@ Your first session in your own Chrome, in Tamil ("book a train from Chennai to E
   - Replays have **no drift**: 40/40 in strict mode with Playwright and with the extension's trusted input.
   - With synthetic input, bookings and complaints drift by 1 to 6 prompts. A synthetic click on a suggestion leaves focus in the From box, so the page shows `focused` where a trusted click doesn't. CI runs that mode without `--strict` for this reason.
 
+**Then, at your request: a check on the number of passengers (10 Oct).**
+
+- **The check.** When you say how many are travelling and the page lists another number before a payment, Drishti doesn't ask to pay. The model is told what is wrong ("the user asked for 2 passengers, but the page lists 1 (Asha Verma (34, Female))") and to go back to the passenger details. Run on the saved page from the failed live booking above, it stops that payment. Code: `packages/core/src/agent/passengers.ts`.
+- **What counts as saying it.** Only a count said outright, in English or any of the ten Indian languages:
+  - a number right before "tickets" or a word for people ("2 tickets", "दो लोगों", "இரண்டு பேருக்கு"), with at most a class or quota word between ("three sleeper tickets");
+  - or one word that means so many people ("ఇద్దరికి", "दोघांसाठी", "two of us").
+- **What it leaves alone.** A wrong guess would block a good booking, so anything unclear gives no check:
+  - classes, dates and times ("3 tier", "दो जनवरी", "6 October", "चार बजे"), and "कर दो" ("do it");
+  - "one ticket": "एक टिकट" is also just "a ticket";
+  - earlier tasks and Drishti's own replies. Only what you said in this task counts, and the last count you said wins.
+  - a page that doesn't list passengers as "Name (age, gender)".
+- **You can overrule it.** If Drishti then asks and you answer without a new count ("fine, just the one"), the payment question goes ahead with whoever the page lists.
+- **A gap this exposed.** A click refused for not matching your request (class, quota, date, passengers) stayed blocked as "already tried", even after you said the other choice was fine. It hadn't been done, so it may now be tried again once you answer.
+- **Eval:** none of the 40 recorded runs changes; only `book-hi-two-passengers` states a count, and it matches.
+
 **Still to improve:**
 
 - The model can invent station codes in its suggestions ("Coimbatore (KPY)").
 - Punjabi's machine translation of "Please check before I pay:" came back in English. With the other eight languages, it needs a native-speaker review.
-- Nothing checks how many passengers the user asked for. The readback reads out whoever the page lists, so a user hears a missing passenger, but only if they notice. The model's own question claimed two when one was filled.
+- The Indic number and people words in the passenger-count check (below) are from references, not native speakers. They need the same review as the machine-translated phrases.
